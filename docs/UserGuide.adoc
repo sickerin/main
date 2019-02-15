@@ -12,7 +12,7 @@ ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
 endif::[]
-:repoURL: https://github.com/se-edu/addressbook-level4
+:repoURL: https://github.com/CS2103-AY1819S2-W13-4/main
 
 By: `CS2103-AY1819S2-W13-4`      Since: `January 2019`      Licence: `MIT`
 
@@ -26,7 +26,7 @@ who wish to prescribe a more personalised medication to the patient.
 == Quick Start
 
 .  Ensure you have Java version `9` or later installed in your Computer.
-.  Download the latest `Giatros.jar` link:https://github.com/CS2103-AY1819S2-W13-4/main/releases[here].
+.  Download the latest `Giatros.jar` link:{repourl}/releases[here].
 .  Copy the file to the folder you want to use as the home folder for your Giatros.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
