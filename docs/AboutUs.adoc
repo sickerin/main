@@ -4,44 +4,53 @@
 :imagesDir: images
 :stylesDir: stylesheets
 
-Giatros was developed by the https://github.com/CS2103-AY1819S2-W13-4[CS2103-AY1819S2-W13-4] team. +
-
+AddressBook - Level 4 was developed by the https://se-edu.github.io/docs/Team.html[se-edu] team. +
+_{The dummy content given below serves as a placeholder to be used by future forks of the project.}_ +
+{empty} +
 We are a team based in the http://www.comp.nus.edu.sg[School of Computing, National University of Singapore].
 
 == Project Team
 
-=== Chua Eng Soon
-image::chuaes.png[width="150", align="left"]
-{empty}[https://github.com/chuaes[github]] [<<chuaes#, portfolio>>]
+=== John Doe
+image::damithc.jpg[width="150", align="left"]
+{empty}[http://www.comp.nus.edu.sg/~damithch[homepage]] [https://github.com/damithc[github]] [<<johndoe#, portfolio>>]
 
-Role: Team Lead, Scheduling and Tracking +
-Responsibilities: In charge of authentication, user management and patient appointment features
-
-'''
-
-=== Daniel Pyone Maung
-image::sickerin.png[width="150", align="left"]
-{empty}[http://github.com/sickerin[github]] [<<sickerin#, portfolio>>]
-
-Role: Testing, Code Quality +
-Responsibilities: In charge of patient record and pharmacy inventory features
+Role: Project Advisor
 
 '''
 
-=== Lakhtakia Radhika
-image::radhika-lakhtakia.png[width="150", align="left"]
-{empty}[http://github.com/radhika-lakhtakia[github]] [<<radhika-lakhtakia#, portfolio>>]
+=== John Roe
+image::lejolly.jpg[width="150", align="left"]
+{empty}[http://github.com/lejolly[github]] [<<johndoe#, portfolio>>]
 
-Role: Developer, Integration +
-Responsibilities: In charge of room booking feature
+Role: Team Lead +
+Responsibilities: UI
 
 '''
 
-=== Ronald Santoso
-image::wfxronald.png[width="150", align="left"]
-{empty}[http://github.com/wfxronald[github]] [<<wfxronald#, portfolio>>]
+=== Johnny Doe
+image::yijinl.jpg[width="150", align="left"]
+{empty}[http://github.com/yijinl[github]] [<<johndoe#, portfolio>>]
 
-Role: Documentation, Deliverables and Deadlines +
-Responsibilities: In charge of patient allergy feature
+Role: Developer +
+Responsibilities: Data
+
+'''
+
+=== Johnny Roe
+image::m133225.jpg[width="150", align="left"]
+{empty}[http://github.com/m133225[github]] [<<johndoe#, portfolio>>]
+
+Role: Developer +
+Responsibilities: Dev Ops + Threading
+
+'''
+
+=== Benson Meier
+image::yl_coder.jpg[width="150", align="left"]
+{empty}[http://github.com/yl-coder[github]] [<<johndoe#, portfolio>>]
+
+Role: Developer +
+Responsibilities: UI
 
 '''
