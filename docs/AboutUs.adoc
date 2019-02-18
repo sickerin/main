@@ -4,7 +4,7 @@
 :imagesDir: images
 :stylesDir: stylesheets
 
-Giatros was developed by https://github.com/CS2103-AY1819S1-W13-4[CS2103-AY1819S2-W13-4] team. +
+Giatros was developed by https://github.com/CS2103-AY1819S2-W13-4[CS2103-AY1819S2-W13-4] team. +
 {empty} +
 We are a team based in the http://www.comp.nus.edu.sg[School of Computing, National University of Singapore].
 
