@@ -15,7 +15,7 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 image::chuaes.png[width="150", align="left"]
 {empty}[https://github.com/chuaes[github]] [<<johndoe#, portfolio>>]
 
-Role: Developer, Project Advisor
+Role: Developer, Project Advisor +
 Responsibilities: Feature Development, Integration
 
 '''
@@ -24,7 +24,7 @@ Responsibilities: Feature Development, Integration
 image::sickerin.png[width="150", align="left"]
 {empty}[http://github.com/sickerin[github]] [<<johndoe#, portfolio>>]
 
-Role: Developer 
+Role: Developer +
 Responsibilities: Feature Development, UI
 
 '''
@@ -33,7 +33,7 @@ Responsibilities: Feature Development, UI
 image::radhika-lakhtakia.png[width="150", align="left"]
 {empty}[http://github.com/radhika-lakhtakia[github]] [<<johndoe#, portfolio>>]
 
-Role: Developer 
+Role: Developer +
 Responsibilities: Feature Development, UI
 
 '''
@@ -42,7 +42,7 @@ Responsibilities: Feature Development, UI
 image::wfxronald.png[width="150", align="left"]
 {empty}[http://github.com/wfxronald[github]] [<<johndoe#, portfolio>>]
 
-Role: Developer 
+Role: Developer +
 Responsibilities: Feature Development, Integration
 
 '''
