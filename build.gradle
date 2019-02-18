@@ -203,7 +203,7 @@ asciidoctor {
         idseparator: '-',
         'site-root': "${sourceDir}",  // must be the same as sourceDir, do not modify
         'site-name': 'Giatros',
-        'site-githuburl': 'https://github.com/CS2103-AY1819S1-W13-4/main',
+        'site-githuburl': 'https://github.com/CS2103-AY1819S2-W13-4/main',
     ]
 
     options['template_dirs'].each {
