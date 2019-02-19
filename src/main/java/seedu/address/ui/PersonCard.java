@@ -54,7 +54,7 @@ public class PersonCard extends UiPart<Region> {
      * Chooses a random colour for {@code tag}'s label
      */
     private String chooseRandomColourFor(String tag) {
-        String[] listOfColours = { "blue", "red", "yellow", "green"};
+        String[] listOfColours = { "blue", "red", "yellow", "green", "orange", "black", "white"};
 
         // Generate a random colour that will be consistent for the same tag, based on the value of the string
         int valueOfString = 0;
@@ -62,7 +62,7 @@ public class PersonCard extends UiPart<Region> {
             valueOfString += (int) character;
         }
 
-        return listOfColours[valueOfString % 4];
+        return listOfColours[valueOfString % 7];
     }
 
     /**

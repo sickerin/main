@@ -368,3 +368,18 @@
     -fx-text-fill: white;
     -fx-background-color: #0da507;
 }
+
+#tags .orange {
+    -fx-text-fill: black;
+    -fx-background-color: #ffa700;
+}
+
+#tags .black {
+    -fx-text-fill: white;
+    -fx-background-color: #000000;
+}
+
+#tags .white {
+    -fx-text-fill: black;
+    -fx-background-color: #ffffff;
+}
