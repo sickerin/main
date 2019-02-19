@@ -353,3 +353,18 @@
     -fx-text-fill: white;
     -fx-background-color: #127a9c;
 }
+
+#tags .red {
+    -fx-text-fill: white;
+    -fx-background-color: #d60d0d;
+}
+
+#tags .yellow {
+    -fx-text-fill: black;
+    -fx-background-color: #eecc00;
+}
+
+#tags .green {
+    -fx-text-fill: white;
+    -fx-background-color: #0da507;
+}

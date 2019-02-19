@@ -50,14 +50,28 @@ public class PersonCard extends UiPart<Region> {
         createTag(person);
 
     }
+    /**
+     * Chooses a random colour for {@code tag}'s label
+     */
+    private String chooseRandomColourFor(String tag) {
+        String[] listOfColours = { "blue", "red", "yellow", "green"};
+
+        // Generate a random colour that will be consistent for the same tag, based on the value of the string
+        int valueOfString = 0;
+        for (char character : tag.toCharArray()) {
+            valueOfString += (int) character;
+        }
+
+        return listOfColours[valueOfString % 4];
+    }
 
     /**
-     * Create a coloured tag label for {@code Person}
+     * Creates a coloured tag label for {@code Person}
      */
     private void createTag(Person person) {
         person.getTags().forEach(tag -> {
             Label newTag = new Label(tag.tagName);
-            newTag.getStyleClass().add("blue"); // Try to create a coloured tag
+            newTag.getStyleClass().add(chooseRandomColourFor(tag.tagName));
             tags.getChildren().add(newTag);
         });
     }
