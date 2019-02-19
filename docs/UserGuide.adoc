@@ -50,31 +50,36 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 *Command Format*
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-* Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-* Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+* Items in square brackets are optional e.g `n/NAME [a/ALLERGY]` can be used as `n/John Doe t/Ibuprofen` or as `n/John Doe`.
+* Items with `…`​ after them can be used multiple times including zero times e.g. `[a/ALLERGY]...` can be used as `{nbsp}` (i.e. 0 times), `a/Ibuprofen`,
+`a/Ibuprofen a/Penicillin` etc.
 * Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 ====
 
 === Viewing help : `help`
 
+Allows a new user to learn about the different commands that are available. +
 Format: `help`
 
-=== Adding a person: `add`
+=== Adding a patient: `add`
 
-Adds a person to the address book +
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
+Adds a patient into Giatros. +
+Format: `add n/NAME p/PHONE_NUMBER [x/NEXT_APPOINTMENT] [a/ALLERGY]... `
 
 [TIP]
-A person can have any number of tags (including 0)
+A patient can have any number of allergies (including 0)
+[TIP]
+A patient can only have either 0 or 1 next appointment. If a patient has more than one appointment scheduled, only the
+first appointment will be recorded
 
 Examples:
 
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/John Doe p/98765432 x/28-02-2019 a/Ibuprofen`
+* `add n/Betsy Crowe p/12345678 a/Ibuprofen a/Penicillin`
 
-=== Listing all persons : `list`
+=== Listing all patients : `list`
 
-Shows a list of all persons in the address book. +
+Shows a list of all patients stored in Giatros. +
 Format: `list`
 
 === Editing a person : `edit`
