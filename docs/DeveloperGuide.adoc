@@ -836,20 +836,48 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 [width="59%",cols="22%,<23%,<25%,<30%",options="header",]
 |=======================================================================
 |Priority |As a ... |I want to ... |So that I can...
-|`* * *` |new user |see usage instructions |refer to instructions when I forget how to use the App
+|`* * *` |receptionist |find a patient in the database |decide whether the patient has been registered before
 
-|`* * *` |user |add a new person |
+|`* * *` |receptionist |add a new patient to the database |register a patient who has never visited our hospital before
 
-|`* * *` |user |delete a person |remove entries that I no longer need
+|`* * *` |receptionist |delete a patient from the database |remove erroneous details that have been accidentally added
 
-|`* * *` |user |find a person by name |locate details of persons without having to go through the entire list
+|`* * *` |receptionist |add a patient’s appointment |keep track of the appointments in the hospital
 
-|`* *` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
+|`* * *` |receptionist |edit a patient’s appointment |update an appointment that has been changed to another date
 
-|`*` |user with many persons in the address book |sort persons by name |locate a person easily
+|`* * *` |receptionist |delete a patient’s appointment |remove an appointment that has been cancelled or erroneously input
+
+|`* * *` |doctor |add a patient’s allergy |make sure that proper treatment and medication can be given to the patient
+
+|`* * *` |doctor |edit a patient’s allergy |update the patient’s allergy data
+
+|`* * *` |doctor |delete a patient’s allergy |remove an allergy that has been erroneously input or mysteriously cured
+
+|`* * *` |pharmacist |check a patient’s allergy |give out the proper medication
+
+|`* *` |receptionist |view the user guide |find out about the commands available in the application
+
+|`* *` |receptionist |add room booking for surgery |patient can be treated by doctor
+
+|`* *` |receptionist |edit room booking for surgery |prioritize urgent surgeries
+
+|`* *` |receptionist |add patient into a surgery room |patient can be allocated to a room properly
+
+|`* *` |receptionist |view all available patient recovery rooms |locate available rooms for new patients
+
+|`* *` |doctor |check a patient’s appointment |better allocate my timetable
+
+|`*` |receptionist |the search result to be shown neatly |locate and process work faster
+
+|`*` |doctor |all my upcoming appointments to be displayed in a dashboard |keep track of all my appointments
+
+|`*` |doctor |view room booking |find out where the treatment is being delivered
+
+|`*` |pharmacist |have a drug inventory feature |keep track of the drug inventory status
 |=======================================================================
 
-_{More to be added}_
+_{More listed in our Github issues}_
 
 [appendix]
 == Use Cases
