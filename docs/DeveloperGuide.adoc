@@ -882,17 +882,40 @@ _{More listed in our Github issues}_
 [appendix]
 == Use Cases
 
-(For all use cases below, the *System* is the `AddressBook` and the *Actor* is the `user`, unless specified otherwise)
+(For all use cases below, the *System* is `Giatros` and the *Actor* is the `user`, unless specified otherwise)
 
 [discrete]
-=== Use case: Delete person
+=== Use case: Add patient
 
 *MSS*
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. Receptionist encounters a new patient.
+2. Receptionist checks whether the new patient is registered in the system.
+3. Receptionist requests for the patient’s personal data.
+4. Receptionist adds the patient into the system.
+5. Giatros shows a message when addition of patient is successful.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 4a. The receptionist did not input data in the specified format.
++
+[none]
+** 4a1. Giatros shows an error message, along with a hint on how to input the data in the right format
++
+Use case resumes at step 4.
+
+[discrete]
+=== Use case: Delete patient
+
+*MSS*
+
+1. Receptionist requests to list all patients in the database.
+2. Giatros shows a list of patients registered in the database.
+3. Receptionist requests to delete a specific person in the list.
+4. Giatros deletes the person.
 +
 Use case ends.
 
@@ -906,7 +929,7 @@ Use case ends.
 * 3a. The given index is invalid.
 +
 [none]
-** 3a1. AddressBook shows an error message.
+** 3a1. Giatros shows an error message, prompting for a valid index.
 +
 Use case resumes at step 2.
 
