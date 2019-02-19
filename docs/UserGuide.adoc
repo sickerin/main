@@ -1,4 +1,4 @@
-= AddressBook Level 4 - User Guide
+= Giatros - User Guide
 :site-section: UserGuide
 :toc:
 :toc-title:
