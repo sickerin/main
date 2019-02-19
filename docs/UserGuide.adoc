@@ -18,7 +18,10 @@ By: `CS2103-AY1819S2-W13-4`      Since: `January 2019`      Licence: `MIT`
 
 == Introduction
 
-AddressBook Level 4 (AB4) is for those who *prefer to use a desktop app for managing contacts*. More importantly, AB4 is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB4 can get your contact management tasks done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+Giatros is a hospital-management app that facilitate better interactions between different parties involved in the hospital.
+Mainly targeted at the hospital receptionists who are keeping track of the patient records, Giatros can also be used by doctors
+who wish to find out more about their patients, allows patients to manage their appointments and also by pharmacists
+who wish to prescribe a more personalised medication to the patient.
 
 == Quick Start
 
