@@ -26,8 +26,8 @@ who wish to prescribe a more personalised medication to the patient.
 == Quick Start
 
 .  Ensure you have Java version `9` or later installed in your Computer.
-.  Download the latest `addressbook.jar` link:{repoURL}/releases[here].
-.  Copy the file to the folder you want to use as the home folder for your Address Book.
+.  Download the latest `Giatros.jar` link:{repoURL}/releases[here].
+.  Copy the file to the folder you want to use as the home folder for your Giatros.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
 image::Ui.png[width="790"]
@@ -36,9 +36,9 @@ image::Ui.png[width="790"]
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
-* *`list`* : lists all contacts
-* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to the Address Book.
-* **`delete`**`3` : deletes the 3rd contact shown in the current list
+* *`list`* : lists all patients
+* **`add`**`n/John Doe p/94785930 a/Ibuprofen` : adds a patient named `John Doe`, who is allergic to `Ibuprofen` into Giatros
+* **`delete`**`3` : deletes the 3rd patient shown in the current list
 * *`exit`* : exits the app
 
 .  Refer to <<Features>> for details of each command.
