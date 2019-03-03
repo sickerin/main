@@ -1,7 +1,7 @@
 = Giatros
 ifdef::env-github,env-browser[:relfileprefix: docs/]
 
-https://travis-ci.org/CS2103-AY1819S1-W13-4/main[image:https://travis-ci.org/CS2103-AY1819S2-W13-4/main.svg?branch=master[Build Status]]
+https://travis-ci.org/CS2103-AY1819S2-W13-4/main[image:https://travis-ci.org/CS2103-AY1819S2-W13-4/main.svg?branch=master[Build Status]]
 https://ci.appveyor.com/project/chuaes/main-erei4[image:https://ci.appveyor.com/api/projects/status/l0jp6ewmhauhmsr0?svg=true[Build status]]
 https://coveralls.io/github/CS2103-AY1819S2-W13-4/main?branch=master[image:https://coveralls.io/repos/CS2103-AY1819S2-W13-4/main/badge.svg?branch=master[Coverage Status]]
 
