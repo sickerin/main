@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -34,13 +36,39 @@ public class AddallCommandTest {
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() throws Exception {
-        AddallCommand addallCommand = new AddallCommand();
+    public void execute_throwsCommandException() throws Exception {
+        AddallCommand addallCommand = new AddallCommand(INDEX_FIRST_PERSON, "ibuprofen");
         Model modelStub = new ModelStub();
 
         thrown.expect(CommandException.class);
-        thrown.expectMessage("This method has not been implemented");
+        thrown.expectMessage("ibuprofen");
         addallCommand.execute(modelStub, commandHistory);
+    }
+
+    @Test
+    public void equals() {
+        final AddallCommand standardCommand = new AddallCommand(INDEX_FIRST_PERSON, "ibuprofen");
+
+        // same values -> returns true
+        String copyAllergyString = "ibuprofen";
+        AddallCommand commandWithSameValues = new AddallCommand(INDEX_FIRST_PERSON, copyAllergyString);
+        assertTrue(standardCommand.equals(commandWithSameValues));
+
+        // same object -> returns true
+        assertTrue(standardCommand.equals(standardCommand));
+
+        // null -> returns false
+        assertFalse(standardCommand.equals(null));
+
+        // different types -> returns false
+        assertFalse(standardCommand.equals(new ClearCommand()));
+
+        // different index -> returns false
+        assertFalse(standardCommand.equals(new AddallCommand(INDEX_SECOND_PERSON, copyAllergyString)));
+
+        // different descriptor -> returns false
+        String differentAllergyString = "paracetamol";
+        assertFalse(standardCommand.equals(new AddallCommand(INDEX_FIRST_PERSON, differentAllergyString)));
     }
 
     /**
