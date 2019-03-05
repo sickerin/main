@@ -40,8 +40,17 @@ public class AddallCommandParser implements Parser<AddallCommand> {
         String delims = "[ ]+";
         String[] tokens = args.trim().split(delims);
 
+        if (!(tokens[0].contains("[0-9]+"))) {
+            throw new ParseException("Invalid format");
+        }
+
         index = Index.fromOneBased(Integer.valueOf(tokens[0])); // The first argument is the index
         allergyString = tokens[1]; // The second argument is the allergyString
+
+        if (!(allergyString.contains("a/"))) {
+            throw new ParseException("Invalid format");
+        }
+
         allergyString = allergyString.substring(2); // Trim off the tag a/ in the beginning
 
         return new AddallCommand(index, allergyString);
