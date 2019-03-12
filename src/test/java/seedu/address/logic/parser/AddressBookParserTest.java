@@ -14,6 +14,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddallCommand;
 import seedu.address.logic.commands.ClearCommand;
@@ -118,7 +119,9 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_addall() throws Exception {
-        assertTrue(parser.parseCommand(AddallCommand.COMMAND_WORD) instanceof AddallCommand);
+        AddallCommand command = (AddallCommand) parser.parseCommand("addall 1 a/ibuprofen");
+        assertEquals(new AddallCommand(Index.fromOneBased(1), "ibuprofen"), command);
+        assertTrue(parser.parseCommand("addall 1 a/ibuprofen") instanceof AddallCommand);
     }
 
     @Test
