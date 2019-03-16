@@ -3,50 +3,50 @@ package systemtests;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.AMY;
-import static seedu.address.testutil.TypicalPersons.BOB;
-import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
+import static seedu.giatros.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
+import static seedu.giatros.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
+import static seedu.giatros.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
+import static seedu.giatros.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
+import static seedu.giatros.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
+import static seedu.giatros.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
+import static seedu.giatros.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+import static seedu.giatros.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
+import static seedu.giatros.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
+import static seedu.giatros.logic.commands.CommandTestUtil.NAME_DESC_AMY;
+import static seedu.giatros.logic.commands.CommandTestUtil.NAME_DESC_BOB;
+import static seedu.giatros.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+import static seedu.giatros.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
+import static seedu.giatros.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
+import static seedu.giatros.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
+import static seedu.giatros.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
+import static seedu.giatros.logic.commands.CommandTestUtil.VALID_NAME_AMY;
+import static seedu.giatros.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.giatros.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
+import static seedu.giatros.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.giatros.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.giatros.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.giatros.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.giatros.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.giatros.testutil.TypicalPersons.AMY;
+import static seedu.giatros.testutil.TypicalPersons.BOB;
+import static seedu.giatros.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
 
 import org.junit.Test;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.RedoCommand;
-import seedu.address.logic.commands.UndoCommand;
-import seedu.address.model.Model;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
-import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.PersonUtil;
+import seedu.giatros.commons.core.Messages;
+import seedu.giatros.commons.core.index.Index;
+import seedu.giatros.logic.commands.EditCommand;
+import seedu.giatros.logic.commands.RedoCommand;
+import seedu.giatros.logic.commands.UndoCommand;
+import seedu.giatros.model.Model;
+import seedu.giatros.model.person.Address;
+import seedu.giatros.model.person.Email;
+import seedu.giatros.model.person.Name;
+import seedu.giatros.model.person.Person;
+import seedu.giatros.model.person.Phone;
+import seedu.giatros.model.tag.Tag;
+import seedu.giatros.testutil.PersonBuilder;
+import seedu.giatros.testutil.PersonUtil;
 
 public class EditCommandSystemTest extends AddressBookSystemTest {
 
@@ -108,7 +108,7 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
 
         /* ------------------ Performing edit operation while a filtered list is being shown ------------------------ */
 
-        /* Case: filtered person list, edit index within bounds of address book and person list -> edited */
+        /* Case: filtered person list, edit index within bounds of giatros book and person list -> edited */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
         index = INDEX_FIRST_PERSON;
         assertTrue(index.getZeroBased() < getModel().getFilteredPersonList().size());
@@ -117,7 +117,7 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
         editedPerson = new PersonBuilder(personToEdit).withName(VALID_NAME_BOB).build();
         assertCommandSuccess(command, index, editedPerson);
 
-        /* Case: filtered person list, edit index within bounds of address book but out of bounds of person list
+        /* Case: filtered person list, edit index within bounds of giatros book but out of bounds of person list
          * -> rejected
          */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
@@ -174,7 +174,7 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + INVALID_EMAIL_DESC,
                 Email.MESSAGE_CONSTRAINTS);
 
-        /* Case: invalid address -> rejected */
+        /* Case: invalid giatros -> rejected */
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + INVALID_ADDRESS_DESC,
                 Address.MESSAGE_CONSTRAINTS);
 
@@ -196,7 +196,7 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
                 + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_PERSON);
 
-        /* Case: edit a person with new values same as another person's values but with different address -> rejected */
+        /* Case: edit a person with new values same as another person's values but with different giatros -> rejected */
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_AMY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_PERSON);
