@@ -818,13 +818,6 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 ** Would like to manage where patients will recover
 ** Would like to manage where doctors will perform treatment
 
-* Pharmacists
-** Decide what kind of medication should be prescribed, taking into consideration the patient’s allergy
-* Doctors
-** Decide what kind of treatment works best for a particular patient, and give a more personalised treatment
-** Manage his or her time well by knowing when exactly are their patient appointments
-
-
 *Value proposition*: Giatros acts as an integrated platform that improves the coordination between
 the various parties involved in a hospital, including hospital staffs and patients
 
@@ -848,14 +841,6 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |receptionist |delete a patient’s appointment |remove an appointment that has been cancelled or erroneously input
 
-|`* * *` |doctor |add a patient’s allergy |make sure that proper treatment and medication can be given to the patient
-
-|`* * *` |doctor |edit a patient’s allergy |update the patient’s allergy data
-
-|`* * *` |doctor |delete a patient’s allergy |remove an allergy that has been erroneously input or mysteriously cured
-
-|`* * *` |pharmacist |check a patient’s allergy |give out the proper medication
-
 |`* *` |receptionist |view the user guide |find out about the commands available in the application
 
 |`* *` |receptionist |add room booking for surgery |patient can be treated by doctor
@@ -866,15 +851,8 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* *` |receptionist |view all available patient recovery rooms |locate available rooms for new patients
 
-|`* *` |doctor |check a patient’s appointment |better allocate my timetable
-
 |`*` |receptionist |the search result to be shown neatly |locate and process work faster
 
-|`*` |doctor |all my upcoming appointments to be displayed in a dashboard |keep track of all my appointments
-
-|`*` |doctor |view room booking |find out where the treatment is being delivered
-
-|`*` |pharmacist |have a drug inventory feature |keep track of the drug inventory status
 |=======================================================================
 
 _{More listed in our Github issues}_
