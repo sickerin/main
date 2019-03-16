@@ -1,9 +1,10 @@
 package seedu.giatros.logic.parser;
 
+import static seedu.giatros.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 import seedu.giatros.commons.core.index.Index;
 import seedu.giatros.logic.commands.SelectCommand;
 import seedu.giatros.logic.parser.exceptions.ParseException;
-import seedu.giatros.commons.core.Messages;
 
 /**
  * Parses input arguments and creates a new SelectCommand object
@@ -21,7 +22,7 @@ public class SelectCommandParser implements Parser<SelectCommand> {
             return new SelectCommand(index);
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE), pe);
         }
     }
 }

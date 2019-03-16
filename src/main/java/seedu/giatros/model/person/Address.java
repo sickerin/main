@@ -1,7 +1,5 @@
 package seedu.giatros.model.person;
 
-import seedu.giatros.commons.util.AppUtil;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.giatros.commons.util.AppUtil.checkArgument;
 
@@ -28,7 +26,7 @@ public class Address {
      */
     public Address(String address) {
         requireNonNull(address);
-        AppUtil.checkArgument(isValidAddress(address), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidAddress(address), MESSAGE_CONSTRAINTS);
         value = address;
     }
 

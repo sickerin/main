@@ -10,7 +10,7 @@ import seedu.giatros.logic.commands.exceptions.CommandException;
 import seedu.giatros.logic.parser.exceptions.ParseException;
 import seedu.giatros.model.ReadOnlyAddressBook;
 import seedu.giatros.model.person.Person;
-import seedu.giatros.model.Model;
+
 
 /**
  * API of the Logic component
@@ -28,7 +28,7 @@ public interface Logic {
     /**
      * Returns the AddressBook.
      *
-     * @see Model#getAddressBook()
+     * @see seedu.giatros.model.Model#getAddressBook()
      */
     ReadOnlyAddressBook getAddressBook();
 
@@ -60,14 +60,14 @@ public interface Logic {
      * Selected person in the filtered person list.
      * null if no person is selected.
      *
-     * @see Model#selectedPersonProperty()
+     * @see seedu.giatros.model.Model#selectedPersonProperty()
      */
     ReadOnlyProperty<Person> selectedPersonProperty();
 
     /**
      * Sets the selected person in the filtered person list.
      *
-     * @see Model#setSelectedPerson(Person)
+     * @see seedu.giatros.model.Model#setSelectedPerson(Person)
      */
     void setSelectedPerson(Person person);
 }

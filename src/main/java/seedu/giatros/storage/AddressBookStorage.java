@@ -6,10 +6,9 @@ import java.util.Optional;
 
 import seedu.giatros.commons.exceptions.DataConversionException;
 import seedu.giatros.model.ReadOnlyAddressBook;
-import seedu.giatros.model.AddressBook;
 
 /**
- * Represents a storage for {@link AddressBook}.
+ * Represents a storage for {@link seedu.giatros.model.AddressBook}.
  */
 public interface AddressBookStorage {
 

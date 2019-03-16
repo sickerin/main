@@ -17,7 +17,6 @@ import seedu.giatros.commons.core.GuiSettings;
 import seedu.giatros.commons.core.LogsCenter;
 import seedu.giatros.model.person.Person;
 import seedu.giatros.model.person.exceptions.PersonNotFoundException;
-import seedu.giatros.commons.util.CollectionUtil;
 
 /**
  * Represents the in-memory model of the giatros book data.
@@ -35,7 +34,7 @@ public class ModelManager implements Model {
      */
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
         super();
-        CollectionUtil.requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with giatros book: " + addressBook + " and user prefs " + userPrefs);
 
@@ -115,7 +114,7 @@ public class ModelManager implements Model {
 
     @Override
     public void setPerson(Person target, Person editedPerson) {
-        CollectionUtil.requireAllNonNull(target, editedPerson);
+        requireAllNonNull(target, editedPerson);
 
         versionedAddressBook.setPerson(target, editedPerson);
     }

@@ -10,7 +10,6 @@ import javafx.scene.layout.Region;
 import seedu.giatros.logic.commands.CommandResult;
 import seedu.giatros.logic.commands.exceptions.CommandException;
 import seedu.giatros.logic.parser.exceptions.ParseException;
-import seedu.giatros.logic.Logic;
 
 /**
  * The UI component that is responsible for receiving user command inputs.
@@ -147,7 +146,7 @@ public class CommandBox extends UiPart<Region> {
         /**
          * Executes the command and returns the result.
          *
-         * @see Logic#execute(String)
+         * @see seedu.giatros.logic.Logic#execute(String)
          */
         CommandResult execute(String commandText) throws CommandException, ParseException;
     }
