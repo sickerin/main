@@ -2,7 +2,7 @@ package seedu.giatros.storage;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static seedu.giatros.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.giatros.testutil.TypicalPersons.getTypicalGiatrosBook;
 
 import java.nio.file.Path;
 
@@ -12,8 +12,8 @@ import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
 import seedu.giatros.commons.core.GuiSettings;
-import seedu.giatros.model.AddressBook;
-import seedu.giatros.model.ReadOnlyAddressBook;
+import seedu.giatros.model.GiatrosBook;
+import seedu.giatros.model.ReadOnlyGiatrosBook;
 import seedu.giatros.model.UserPrefs;
 
 public class StorageManagerTest {
@@ -25,7 +25,7 @@ public class StorageManagerTest {
 
     @Before
     public void setUp() {
-        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(getTempFilePath("ab"));
+        JsonGiatrosBookStorage addressBookStorage = new JsonGiatrosBookStorage(getTempFilePath("ab"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
         storageManager = new StorageManager(addressBookStorage, userPrefsStorage);
     }
@@ -53,18 +53,18 @@ public class StorageManagerTest {
     public void addressBookReadSave() throws Exception {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
-         * {@link JsonAddressBookStorage} class.
-         * More extensive testing of UserPref saving/reading is done in {@link JsonAddressBookStorageTest} class.
+         * {@link JsonGiatrosBookStorage} class.
+         * More extensive testing of UserPref saving/reading is done in {@link JsonGiatrosBookStorageTest} class.
          */
-        AddressBook original = getTypicalAddressBook();
-        storageManager.saveAddressBook(original);
-        ReadOnlyAddressBook retrieved = storageManager.readAddressBook().get();
-        assertEquals(original, new AddressBook(retrieved));
+        GiatrosBook original = getTypicalGiatrosBook();
+        storageManager.saveGiatrosBook(original);
+        ReadOnlyGiatrosBook retrieved = storageManager.readGiatrosBook().get();
+        assertEquals(original, new GiatrosBook(retrieved));
     }
 
     @Test
-    public void getAddressBookFilePath() {
-        assertNotNull(storageManager.getAddressBookFilePath());
+    public void getGiatrosBookFilePath() {
+        assertNotNull(storageManager.getGiatrosBookFilePath());
     }
 
 }

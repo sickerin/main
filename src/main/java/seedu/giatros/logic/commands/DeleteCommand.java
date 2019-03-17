@@ -12,7 +12,7 @@ import seedu.giatros.model.Model;
 import seedu.giatros.model.person.Person;
 
 /**
- * Deletes a person identified using it's displayed index from the giatros book.
+ * Deletes a person identified using it's displayed index from the Giatros book.
  */
 public class DeleteCommand extends Command {
 
@@ -42,7 +42,7 @@ public class DeleteCommand extends Command {
 
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deletePerson(personToDelete);
-        model.commitAddressBook();
+        model.commitGiatrosBook();
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
     }
 

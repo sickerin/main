@@ -8,7 +8,7 @@ import static seedu.giatros.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.giatros.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.giatros.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.giatros.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
-import static seedu.giatros.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.giatros.testutil.TypicalPersons.getTypicalGiatrosBook;
 
 import org.junit.Test;
 
@@ -23,8 +23,8 @@ import seedu.giatros.model.UserPrefs;
  * Contains integration tests (interaction with the Model) for {@code SelectCommand}.
  */
 public class SelectCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalGiatrosBook(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalGiatrosBook(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
@@ -57,8 +57,8 @@ public class SelectCommandTest {
         showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
 
         Index outOfBoundsIndex = INDEX_SECOND_PERSON;
-        // ensures that outOfBoundIndex is still in bounds of giatros book list
-        assertTrue(outOfBoundsIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
+        // ensures that outOfBoundIndex is still in bounds of Giatros book list
+        assertTrue(outOfBoundsIndex.getZeroBased() < model.getGiatrosBook().getPersonList().size());
 
         assertExecutionFailure(outOfBoundsIndex, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }

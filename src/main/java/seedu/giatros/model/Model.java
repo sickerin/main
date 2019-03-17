@@ -36,44 +36,44 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' giatros book file path.
+     * Returns the user prefs' Giatros book file path.
      */
-    Path getAddressBookFilePath();
+    Path getGiatrosBookFilePath();
 
     /**
-     * Sets the user prefs' giatros book file path.
+     * Sets the user prefs' Giatros book file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setGiatrosBookFilePath(Path giatrosBookFilePath);
 
     /**
-     * Replaces giatros book data with the data in {@code addressBook}.
+     * Replaces Giatros book data with the data in {@code giatrosBook}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setGiatrosBook(ReadOnlyGiatrosBook giatrosBook);
 
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    /** Returns the GiatrosBook */
+    ReadOnlyGiatrosBook getGiatrosBook();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the giatros book.
+     * Returns true if a person with the same identity as {@code person} exists in the Giatros book.
      */
     boolean hasPerson(Person person);
 
     /**
      * Deletes the given person.
-     * The person must exist in the giatros book.
+     * The person must exist in the Giatros book.
      */
     void deletePerson(Person target);
 
     /**
      * Adds the given person.
-     * {@code person} must not already exist in the giatros book.
+     * {@code person} must not already exist in the Giatros book.
      */
     void addPerson(Person person);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the giatros book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the giatros book.
+     * {@code target} must exist in the Giatros book.
+     * The person identity of {@code editedPerson} must not be the same as another existing person in the Giatros book.
      */
     void setPerson(Person target, Person editedPerson);
 
@@ -87,29 +87,29 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     /**
-     * Returns true if the model has previous giatros book states to restore.
+     * Returns true if the model has previous Giatros book states to restore.
      */
-    boolean canUndoAddressBook();
+    boolean canUndoGiatrosBook();
 
     /**
-     * Returns true if the model has undone giatros book states to restore.
+     * Returns true if the model has undone Giatros book states to restore.
      */
-    boolean canRedoAddressBook();
+    boolean canRedoGiatrosBook();
 
     /**
-     * Restores the model's giatros book to its previous state.
+     * Restores the model's Giatros book to its previous state.
      */
-    void undoAddressBook();
+    void undoGiatrosBook();
 
     /**
-     * Restores the model's giatros book to its previously undone state.
+     * Restores the model's Giatros book to its previously undone state.
      */
-    void redoAddressBook();
+    void redoGiatrosBook();
 
     /**
-     * Saves the current giatros book state for undo/redo.
+     * Saves the current Giatros book state for undo/redo.
      */
-    void commitAddressBook();
+    void commitGiatrosBook();
 
     /**
      * Selected person in the filtered person list.

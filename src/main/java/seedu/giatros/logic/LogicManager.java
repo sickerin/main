@@ -11,10 +11,10 @@ import seedu.giatros.commons.core.LogsCenter;
 import seedu.giatros.logic.commands.Command;
 import seedu.giatros.logic.commands.CommandResult;
 import seedu.giatros.logic.commands.exceptions.CommandException;
-import seedu.giatros.logic.parser.AddressBookParser;
+import seedu.giatros.logic.parser.GiatrosBookParser;
 import seedu.giatros.logic.parser.exceptions.ParseException;
 import seedu.giatros.model.Model;
-import seedu.giatros.model.ReadOnlyAddressBook;
+import seedu.giatros.model.ReadOnlyGiatrosBook;
 import seedu.giatros.model.person.Person;
 import seedu.giatros.storage.Storage;
 
@@ -28,36 +28,36 @@ public class LogicManager implements Logic {
     private final Model model;
     private final Storage storage;
     private final CommandHistory history;
-    private final AddressBookParser addressBookParser;
-    private boolean addressBookModified;
+    private final GiatrosBookParser giatrosBookParser;
+    private boolean giatrosBookModified;
 
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
         history = new CommandHistory();
-        addressBookParser = new AddressBookParser();
+        giatrosBookParser = new GiatrosBookParser();
 
-        // Set addressBookModified to true whenever the models' giatros book is modified.
-        model.getAddressBook().addListener(observable -> addressBookModified = true);
+        // Set giatrosBookModified to true whenever the models' giatros book is modified.
+        model.getGiatrosBook().addListener(observable -> giatrosBookModified = true);
     }
 
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
-        addressBookModified = false;
+        giatrosBookModified = false;
 
         CommandResult commandResult;
         try {
-            Command command = addressBookParser.parseCommand(commandText);
+            Command command = giatrosBookParser.parseCommand(commandText);
             commandResult = command.execute(model, history);
         } finally {
             history.add(commandText);
         }
 
-        if (addressBookModified) {
-            logger.info("Address book modified, saving to file.");
+        if (giatrosBookModified) {
+            logger.info("Giatros book modified, saving to file.");
             try {
-                storage.saveAddressBook(model.getAddressBook());
+                storage.saveGiatrosBook(model.getGiatrosBook());
             } catch (IOException ioe) {
                 throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
             }
@@ -67,8 +67,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return model.getAddressBook();
+    public ReadOnlyGiatrosBook getGiatrosBook() {
+        return model.getGiatrosBook();
     }
 
     @Override
@@ -82,8 +82,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return model.getAddressBookFilePath();
+    public Path getGiatrosBookFilePath() {
+        return model.getGiatrosBookFilePath();
     }
 
     @Override

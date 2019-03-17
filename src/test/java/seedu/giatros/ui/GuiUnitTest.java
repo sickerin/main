@@ -10,7 +10,7 @@ import javafx.scene.Node;
 import seedu.giatros.ui.testutil.UiPartRule;
 
 /**
- * A GUI unit test class for AddressBook.
+ * A GUI unit test class for GiatrosBook.
  */
 public abstract class GuiUnitTest {
     @Rule

@@ -8,17 +8,17 @@ import java.nio.file.Path;
 
 import org.junit.Test;
 
-import seedu.giatros.model.AddressBook;
+import seedu.giatros.model.GiatrosBook;
 import seedu.giatros.model.person.Person;
 import seedu.giatros.model.util.SampleDataUtil;
 import seedu.giatros.testutil.TestUtil;
 
-public class SampleDataTest extends AddressBookSystemTest {
+public class SampleDataTest extends GiatrosBookSystemTest {
     /**
      * Returns null to force test app to load data of the file in {@code getDataFileLocation()}.
      */
     @Override
-    protected AddressBook getInitialData() {
+    protected GiatrosBook getInitialData() {
         return null;
     }
 

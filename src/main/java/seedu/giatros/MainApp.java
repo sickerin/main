@@ -15,15 +15,15 @@ import seedu.giatros.commons.util.ConfigUtil;
 import seedu.giatros.commons.util.StringUtil;
 import seedu.giatros.logic.Logic;
 import seedu.giatros.logic.LogicManager;
-import seedu.giatros.model.AddressBook;
+import seedu.giatros.model.GiatrosBook;
 import seedu.giatros.model.Model;
 import seedu.giatros.model.ModelManager;
-import seedu.giatros.model.ReadOnlyAddressBook;
+import seedu.giatros.model.ReadOnlyGiatrosBook;
 import seedu.giatros.model.ReadOnlyUserPrefs;
 import seedu.giatros.model.UserPrefs;
 import seedu.giatros.model.util.SampleDataUtil;
-import seedu.giatros.storage.AddressBookStorage;
-import seedu.giatros.storage.JsonAddressBookStorage;
+import seedu.giatros.storage.GiatrosBookStorage;
+import seedu.giatros.storage.JsonGiatrosBookStorage;
 import seedu.giatros.storage.JsonUserPrefsStorage;
 import seedu.giatros.storage.Storage;
 import seedu.giatros.storage.StorageManager;
@@ -48,7 +48,7 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing AddressBook ]===========================");
+        logger.info("=============================[ Initializing GiatrosBook ]===========================");
         super.init();
 
         AppParameters appParameters = AppParameters.parse(getParameters());
@@ -56,8 +56,8 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        GiatrosBookStorage giatrosBookStorage = new JsonGiatrosBookStorage(userPrefs.getGiatrosBookFilePath());
+        storage = new StorageManager(giatrosBookStorage, userPrefsStorage);
 
         initLogging(config);
 
@@ -69,25 +69,25 @@ public class MainApp extends Application {
     }
 
     /**
-     * Returns a {@code ModelManager} with the data from {@code storage}'s giatros book and {@code userPrefs}. <br>
-     * The data from the sample giatros book will be used instead if {@code storage}'s giatros book is not found,
-     * or an empty giatros book will be used instead if errors occur when reading {@code storage}'s giatros book.
+     * Returns a {@code ModelManager} with the data from {@code storage}'s clinic book and {@code userPrefs}. <br>
+     * The data from the sample clinic book will be used instead if {@code storage}'s clinic book is not found,
+     * or an empty clinic book will be used instead if errors occur when reading {@code storage}'s clinic book.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
+        Optional<ReadOnlyGiatrosBook> giatrosBookOptional;
+        ReadOnlyGiatrosBook initialData;
         try {
-            addressBookOptional = storage.readAddressBook();
-            if (!addressBookOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample AddressBook");
+            giatrosBookOptional = storage.readGiatrosBook();
+            if (!giatrosBookOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with a sample GiatrosBook");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialData = giatrosBookOptional.orElseGet(SampleDataUtil::getSampleGiatrosBook);
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
+            logger.warning("Data file not in the correct format. Will be starting with an empty GiatrosBook");
+            initialData = new GiatrosBook();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
+            logger.warning("Problem while reading from the file. Will be starting with an empty GiatrosBook");
+            initialData = new GiatrosBook();
         }
 
         return new ModelManager(initialData, userPrefs);
@@ -151,7 +151,7 @@ public class MainApp extends Application {
                     + "Using default user prefs");
             initializedPrefs = new UserPrefs();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
+            logger.warning("Problem while reading from the file. Will be starting with an empty GiatrosBook");
             initializedPrefs = new UserPrefs();
         }
 
@@ -167,13 +167,13 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting AddressBook " + MainApp.VERSION);
+        logger.info("Starting GiatrosBook " + MainApp.VERSION);
         ui.start(primaryStage);
     }
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping Address Book ] =============================");
+        logger.info("============================ [ Stopping Giatros Book ] =============================");
         try {
             storage.saveUserPrefs(model.getUserPrefs());
         } catch (IOException e) {

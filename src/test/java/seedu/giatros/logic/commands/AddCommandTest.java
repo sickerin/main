@@ -19,9 +19,9 @@ import javafx.collections.ObservableList;
 import seedu.giatros.commons.core.GuiSettings;
 import seedu.giatros.logic.CommandHistory;
 import seedu.giatros.logic.commands.exceptions.CommandException;
-import seedu.giatros.model.AddressBook;
+import seedu.giatros.model.GiatrosBook;
 import seedu.giatros.model.Model;
-import seedu.giatros.model.ReadOnlyAddressBook;
+import seedu.giatros.model.ReadOnlyGiatrosBook;
 import seedu.giatros.model.ReadOnlyUserPrefs;
 import seedu.giatros.model.person.Person;
 import seedu.giatros.testutil.PersonBuilder;
@@ -113,12 +113,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public Path getAddressBookFilePath() {
+        public Path getGiatrosBookFilePath() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
+        public void setGiatrosBookFilePath(Path giatrosBookFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -128,12 +128,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
+        public void setGiatrosBook(ReadOnlyGiatrosBook newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyGiatrosBook getGiatrosBook() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -163,27 +163,27 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean canUndoAddressBook() {
+        public boolean canUndoGiatrosBook() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean canRedoAddressBook() {
+        public boolean canRedoGiatrosBook() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void undoAddressBook() {
+        public void undoGiatrosBook() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void redoAddressBook() {
+        public void redoGiatrosBook() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void commitAddressBook() {
+        public void commitGiatrosBook() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -240,13 +240,13 @@ public class AddCommandTest {
         }
 
         @Override
-        public void commitAddressBook() {
+        public void commitGiatrosBook() {
             // called by {@code AddCommand#execute()}
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ReadOnlyGiatrosBook getGiatrosBook() {
+            return new GiatrosBook();
         }
     }
 

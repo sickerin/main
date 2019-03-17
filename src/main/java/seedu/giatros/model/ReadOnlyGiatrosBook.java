@@ -5,9 +5,9 @@ import javafx.collections.ObservableList;
 import seedu.giatros.model.person.Person;
 
 /**
- * Unmodifiable view of an giatros book
+ * Unmodifiable view of an Giatros book
  */
-public interface ReadOnlyAddressBook extends Observable {
+public interface ReadOnlyGiatrosBook extends Observable {
 
     /**
      * Returns an unmodifiable view of the persons list.

@@ -34,17 +34,17 @@ import seedu.giatros.logic.commands.ClearCommand;
 import seedu.giatros.logic.commands.FindCommand;
 import seedu.giatros.logic.commands.ListCommand;
 import seedu.giatros.logic.commands.SelectCommand;
-import seedu.giatros.model.AddressBook;
+import seedu.giatros.model.GiatrosBook;
 import seedu.giatros.model.Model;
 import seedu.giatros.testutil.TypicalPersons;
 import seedu.giatros.ui.BrowserPanel;
 import seedu.giatros.ui.CommandBox;
 
 /**
- * A system test class for AddressBook, which provides access to handles of GUI components and helper methods
+ * A system test class for GiatrosBook, which provides access to handles of GUI components and helper methods
  * for test verification.
  */
-public abstract class AddressBookSystemTest {
+public abstract class GiatrosBookSystemTest {
     @ClassRule
     public static ClockRule clockRule = new ClockRule();
 
@@ -79,8 +79,8 @@ public abstract class AddressBookSystemTest {
     /**
      * Returns the data to be loaded into the file in {@link #getDataFileLocation()}.
      */
-    protected AddressBook getInitialData() {
-        return TypicalPersons.getTypicalAddressBook();
+    protected GiatrosBook getInitialData() {
+        return TypicalPersons.getTypicalGiatrosBook();
     }
 
     /**
@@ -134,11 +134,11 @@ public abstract class AddressBookSystemTest {
     }
 
     /**
-     * Displays all persons in the giatros book.
+     * Displays all persons in the Giatros book.
      */
     protected void showAllPersons() {
         executeCommand(ListCommand.COMMAND_WORD);
-        assertEquals(getModel().getAddressBook().getPersonList().size(), getModel().getFilteredPersonList().size());
+        assertEquals(getModel().getGiatrosBook().getPersonList().size(), getModel().getFilteredPersonList().size());
     }
 
     /**
@@ -146,7 +146,7 @@ public abstract class AddressBookSystemTest {
      */
     protected void showPersonsWithName(String keyword) {
         executeCommand(FindCommand.COMMAND_WORD + " " + keyword);
-        assertTrue(getModel().getFilteredPersonList().size() < getModel().getAddressBook().getPersonList().size());
+        assertTrue(getModel().getFilteredPersonList().size() < getModel().getGiatrosBook().getPersonList().size());
     }
 
     /**
@@ -158,11 +158,11 @@ public abstract class AddressBookSystemTest {
     }
 
     /**
-     * Deletes all persons in the giatros book.
+     * Deletes all persons in the Giatros book.
      */
     protected void deleteAllPersons() {
         executeCommand(ClearCommand.COMMAND_WORD);
-        assertEquals(0, getModel().getAddressBook().getPersonList().size());
+        assertEquals(0, getModel().getGiatrosBook().getPersonList().size());
     }
 
     /**
@@ -174,7 +174,7 @@ public abstract class AddressBookSystemTest {
             Model expectedModel) {
         assertEquals(expectedCommandInput, getCommandBox().getInput());
         assertEquals(expectedResultMessage, getResultDisplay().getText());
-        assertEquals(new AddressBook(expectedModel.getAddressBook()), testApp.readStorageAddressBook());
+        assertEquals(new GiatrosBook(expectedModel.getGiatrosBook()), testApp.readStorageAddressBook());
         assertListMatching(getPersonListPanel(), expectedModel.getFilteredPersonList());
     }
 

@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import seedu.giatros.model.AddressBook;
-import seedu.giatros.model.ReadOnlyAddressBook;
+import seedu.giatros.model.GiatrosBook;
+import seedu.giatros.model.ReadOnlyGiatrosBook;
 import seedu.giatros.model.person.Address;
 import seedu.giatros.model.person.Email;
 import seedu.giatros.model.person.Name;
@@ -14,7 +14,7 @@ import seedu.giatros.model.person.Phone;
 import seedu.giatros.model.tag.Tag;
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code GiatrosBook} with sample data.
  */
 public class SampleDataUtil {
     public static Person[] getSamplePersons() {
@@ -40,8 +40,8 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
-        AddressBook sampleAb = new AddressBook();
+    public static ReadOnlyGiatrosBook getSampleGiatrosBook() {
+        GiatrosBook sampleAb = new GiatrosBook();
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
         }

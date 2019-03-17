@@ -36,11 +36,11 @@ import seedu.giatros.testutil.EditPersonDescriptorBuilder;
 import seedu.giatros.testutil.PersonBuilder;
 import seedu.giatros.testutil.PersonUtil;
 
-public class AddressBookParserTest {
+public class GiatrosBookParserTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    private final AddressBookParser parser = new AddressBookParser();
+    private final GiatrosBookParser parser = new GiatrosBookParser();
 
     @Test
     public void parseCommand_add() throws Exception {

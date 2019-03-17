@@ -17,7 +17,7 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import seedu.giatros.logic.LogicManager;
 import seedu.giatros.model.ModelManager;
-import seedu.giatros.storage.JsonAddressBookStorage;
+import seedu.giatros.storage.JsonGiatrosBookStorage;
 import seedu.giatros.storage.JsonUserPrefsStorage;
 import seedu.giatros.storage.StorageManager;
 
@@ -34,7 +34,7 @@ public class MainWindowCloseTest extends GuiUnitTest {
 
     @Before
     public void setUp() throws Exception {
-        JsonAddressBookStorage jsonAddressBookStorage = new JsonAddressBookStorage(temporaryFolder.newFile().toPath());
+        JsonGiatrosBookStorage jsonAddressBookStorage = new JsonGiatrosBookStorage(temporaryFolder.newFile().toPath());
         JsonUserPrefsStorage jsonUserPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.newFile().toPath());
         StorageManager storageManager = new StorageManager(jsonAddressBookStorage, jsonUserPrefsStorage);
         FxToolkit.setupStage(stage -> {

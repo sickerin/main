@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.giatros.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Tag in the giatros book.
+ * Represents a Tag in the Giatros book.
  * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
  */
 public class Tag {

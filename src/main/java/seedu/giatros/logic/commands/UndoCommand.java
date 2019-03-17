@@ -8,7 +8,7 @@ import seedu.giatros.logic.commands.exceptions.CommandException;
 import seedu.giatros.model.Model;
 
 /**
- * Reverts the {@code model}'s giatros book to its previous state.
+ * Reverts the {@code model}'s Giatros book to its previous state.
  */
 public class UndoCommand extends Command {
 
@@ -20,11 +20,11 @@ public class UndoCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        if (!model.canUndoAddressBook()) {
+        if (!model.canUndoGiatrosBook()) {
             throw new CommandException(MESSAGE_FAILURE);
         }
 
-        model.undoAddressBook();
+        model.undoGiatrosBook();
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(MESSAGE_SUCCESS);
     }

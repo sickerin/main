@@ -15,7 +15,7 @@ import java.util.List;
 import seedu.giatros.commons.core.index.Index;
 import seedu.giatros.logic.CommandHistory;
 import seedu.giatros.logic.commands.exceptions.CommandException;
-import seedu.giatros.model.AddressBook;
+import seedu.giatros.model.GiatrosBook;
 import seedu.giatros.model.Model;
 import seedu.giatros.model.person.NameContainsKeywordsPredicate;
 import seedu.giatros.model.person.Person;
@@ -76,7 +76,7 @@ public class CommandTestUtil {
      * - the {@code actualCommandHistory} remains unchanged.
      */
     public static void assertCommandSuccess(Command command, Model actualModel, CommandHistory actualCommandHistory,
-                                            CommandResult expectedCommandResult, Model expectedModel) {
+            CommandResult expectedCommandResult, Model expectedModel) {
         CommandHistory expectedCommandHistory = new CommandHistory(actualCommandHistory);
         try {
             CommandResult result = command.execute(actualModel, actualCommandHistory);
@@ -102,14 +102,14 @@ public class CommandTestUtil {
      * Executes the given {@code command}, confirms that <br>
      * - a {@code CommandException} is thrown <br>
      * - the CommandException message matches {@code expectedMessage} <br>
-     * - the giatros book, filtered person list and selected person in {@code actualModel} remain unchanged <br>
+     * - the Giatros book, filtered person list and selected person in {@code actualModel} remain unchanged <br>
      * - {@code actualCommandHistory} remains unchanged.
      */
     public static void assertCommandFailure(Command command, Model actualModel, CommandHistory actualCommandHistory,
             String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
-        AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
+        GiatrosBook expectedGiatrosBook = new GiatrosBook(actualModel.getGiatrosBook());
         List<Person> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
         Person expectedSelectedPerson = actualModel.getSelectedPerson();
 
@@ -120,7 +120,7 @@ public class CommandTestUtil {
             throw new AssertionError("The expected CommandException was not thrown.");
         } catch (CommandException e) {
             assertEquals(expectedMessage, e.getMessage());
-            assertEquals(expectedAddressBook, actualModel.getAddressBook());
+            assertEquals(expectedGiatrosBook, actualModel.getGiatrosBook());
             assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
             assertEquals(expectedSelectedPerson, actualModel.getSelectedPerson());
             assertEquals(expectedCommandHistory, actualCommandHistory);
@@ -129,7 +129,7 @@ public class CommandTestUtil {
 
     /**
      * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
-     * {@code model}'s giatros book.
+     * {@code model}'s Giatros book.
      */
     public static void showPersonAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredPersonList().size());
@@ -142,12 +142,12 @@ public class CommandTestUtil {
     }
 
     /**
-     * Deletes the first person in {@code model}'s filtered list from {@code model}'s giatros book.
+     * Deletes the first person in {@code model}'s filtered list from {@code model}'s Giatros book.
      */
     public static void deleteFirstPerson(Model model) {
         Person firstPerson = model.getFilteredPersonList().get(0);
         model.deletePerson(firstPerson);
-        model.commitAddressBook();
+        model.commitGiatrosBook();
     }
 
 }

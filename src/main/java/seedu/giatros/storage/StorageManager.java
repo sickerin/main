@@ -7,23 +7,23 @@ import java.util.logging.Logger;
 
 import seedu.giatros.commons.core.LogsCenter;
 import seedu.giatros.commons.exceptions.DataConversionException;
-import seedu.giatros.model.ReadOnlyAddressBook;
+import seedu.giatros.model.ReadOnlyGiatrosBook;
 import seedu.giatros.model.ReadOnlyUserPrefs;
 import seedu.giatros.model.UserPrefs;
 
 /**
- * Manages storage of AddressBook data in local storage.
+ * Manages storage of GiatrosBook data in local storage.
  */
 public class StorageManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
-    private AddressBookStorage addressBookStorage;
+    private GiatrosBookStorage giatrosBookStorage;
     private UserPrefsStorage userPrefsStorage;
 
 
-    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(GiatrosBookStorage giatrosBookStorage, UserPrefsStorage userPrefsStorage) {
         super();
-        this.addressBookStorage = addressBookStorage;
+        this.giatrosBookStorage = giatrosBookStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
 
@@ -45,33 +45,33 @@ public class StorageManager implements Storage {
     }
 
 
-    // ================ AddressBook methods ==============================
+    // ================ GiatrosBook methods ==============================
 
     @Override
-    public Path getAddressBookFilePath() {
-        return addressBookStorage.getAddressBookFilePath();
+    public Path getGiatrosBookFilePath() {
+        return giatrosBookStorage.getGiatrosBookFilePath();
     }
 
     @Override
-    public Optional<ReadOnlyAddressBook> readAddressBook() throws DataConversionException, IOException {
-        return readAddressBook(addressBookStorage.getAddressBookFilePath());
+    public Optional<ReadOnlyGiatrosBook> readGiatrosBook() throws DataConversionException, IOException {
+        return readGiatrosBook(giatrosBookStorage.getGiatrosBookFilePath());
     }
 
     @Override
-    public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataConversionException, IOException {
+    public Optional<ReadOnlyGiatrosBook> readGiatrosBook(Path filePath) throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return addressBookStorage.readAddressBook(filePath);
+        return giatrosBookStorage.readGiatrosBook(filePath);
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
-        saveAddressBook(addressBook, addressBookStorage.getAddressBookFilePath());
+    public void saveGiatrosBook(ReadOnlyGiatrosBook addressBook) throws IOException {
+        saveGiatrosBook(addressBook, giatrosBookStorage.getGiatrosBookFilePath());
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
+    public void saveGiatrosBook(ReadOnlyGiatrosBook addressBook, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        addressBookStorage.saveAddressBook(addressBook, filePath);
+        giatrosBookStorage.saveGiatrosBook(addressBook, filePath);
     }
 
 }

@@ -6,6 +6,7 @@ import static seedu.giatros.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.giatros.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.giatros.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.giatros.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.giatros.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -27,7 +28,7 @@ import seedu.giatros.model.person.Phone;
 import seedu.giatros.model.tag.Tag;
 
 /**
- * Edits the details of an existing person in the giatros book.
+ * Edits the details of an existing person in the Giatros book.
  */
 public class EditCommand extends Command {
 
@@ -48,7 +49,7 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the giatros book.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the Giatros book.";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -82,8 +83,8 @@ public class EditCommand extends Command {
         }
 
         model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
-        model.commitAddressBook();
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.commitGiatrosBook();
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
     }
 

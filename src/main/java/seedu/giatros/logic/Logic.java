@@ -8,9 +8,8 @@ import seedu.giatros.commons.core.GuiSettings;
 import seedu.giatros.logic.commands.CommandResult;
 import seedu.giatros.logic.commands.exceptions.CommandException;
 import seedu.giatros.logic.parser.exceptions.ParseException;
-import seedu.giatros.model.ReadOnlyAddressBook;
+import seedu.giatros.model.ReadOnlyGiatrosBook;
 import seedu.giatros.model.person.Person;
-
 
 /**
  * API of the Logic component
@@ -26,11 +25,11 @@ public interface Logic {
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
     /**
-     * Returns the AddressBook.
+     * Returns the GiatrosBook.
      *
-     * @see seedu.giatros.model.Model#getAddressBook()
+     * @see seedu.giatros.model.Model#getGiatrosBook()
      */
-    ReadOnlyAddressBook getAddressBook();
+    ReadOnlyGiatrosBook getGiatrosBook();
 
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();
@@ -42,9 +41,9 @@ public interface Logic {
     ObservableList<String> getHistory();
 
     /**
-     * Returns the user prefs' giatros book file path.
+     * Returns the user prefs' Giatros book file path.
      */
-    Path getAddressBookFilePath();
+    Path getGiatrosBookFilePath();
 
     /**
      * Returns the user prefs' GUI settings.

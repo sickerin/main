@@ -22,11 +22,10 @@ import seedu.giatros.logic.commands.SelectCommand;
 import seedu.giatros.logic.commands.UndoCommand;
 import seedu.giatros.logic.parser.exceptions.ParseException;
 
-
 /**
  * Parses user input.
  */
-public class AddressBookParser {
+public class GiatrosBookParser {
 
     /**
      * Used for initial separation of command word and args.

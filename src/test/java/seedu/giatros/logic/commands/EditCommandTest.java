@@ -13,7 +13,7 @@ import static seedu.giatros.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.giatros.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.giatros.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.giatros.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.giatros.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.giatros.testutil.TypicalPersons.getTypicalGiatrosBook;
 
 import org.junit.Test;
 
@@ -21,7 +21,7 @@ import seedu.giatros.commons.core.Messages;
 import seedu.giatros.commons.core.index.Index;
 import seedu.giatros.logic.CommandHistory;
 import seedu.giatros.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.giatros.model.AddressBook;
+import seedu.giatros.model.GiatrosBook;
 import seedu.giatros.model.Model;
 import seedu.giatros.model.ModelManager;
 import seedu.giatros.model.UserPrefs;
@@ -34,7 +34,7 @@ import seedu.giatros.testutil.PersonBuilder;
  */
 public class EditCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalGiatrosBook(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
@@ -45,9 +45,9 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new GiatrosBook(model.getGiatrosBook()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
-        expectedModel.commitAddressBook();
+        expectedModel.commitGiatrosBook();
 
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -67,9 +67,9 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new GiatrosBook(model.getGiatrosBook()), new UserPrefs());
         expectedModel.setPerson(lastPerson, editedPerson);
-        expectedModel.commitAddressBook();
+        expectedModel.commitGiatrosBook();
 
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -81,8 +81,8 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.commitAddressBook();
+        Model expectedModel = new ModelManager(new GiatrosBook(model.getGiatrosBook()), new UserPrefs());
+        expectedModel.commitGiatrosBook();
 
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -98,9 +98,9 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new GiatrosBook(model.getGiatrosBook()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
-        expectedModel.commitAddressBook();
+        expectedModel.commitGiatrosBook();
 
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -118,8 +118,8 @@ public class EditCommandTest {
     public void execute_duplicatePersonFilteredList_failure() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
-        // edit person in filtered list into a duplicate in giatros book
-        Person personInList = model.getAddressBook().getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        // edit person in filtered list into a duplicate in Giatros book
+        Person personInList = model.getGiatrosBook().getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
                 new EditPersonDescriptorBuilder(personInList).build());
 
@@ -137,14 +137,14 @@ public class EditCommandTest {
 
     /**
      * Edit filtered list where index is larger than size of filtered list,
-     * but smaller than size of giatros book
+     * but smaller than size of Giatros book
      */
     @Test
     public void execute_invalidPersonIndexFilteredList_failure() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
-        // ensures that outOfBoundIndex is still in bounds of giatros book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
+        // ensures that outOfBoundIndex is still in bounds of Giatros book list
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getGiatrosBook().getPersonList().size());
 
         EditCommand editCommand = new EditCommand(outOfBoundIndex,
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
@@ -158,19 +158,19 @@ public class EditCommandTest {
         Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new GiatrosBook(model.getGiatrosBook()), new UserPrefs());
         expectedModel.setPerson(personToEdit, editedPerson);
-        expectedModel.commitAddressBook();
+        expectedModel.commitGiatrosBook();
 
         // edit -> first person edited
         editCommand.execute(model, commandHistory);
 
         // undo -> reverts addressbook back to previous state and filtered person list to show all persons
-        expectedModel.undoAddressBook();
+        expectedModel.undoGiatrosBook();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         // redo -> same first person edited again
-        expectedModel.redoAddressBook();
+        expectedModel.redoGiatrosBook();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
@@ -180,10 +180,10 @@ public class EditCommandTest {
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
 
-        // execution failed -> giatros book state not added into model
+        // execution failed -> Giatros book state not added into model
         assertCommandFailure(editCommand, model, commandHistory, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
-        // single giatros book state in model -> undoCommand and redoCommand fail
+        // single Giatros book state in model -> undoCommand and redoCommand fail
         assertCommandFailure(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_FAILURE);
         assertCommandFailure(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_FAILURE);
     }
@@ -200,23 +200,23 @@ public class EditCommandTest {
         Person editedPerson = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new GiatrosBook(model.getGiatrosBook()), new UserPrefs());
 
         showPersonAtIndex(model, INDEX_SECOND_PERSON);
         Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         expectedModel.setPerson(personToEdit, editedPerson);
-        expectedModel.commitAddressBook();
+        expectedModel.commitGiatrosBook();
 
         // edit -> edits second person in unfiltered person list / first person in filtered person list
         editCommand.execute(model, commandHistory);
 
         // undo -> reverts addressbook back to previous state and filtered person list to show all persons
-        expectedModel.undoAddressBook();
+        expectedModel.undoGiatrosBook();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         assertNotEquals(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()), personToEdit);
         // redo -> edits same second person in unfiltered person list
-        expectedModel.redoAddressBook();
+        expectedModel.redoGiatrosBook();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
 

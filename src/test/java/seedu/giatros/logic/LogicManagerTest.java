@@ -26,10 +26,10 @@ import seedu.giatros.logic.commands.exceptions.CommandException;
 import seedu.giatros.logic.parser.exceptions.ParseException;
 import seedu.giatros.model.Model;
 import seedu.giatros.model.ModelManager;
-import seedu.giatros.model.ReadOnlyAddressBook;
+import seedu.giatros.model.ReadOnlyGiatrosBook;
 import seedu.giatros.model.UserPrefs;
 import seedu.giatros.model.person.Person;
-import seedu.giatros.storage.JsonAddressBookStorage;
+import seedu.giatros.storage.JsonGiatrosBookStorage;
 import seedu.giatros.storage.JsonUserPrefsStorage;
 import seedu.giatros.storage.StorageManager;
 import seedu.giatros.testutil.PersonBuilder;
@@ -49,7 +49,7 @@ public class LogicManagerTest {
 
     @Before
     public void setUp() throws Exception {
-        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(temporaryFolder.newFile().toPath());
+        JsonGiatrosBookStorage addressBookStorage = new JsonGiatrosBookStorage(temporaryFolder.newFile().toPath());
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.newFile().toPath());
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
@@ -78,9 +78,9 @@ public class LogicManagerTest {
 
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() throws Exception {
-        // Setup LogicManager with JsonAddressBookIoExceptionThrowingStub
-        JsonAddressBookStorage addressBookStorage =
-                new JsonAddressBookIoExceptionThrowingStub(temporaryFolder.newFile().toPath());
+        // Setup LogicManager with JsonGiatrosBookIoExceptionThrowingStub
+        JsonGiatrosBookStorage addressBookStorage =
+                new JsonGiatrosBookIoExceptionThrowingStub(temporaryFolder.newFile().toPath());
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.newFile().toPath());
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
@@ -91,7 +91,7 @@ public class LogicManagerTest {
         Person expectedPerson = new PersonBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedPerson);
-        expectedModel.commitAddressBook();
+        expectedModel.commitGiatrosBook();
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
         assertCommandBehavior(CommandException.class, addCommand, expectedMessage, expectedModel);
         assertHistoryCorrect(addCommand);
@@ -133,7 +133,7 @@ public class LogicManagerTest {
      * @see #assertCommandBehavior(Class, String, String, Model)
      */
     private void assertCommandFailure(String inputCommand, Class<?> expectedException, String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getGiatrosBook(), new UserPrefs());
         assertCommandBehavior(expectedException, inputCommand, expectedMessage, expectedModel);
     }
 
@@ -141,7 +141,7 @@ public class LogicManagerTest {
      * Executes the command, confirms that the result message is correct and that the expected exception is thrown,
      * and also confirms that the following two parts of the LogicManager object's state are as expected:<br>
      *      - the internal model manager data are same as those in the {@code expectedModel} <br>
-     *      - {@code expectedModel}'s giatros book was saved to the storage file.
+     *      - {@code expectedModel}'s Giatros book was saved to the storage file.
      */
     private void assertCommandBehavior(Class<?> expectedException, String inputCommand,
                                            String expectedMessage, Model expectedModel) {
@@ -176,13 +176,13 @@ public class LogicManagerTest {
     /**
      * A stub class to throw an {@code IOException} when the save method is called.
      */
-    private static class JsonAddressBookIoExceptionThrowingStub extends JsonAddressBookStorage {
-        private JsonAddressBookIoExceptionThrowingStub(Path filePath) {
+    private static class JsonGiatrosBookIoExceptionThrowingStub extends JsonGiatrosBookStorage {
+        private JsonGiatrosBookIoExceptionThrowingStub(Path filePath) {
             super(filePath);
         }
 
         @Override
-        public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
+        public void saveGiatrosBook(ReadOnlyGiatrosBook addressBook, Path filePath) throws IOException {
             throw DUMMY_IO_EXCEPTION;
         }
     }

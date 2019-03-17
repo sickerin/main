@@ -24,28 +24,28 @@ import seedu.giatros.model.person.exceptions.PersonNotFoundException;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final VersionedAddressBook versionedAddressBook;
+    private final VersionedGiatrosBook versionedGiatrosBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final SimpleObjectProperty<Person> selectedPerson = new SimpleObjectProperty<>();
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given giatrosBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyGiatrosBook giatrosBook, ReadOnlyUserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(giatrosBook, userPrefs);
 
-        logger.fine("Initializing with giatros book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with giatros book: " + giatrosBook + " and user prefs " + userPrefs);
 
-        versionedAddressBook = new VersionedAddressBook(addressBook);
+        versionedGiatrosBook = new VersionedGiatrosBook(giatrosBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
+        filteredPersons = new FilteredList<>(versionedGiatrosBook.getPersonList());
         filteredPersons.addListener(this::ensureSelectedPersonIsValid);
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new GiatrosBook(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -73,42 +73,42 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getGiatrosBookFilePath() {
+        return userPrefs.getGiatrosBookFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+    public void setGiatrosBookFilePath(Path giatrosBookFilePath) {
+        requireNonNull(giatrosBookFilePath);
+        userPrefs.setGiatrosBookFilePath(giatrosBookFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== GiatrosBook ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        versionedAddressBook.resetData(addressBook);
+    public void setGiatrosBook(ReadOnlyGiatrosBook giatrosBook) {
+        versionedGiatrosBook.resetData(giatrosBook);
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return versionedAddressBook;
+    public ReadOnlyGiatrosBook getGiatrosBook() {
+        return versionedGiatrosBook;
     }
 
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
-        return versionedAddressBook.hasPerson(person);
+        return versionedGiatrosBook.hasPerson(person);
     }
 
     @Override
     public void deletePerson(Person target) {
-        versionedAddressBook.removePerson(target);
+        versionedGiatrosBook.removePerson(target);
     }
 
     @Override
     public void addPerson(Person person) {
-        versionedAddressBook.addPerson(person);
+        versionedGiatrosBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
@@ -116,14 +116,14 @@ public class ModelManager implements Model {
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
-        versionedAddressBook.setPerson(target, editedPerson);
+        versionedGiatrosBook.setPerson(target, editedPerson);
     }
 
     //=========== Filtered Person List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedGiatrosBook}
      */
     @Override
     public ObservableList<Person> getFilteredPersonList() {
@@ -139,28 +139,28 @@ public class ModelManager implements Model {
     //=========== Undo/Redo =================================================================================
 
     @Override
-    public boolean canUndoAddressBook() {
-        return versionedAddressBook.canUndo();
+    public boolean canUndoGiatrosBook() {
+        return versionedGiatrosBook.canUndo();
     }
 
     @Override
-    public boolean canRedoAddressBook() {
-        return versionedAddressBook.canRedo();
+    public boolean canRedoGiatrosBook() {
+        return versionedGiatrosBook.canRedo();
     }
 
     @Override
-    public void undoAddressBook() {
-        versionedAddressBook.undo();
+    public void undoGiatrosBook() {
+        versionedGiatrosBook.undo();
     }
 
     @Override
-    public void redoAddressBook() {
-        versionedAddressBook.redo();
+    public void redoGiatrosBook() {
+        versionedGiatrosBook.redo();
     }
 
     @Override
-    public void commitAddressBook() {
-        versionedAddressBook.commit();
+    public void commitGiatrosBook() {
+        versionedGiatrosBook.commit();
     }
 
     //=========== Selected person ===========================================================================
@@ -226,7 +226,7 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return versionedAddressBook.equals(other.versionedAddressBook)
+        return versionedGiatrosBook.equals(other.versionedGiatrosBook)
                 && userPrefs.equals(other.userPrefs)
                 && filteredPersons.equals(other.filteredPersons)
                 && Objects.equals(selectedPerson.get(), other.selectedPerson.get());

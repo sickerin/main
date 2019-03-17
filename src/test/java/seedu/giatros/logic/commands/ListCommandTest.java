@@ -3,7 +3,7 @@ package seedu.giatros.logic.commands;
 import static seedu.giatros.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.giatros.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.giatros.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.giatros.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.giatros.testutil.TypicalPersons.getTypicalGiatrosBook;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -24,8 +24,8 @@ public class ListCommandTest {
 
     @Before
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalGiatrosBook(), new UserPrefs());
+        expectedModel = new ModelManager(model.getGiatrosBook(), new UserPrefs());
     }
 
     @Test

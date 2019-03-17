@@ -4,28 +4,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * {@code AddressBook} that keeps track of its own history.
+ * {@code GiatrosBook} that keeps track of its own history.
  */
-public class VersionedAddressBook extends AddressBook {
+public class VersionedGiatrosBook extends GiatrosBook {
 
-    private final List<ReadOnlyAddressBook> addressBookStateList;
+    private final List<ReadOnlyGiatrosBook> addressBookStateList;
     private int currentStatePointer;
 
-    public VersionedAddressBook(ReadOnlyAddressBook initialState) {
+    public VersionedGiatrosBook(ReadOnlyGiatrosBook initialState) {
         super(initialState);
 
         addressBookStateList = new ArrayList<>();
-        addressBookStateList.add(new AddressBook(initialState));
+        addressBookStateList.add(new GiatrosBook(initialState));
         currentStatePointer = 0;
     }
 
     /**
-     * Saves a copy of the current {@code AddressBook} state at the end of the state list.
+     * Saves a copy of the current {@code GiatrosBook} state at the end of the state list.
      * Undone states are removed from the state list.
      */
     public void commit() {
         removeStatesAfterCurrentPointer();
-        addressBookStateList.add(new AddressBook(this));
+        addressBookStateList.add(new GiatrosBook(this));
         currentStatePointer++;
         indicateModified();
     }
@@ -35,7 +35,7 @@ public class VersionedAddressBook extends AddressBook {
     }
 
     /**
-     * Restores the giatros book to its previous state.
+     * Restores the Giatros book to its previous state.
      */
     public void undo() {
         if (!canUndo()) {
@@ -46,7 +46,7 @@ public class VersionedAddressBook extends AddressBook {
     }
 
     /**
-     * Restores the giatros book to its previously undone state.
+     * Restores the Giatros book to its previously undone state.
      */
     public void redo() {
         if (!canRedo()) {
@@ -57,14 +57,14 @@ public class VersionedAddressBook extends AddressBook {
     }
 
     /**
-     * Returns true if {@code undo()} has giatros book states to undo.
+     * Returns true if {@code undo()} has Giatros book states to undo.
      */
     public boolean canUndo() {
         return currentStatePointer > 0;
     }
 
     /**
-     * Returns true if {@code redo()} has giatros book states to redo.
+     * Returns true if {@code redo()} has Giatros book states to redo.
      */
     public boolean canRedo() {
         return currentStatePointer < addressBookStateList.size() - 1;
@@ -78,11 +78,11 @@ public class VersionedAddressBook extends AddressBook {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof VersionedAddressBook)) {
+        if (!(other instanceof VersionedGiatrosBook)) {
             return false;
         }
 
-        VersionedAddressBook otherVersionedAddressBook = (VersionedAddressBook) other;
+        VersionedGiatrosBook otherVersionedAddressBook = (VersionedGiatrosBook) other;
 
         // state check
         return super.equals(otherVersionedAddressBook)

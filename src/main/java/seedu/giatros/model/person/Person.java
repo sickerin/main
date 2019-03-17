@@ -10,7 +10,7 @@ import java.util.Set;
 import seedu.giatros.model.tag.Tag;
 
 /**
- * Represents a Person in the giatros book.
+ * Represents a Person in the Giatros book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Person {

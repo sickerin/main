@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.giatros.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Person's giatros in the giatros book.
+ * Represents a Person's address in the Giatros book.
  * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
  */
 public class Address {
@@ -12,7 +12,7 @@ public class Address {
     public static final String MESSAGE_CONSTRAINTS = "Addresses can take any values, and it should not be blank";
 
     /*
-     * The first character of the giatros must not be a whitespace,
+     * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX = "[^\\s].*";
@@ -22,7 +22,7 @@ public class Address {
     /**
      * Constructs an {@code Address}.
      *
-     * @param address A valid giatros.
+     * @param address A valid address.
      */
     public Address(String address) {
         requireNonNull(address);

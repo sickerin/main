@@ -12,7 +12,7 @@ import seedu.giatros.model.Model;
 import seedu.giatros.model.person.Person;
 
 /**
- * Selects a person identified using it's displayed index from the giatros book.
+ * Selects a person identified using it's displayed index from the Giatros book.
  */
 public class SelectCommand extends Command {
 

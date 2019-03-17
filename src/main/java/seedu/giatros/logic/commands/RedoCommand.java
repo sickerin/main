@@ -1,6 +1,7 @@
 package seedu.giatros.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.giatros.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import seedu.giatros.logic.CommandHistory;
 import seedu.giatros.logic.commands.exceptions.CommandException;
@@ -19,12 +20,12 @@ public class RedoCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        if (!model.canRedoAddressBook()) {
+        if (!model.canRedoGiatrosBook()) {
             throw new CommandException(MESSAGE_FAILURE);
         }
 
-        model.redoAddressBook();
-        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+        model.redoGiatrosBook();
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
