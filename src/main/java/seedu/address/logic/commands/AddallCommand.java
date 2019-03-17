@@ -1,28 +1,42 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ALLERGY;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
 /**
- * Adds a person to the address book.
+ * Changes the allergy of an existing patient in the record.
  */
 public class AddallCommand extends Command {
 
     public static final String COMMAND_WORD = "addall";
 
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the allergy of a patient identified "
+            + "by the index number used in the patient listing. "
+            + "Existing allergy will be overwritten by the input.\n"
+            + "Parameters: INDEX (must be a positive integer"
+            + PREFIX_ALLERGY + "[ALLERGY]\n"
+            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_ALLERGY + "ibuprofen.";
+
+    public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Allergy: %2$s";
+
     private Index index;
     private String allergyString;
 
     public AddallCommand(Index index, String allergyString) {
+        requireAllNonNull(index, allergyString);
+
         this.index = index;
         this.allergyString = allergyString;
     }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        throw new CommandException(index.getOneBased() + " " + allergyString);
+        throw new CommandException(String.format(MESSAGE_ARGUMENTS, index.getOneBased(), allergyString));
     }
 
     @Override

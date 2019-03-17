@@ -1,13 +1,16 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ALLERGY;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.AddallCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new AddallCommand object
+ * Parses input arguments and creates a new {@code AddallCommand} object
  */
 public class AddallCommandParser implements Parser<AddallCommand> {
 
@@ -22,19 +25,14 @@ public class AddallCommandParser implements Parser<AddallCommand> {
         Index index;
         String allergyString;
 
-        // Implement a simple parser locally first
-        String delims = "[ ]+";
-        String[] tokens = args.trim().split(delims);
-
-        index = Index.fromOneBased(Integer.valueOf(tokens[0])); // The first argument is the index
-        allergyString = tokens[1]; // The second argument is the allergyString
-
-        if (!(allergyString.contains("a/"))) {
-            throw new ParseException("Invalid format");
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_ALLERGY);
+        try {
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        } catch (IllegalValueException exc) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddallCommand.MESSAGE_USAGE), exc);
         }
 
-
-        allergyString = allergyString.substring(2); // Trim off the tag a/ in the beginning
+        allergyString = argMultimap.getValue(PREFIX_ALLERGY).orElse("");
 
         return new AddallCommand(index, allergyString);
     }
