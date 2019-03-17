@@ -9,7 +9,7 @@ import seedu.giatros.logic.commands.exceptions.CommandException;
 import seedu.giatros.model.Model;
 
 /**
- * Adds a person to the giatros book.
+ * Changes the allergy of an existing patient in the giatros book.
  */
 public class AddallCommand extends Command {
 
