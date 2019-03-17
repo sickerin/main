@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import seedu.giatros.commons.core.index.Index;
 import seedu.giatros.logic.commands.AddallCommand;
+import seedu.giatros.model.person.Allergy;
 
 public class AddallCommandParserTest {
 
@@ -22,11 +23,11 @@ public class AddallCommandParserTest {
         // adding non-empty allergy
         Index index = INDEX_FIRST_PERSON;
         String input = index.getOneBased() + " " + PREFIX_ALLERGY + nonEmptyAllergy;
-        assertParseSuccess(parser, input, new AddallCommand(INDEX_FIRST_PERSON, nonEmptyAllergy));
+        assertParseSuccess(parser, input, new AddallCommand(INDEX_FIRST_PERSON, new Allergy(nonEmptyAllergy)));
 
         // adding an empty allergy
         input = index.getOneBased() + " " + PREFIX_ALLERGY + "";
-        assertParseSuccess(parser, input, new AddallCommand(INDEX_FIRST_PERSON, ""));
+        assertParseSuccess(parser, input, new AddallCommand(INDEX_FIRST_PERSON, new Allergy("")));
     }
 
     @Test

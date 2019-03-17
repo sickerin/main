@@ -8,6 +8,7 @@ import seedu.giatros.commons.core.index.Index;
 import seedu.giatros.commons.exceptions.IllegalValueException;
 import seedu.giatros.logic.commands.AddallCommand;
 import seedu.giatros.logic.parser.exceptions.ParseException;
+import seedu.giatros.model.person.Allergy;
 
 /**
  * Parses input arguments and creates a new {@code AddallCommand} object
@@ -34,7 +35,7 @@ public class AddallCommandParser implements Parser<AddallCommand> {
 
         allergyString = argMultimap.getValue(PREFIX_ALLERGY).orElse("");
 
-        return new AddallCommand(index, allergyString);
+        return new AddallCommand(index, new Allergy(allergyString));
     }
 
 }

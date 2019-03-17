@@ -30,6 +30,7 @@ import seedu.giatros.logic.commands.RedoCommand;
 import seedu.giatros.logic.commands.SelectCommand;
 import seedu.giatros.logic.commands.UndoCommand;
 import seedu.giatros.logic.parser.exceptions.ParseException;
+import seedu.giatros.model.person.Allergy;
 import seedu.giatros.model.person.NameContainsKeywordsPredicate;
 import seedu.giatros.model.person.Person;
 import seedu.giatros.testutil.EditPersonDescriptorBuilder;
@@ -119,10 +120,10 @@ public class GiatrosBookParserTest {
 
     @Test
     public void parseCommand_addall() throws Exception {
-        final String allergyString = "One allergy, and some other allergy";
+        final Allergy allergy = new Allergy("One allergy, and some other allergy");
         AddallCommand command = (AddallCommand) parser.parseCommand(AddallCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_ALLERGY + allergyString);
-        assertEquals(new AddallCommand(INDEX_FIRST_PERSON, allergyString), command);
+                + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_ALLERGY + allergy.value);
+        assertEquals(new AddallCommand(INDEX_FIRST_PERSON, allergy), command);
         assertTrue(parser.parseCommand("addall 1 y/Allergy") instanceof AddallCommand);
     }
 

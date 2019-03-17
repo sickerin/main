@@ -18,6 +18,7 @@ import seedu.giatros.logic.CommandHistory;
 import seedu.giatros.model.Model;
 import seedu.giatros.model.ModelManager;
 import seedu.giatros.model.UserPrefs;
+import seedu.giatros.model.person.Allergy;
 
 public class AddallCommandTest {
 
@@ -28,19 +29,19 @@ public class AddallCommandTest {
 
     @Test
     public void execute() {
-        final String allergyString = "One allergy, and some other allergy";
+        final Allergy allergy = new Allergy("One allergy, and some other allergy");
         Model model = new ModelManager(getTypicalGiatrosBook(), new UserPrefs());
 
-        assertCommandFailure(new AddallCommand(INDEX_FIRST_PERSON, allergyString), model, commandHistory,
-                String.format(MESSAGE_ARGUMENTS, INDEX_FIRST_PERSON.getOneBased(), allergyString));
+        assertCommandFailure(new AddallCommand(INDEX_FIRST_PERSON, allergy), model, commandHistory,
+                String.format(MESSAGE_ARGUMENTS, INDEX_FIRST_PERSON.getOneBased(), allergy));
     }
 
     @Test
     public void equals() {
-        final AddallCommand standardCommand = new AddallCommand(INDEX_FIRST_PERSON, VALID_ALLERGY_AMY);
+        final AddallCommand standardCommand = new AddallCommand(INDEX_FIRST_PERSON, new Allergy(VALID_ALLERGY_AMY));
 
         // same values -> returns true
-        AddallCommand commandWithSameValues = new AddallCommand(INDEX_FIRST_PERSON, VALID_ALLERGY_AMY);
+        AddallCommand commandWithSameValues = new AddallCommand(INDEX_FIRST_PERSON, new Allergy(VALID_ALLERGY_AMY));
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -53,10 +54,10 @@ public class AddallCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new AddallCommand(INDEX_SECOND_PERSON, VALID_ALLERGY_AMY)));
+        assertFalse(standardCommand.equals(new AddallCommand(INDEX_SECOND_PERSON, new Allergy(VALID_ALLERGY_AMY))));
 
         // different descriptor -> returns false
-        assertFalse(standardCommand.equals(new AddallCommand(INDEX_FIRST_PERSON, VALID_ALLERGY_BOB)));
+        assertFalse(standardCommand.equals(new AddallCommand(INDEX_FIRST_PERSON, new Allergy(VALID_ALLERGY_BOB))));
     }
 
 }

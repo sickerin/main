@@ -7,6 +7,7 @@ import seedu.giatros.commons.core.index.Index;
 import seedu.giatros.logic.CommandHistory;
 import seedu.giatros.logic.commands.exceptions.CommandException;
 import seedu.giatros.model.Model;
+import seedu.giatros.model.person.Allergy;
 
 /**
  * Changes the allergy of an existing patient in the giatros book.
@@ -25,18 +26,18 @@ public class AddallCommand extends Command {
     public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Allergy: %2$s";
 
     private Index index;
-    private String allergyString;
+    private Allergy allergy;
 
-    public AddallCommand(Index index, String allergyString) {
-        requireAllNonNull(index, allergyString);
+    public AddallCommand(Index index, Allergy allergy) {
+        requireAllNonNull(index, allergy);
 
         this.index = index;
-        this.allergyString = allergyString;
+        this.allergy = allergy;
     }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        throw new CommandException(String.format(MESSAGE_ARGUMENTS, index.getOneBased(), allergyString));
+        throw new CommandException(String.format(MESSAGE_ARGUMENTS, index.getOneBased(), allergy));
     }
 
     @Override
@@ -54,7 +55,7 @@ public class AddallCommand extends Command {
         // state check
         AddallCommand e = (AddallCommand) other;
         return index.equals(e.index)
-                && allergyString.equals(e.allergyString);
+                && allergy.equals(e.allergy);
     }
 
 }
