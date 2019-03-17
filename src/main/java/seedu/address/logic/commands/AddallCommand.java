@@ -18,7 +18,7 @@ public class AddallCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the allergy of a patient identified "
             + "by the index number used in the patient listing. "
             + "Existing allergy will be overwritten by the input.\n"
-            + "Parameters: INDEX (must be a positive integer"
+            + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_ALLERGY + "[ALLERGY]\n"
             + "Example: " + COMMAND_WORD + " 1 " + PREFIX_ALLERGY + "ibuprofen.";
 

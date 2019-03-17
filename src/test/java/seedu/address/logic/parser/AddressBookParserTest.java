@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ALLERGY;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
@@ -119,9 +120,11 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_addall() throws Exception {
-        AddallCommand command = (AddallCommand) parser.parseCommand("addall 1 a/ibuprofen");
-        assertEquals(new AddallCommand(Index.fromOneBased(1), "ibuprofen"), command);
-        assertTrue(parser.parseCommand("addall 1 a/ibuprofen") instanceof AddallCommand);
+        final String allergyString = "One allergy, and some other allergy";
+        AddallCommand command = (AddallCommand) parser.parseCommand(AddallCommand.COMMAND_WORD + " " +
+                INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_ALLERGY + allergyString);
+        assertEquals(new AddallCommand(INDEX_FIRST_PERSON, allergyString), command);
+        assertTrue(parser.parseCommand("addall 1 y/Allergy") instanceof AddallCommand);
     }
 
     @Test
