@@ -22,7 +22,7 @@ public class AddallCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        throw new CommandException(index + " " + allergyString);
+        throw new CommandException(index.getOneBased() + " " + allergyString);
     }
 
     @Override

@@ -35,7 +35,7 @@ public class AddallCommandTest {
         Model modelStub = new ModelStub();
 
         thrown.expect(CommandException.class);
-        thrown.expectMessage("ibuprofen");
+        thrown.expectMessage(INDEX_FIRST_PERSON.getOneBased() + " " + "ibuprofen");
         addallCommand.execute(modelStub, commandHistory);
     }
 

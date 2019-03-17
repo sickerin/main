@@ -25,7 +25,6 @@ public class AddallCommandParser implements Parser<AddallCommand> {
         // Implement a simple parser locally first
         String delims = "[ ]+";
         String[] tokens = args.trim().split(delims);
-        System.out.println(tokens[0]);
 
         index = Index.fromOneBased(Integer.valueOf(tokens[0])); // The first argument is the index
         allergyString = tokens[1]; // The second argument is the allergyString
