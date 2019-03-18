@@ -14,285 +14,285 @@ import java.util.List;
 
 import org.junit.Test;
 
-import seedu.giatros.testutil.AddressBookBuilder;
+import seedu.giatros.testutil.GiatrosBookBuilder;
 
 public class VersionedGiatrosBookTest {
 
-    private final ReadOnlyGiatrosBook addressBookWithAmy = new AddressBookBuilder().withPerson(AMY).build();
-    private final ReadOnlyGiatrosBook addressBookWithBob = new AddressBookBuilder().withPerson(BOB).build();
-    private final ReadOnlyGiatrosBook addressBookWithCarl = new AddressBookBuilder().withPerson(CARL).build();
-    private final ReadOnlyGiatrosBook emptyAddressBook = new AddressBookBuilder().build();
+    private final ReadOnlyGiatrosBook giatrosBookWithAmy = new GiatrosBookBuilder().withPerson(AMY).build();
+    private final ReadOnlyGiatrosBook giatrosBookWithBob = new GiatrosBookBuilder().withPerson(BOB).build();
+    private final ReadOnlyGiatrosBook giatrosBookWithCarl = new GiatrosBookBuilder().withPerson(CARL).build();
+    private final ReadOnlyGiatrosBook emptyGiatrosBook = new GiatrosBookBuilder().build();
 
     @Test
-    public void commit_singleAddressBook_noStatesRemovedCurrentStateSaved() {
-        VersionedGiatrosBook versionedAddressBook = prepareAddressBookList(emptyAddressBook);
+    public void commit_singleGiatrosBook_noStatesRemovedCurrentStateSaved() {
+        VersionedGiatrosBook versionedGiatrosBook = prepareGiatrosBookList(emptyGiatrosBook);
 
-        versionedAddressBook.commit();
-        assertAddressBookListStatus(versionedAddressBook,
-                Collections.singletonList(emptyAddressBook),
-                emptyAddressBook,
+        versionedGiatrosBook.commit();
+        assertGiatrosBookListStatus(versionedGiatrosBook,
+                Collections.singletonList(emptyGiatrosBook),
+                emptyGiatrosBook,
                 Collections.emptyList());
     }
 
     @Test
-    public void commit_multipleAddressBookPointerAtEndOfStateList_noStatesRemovedCurrentStateSaved() {
-        VersionedGiatrosBook versionedAddressBook = prepareAddressBookList(
-                emptyAddressBook, addressBookWithAmy, addressBookWithBob);
+    public void commit_multipleGiatrosBookPointerAtEndOfStateList_noStatesRemovedCurrentStateSaved() {
+        VersionedGiatrosBook versionedGiatrosBook = prepareGiatrosBookList(
+                emptyGiatrosBook, giatrosBookWithAmy, giatrosBookWithBob);
 
-        versionedAddressBook.commit();
-        assertAddressBookListStatus(versionedAddressBook,
-                Arrays.asList(emptyAddressBook, addressBookWithAmy, addressBookWithBob),
-                addressBookWithBob,
+        versionedGiatrosBook.commit();
+        assertGiatrosBookListStatus(versionedGiatrosBook,
+                Arrays.asList(emptyGiatrosBook, giatrosBookWithAmy, giatrosBookWithBob),
+                giatrosBookWithBob,
                 Collections.emptyList());
     }
 
     @Test
-    public void commit_multipleAddressBookPointerNotAtEndOfStateList_statesAfterPointerRemovedCurrentStateSaved() {
-        VersionedGiatrosBook versionedAddressBook = prepareAddressBookList(
-                emptyAddressBook, addressBookWithAmy, addressBookWithBob);
-        shiftCurrentStatePointerLeftwards(versionedAddressBook, 2);
+    public void commit_multipleGiatrosBookPointerNotAtEndOfStateList_statesAfterPointerRemovedCurrentStateSaved() {
+        VersionedGiatrosBook versionedGiatrosBook = prepareGiatrosBookList(
+                emptyGiatrosBook, giatrosBookWithAmy, giatrosBookWithBob);
+        shiftCurrentStatePointerLeftwards(versionedGiatrosBook, 2);
 
-        versionedAddressBook.commit();
-        assertAddressBookListStatus(versionedAddressBook,
-                Collections.singletonList(emptyAddressBook),
-                emptyAddressBook,
+        versionedGiatrosBook.commit();
+        assertGiatrosBookListStatus(versionedGiatrosBook,
+                Collections.singletonList(emptyGiatrosBook),
+                emptyGiatrosBook,
                 Collections.emptyList());
     }
-
+    
     @Test
-    public void canUndo_multipleAddressBookPointerAtEndOfStateList_returnsTrue() {
-        VersionedGiatrosBook versionedAddressBook = prepareAddressBookList(
-                emptyAddressBook, addressBookWithAmy, addressBookWithBob);
+    public void canUndo_multipleGiatrosBookPointerAtEndOfStateList_returnsTrue() {
+        VersionedGiatrosBook versionedGiatrosBook = prepareGiatrosBookList(
+                emptyGiatrosBook, giatrosBookWithAmy, giatrosBookWithBob);
 
-        assertTrue(versionedAddressBook.canUndo());
+        assertTrue(versionedGiatrosBook.canUndo());
     }
 
     @Test
-    public void canUndo_multipleAddressBookPointerAtStartOfStateList_returnsTrue() {
-        VersionedGiatrosBook versionedAddressBook = prepareAddressBookList(
-                emptyAddressBook, addressBookWithAmy, addressBookWithBob);
-        shiftCurrentStatePointerLeftwards(versionedAddressBook, 1);
+    public void canUndo_multipleGiatrosBookPointerAtStartOfStateList_returnsTrue() {
+        VersionedGiatrosBook versionedGiatrosBook = prepareGiatrosBookList(
+                emptyGiatrosBook, giatrosBookWithAmy, giatrosBookWithBob);
+        shiftCurrentStatePointerLeftwards(versionedGiatrosBook, 1);
 
-        assertTrue(versionedAddressBook.canUndo());
+        assertTrue(versionedGiatrosBook.canUndo());
     }
 
     @Test
-    public void canUndo_singleAddressBook_returnsFalse() {
-        VersionedGiatrosBook versionedAddressBook = prepareAddressBookList(emptyAddressBook);
+    public void canUndo_singleGiatrosBook_returnsFalse() {
+        VersionedGiatrosBook versionedGiatrosBook = prepareGiatrosBookList(emptyGiatrosBook);
 
-        assertFalse(versionedAddressBook.canUndo());
+        assertFalse(versionedGiatrosBook.canUndo());
     }
 
     @Test
-    public void canUndo_multipleAddressBookPointerAtStartOfStateList_returnsFalse() {
-        VersionedGiatrosBook versionedAddressBook = prepareAddressBookList(
-                emptyAddressBook, addressBookWithAmy, addressBookWithBob);
-        shiftCurrentStatePointerLeftwards(versionedAddressBook, 2);
+    public void canUndo_multipleGiatrosBookPointerAtStartOfStateList_returnsFalse() {
+        VersionedGiatrosBook versionedGiatrosBook = prepareGiatrosBookList(
+                emptyGiatrosBook, giatrosBookWithAmy, giatrosBookWithBob);
+        shiftCurrentStatePointerLeftwards(versionedGiatrosBook, 2);
 
-        assertFalse(versionedAddressBook.canUndo());
+        assertFalse(versionedGiatrosBook.canUndo());
     }
 
     @Test
-    public void canRedo_multipleAddressBookPointerNotAtEndOfStateList_returnsTrue() {
-        VersionedGiatrosBook versionedAddressBook = prepareAddressBookList(
-                emptyAddressBook, addressBookWithAmy, addressBookWithBob);
-        shiftCurrentStatePointerLeftwards(versionedAddressBook, 1);
+    public void canRedo_multipleGiatrosBookPointerNotAtEndOfStateList_returnsTrue() {
+        VersionedGiatrosBook versionedGiatrosBook = prepareGiatrosBookList(
+                emptyGiatrosBook, giatrosBookWithAmy, giatrosBookWithBob);
+        shiftCurrentStatePointerLeftwards(versionedGiatrosBook, 1);
 
-        assertTrue(versionedAddressBook.canRedo());
+        assertTrue(versionedGiatrosBook.canRedo());
     }
 
     @Test
-    public void canRedo_multipleAddressBookPointerAtStartOfStateList_returnsTrue() {
-        VersionedGiatrosBook versionedAddressBook = prepareAddressBookList(
-                emptyAddressBook, addressBookWithAmy, addressBookWithBob);
-        shiftCurrentStatePointerLeftwards(versionedAddressBook, 2);
+    public void canRedo_multipleGiatrosBookPointerAtStartOfStateList_returnsTrue() {
+        VersionedGiatrosBook versionedGiatrosBook = prepareGiatrosBookList(
+                emptyGiatrosBook, giatrosBookWithAmy, giatrosBookWithBob);
+        shiftCurrentStatePointerLeftwards(versionedGiatrosBook, 2);
 
-        assertTrue(versionedAddressBook.canRedo());
+        assertTrue(versionedGiatrosBook.canRedo());
     }
 
     @Test
-    public void canRedo_singleAddressBook_returnsFalse() {
-        VersionedGiatrosBook versionedAddressBook = prepareAddressBookList(emptyAddressBook);
+    public void canRedo_singleGiatrosBook_returnsFalse() {
+        VersionedGiatrosBook versionedGiatrosBook = prepareGiatrosBookList(emptyGiatrosBook);
 
-        assertFalse(versionedAddressBook.canRedo());
+        assertFalse(versionedGiatrosBook.canRedo());
     }
 
     @Test
-    public void canRedo_multipleAddressBookPointerAtEndOfStateList_returnsFalse() {
-        VersionedGiatrosBook versionedAddressBook = prepareAddressBookList(
-                emptyAddressBook, addressBookWithAmy, addressBookWithBob);
+    public void canRedo_multipleGiatrosBookPointerAtEndOfStateList_returnsFalse() {
+        VersionedGiatrosBook versionedGiatrosBook = prepareGiatrosBookList(
+                emptyGiatrosBook, giatrosBookWithAmy, giatrosBookWithBob);
 
-        assertFalse(versionedAddressBook.canRedo());
+        assertFalse(versionedGiatrosBook.canRedo());
     }
 
     @Test
-    public void undo_multipleAddressBookPointerAtEndOfStateList_success() {
-        VersionedGiatrosBook versionedAddressBook = prepareAddressBookList(
-                emptyAddressBook, addressBookWithAmy, addressBookWithBob);
+    public void undo_multipleGiatrosBookPointerAtEndOfStateList_success() {
+        VersionedGiatrosBook versionedGiatrosBook = prepareGiatrosBookList(
+                emptyGiatrosBook, giatrosBookWithAmy, giatrosBookWithBob);
 
-        versionedAddressBook.undo();
-        assertAddressBookListStatus(versionedAddressBook,
-                Collections.singletonList(emptyAddressBook),
-                addressBookWithAmy,
-                Collections.singletonList(addressBookWithBob));
+        versionedGiatrosBook.undo();
+        assertGiatrosBookListStatus(versionedGiatrosBook,
+                Collections.singletonList(emptyGiatrosBook),
+                giatrosBookWithAmy,
+                Collections.singletonList(giatrosBookWithBob));
     }
 
     @Test
-    public void undo_multipleAddressBookPointerNotAtStartOfStateList_success() {
-        VersionedGiatrosBook versionedAddressBook = prepareAddressBookList(
-                emptyAddressBook, addressBookWithAmy, addressBookWithBob);
-        shiftCurrentStatePointerLeftwards(versionedAddressBook, 1);
+    public void undo_multipleGiatrosBookPointerNotAtStartOfStateList_success() {
+        VersionedGiatrosBook versionedGiatrosBook = prepareGiatrosBookList(
+                emptyGiatrosBook, giatrosBookWithAmy, giatrosBookWithBob);
+        shiftCurrentStatePointerLeftwards(versionedGiatrosBook, 1);
 
-        versionedAddressBook.undo();
-        assertAddressBookListStatus(versionedAddressBook,
+        versionedGiatrosBook.undo();
+        assertGiatrosBookListStatus(versionedGiatrosBook,
                 Collections.emptyList(),
-                emptyAddressBook,
-                Arrays.asList(addressBookWithAmy, addressBookWithBob));
+                emptyGiatrosBook,
+                Arrays.asList(giatrosBookWithAmy, giatrosBookWithBob));
     }
 
     @Test
-    public void undo_singleAddressBook_throwsNoUndoableStateException() {
-        VersionedGiatrosBook versionedAddressBook = prepareAddressBookList(emptyAddressBook);
+    public void undo_singleGiatrosBook_throwsNoUndoableStateException() {
+        VersionedGiatrosBook versionedGiatrosBook = prepareGiatrosBookList(emptyGiatrosBook);
 
-        assertThrows(VersionedGiatrosBook.NoUndoableStateException.class, versionedAddressBook::undo);
+        assertThrows(VersionedGiatrosBook.NoUndoableStateException.class, versionedGiatrosBook::undo);
     }
 
     @Test
-    public void undo_multipleAddressBookPointerAtStartOfStateList_throwsNoUndoableStateException() {
-        VersionedGiatrosBook versionedAddressBook = prepareAddressBookList(
-                emptyAddressBook, addressBookWithAmy, addressBookWithBob);
-        shiftCurrentStatePointerLeftwards(versionedAddressBook, 2);
+    public void undo_multipleGiatrosBookPointerAtStartOfStateList_throwsNoUndoableStateException() {
+        VersionedGiatrosBook versionedGiatrosBook = prepareGiatrosBookList(
+                emptyGiatrosBook, giatrosBookWithAmy, giatrosBookWithBob);
+        shiftCurrentStatePointerLeftwards(versionedGiatrosBook, 2);
 
-        assertThrows(VersionedGiatrosBook.NoUndoableStateException.class, versionedAddressBook::undo);
+        assertThrows(VersionedGiatrosBook.NoUndoableStateException.class, versionedGiatrosBook::undo);
     }
 
     @Test
-    public void redo_multipleAddressBookPointerNotAtEndOfStateList_success() {
-        VersionedGiatrosBook versionedAddressBook = prepareAddressBookList(
-                emptyAddressBook, addressBookWithAmy, addressBookWithBob);
-        shiftCurrentStatePointerLeftwards(versionedAddressBook, 1);
+    public void redo_multipleGiatrosBookPointerNotAtEndOfStateList_success() {
+        VersionedGiatrosBook versionedGiatrosBook = prepareGiatrosBookList(
+                emptyGiatrosBook, giatrosBookWithAmy, giatrosBookWithBob);
+        shiftCurrentStatePointerLeftwards(versionedGiatrosBook, 1);
 
-        versionedAddressBook.redo();
-        assertAddressBookListStatus(versionedAddressBook,
-                Arrays.asList(emptyAddressBook, addressBookWithAmy),
-                addressBookWithBob,
+        versionedGiatrosBook.redo();
+        assertGiatrosBookListStatus(versionedGiatrosBook,
+                Arrays.asList(emptyGiatrosBook, giatrosBookWithAmy),
+                giatrosBookWithBob,
                 Collections.emptyList());
     }
 
     @Test
-    public void redo_multipleAddressBookPointerAtStartOfStateList_success() {
-        VersionedGiatrosBook versionedAddressBook = prepareAddressBookList(
-                emptyAddressBook, addressBookWithAmy, addressBookWithBob);
-        shiftCurrentStatePointerLeftwards(versionedAddressBook, 2);
+    public void redo_multipleGiatrosBookPointerAtStartOfStateList_success() {
+        VersionedGiatrosBook versionedGiatrosBook = prepareGiatrosBookList(
+                emptyGiatrosBook, giatrosBookWithAmy, giatrosBookWithBob);
+        shiftCurrentStatePointerLeftwards(versionedGiatrosBook, 2);
 
-        versionedAddressBook.redo();
-        assertAddressBookListStatus(versionedAddressBook,
-                Collections.singletonList(emptyAddressBook),
-                addressBookWithAmy,
-                Collections.singletonList(addressBookWithBob));
+        versionedGiatrosBook.redo();
+        assertGiatrosBookListStatus(versionedGiatrosBook,
+                Collections.singletonList(emptyGiatrosBook),
+                giatrosBookWithAmy,
+                Collections.singletonList(giatrosBookWithBob));
     }
 
     @Test
-    public void redo_singleAddressBook_throwsNoRedoableStateException() {
-        VersionedGiatrosBook versionedAddressBook = prepareAddressBookList(emptyAddressBook);
+    public void redo_singleGiatrosBook_throwsNoRedoableStateException() {
+        VersionedGiatrosBook versionedGiatrosBook = prepareGiatrosBookList(emptyGiatrosBook);
 
-        assertThrows(VersionedGiatrosBook.NoRedoableStateException.class, versionedAddressBook::redo);
+        assertThrows(VersionedGiatrosBook.NoRedoableStateException.class, versionedGiatrosBook::redo);
     }
 
     @Test
-    public void redo_multipleAddressBookPointerAtEndOfStateList_throwsNoRedoableStateException() {
-        VersionedGiatrosBook versionedAddressBook = prepareAddressBookList(
-                emptyAddressBook, addressBookWithAmy, addressBookWithBob);
+    public void redo_multipleGiatrosBookPointerAtEndOfStateList_throwsNoRedoableStateException() {
+        VersionedGiatrosBook versionedGiatrosBook = prepareGiatrosBookList(
+                emptyGiatrosBook, giatrosBookWithAmy, giatrosBookWithBob);
 
-        assertThrows(VersionedGiatrosBook.NoRedoableStateException.class, versionedAddressBook::redo);
+        assertThrows(VersionedGiatrosBook.NoRedoableStateException.class, versionedGiatrosBook::redo);
     }
 
     @Test
     public void equals() {
-        VersionedGiatrosBook versionedAddressBook = prepareAddressBookList(addressBookWithAmy, addressBookWithBob);
+        VersionedGiatrosBook versionedGiatrosBook = prepareGiatrosBookList(giatrosBookWithAmy, giatrosBookWithBob);
 
         // same values -> returns true
-        VersionedGiatrosBook copy = prepareAddressBookList(addressBookWithAmy, addressBookWithBob);
-        assertTrue(versionedAddressBook.equals(copy));
+        VersionedGiatrosBook copy = prepareGiatrosBookList(giatrosBookWithAmy, giatrosBookWithBob);
+        assertTrue(versionedGiatrosBook.equals(copy));
 
         // same object -> returns true
-        assertTrue(versionedAddressBook.equals(versionedAddressBook));
+        assertTrue(versionedGiatrosBook.equals(versionedGiatrosBook));
 
         // null -> returns false
-        assertFalse(versionedAddressBook.equals(null));
+        assertFalse(versionedGiatrosBook.equals(null));
 
         // different types -> returns false
-        assertFalse(versionedAddressBook.equals(1));
+        assertFalse(versionedGiatrosBook.equals(1));
 
         // different state list -> returns false
-        VersionedGiatrosBook differentAddressBookList = prepareAddressBookList(addressBookWithBob, addressBookWithCarl);
-        assertFalse(versionedAddressBook.equals(differentAddressBookList));
+        VersionedGiatrosBook differentGiatrosBookList = prepareGiatrosBookList(giatrosBookWithBob, giatrosBookWithCarl);
+        assertFalse(versionedGiatrosBook.equals(differentGiatrosBookList));
 
         // different current pointer index -> returns false
-        VersionedGiatrosBook differentCurrentStatePointer = prepareAddressBookList(
-                addressBookWithAmy, addressBookWithBob);
-        shiftCurrentStatePointerLeftwards(versionedAddressBook, 1);
-        assertFalse(versionedAddressBook.equals(differentCurrentStatePointer));
+        VersionedGiatrosBook differentCurrentStatePointer = prepareGiatrosBookList(
+                giatrosBookWithAmy, giatrosBookWithBob);
+        shiftCurrentStatePointerLeftwards(versionedGiatrosBook, 1);
+        assertFalse(versionedGiatrosBook.equals(differentCurrentStatePointer));
     }
 
     /**
-     * Asserts that {@code versionedAddressBook} is currently pointing at {@code expectedCurrentState},
-     * states before {@code versionedAddressBook#currentStatePointer} is equal to {@code expectedStatesBeforePointer},
-     * and states after {@code versionedAddressBook#currentStatePointer} is equal to {@code expectedStatesAfterPointer}.
+     * Asserts that {@code versionedGiatrosBook} is currently pointing at {@code expectedCurrentState},
+     * states before {@code versionedGiatrosBook#currentStatePointer} is equal to {@code expectedStatesBeforePointer},
+     * and states after {@code versionedGiatrosBook#currentStatePointer} is equal to {@code expectedStatesAfterPointer}.
      */
-    private void assertAddressBookListStatus(VersionedGiatrosBook versionedAddressBook,
+    private void assertGiatrosBookListStatus(VersionedGiatrosBook versionedGiatrosBook,
                                              List<ReadOnlyGiatrosBook> expectedStatesBeforePointer,
                                              ReadOnlyGiatrosBook expectedCurrentState,
                                              List<ReadOnlyGiatrosBook> expectedStatesAfterPointer) {
         // check state currently pointing at is correct
-        assertEquals(new GiatrosBook(versionedAddressBook), expectedCurrentState);
+        assertEquals(new GiatrosBook(versionedGiatrosBook), expectedCurrentState);
 
         // shift pointer to start of state list
-        while (versionedAddressBook.canUndo()) {
-            versionedAddressBook.undo();
+        while (versionedGiatrosBook.canUndo()) {
+            versionedGiatrosBook.undo();
         }
 
         // check states before pointer are correct
-        for (ReadOnlyGiatrosBook expectedAddressBook : expectedStatesBeforePointer) {
-            assertEquals(expectedAddressBook, new GiatrosBook(versionedAddressBook));
-            versionedAddressBook.redo();
+        for (ReadOnlyGiatrosBook expectedGiatrosBook : expectedStatesBeforePointer) {
+            assertEquals(expectedGiatrosBook, new GiatrosBook(versionedGiatrosBook));
+            versionedGiatrosBook.redo();
         }
 
         // check states after pointer are correct
-        for (ReadOnlyGiatrosBook expectedAddressBook : expectedStatesAfterPointer) {
-            versionedAddressBook.redo();
-            assertEquals(expectedAddressBook, new GiatrosBook(versionedAddressBook));
+        for (ReadOnlyGiatrosBook expectedGiatrosBook : expectedStatesAfterPointer) {
+            versionedGiatrosBook.redo();
+            assertEquals(expectedGiatrosBook, new GiatrosBook(versionedGiatrosBook));
         }
 
         // check that there are no more states after pointer
-        assertFalse(versionedAddressBook.canRedo());
+        assertFalse(versionedGiatrosBook.canRedo());
 
         // revert pointer to original position
-        expectedStatesAfterPointer.forEach(unused -> versionedAddressBook.undo());
+        expectedStatesAfterPointer.forEach(unused -> versionedGiatrosBook.undo());
     }
 
     /**
-     * Creates and returns a {@code VersionedGiatrosBook} with the {@code addressBookStates} added into it, and the
+     * Creates and returns a {@code VersionedGiatrosBook} with the {@code giatrosBookStates} added into it, and the
      * {@code VersionedGiatrosBook#currentStatePointer} at the end of list.
      */
-    private VersionedGiatrosBook prepareAddressBookList(ReadOnlyGiatrosBook... addressBookStates) {
-        assertFalse(addressBookStates.length == 0);
+    private VersionedGiatrosBook prepareGiatrosBookList(ReadOnlyGiatrosBook... giatrosBookStates) {
+        assertFalse(giatrosBookStates.length == 0);
 
-        VersionedGiatrosBook versionedAddressBook = new VersionedGiatrosBook(addressBookStates[0]);
-        for (int i = 1; i < addressBookStates.length; i++) {
-            versionedAddressBook.resetData(addressBookStates[i]);
-            versionedAddressBook.commit();
+        VersionedGiatrosBook versionedGiatrosBook = new VersionedGiatrosBook(giatrosBookStates[0]);
+        for (int i = 1; i < giatrosBookStates.length; i++) {
+            versionedGiatrosBook.resetData(giatrosBookStates[i]);
+            versionedGiatrosBook.commit();
         }
 
-        return versionedAddressBook;
+        return versionedGiatrosBook;
     }
 
     /**
-     * Shifts the {@code versionedAddressBook#currentStatePointer} by {@code count} to the left of its list.
+     * Shifts the {@code versionedGiatrosBook#currentStatePointer} by {@code count} to the left of its list.
      */
-    private void shiftCurrentStatePointerLeftwards(VersionedGiatrosBook versionedAddressBook, int count) {
+    private void shiftCurrentStatePointerLeftwards(VersionedGiatrosBook versionedGiatrosBook, int count) {
         for (int i = 0; i < count; i++) {
-            versionedAddressBook.undo();
+            versionedGiatrosBook.undo();
         }
     }
 }

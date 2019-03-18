@@ -174,7 +174,7 @@ public abstract class GiatrosBookSystemTest {
             Model expectedModel) {
         assertEquals(expectedCommandInput, getCommandBox().getInput());
         assertEquals(expectedResultMessage, getResultDisplay().getText());
-        assertEquals(new GiatrosBook(expectedModel.getGiatrosBook()), testApp.readStorageAddressBook());
+        assertEquals(new GiatrosBook(expectedModel.getGiatrosBook()), testApp.readStorageGiatrosBook());
         assertListMatching(getPersonListPanel(), expectedModel.getFilteredPersonList());
     }
 

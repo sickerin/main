@@ -69,9 +69,9 @@ public class TestApp extends MainApp {
     }
 
     /**
-     * Returns a defensive copy of the Giatros book data stored inside the storage file.
+     * Returns a defensive copy of the giatros book data stored inside the storage file.
      */
-    public GiatrosBook readStorageAddressBook() {
+    public GiatrosBook readStorageGiatrosBook() {
         try {
             return new GiatrosBook(storage.readGiatrosBook().get());
         } catch (DataConversionException dce) {

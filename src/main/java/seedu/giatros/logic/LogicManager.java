@@ -37,7 +37,7 @@ public class LogicManager implements Logic {
         history = new CommandHistory();
         giatrosBookParser = new GiatrosBookParser();
 
-        // Set giatrosBookModified to true whenever the models' giatros book is modified.
+        // Set giatrosBookModified to true whenever the models' Giatros book is modified.
         model.getGiatrosBook().addListener(observable -> giatrosBookModified = true);
     }
 

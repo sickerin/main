@@ -19,7 +19,7 @@ import seedu.giatros.model.person.Person;
 import seedu.giatros.model.person.exceptions.PersonNotFoundException;
 
 /**
- * Represents the in-memory model of the giatros book data.
+ * Represents the in-memory model of the Giatros book data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
@@ -30,7 +30,7 @@ public class ModelManager implements Model {
     private final SimpleObjectProperty<Person> selectedPerson = new SimpleObjectProperty<>();
 
     /**
-     * Initializes a ModelManager with the given giatrosBook and userPrefs.
+     * Initializes a ModelManager with the given GiatrosBook and userPrefs.
      */
     public ModelManager(ReadOnlyGiatrosBook giatrosBook, ReadOnlyUserPrefs userPrefs) {
         super();

@@ -8,14 +8,14 @@ import java.util.List;
  */
 public class VersionedGiatrosBook extends GiatrosBook {
 
-    private final List<ReadOnlyGiatrosBook> addressBookStateList;
+    private final List<ReadOnlyGiatrosBook> giatrosBookStateList;
     private int currentStatePointer;
 
     public VersionedGiatrosBook(ReadOnlyGiatrosBook initialState) {
         super(initialState);
 
-        addressBookStateList = new ArrayList<>();
-        addressBookStateList.add(new GiatrosBook(initialState));
+        giatrosBookStateList = new ArrayList<>();
+        giatrosBookStateList.add(new GiatrosBook(initialState));
         currentStatePointer = 0;
     }
 
@@ -25,13 +25,13 @@ public class VersionedGiatrosBook extends GiatrosBook {
      */
     public void commit() {
         removeStatesAfterCurrentPointer();
-        addressBookStateList.add(new GiatrosBook(this));
+        giatrosBookStateList.add(new GiatrosBook(this));
         currentStatePointer++;
         indicateModified();
     }
 
     private void removeStatesAfterCurrentPointer() {
-        addressBookStateList.subList(currentStatePointer + 1, addressBookStateList.size()).clear();
+        giatrosBookStateList.subList(currentStatePointer + 1, giatrosBookStateList.size()).clear();
     }
 
     /**
@@ -42,7 +42,7 @@ public class VersionedGiatrosBook extends GiatrosBook {
             throw new NoUndoableStateException();
         }
         currentStatePointer--;
-        resetData(addressBookStateList.get(currentStatePointer));
+        resetData(giatrosBookStateList.get(currentStatePointer));
     }
 
     /**
@@ -53,7 +53,7 @@ public class VersionedGiatrosBook extends GiatrosBook {
             throw new NoRedoableStateException();
         }
         currentStatePointer++;
-        resetData(addressBookStateList.get(currentStatePointer));
+        resetData(giatrosBookStateList.get(currentStatePointer));
     }
 
     /**
@@ -67,7 +67,7 @@ public class VersionedGiatrosBook extends GiatrosBook {
      * Returns true if {@code redo()} has Giatros book states to redo.
      */
     public boolean canRedo() {
-        return currentStatePointer < addressBookStateList.size() - 1;
+        return currentStatePointer < giatrosBookStateList.size() - 1;
     }
 
     @Override
@@ -82,12 +82,12 @@ public class VersionedGiatrosBook extends GiatrosBook {
             return false;
         }
 
-        VersionedGiatrosBook otherVersionedAddressBook = (VersionedGiatrosBook) other;
+        VersionedGiatrosBook otherVersionedGiatrosBook = (VersionedGiatrosBook) other;
 
         // state check
-        return super.equals(otherVersionedAddressBook)
-                && addressBookStateList.equals(otherVersionedAddressBook.addressBookStateList)
-                && currentStatePointer == otherVersionedAddressBook.currentStatePointer;
+        return super.equals(otherVersionedGiatrosBook)
+                && giatrosBookStateList.equals(otherVersionedGiatrosBook.giatrosBookStateList)
+                && currentStatePointer == otherVersionedGiatrosBook.currentStatePointer;
     }
 
     /**
@@ -95,7 +95,7 @@ public class VersionedGiatrosBook extends GiatrosBook {
      */
     public static class NoUndoableStateException extends RuntimeException {
         private NoUndoableStateException() {
-            super("Current state pointer at start of addressBookState list, unable to undo.");
+            super("Current state pointer at start of giatrosBookState list, unable to undo.");
         }
     }
 
@@ -104,7 +104,7 @@ public class VersionedGiatrosBook extends GiatrosBook {
      */
     public static class NoRedoableStateException extends RuntimeException {
         private NoRedoableStateException() {
-            super("Current state pointer at end of addressBookState list, unable to redo.");
+            super("Current state pointer at end of giatrosBookState list, unable to redo.");
         }
     }
 }

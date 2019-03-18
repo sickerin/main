@@ -22,7 +22,7 @@ import seedu.giatros.commons.core.GuiSettings;
 import seedu.giatros.model.person.NameContainsKeywordsPredicate;
 import seedu.giatros.model.person.Person;
 import seedu.giatros.model.person.exceptions.PersonNotFoundException;
-import seedu.giatros.testutil.AddressBookBuilder;
+import seedu.giatros.testutil.GiatrosBookBuilder;
 import seedu.giatros.testutil.PersonBuilder;
 
 public class ModelManagerTest {
@@ -151,7 +151,7 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        GiatrosBook giatrosBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        GiatrosBook giatrosBook = new GiatrosBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         GiatrosBook differentGiatrosBook = new GiatrosBook();
         UserPrefs userPrefs = new UserPrefs();
 

@@ -95,7 +95,7 @@ public class AddallCommandTest {
         }
 
         @Override
-        public void setGiatrosBookFilePath(Path addressBookFilePath) {
+        public void setGiatrosBookFilePath(Path giatrosBookFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 

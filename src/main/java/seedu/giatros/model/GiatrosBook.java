@@ -11,7 +11,7 @@ import seedu.giatros.model.person.Person;
 import seedu.giatros.model.person.UniquePersonList;
 
 /**
- * Wraps all data at the address-book level
+ * Wraps all data at the Giatros-book level
  * Duplicates are not allowed (by .isSamePerson comparison)
  */
 public class GiatrosBook implements ReadOnlyGiatrosBook {

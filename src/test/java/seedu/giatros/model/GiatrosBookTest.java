@@ -44,7 +44,7 @@ public class GiatrosBookTest {
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
+    public void resetData_withValidReadOnlyGiatrosBook_replacesData() {
         GiatrosBook newData = getTypicalGiatrosBook();
         giatrosBook.resetData(newData);
         assertEquals(newData, giatrosBook);
@@ -56,7 +56,7 @@ public class GiatrosBookTest {
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newPersons);
+        GiatrosBookStub newData = new GiatrosBookStub(newPersons);
 
         thrown.expect(DuplicatePersonException.class);
         giatrosBook.resetData(newData);
@@ -69,18 +69,18 @@ public class GiatrosBookTest {
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
+    public void hasPerson_personNotInGiatrosBook_returnsFalse() {
         assertFalse(giatrosBook.hasPerson(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
+    public void hasPerson_personInGiatrosBook_returnsTrue() {
         giatrosBook.addPerson(ALICE);
         assertTrue(giatrosBook.hasPerson(ALICE));
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
+    public void hasPerson_personWithSameIdentityFieldsInGiatrosBook_returnsTrue() {
         giatrosBook.addPerson(ALICE);
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
@@ -115,10 +115,10 @@ public class GiatrosBookTest {
     /**
      * A stub ReadOnlyGiatrosBook whose persons list can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyGiatrosBook {
+    private static class GiatrosBookStub implements ReadOnlyGiatrosBook {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Person> persons) {
+        GiatrosBookStub(Collection<Person> persons) {
             this.persons.setAll(persons);
         }
 

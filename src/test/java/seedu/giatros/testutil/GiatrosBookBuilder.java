@@ -6,24 +6,24 @@ import seedu.giatros.model.person.Person;
 /**
  * A utility class to help with building Addressbook objects.
  * Example usage: <br>
- *     {@code GiatrosBook ab = new AddressBookBuilder().withPerson("John", "Doe").build();}
+ *     {@code GiatrosBook ab = new GiatrosBookBuilder().withPerson("John", "Doe").build();}
  */
-public class AddressBookBuilder {
+public class GiatrosBookBuilder {
 
     private GiatrosBook giatrosBook;
 
-    public AddressBookBuilder() {
+    public GiatrosBookBuilder() {
         giatrosBook = new GiatrosBook();
     }
 
-    public AddressBookBuilder(GiatrosBook giatrosBook) {
+    public GiatrosBookBuilder(GiatrosBook giatrosBook) {
         this.giatrosBook = giatrosBook;
     }
 
     /**
      * Adds a new {@code Person} to the {@code GiatrosBook} that we are building.
      */
-    public AddressBookBuilder withPerson(Person person) {
+    public GiatrosBookBuilder withPerson(Person person) {
         giatrosBook.addPerson(person);
         return this;
     }
