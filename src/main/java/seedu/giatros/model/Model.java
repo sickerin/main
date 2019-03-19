@@ -73,7 +73,8 @@ public interface Model {
     /**
      * Replaces the given patient {@code target} with {@code editedPatient}.
      * {@code target} must exist in the Giatros book.
-     * The patient identity of {@code editedPatient} must not be the same as another existing patient in the Giatros book.
+     * The patient identity of {@code editedPatient} must not be the same as another existing patient in the Giatros
+     * book.
      */
     void setPatient(Patient target, Patient editedPatient);
 
