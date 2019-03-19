@@ -13,6 +13,7 @@ import java.util.stream.Stream;
 import seedu.giatros.logic.commands.AddCommand;
 import seedu.giatros.logic.parser.exceptions.ParseException;
 import seedu.giatros.model.person.Address;
+import seedu.giatros.model.person.Allergy;
 import seedu.giatros.model.person.Email;
 import seedu.giatros.model.person.Name;
 import seedu.giatros.model.person.Person;
@@ -42,9 +43,10 @@ public class AddCommandParser implements Parser<AddCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
+        Allergy allergy = new Allergy(""); // Currently, cannot add a person with allergy immediately
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(name, phone, email, address, tagList);
+        Person person = new Person(name, phone, email, address, allergy, tagList);
 
         return new AddCommand(person);
     }

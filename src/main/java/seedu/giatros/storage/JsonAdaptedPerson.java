@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.giatros.commons.exceptions.IllegalValueException;
 import seedu.giatros.model.person.Address;
+import seedu.giatros.model.person.Allergy;
 import seedu.giatros.model.person.Email;
 import seedu.giatros.model.person.Name;
 import seedu.giatros.model.person.Person;
@@ -102,8 +103,10 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
+        final Allergy modelAllergy = new Allergy(""); // To be fixed in Storage commit
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelAllergy, modelTags);
     }
 
 }
