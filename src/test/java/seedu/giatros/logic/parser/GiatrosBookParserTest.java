@@ -5,7 +5,7 @@ import static org.junit.Assert.assertTrue;
 import static seedu.giatros.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.giatros.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.giatros.logic.parser.CliSyntax.PREFIX_ALLERGY;
-import static seedu.giatros.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.giatros.testutil.TypicalIndexes.INDEX_FIRST_PATIENT;
 
 import java.util.Arrays;
 import java.util.List;
@@ -20,7 +20,7 @@ import seedu.giatros.logic.commands.AddallCommand;
 import seedu.giatros.logic.commands.ClearCommand;
 import seedu.giatros.logic.commands.DeleteCommand;
 import seedu.giatros.logic.commands.EditCommand;
-import seedu.giatros.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.giatros.logic.commands.EditCommand.EditPatientDescriptor;
 import seedu.giatros.logic.commands.ExitCommand;
 import seedu.giatros.logic.commands.FindCommand;
 import seedu.giatros.logic.commands.HelpCommand;
@@ -30,12 +30,12 @@ import seedu.giatros.logic.commands.RedoCommand;
 import seedu.giatros.logic.commands.SelectCommand;
 import seedu.giatros.logic.commands.UndoCommand;
 import seedu.giatros.logic.parser.exceptions.ParseException;
-import seedu.giatros.model.person.Allergy;
-import seedu.giatros.model.person.NameContainsKeywordsPredicate;
-import seedu.giatros.model.person.Person;
-import seedu.giatros.testutil.EditPersonDescriptorBuilder;
-import seedu.giatros.testutil.PersonBuilder;
-import seedu.giatros.testutil.PersonUtil;
+import seedu.giatros.model.patient.Allergy;
+import seedu.giatros.model.patient.NameContainsKeywordsPredicate;
+import seedu.giatros.model.patient.Patient;
+import seedu.giatros.testutil.EditPatientDescriptorBuilder;
+import seedu.giatros.testutil.PatientBuilder;
+import seedu.giatros.testutil.PatientUtil;
 
 public class GiatrosBookParserTest {
     @Rule
@@ -45,9 +45,9 @@ public class GiatrosBookParserTest {
 
     @Test
     public void parseCommand_add() throws Exception {
-        Person person = new PersonBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
-        assertEquals(new AddCommand(person), command);
+        Patient patient = new PatientBuilder().build();
+        AddCommand command = (AddCommand) parser.parseCommand(PatientUtil.getAddCommand(patient));
+        assertEquals(new AddCommand(patient), command);
     }
 
     @Test
@@ -59,17 +59,17 @@ public class GiatrosBookParserTest {
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PATIENT.getOneBased());
+        assertEquals(new DeleteCommand(INDEX_FIRST_PATIENT), command);
     }
 
     @Test
     public void parseCommand_edit() throws Exception {
-        Person person = new PersonBuilder().build();
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
+        Patient patient = new PatientBuilder().build();
+        EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder(patient).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+                + INDEX_FIRST_PATIENT.getOneBased() + " " + PatientUtil.getEditPatientDescriptorDetails(descriptor));
+        assertEquals(new EditCommand(INDEX_FIRST_PATIENT, descriptor), command);
     }
 
     @Test
@@ -114,16 +114,16 @@ public class GiatrosBookParserTest {
     @Test
     public void parseCommand_select() throws Exception {
         SelectCommand command = (SelectCommand) parser.parseCommand(
-                SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new SelectCommand(INDEX_FIRST_PERSON), command);
+                SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_PATIENT.getOneBased());
+        assertEquals(new SelectCommand(INDEX_FIRST_PATIENT), command);
     }
 
     @Test
     public void parseCommand_addall() throws Exception {
         final Allergy allergy = new Allergy("One allergy, and some other allergy");
         AddallCommand command = (AddallCommand) parser.parseCommand(AddallCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_ALLERGY + allergy.value);
-        assertEquals(new AddallCommand(INDEX_FIRST_PERSON, allergy), command);
+                + INDEX_FIRST_PATIENT.getOneBased() + " " + PREFIX_ALLERGY + allergy.value);
+        assertEquals(new AddallCommand(INDEX_FIRST_PATIENT, allergy), command);
         assertTrue(parser.parseCommand("addall 1 y/Allergy") instanceof AddallCommand);
     }
 

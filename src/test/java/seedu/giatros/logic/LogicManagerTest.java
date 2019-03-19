@@ -1,13 +1,13 @@
 package seedu.giatros.logic;
 
 import static org.junit.Assert.assertEquals;
-import static seedu.giatros.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static seedu.giatros.commons.core.Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX;
 import static seedu.giatros.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.giatros.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.giatros.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.giatros.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.giatros.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
-import static seedu.giatros.testutil.TypicalPersons.AMY;
+import static seedu.giatros.testutil.TypicalPatients.AMY;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -28,11 +28,11 @@ import seedu.giatros.model.Model;
 import seedu.giatros.model.ModelManager;
 import seedu.giatros.model.ReadOnlyGiatrosBook;
 import seedu.giatros.model.UserPrefs;
-import seedu.giatros.model.person.Person;
+import seedu.giatros.model.patient.Patient;
 import seedu.giatros.storage.JsonGiatrosBookStorage;
 import seedu.giatros.storage.JsonUserPrefsStorage;
 import seedu.giatros.storage.StorageManager;
-import seedu.giatros.testutil.PersonBuilder;
+import seedu.giatros.testutil.PatientBuilder;
 
 
 public class LogicManagerTest {
@@ -65,7 +65,7 @@ public class LogicManagerTest {
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
         String deleteCommand = "delete 9";
-        assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandException(deleteCommand, MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
         assertHistoryCorrect(deleteCommand);
     }
 
@@ -88,9 +88,9 @@ public class LogicManagerTest {
         // Execute add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
                 + ADDRESS_DESC_AMY;
-        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
+        Patient expectedPatient = new PatientBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
-        expectedModel.addPerson(expectedPerson);
+        expectedModel.addPatient(expectedPatient);
         expectedModel.commitGiatrosBook();
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
         assertCommandBehavior(CommandException.class, addCommand, expectedMessage, expectedModel);
@@ -98,9 +98,9 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
+    public void getFilteredPatientList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
-        logic.getFilteredPersonList().remove(0);
+        logic.getFilteredPatientList().remove(0);
     }
 
     /**

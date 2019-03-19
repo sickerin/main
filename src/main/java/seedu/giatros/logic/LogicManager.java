@@ -15,7 +15,7 @@ import seedu.giatros.logic.parser.GiatrosBookParser;
 import seedu.giatros.logic.parser.exceptions.ParseException;
 import seedu.giatros.model.Model;
 import seedu.giatros.model.ReadOnlyGiatrosBook;
-import seedu.giatros.model.person.Person;
+import seedu.giatros.model.patient.Patient;
 import seedu.giatros.storage.Storage;
 
 /**
@@ -37,7 +37,7 @@ public class LogicManager implements Logic {
         history = new CommandHistory();
         giatrosBookParser = new GiatrosBookParser();
 
-        // Set giatrosBookModified to true whenever the models' giatros book is modified.
+        // Set giatrosBookModified to true whenever the models' Giatros book is modified.
         model.getGiatrosBook().addListener(observable -> giatrosBookModified = true);
     }
 
@@ -72,8 +72,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return model.getFilteredPersonList();
+    public ObservableList<Patient> getFilteredPatientList() {
+        return model.getFilteredPatientList();
     }
 
     @Override
@@ -97,12 +97,12 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ReadOnlyProperty<Person> selectedPersonProperty() {
-        return model.selectedPersonProperty();
+    public ReadOnlyProperty<Patient> selectedPatientProperty() {
+        return model.selectedPatientProperty();
     }
 
     @Override
-    public void setSelectedPerson(Person person) {
-        model.setSelectedPerson(person);
+    public void setSelectedPatient(Patient patient) {
+        model.setSelectedPatient(patient);
     }
 }

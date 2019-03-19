@@ -3,12 +3,12 @@ package seedu.giatros.logic.commands;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.giatros.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
+import static seedu.giatros.commons.core.Messages.MESSAGE_PATIENTS_LISTED_OVERVIEW;
 import static seedu.giatros.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.giatros.testutil.TypicalPersons.CARL;
-import static seedu.giatros.testutil.TypicalPersons.ELLE;
-import static seedu.giatros.testutil.TypicalPersons.FIONA;
-import static seedu.giatros.testutil.TypicalPersons.getTypicalGiatrosBook;
+import static seedu.giatros.testutil.TypicalPatients.CARL;
+import static seedu.giatros.testutil.TypicalPatients.ELLE;
+import static seedu.giatros.testutil.TypicalPatients.FIONA;
+import static seedu.giatros.testutil.TypicalPatients.getTypicalGiatrosBook;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -19,7 +19,7 @@ import seedu.giatros.logic.CommandHistory;
 import seedu.giatros.model.Model;
 import seedu.giatros.model.ModelManager;
 import seedu.giatros.model.UserPrefs;
-import seedu.giatros.model.person.NameContainsKeywordsPredicate;
+import seedu.giatros.model.patient.NameContainsKeywordsPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
@@ -52,28 +52,28 @@ public class FindCommandTest {
         // null -> returns false
         assertFalse(findFirstCommand.equals(null));
 
-        // different person -> returns false
+        // different patient -> returns false
         assertFalse(findFirstCommand.equals(findSecondCommand));
     }
 
     @Test
-    public void execute_zeroKeywords_noPersonFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+    public void execute_zeroKeywords_noPatientFound() {
+        String expectedMessage = String.format(MESSAGE_PATIENTS_LISTED_OVERVIEW, 0);
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
+        expectedModel.updateFilteredPatientList(predicate);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+        assertEquals(Collections.emptyList(), model.getFilteredPatientList());
     }
 
     @Test
-    public void execute_multipleKeywords_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
+    public void execute_multipleKeywords_multiplePatientsFound() {
+        String expectedMessage = String.format(MESSAGE_PATIENTS_LISTED_OVERVIEW, 3);
         NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
         FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
+        expectedModel.updateFilteredPatientList(predicate);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPatientList());
     }
 
     /**

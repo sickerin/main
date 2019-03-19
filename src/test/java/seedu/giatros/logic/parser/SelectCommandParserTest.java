@@ -3,7 +3,7 @@ package seedu.giatros.logic.parser;
 import static seedu.giatros.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.giatros.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.giatros.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.giatros.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.giatros.testutil.TypicalIndexes.INDEX_FIRST_PATIENT;
 
 import org.junit.Test;
 
@@ -19,7 +19,7 @@ public class SelectCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsSelectCommand() {
-        assertParseSuccess(parser, "1", new SelectCommand(INDEX_FIRST_PERSON));
+        assertParseSuccess(parser, "1", new SelectCommand(INDEX_FIRST_PATIENT));
     }
 
     @Test

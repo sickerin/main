@@ -69,9 +69,9 @@ public class TestApp extends MainApp {
     }
 
     /**
-     * Returns a defensive copy of the Giatros book data stored inside the storage file.
+     * Returns a defensive copy of the giatros book data stored inside the storage file.
      */
-    public GiatrosBook readStorageAddressBook() {
+    public GiatrosBook readStorageGiatrosBook() {
         try {
             return new GiatrosBook(storage.readGiatrosBook().get());
         } catch (DataConversionException dce) {
@@ -93,7 +93,7 @@ public class TestApp extends MainApp {
      */
     public Model getModel() {
         Model copy = new ModelManager((model.getGiatrosBook()), new UserPrefs());
-        ModelHelper.setFilteredList(copy, model.getFilteredPersonList());
+        ModelHelper.setFilteredList(copy, model.getFilteredPatientList());
         return copy;
     }
 

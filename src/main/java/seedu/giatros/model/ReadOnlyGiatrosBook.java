@@ -2,7 +2,7 @@ package seedu.giatros.model;
 
 import javafx.beans.Observable;
 import javafx.collections.ObservableList;
-import seedu.giatros.model.person.Person;
+import seedu.giatros.model.patient.Patient;
 
 /**
  * Unmodifiable view of an Giatros book
@@ -10,9 +10,9 @@ import seedu.giatros.model.person.Person;
 public interface ReadOnlyGiatrosBook extends Observable {
 
     /**
-     * Returns an unmodifiable view of the persons list.
-     * This list will not contain any duplicate persons.
+     * Returns an unmodifiable view of the patients list.
+     * This list will not contain any duplicate patients.
      */
-    ObservableList<Person> getPersonList();
+    ObservableList<Patient> getPatientList();
 
 }

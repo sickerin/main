@@ -9,7 +9,7 @@ import seedu.giatros.logic.commands.CommandResult;
 import seedu.giatros.logic.commands.exceptions.CommandException;
 import seedu.giatros.logic.parser.exceptions.ParseException;
 import seedu.giatros.model.ReadOnlyGiatrosBook;
-import seedu.giatros.model.person.Person;
+import seedu.giatros.model.patient.Patient;
 
 /**
  * API of the Logic component
@@ -31,8 +31,8 @@ public interface Logic {
      */
     ReadOnlyGiatrosBook getGiatrosBook();
 
-    /** Returns an unmodifiable view of the filtered list of persons */
-    ObservableList<Person> getFilteredPersonList();
+    /** Returns an unmodifiable view of the filtered list of patients */
+    ObservableList<Patient> getFilteredPatientList();
 
     /**
      * Returns an unmodifiable view of the list of commands entered by the user.
@@ -56,17 +56,17 @@ public interface Logic {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Selected person in the filtered person list.
-     * null if no person is selected.
+     * Selected patient in the filtered patient list.
+     * null if no patient is selected.
      *
-     * @see seedu.giatros.model.Model#selectedPersonProperty()
+     * @see seedu.giatros.model.Model#selectedPatientProperty()
      */
-    ReadOnlyProperty<Person> selectedPersonProperty();
+    ReadOnlyProperty<Patient> selectedPatientProperty();
 
     /**
-     * Sets the selected person in the filtered person list.
+     * Sets the selected patient in the filtered patient list.
      *
-     * @see seedu.giatros.model.Model#setSelectedPerson(Person)
+     * @see seedu.giatros.model.Model#setSelectedPatient(Patient)
      */
-    void setSelectedPerson(Person person);
+    void setSelectedPatient(Patient patient);
 }

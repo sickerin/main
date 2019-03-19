@@ -9,7 +9,7 @@ import java.util.Arrays;
 import org.junit.Test;
 
 import seedu.giatros.logic.commands.FindCommand;
-import seedu.giatros.model.person.NameContainsKeywordsPredicate;
+import seedu.giatros.model.patient.NameContainsKeywordsPredicate;
 
 public class FindCommandParserTest {
 

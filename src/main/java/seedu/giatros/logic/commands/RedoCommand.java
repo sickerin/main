@@ -1,7 +1,7 @@
 package seedu.giatros.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.giatros.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.giatros.model.Model.PREDICATE_SHOW_ALL_PATIENTS;
 
 import seedu.giatros.logic.CommandHistory;
 import seedu.giatros.logic.commands.exceptions.CommandException;
@@ -25,7 +25,7 @@ public class RedoCommand extends Command {
         }
 
         model.redoGiatrosBook();
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateFilteredPatientList(PREDICATE_SHOW_ALL_PATIENTS);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
