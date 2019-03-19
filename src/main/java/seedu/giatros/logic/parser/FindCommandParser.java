@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 import seedu.giatros.logic.commands.FindCommand;
 import seedu.giatros.logic.parser.exceptions.ParseException;
-import seedu.giatros.model.person.NameContainsKeywordsPredicate;
+import seedu.giatros.model.patient.NameContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object

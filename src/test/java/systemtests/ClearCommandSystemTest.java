@@ -1,7 +1,7 @@
 package systemtests;
 
 import static seedu.giatros.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.giatros.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
+import static seedu.giatros.testutil.TypicalPatients.KEYWORD_MATCHING_MEIER;
 
 import org.junit.Test;
 
@@ -36,15 +36,15 @@ public class ClearCommandSystemTest extends GiatrosBookSystemTest {
         assertCommandSuccess(command, expectedResultMessage, new ModelManager());
         assertSelectedCardUnchanged();
 
-        /* Case: selects first card in person list and clears Giatros book -> cleared and no card selected */
+        /* Case: selects first card in patient list and clears Giatros book -> cleared and no card selected */
         executeCommand(UndoCommand.COMMAND_WORD); // restores the original Giatros book
-        selectPerson(Index.fromOneBased(1));
+        selectPatient(Index.fromOneBased(1));
         assertCommandSuccess(ClearCommand.COMMAND_WORD);
         assertSelectedCardDeselected();
 
-        /* Case: filters the person list before clearing -> entire Giatros book cleared */
+        /* Case: filters the patient list before clearing -> entire Giatros book cleared */
         executeCommand(UndoCommand.COMMAND_WORD); // restores the original Giatros book
-        showPersonsWithName(KEYWORD_MATCHING_MEIER);
+        showPatientsWithName(KEYWORD_MATCHING_MEIER);
         assertCommandSuccess(ClearCommand.COMMAND_WORD);
         assertSelectedCardUnchanged();
 

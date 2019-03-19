@@ -6,7 +6,7 @@ import seedu.giatros.logic.commands.exceptions.CommandException;
 import seedu.giatros.model.Model;
 
 /**
- * Adds a person to the giatros book.
+ * Adds a patient to the giatros book.
  */
 public class AddallCommand extends Command {
 

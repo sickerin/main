@@ -45,14 +45,14 @@ public class JsonGiatrosBookStorage implements GiatrosBookStorage {
     public Optional<ReadOnlyGiatrosBook> readGiatrosBook(Path filePath) throws DataConversionException {
         requireNonNull(filePath);
 
-        Optional<JsonSerializableGiatrosBook> jsonAddressBook = JsonUtil.readJsonFile(
+        Optional<JsonSerializableGiatrosBook> jsonGiatrosBook = JsonUtil.readJsonFile(
                 filePath, JsonSerializableGiatrosBook.class);
-        if (!jsonAddressBook.isPresent()) {
+        if (!jsonGiatrosBook.isPresent()) {
             return Optional.empty();
         }
 
         try {
-            return Optional.of(jsonAddressBook.get().toModelType());
+            return Optional.of(jsonGiatrosBook.get().toModelType());
         } catch (IllegalValueException ive) {
             logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
             throw new DataConversionException(ive);
@@ -60,8 +60,8 @@ public class JsonGiatrosBookStorage implements GiatrosBookStorage {
     }
 
     @Override
-    public void saveGiatrosBook(ReadOnlyGiatrosBook addressBook) throws IOException {
-        saveGiatrosBook(addressBook, filePath);
+    public void saveGiatrosBook(ReadOnlyGiatrosBook giatrosBook) throws IOException {
+        saveGiatrosBook(giatrosBook, filePath);
     }
 
     /**
@@ -69,12 +69,12 @@ public class JsonGiatrosBookStorage implements GiatrosBookStorage {
      *
      * @param filePath location of the data. Cannot be null.
      */
-    public void saveGiatrosBook(ReadOnlyGiatrosBook addressBook, Path filePath) throws IOException {
-        requireNonNull(addressBook);
+    public void saveGiatrosBook(ReadOnlyGiatrosBook giatrosBook, Path filePath) throws IOException {
+        requireNonNull(giatrosBook);
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        JsonUtil.saveJsonFile(new JsonSerializableGiatrosBook(addressBook), filePath);
+        JsonUtil.saveJsonFile(new JsonSerializableGiatrosBook(giatrosBook), filePath);
     }
 
 }

@@ -2,10 +2,10 @@ package seedu.giatros.storage;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static seedu.giatros.testutil.TypicalPersons.ALICE;
-import static seedu.giatros.testutil.TypicalPersons.HOON;
-import static seedu.giatros.testutil.TypicalPersons.IDA;
-import static seedu.giatros.testutil.TypicalPersons.getTypicalGiatrosBook;
+import static seedu.giatros.testutil.TypicalPatients.ALICE;
+import static seedu.giatros.testutil.TypicalPatients.HOON;
+import static seedu.giatros.testutil.TypicalPatients.IDA;
+import static seedu.giatros.testutil.TypicalPatients.getTypicalGiatrosBook;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -54,27 +54,27 @@ public class JsonGiatrosBookStorageTest {
     public void read_notJsonFormat_exceptionThrown() throws Exception {
 
         thrown.expect(DataConversionException.class);
-        readGiatrosBook("notJsonFormatAddressBook.json");
+        readGiatrosBook("notJsonFormatGiatrosBook.json");
 
         // IMPORTANT: Any code below an exception-throwing line (like the one above) will be ignored.
         // That means you should not have more than one exception test in one method
     }
 
     @Test
-    public void readGiatrosBook_invalidPersonGiatrosBook_throwDataConversionException() throws Exception {
+    public void readGiatrosBook_invalidPatientGiatrosBook_throwDataConversionException() throws Exception {
         thrown.expect(DataConversionException.class);
-        readGiatrosBook("invalidPersonAddressBook.json");
+        readGiatrosBook("invalidPatientGiatrosBook.json");
     }
 
     @Test
-    public void readGiatrosBook_invalidAndValidPersonGiatrosBook_throwDataConversionException() throws Exception {
+    public void readGiatrosBook_invalidAndValidPatientGiatrosBook_throwDataConversionException() throws Exception {
         thrown.expect(DataConversionException.class);
-        readGiatrosBook("invalidAndValidPersonAddressBook.json");
+        readGiatrosBook("invalidAndValidPatientGiatrosBook.json");
     }
 
     @Test
     public void readAndSaveGiatrosBook_allInOrder_success() throws Exception {
-        Path filePath = testFolder.getRoot().toPath().resolve("TempAddressBook.json");
+        Path filePath = testFolder.getRoot().toPath().resolve("TempGiatrosBook.json");
         GiatrosBook original = getTypicalGiatrosBook();
         JsonGiatrosBookStorage jsonGiatrosBookStorage = new JsonGiatrosBookStorage(filePath);
 
@@ -84,14 +84,14 @@ public class JsonGiatrosBookStorageTest {
         assertEquals(original, new GiatrosBook(readBack));
 
         // Modify data, overwrite exiting file, and read back
-        original.addPerson(HOON);
-        original.removePerson(ALICE);
+        original.addPatient(HOON);
+        original.removePatient(ALICE);
         jsonGiatrosBookStorage.saveGiatrosBook(original, filePath);
         readBack = jsonGiatrosBookStorage.readGiatrosBook(filePath).get();
         assertEquals(original, new GiatrosBook(readBack));
 
         // Save and read without specifying file path
-        original.addPerson(IDA);
+        original.addPatient(IDA);
         jsonGiatrosBookStorage.saveGiatrosBook(original); // file path not specified
         readBack = jsonGiatrosBookStorage.readGiatrosBook().get(); // file path not specified
         assertEquals(original, new GiatrosBook(readBack));

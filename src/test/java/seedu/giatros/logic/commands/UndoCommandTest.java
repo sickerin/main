@@ -2,8 +2,8 @@ package seedu.giatros.logic.commands;
 
 import static seedu.giatros.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.giatros.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.giatros.logic.commands.CommandTestUtil.deleteFirstPerson;
-import static seedu.giatros.testutil.TypicalPersons.getTypicalGiatrosBook;
+import static seedu.giatros.logic.commands.CommandTestUtil.deleteFirstPatient;
+import static seedu.giatros.testutil.TypicalPatients.getTypicalGiatrosBook;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -22,11 +22,11 @@ public class UndoCommandTest {
     @Before
     public void setUp() {
         // set up of models' undo/redo history
-        deleteFirstPerson(model);
-        deleteFirstPerson(model);
+        deleteFirstPatient(model);
+        deleteFirstPatient(model);
 
-        deleteFirstPerson(expectedModel);
-        deleteFirstPerson(expectedModel);
+        deleteFirstPatient(expectedModel);
+        deleteFirstPatient(expectedModel);
     }
 
     @Test

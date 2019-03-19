@@ -69,9 +69,9 @@ public class MainApp extends Application {
     }
 
     /**
-     * Returns a {@code ModelManager} with the data from {@code storage}'s clinic book and {@code userPrefs}. <br>
-     * The data from the sample clinic book will be used instead if {@code storage}'s clinic book is not found,
-     * or an empty clinic book will be used instead if errors occur when reading {@code storage}'s clinic book.
+     * Returns a {@code ModelManager} with the data from {@code storage}'s giatros book and {@code userPrefs}. <br>
+     * The data from the sample giatros book will be used instead if {@code storage}'s giatros book is not found,
+     * or an empty giatros book will be used instead if errors occur when reading {@code storage}'s giatros book.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         Optional<ReadOnlyGiatrosBook> giatrosBookOptional;

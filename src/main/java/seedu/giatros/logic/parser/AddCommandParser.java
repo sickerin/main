@@ -12,11 +12,11 @@ import java.util.stream.Stream;
 
 import seedu.giatros.logic.commands.AddCommand;
 import seedu.giatros.logic.parser.exceptions.ParseException;
-import seedu.giatros.model.person.Address;
-import seedu.giatros.model.person.Email;
-import seedu.giatros.model.person.Name;
-import seedu.giatros.model.person.Person;
-import seedu.giatros.model.person.Phone;
+import seedu.giatros.model.patient.Address;
+import seedu.giatros.model.patient.Email;
+import seedu.giatros.model.patient.Name;
+import seedu.giatros.model.patient.Patient;
+import seedu.giatros.model.patient.Phone;
 import seedu.giatros.model.tag.Tag;
 
 /**
@@ -44,9 +44,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(name, phone, email, address, tagList);
+        Patient patient = new Patient(name, phone, email, address, tagList);
 
-        return new AddCommand(person);
+        return new AddCommand(patient);
     }
 
     /**

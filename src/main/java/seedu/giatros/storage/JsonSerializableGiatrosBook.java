@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.giatros.commons.exceptions.IllegalValueException;
 import seedu.giatros.model.GiatrosBook;
 import seedu.giatros.model.ReadOnlyGiatrosBook;
-import seedu.giatros.model.person.Person;
+import seedu.giatros.model.patient.Patient;
 
 /**
  * An Immutable GiatrosBook that is serializable to JSON format.
@@ -19,16 +19,16 @@ import seedu.giatros.model.person.Person;
 @JsonRootName(value = "giatrosbook")
 class JsonSerializableGiatrosBook {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE_PATIENT = "Patients list contains duplicate patient(s).";
 
-    private final List<JsonAdaptedPerson> persons = new ArrayList<>();
+    private final List<JsonAdaptedPatient> patients = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableGiatrosBook} with the given persons.
+     * Constructs a {@code JsonSerializableGiatrosBook} with the given patients.
      */
     @JsonCreator
-    public JsonSerializableGiatrosBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons) {
-        this.persons.addAll(persons);
+    public JsonSerializableGiatrosBook(@JsonProperty("patients") List<JsonAdaptedPatient> patients) {
+        this.patients.addAll(patients);
     }
 
     /**
@@ -37,7 +37,7 @@ class JsonSerializableGiatrosBook {
      * @param source future changes to this will not affect the created {@code JsonSerializableGiatrosBook}.
      */
     public JsonSerializableGiatrosBook(ReadOnlyGiatrosBook source) {
-        persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
+        patients.addAll(source.getPatientList().stream().map(JsonAdaptedPatient::new).collect(Collectors.toList()));
     }
 
     /**
@@ -47,12 +47,12 @@ class JsonSerializableGiatrosBook {
      */
     public GiatrosBook toModelType() throws IllegalValueException {
         GiatrosBook giatrosBook = new GiatrosBook();
-        for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
-            Person person = jsonAdaptedPerson.toModelType();
-            if (giatrosBook.hasPerson(person)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+        for (JsonAdaptedPatient jsonAdaptedPatient : patients) {
+            Patient patient = jsonAdaptedPatient.toModelType();
+            if (giatrosBook.hasPatient(patient)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_PATIENT);
             }
-            giatrosBook.addPerson(person);
+            giatrosBook.addPatient(patient);
         }
         return giatrosBook;
     }

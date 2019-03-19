@@ -1,14 +1,14 @@
 package systemtests;
 
 import static org.junit.Assert.assertTrue;
-import static seedu.giatros.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static seedu.giatros.commons.core.Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX;
 import static seedu.giatros.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.giatros.logic.commands.DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS;
+import static seedu.giatros.logic.commands.DeleteCommand.MESSAGE_DELETE_PATIENT_SUCCESS;
 import static seedu.giatros.testutil.TestUtil.getLastIndex;
 import static seedu.giatros.testutil.TestUtil.getMidIndex;
-import static seedu.giatros.testutil.TestUtil.getPerson;
-import static seedu.giatros.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.giatros.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
+import static seedu.giatros.testutil.TestUtil.getPatient;
+import static seedu.giatros.testutil.TypicalIndexes.INDEX_FIRST_PATIENT;
+import static seedu.giatros.testutil.TypicalPatients.KEYWORD_MATCHING_MEIER;
 
 import org.junit.Test;
 
@@ -18,7 +18,7 @@ import seedu.giatros.logic.commands.DeleteCommand;
 import seedu.giatros.logic.commands.RedoCommand;
 import seedu.giatros.logic.commands.UndoCommand;
 import seedu.giatros.model.Model;
-import seedu.giatros.model.person.Person;
+import seedu.giatros.model.patient.Patient;
 
 public class DeleteCommandSystemTest extends GiatrosBookSystemTest {
 
@@ -29,60 +29,61 @@ public class DeleteCommandSystemTest extends GiatrosBookSystemTest {
     public void delete() {
         /* ----------------- Performing delete operation while an unfiltered list is being shown -------------------- */
 
-        /* Case: delete the first person in the list, command with leading spaces and trailing spaces -> deleted */
+        /* Case: delete the first patient in the list, command with leading spaces and trailing spaces -> deleted */
         Model expectedModel = getModel();
-        String command = "     " + DeleteCommand.COMMAND_WORD + "      " + INDEX_FIRST_PERSON.getOneBased() + "       ";
-        Person deletedPerson = removePerson(expectedModel, INDEX_FIRST_PERSON);
-        String expectedResultMessage = String.format(MESSAGE_DELETE_PERSON_SUCCESS, deletedPerson);
+        String command = "     " + DeleteCommand.COMMAND_WORD + "      " + INDEX_FIRST_PATIENT.getOneBased() + "      ";
+        Patient deletedPatient = removePatient(expectedModel, INDEX_FIRST_PATIENT);
+        String expectedResultMessage = String.format(MESSAGE_DELETE_PATIENT_SUCCESS, deletedPatient);
         assertCommandSuccess(command, expectedModel, expectedResultMessage);
 
-        /* Case: delete the last person in the list -> deleted */
+        /* Case: delete the last patient in the list -> deleted */
         Model modelBeforeDeletingLast = getModel();
-        Index lastPersonIndex = getLastIndex(modelBeforeDeletingLast);
-        assertCommandSuccess(lastPersonIndex);
+        Index lastPatientIndex = getLastIndex(modelBeforeDeletingLast);
+        assertCommandSuccess(lastPatientIndex);
 
-        /* Case: undo deleting the last person in the list -> last person restored */
+        /* Case: undo deleting the last patient in the list -> last patient restored */
         command = UndoCommand.COMMAND_WORD;
         expectedResultMessage = UndoCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command, modelBeforeDeletingLast, expectedResultMessage);
 
-        /* Case: redo deleting the last person in the list -> last person deleted again */
+        /* Case: redo deleting the last patient in the list -> last patient deleted again */
         command = RedoCommand.COMMAND_WORD;
-        removePerson(modelBeforeDeletingLast, lastPersonIndex);
+        removePatient(modelBeforeDeletingLast, lastPatientIndex);
         expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command, modelBeforeDeletingLast, expectedResultMessage);
 
-        /* Case: delete the middle person in the list -> deleted */
-        Index middlePersonIndex = getMidIndex(getModel());
-        assertCommandSuccess(middlePersonIndex);
+        /* Case: delete the middle patient in the list -> deleted */
+        Index middlePatientIndex = getMidIndex(getModel());
+        assertCommandSuccess(middlePatientIndex);
 
         /* ------------------ Performing delete operation while a filtered list is being shown ---------------------- */
 
-        /* Case: filtered person list, delete index within bounds of Giatros book and person list -> deleted */
-        showPersonsWithName(KEYWORD_MATCHING_MEIER);
-        Index index = INDEX_FIRST_PERSON;
-        assertTrue(index.getZeroBased() < getModel().getFilteredPersonList().size());
+        /* Case: filtered patient list, delete index within bounds of Giatros book and patient list -> deleted */
+        showPatientsWithName(KEYWORD_MATCHING_MEIER);
+        Index index = INDEX_FIRST_PATIENT;
+        assertTrue(index.getZeroBased() < getModel().getFilteredPatientList().size());
         assertCommandSuccess(index);
 
-        /* Case: filtered person list, delete index within bounds of Giatros book but out of bounds of person list
+        /* Case: filtered patient list, delete index within bounds of Giatros book but out of bounds of patient list
          * -> rejected
          */
-        showPersonsWithName(KEYWORD_MATCHING_MEIER);
-        int invalidIndex = getModel().getGiatrosBook().getPersonList().size();
+        showPatientsWithName(KEYWORD_MATCHING_MEIER);
+        int invalidIndex = getModel().getGiatrosBook().getPatientList().size();
         command = DeleteCommand.COMMAND_WORD + " " + invalidIndex;
-        assertCommandFailure(command, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(command, MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
 
-        /* --------------------- Performing delete operation while a person card is selected ------------------------ */
+        /* --------------------- Performing delete operation while a patient card is selected ------------------------
+        */
 
-        /* Case: delete the selected person -> person list panel selects the person before the deleted person */
-        showAllPersons();
+        /* Case: delete the selected patient -> patient list panel selects the patient before the deleted patient */
+        showAllPatients();
         expectedModel = getModel();
         Index selectedIndex = getLastIndex(expectedModel);
         Index expectedIndex = Index.fromZeroBased(selectedIndex.getZeroBased() - 1);
-        selectPerson(selectedIndex);
+        selectPatient(selectedIndex);
         command = DeleteCommand.COMMAND_WORD + " " + selectedIndex.getOneBased();
-        deletedPerson = removePerson(expectedModel, selectedIndex);
-        expectedResultMessage = String.format(MESSAGE_DELETE_PERSON_SUCCESS, deletedPerson);
+        deletedPatient = removePatient(expectedModel, selectedIndex);
+        expectedResultMessage = String.format(MESSAGE_DELETE_PATIENT_SUCCESS, deletedPatient);
         assertCommandSuccess(command, expectedModel, expectedResultMessage, expectedIndex);
 
         /* --------------------------------- Performing invalid delete operation ------------------------------------ */
@@ -97,9 +98,9 @@ public class DeleteCommandSystemTest extends GiatrosBookSystemTest {
 
         /* Case: invalid index (size + 1) -> rejected */
         Index outOfBoundsIndex = Index.fromOneBased(
-                getModel().getGiatrosBook().getPersonList().size() + 1);
+                getModel().getGiatrosBook().getPatientList().size() + 1);
         command = DeleteCommand.COMMAND_WORD + " " + outOfBoundsIndex.getOneBased();
-        assertCommandFailure(command, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(command, MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
 
         /* Case: invalid arguments (alphabets) -> rejected */
         assertCommandFailure(DeleteCommand.COMMAND_WORD + " abc", MESSAGE_INVALID_DELETE_COMMAND_FORMAT);
@@ -112,24 +113,24 @@ public class DeleteCommandSystemTest extends GiatrosBookSystemTest {
     }
 
     /**
-     * Removes the {@code Person} at the specified {@code index} in {@code model}'s Giatros book.
-     * @return the removed person
+     * Removes the {@code Patient} at the specified {@code index} in {@code model}'s Giatros book.
+     * @return the removed patient
      */
-    private Person removePerson(Model model, Index index) {
-        Person targetPerson = getPerson(model, index);
-        model.deletePerson(targetPerson);
-        return targetPerson;
+    private Patient removePatient(Model model, Index index) {
+        Patient targetPatient = getPatient(model, index);
+        model.deletePatient(targetPatient);
+        return targetPatient;
     }
 
     /**
-     * Deletes the person at {@code toDelete} by creating a default {@code DeleteCommand} using {@code toDelete} and
+     * Deletes the patient at {@code toDelete} by creating a default {@code DeleteCommand} using {@code toDelete} and
      * performs the same verification as {@code assertCommandSuccess(String, Model, String)}.
      * @see DeleteCommandSystemTest#assertCommandSuccess(String, Model, String)
      */
     private void assertCommandSuccess(Index toDelete) {
         Model expectedModel = getModel();
-        Person deletedPerson = removePerson(expectedModel, toDelete);
-        String expectedResultMessage = String.format(MESSAGE_DELETE_PERSON_SUCCESS, deletedPerson);
+        Patient deletedPatient = removePatient(expectedModel, toDelete);
+        String expectedResultMessage = String.format(MESSAGE_DELETE_PATIENT_SUCCESS, deletedPatient);
 
         assertCommandSuccess(
                 DeleteCommand.COMMAND_WORD + " " + toDelete.getOneBased(), expectedModel, expectedResultMessage);

@@ -1,9 +1,9 @@
 package seedu.giatros.logic.commands;
 
 import static seedu.giatros.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.giatros.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.giatros.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.giatros.testutil.TypicalPersons.getTypicalGiatrosBook;
+import static seedu.giatros.logic.commands.CommandTestUtil.showPatientAtIndex;
+import static seedu.giatros.testutil.TypicalIndexes.INDEX_FIRST_PATIENT;
+import static seedu.giatros.testutil.TypicalPatients.getTypicalGiatrosBook;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -35,7 +35,7 @@ public class ListCommandTest {
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showPatientAtIndex(model, INDEX_FIRST_PATIENT);
         assertCommandSuccess(new ListCommand(), model, commandHistory, ListCommand.MESSAGE_SUCCESS, expectedModel);
     }
 }
