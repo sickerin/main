@@ -105,7 +105,8 @@ public class AddCommandSystemTest extends GiatrosBookSystemTest {
         showPatientsWithName(KEYWORD_MATCHING_MEIER);
         assertCommandSuccess(IDA);
 
-        /* ------------------------ Perform add operation while a patient card is selected --------------------------- */
+        /* ------------------------ Perform add operation while a patient card is selected ---------------------------
+         */
 
         /* Case: selects first card in the patient list, add a patient -> added, card selection remains unchanged */
         selectPatient(Index.fromOneBased(1));
