@@ -7,7 +7,7 @@ import seedu.giatros.commons.core.index.Index;
 import seedu.giatros.logic.CommandHistory;
 import seedu.giatros.logic.commands.exceptions.CommandException;
 import seedu.giatros.model.Model;
-import seedu.giatros.model.person.Allergy;
+import seedu.giatros.model.patient.Allergy;
 
 /**
  * Changes the allergy of an existing patient in the giatros book.

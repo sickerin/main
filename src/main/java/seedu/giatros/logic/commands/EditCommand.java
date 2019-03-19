@@ -103,7 +103,7 @@ public class EditCommand extends Command {
         Allergy updatedAllergy = patientToEdit.getAllergy(); // Currently, cannot edit allergy yet
         Set<Tag> updatedTags = editPatientDescriptor.getTags().orElse(patientToEdit.getTags());
 
-        return new Patient(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Patient(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedAllergy, updatedTags);
     }
 
     @Override

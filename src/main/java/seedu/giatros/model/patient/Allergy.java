@@ -1,9 +1,9 @@
-package seedu.giatros.model.person;
+package seedu.giatros.model.patient;
 
 import static java.util.Objects.requireNonNull;
 
 /**
- * Represents a Person's allergy in the Giatros book.
+ * Represents a Patient's allergy in the Giatros book.
  * Guarantees: immutable; is always valid
  */
 public class Allergy {
