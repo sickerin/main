@@ -5,13 +5,13 @@ import static seedu.giatros.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.giatros.logic.parser.CliSyntax.PREFIX_ALLERGY;
 import static seedu.giatros.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.giatros.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.giatros.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.giatros.testutil.TypicalIndexes.INDEX_FIRST_PATIENT;
 
 import org.junit.Test;
 
 import seedu.giatros.commons.core.index.Index;
 import seedu.giatros.logic.commands.AddallCommand;
-import seedu.giatros.model.person.Allergy;
+import seedu.giatros.model.patient.Allergy;
 
 public class AddallCommandParserTest {
 
@@ -21,13 +21,13 @@ public class AddallCommandParserTest {
     @Test
     public void parse_allFieldsPresent_success() {
         // adding non-empty allergy
-        Index index = INDEX_FIRST_PERSON;
+        Index index = INDEX_FIRST_PATIENT;
         String input = index.getOneBased() + " " + PREFIX_ALLERGY + nonEmptyAllergy;
-        assertParseSuccess(parser, input, new AddallCommand(INDEX_FIRST_PERSON, new Allergy(nonEmptyAllergy)));
+        assertParseSuccess(parser, input, new AddallCommand(INDEX_FIRST_PATIENT, new Allergy(nonEmptyAllergy)));
 
         // adding an empty allergy
         input = index.getOneBased() + " " + PREFIX_ALLERGY + "";
-        assertParseSuccess(parser, input, new AddallCommand(INDEX_FIRST_PERSON, new Allergy("")));
+        assertParseSuccess(parser, input, new AddallCommand(INDEX_FIRST_PATIENT, new Allergy("")));
     }
 
     @Test
@@ -42,11 +42,11 @@ public class AddallCommandParserTest {
         assertParseFailure(parser, input, expectedMessage);
 
         // no tag provided
-        input = INDEX_FIRST_PERSON.getOneBased() + " " + nonEmptyAllergy;
+        input = INDEX_FIRST_PATIENT.getOneBased() + " " + nonEmptyAllergy;
         assertParseFailure(parser, input, expectedMessage);
 
         // invalid tag specified
-        input = INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_ADDRESS + " " + nonEmptyAllergy;
+        input = INDEX_FIRST_PATIENT.getOneBased() + " " + PREFIX_ADDRESS + " " + nonEmptyAllergy;
         assertParseFailure(parser, input, expectedMessage);
 
     }

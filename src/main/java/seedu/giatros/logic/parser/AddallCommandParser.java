@@ -8,7 +8,7 @@ import seedu.giatros.commons.core.index.Index;
 import seedu.giatros.commons.exceptions.IllegalValueException;
 import seedu.giatros.logic.commands.AddallCommand;
 import seedu.giatros.logic.parser.exceptions.ParseException;
-import seedu.giatros.model.person.Allergy;
+import seedu.giatros.model.patient.Allergy;
 
 /**
  * Parses input arguments and creates a new {@code AddallCommand} object
