@@ -8,8 +8,9 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.giatros.model.patient.exceptions.PatientNotFoundException;
 import seedu.giatros.model.patient.exceptions.DuplicatePatientException;
+import seedu.giatros.model.patient.exceptions.PatientNotFoundException;
+
 
 /**
  * A list of patients that enforces uniqueness between its elements and does not allow nulls.
