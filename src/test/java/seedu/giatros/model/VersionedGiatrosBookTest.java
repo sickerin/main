@@ -58,7 +58,7 @@ public class VersionedGiatrosBookTest {
                 emptyGiatrosBook,
                 Collections.emptyList());
     }
-    
+
     @Test
     public void canUndo_multipleGiatrosBookPointerAtEndOfStateList_returnsTrue() {
         VersionedGiatrosBook versionedGiatrosBook = prepareGiatrosBookList(
