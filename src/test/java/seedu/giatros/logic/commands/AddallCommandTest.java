@@ -33,9 +33,6 @@ public class AddallCommandTest {
     private Model model = new ModelManager(getTypicalGiatrosBook(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
-
     @Test
     public void execute_addAllergyUnfilteredList_success() {
         Patient firstPatient = model.getFilteredPatientList().get(INDEX_FIRST_PATIENT.getZeroBased());
