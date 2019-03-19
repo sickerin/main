@@ -49,7 +49,7 @@ public class PatientCard extends UiPart<Region> {
         phone.setText(patient.getPhone().value);
         address.setText(patient.getAddress().value);
         email.setText(patient.getEmail().value);
-        allergy.setText(patient.getAddress().value);
+        allergy.setText(patient.getAllergy().value);
         createTag(patient);
 
     }
