@@ -125,7 +125,8 @@ public class EditCommandSystemTest extends GiatrosBookSystemTest {
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + invalidIndex + NAME_DESC_BOB,
                 Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
 
-        /* --------------------- Performing edit operation while a patient card is selected -------------------------- */
+        /* --------------------- Performing edit operation while a patient card is selected --------------------------
+        */
 
         /* Case: selects first card in the patient list, edit a patient -> edited, card selection remains unchanged but
          * browser url changes
@@ -196,7 +197,8 @@ public class EditCommandSystemTest extends GiatrosBookSystemTest {
                 + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_PATIENT);
 
-        /* Case: edit a patient with new values same as another patient's values but with different address -> rejected */
+        /* Case: edit a patient with new values same as another patient's values but with different address -> rejected
+         */
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_AMY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_PATIENT);

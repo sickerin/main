@@ -5,7 +5,6 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import seedu.giatros.model.patient.Address;
 import seedu.giatros.testutil.Assert;
 
 public class AddressTest {

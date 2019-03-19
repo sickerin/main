@@ -53,7 +53,8 @@ public class PatientListPanelTest extends GuiUnitTest {
         guiRobot.interact(() -> selectedPatient.set(secondPatient));
         guiRobot.pauseForHuman();
 
-        PatientCardHandle expectedPatient = patientListPanelHandle.getPatientCardHandle(INDEX_SECOND_PATIENT.getZeroBased());
+        PatientCardHandle expectedPatient = patientListPanelHandle.getPatientCardHandle(INDEX_SECOND_PATIENT
+                .getZeroBased());
         PatientCardHandle selectedPatient = patientListPanelHandle.getHandleToSelectedCard();
         assertCardEquals(expectedPatient, selectedPatient);
     }

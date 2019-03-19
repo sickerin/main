@@ -31,7 +31,7 @@ public class DeleteCommandSystemTest extends GiatrosBookSystemTest {
 
         /* Case: delete the first patient in the list, command with leading spaces and trailing spaces -> deleted */
         Model expectedModel = getModel();
-        String command = "     " + DeleteCommand.COMMAND_WORD + "      " + INDEX_FIRST_PATIENT.getOneBased() + "       ";
+        String command = "     " + DeleteCommand.COMMAND_WORD + "      " + INDEX_FIRST_PATIENT.getOneBased() + "      ";
         Patient deletedPatient = removePatient(expectedModel, INDEX_FIRST_PATIENT);
         String expectedResultMessage = String.format(MESSAGE_DELETE_PATIENT_SUCCESS, deletedPatient);
         assertCommandSuccess(command, expectedModel, expectedResultMessage);
@@ -72,7 +72,8 @@ public class DeleteCommandSystemTest extends GiatrosBookSystemTest {
         command = DeleteCommand.COMMAND_WORD + " " + invalidIndex;
         assertCommandFailure(command, MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
 
-        /* --------------------- Performing delete operation while a patient card is selected ------------------------ */
+        /* --------------------- Performing delete operation while a patient card is selected ------------------------
+        */
 
         /* Case: delete the selected patient -> patient list panel selects the patient before the deleted patient */
         showAllPatients();
