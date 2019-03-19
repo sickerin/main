@@ -11,9 +11,7 @@ import static seedu.giatros.testutil.TypicalIndexes.INDEX_FIRST_PATIENT;
 import static seedu.giatros.testutil.TypicalIndexes.INDEX_SECOND_PATIENT;
 import static seedu.giatros.testutil.TypicalPatients.getTypicalGiatrosBook;
 
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 import seedu.giatros.commons.core.Messages;
 import seedu.giatros.commons.core.index.Index;
