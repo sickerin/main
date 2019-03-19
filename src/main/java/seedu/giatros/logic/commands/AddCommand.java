@@ -10,16 +10,16 @@ import static seedu.giatros.logic.parser.CliSyntax.PREFIX_TAG;
 import seedu.giatros.logic.CommandHistory;
 import seedu.giatros.logic.commands.exceptions.CommandException;
 import seedu.giatros.model.Model;
-import seedu.giatros.model.person.Person;
+import seedu.giatros.model.patient.Patient;
 
 /**
- * Adds a person to the Giatros book.
+ * Adds a patient to the Giatros book.
  */
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the Giatros book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a patient to the Giatros book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
@@ -34,28 +34,28 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the giatros book";
+    public static final String MESSAGE_SUCCESS = "New patient added: %1$s";
+    public static final String MESSAGE_DUPLICATE_PATIENT = "This patient already exists in the giatros book";
 
-    private final Person toAdd;
+    private final Patient toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddCommand to add the specified {@code Patient}
      */
-    public AddCommand(Person person) {
-        requireNonNull(person);
-        toAdd = person;
+    public AddCommand(Patient patient) {
+        requireNonNull(patient);
+        toAdd = patient;
     }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasPerson(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        if (model.hasPatient(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_PATIENT);
         }
 
-        model.addPerson(toAdd);
+        model.addPatient(toAdd);
         model.commitGiatrosBook();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }

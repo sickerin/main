@@ -5,8 +5,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.giatros.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.giatros.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.giatros.testutil.TypicalPersons.ALICE;
-import static seedu.giatros.testutil.TypicalPersons.getTypicalGiatrosBook;
+import static seedu.giatros.testutil.TypicalPatients.ALICE;
+import static seedu.giatros.testutil.TypicalPatients.getTypicalGiatrosBook;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -21,9 +21,9 @@ import javafx.beans.InvalidationListener;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.giatros.model.person.Person;
-import seedu.giatros.model.person.exceptions.DuplicatePersonException;
-import seedu.giatros.testutil.PersonBuilder;
+import seedu.giatros.model.patient.Patient;
+import seedu.giatros.model.patient.exceptions.DuplicatePatientException;
+import seedu.giatros.testutil.PatientBuilder;
 
 public class GiatrosBookTest {
 
@@ -34,7 +34,7 @@ public class GiatrosBookTest {
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), giatrosBook.getPersonList());
+        assertEquals(Collections.emptyList(), giatrosBook.getPatientList());
     }
 
     @Test
@@ -51,46 +51,46 @@ public class GiatrosBookTest {
     }
 
     @Test
-    public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
-        // Two persons with the same identity fields
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+    public void resetData_withDuplicatePatients_throwsDuplicatePatientException() {
+        // Two patients with the same identity fields
+        Patient editedAlice = new PatientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
-        GiatrosBookStub newData = new GiatrosBookStub(newPersons);
+        List<Patient> newPatients = Arrays.asList(ALICE, editedAlice);
+        GiatrosBookStub newData = new GiatrosBookStub(newPatients);
 
-        thrown.expect(DuplicatePersonException.class);
+        thrown.expect(DuplicatePatientException.class);
         giatrosBook.resetData(newData);
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
+    public void hasPatient_nullPatient_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        giatrosBook.hasPerson(null);
+        giatrosBook.hasPatient(null);
     }
 
     @Test
-    public void hasPerson_personNotInGiatrosBook_returnsFalse() {
-        assertFalse(giatrosBook.hasPerson(ALICE));
+    public void hasPatient_patientNotInGiatrosBook_returnsFalse() {
+        assertFalse(giatrosBook.hasPatient(ALICE));
     }
 
     @Test
-    public void hasPerson_personInGiatrosBook_returnsTrue() {
-        giatrosBook.addPerson(ALICE);
-        assertTrue(giatrosBook.hasPerson(ALICE));
+    public void hasPatient_patientInGiatrosBook_returnsTrue() {
+        giatrosBook.addPatient(ALICE);
+        assertTrue(giatrosBook.hasPatient(ALICE));
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInGiatrosBook_returnsTrue() {
-        giatrosBook.addPerson(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+    public void hasPatient_patientWithSameIdentityFieldsInGiatrosBook_returnsTrue() {
+        giatrosBook.addPatient(ALICE);
+        Patient editedAlice = new PatientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(giatrosBook.hasPerson(editedAlice));
+        assertTrue(giatrosBook.hasPatient(editedAlice));
     }
 
     @Test
-    public void getPersonList_modifyList_throwsUnsupportedOperationException() {
+    public void getPatientList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
-        giatrosBook.getPersonList().remove(0);
+        giatrosBook.getPatientList().remove(0);
     }
 
     @Test
@@ -98,7 +98,7 @@ public class GiatrosBookTest {
         SimpleIntegerProperty counter = new SimpleIntegerProperty();
         InvalidationListener listener = observable -> counter.set(counter.get() + 1);
         giatrosBook.addListener(listener);
-        giatrosBook.addPerson(ALICE);
+        giatrosBook.addPatient(ALICE);
         assertEquals(1, counter.get());
     }
 
@@ -108,23 +108,23 @@ public class GiatrosBookTest {
         InvalidationListener listener = observable -> counter.set(counter.get() + 1);
         giatrosBook.addListener(listener);
         giatrosBook.removeListener(listener);
-        giatrosBook.addPerson(ALICE);
+        giatrosBook.addPatient(ALICE);
         assertEquals(0, counter.get());
     }
 
     /**
-     * A stub ReadOnlyGiatrosBook whose persons list can violate interface constraints.
+     * A stub ReadOnlyGiatrosBook whose patients list can violate interface constraints.
      */
     private static class GiatrosBookStub implements ReadOnlyGiatrosBook {
-        private final ObservableList<Person> persons = FXCollections.observableArrayList();
+        private final ObservableList<Patient> patients = FXCollections.observableArrayList();
 
-        GiatrosBookStub(Collection<Person> persons) {
-            this.persons.setAll(persons);
+        GiatrosBookStub(Collection<Patient> patients) {
+            this.patients.setAll(patients);
         }
 
         @Override
-        public ObservableList<Person> getPersonList() {
-            return persons;
+        public ObservableList<Patient> getPatientList() {
+            return patients;
         }
 
         @Override

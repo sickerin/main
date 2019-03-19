@@ -1,7 +1,7 @@
 package seedu.giatros.ui;
 
 import static org.junit.Assert.assertEquals;
-import static seedu.giatros.testutil.TypicalPersons.ALICE;
+import static seedu.giatros.testutil.TypicalPatients.ALICE;
 import static seedu.giatros.ui.StatusBarFooter.SYNC_STATUS_INITIAL;
 import static seedu.giatros.ui.StatusBarFooter.SYNC_STATUS_UPDATED;
 
@@ -57,7 +57,7 @@ public class StatusBarFooterTest extends GuiUnitTest {
         assertStatusBarContent(RELATIVE_PATH.resolve(STUB_SAVE_LOCATION).toString(), SYNC_STATUS_INITIAL);
 
         // after Giatros book is updated
-        guiRobot.interact(() -> giatrosBook.addPerson(ALICE));
+        guiRobot.interact(() -> giatrosBook.addPatient(ALICE));
         assertStatusBarContent(RELATIVE_PATH.resolve(STUB_SAVE_LOCATION).toString(),
                 String.format(SYNC_STATUS_UPDATED, new Date(injectedClock.millis()).toString()));
     }

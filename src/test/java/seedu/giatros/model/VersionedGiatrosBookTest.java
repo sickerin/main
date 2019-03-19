@@ -4,9 +4,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static seedu.giatros.testutil.TypicalPersons.AMY;
-import static seedu.giatros.testutil.TypicalPersons.BOB;
-import static seedu.giatros.testutil.TypicalPersons.CARL;
+import static seedu.giatros.testutil.TypicalPatients.AMY;
+import static seedu.giatros.testutil.TypicalPatients.BOB;
+import static seedu.giatros.testutil.TypicalPatients.CARL;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -18,9 +18,9 @@ import seedu.giatros.testutil.GiatrosBookBuilder;
 
 public class VersionedGiatrosBookTest {
 
-    private final ReadOnlyGiatrosBook giatrosBookWithAmy = new GiatrosBookBuilder().withPerson(AMY).build();
-    private final ReadOnlyGiatrosBook giatrosBookWithBob = new GiatrosBookBuilder().withPerson(BOB).build();
-    private final ReadOnlyGiatrosBook giatrosBookWithCarl = new GiatrosBookBuilder().withPerson(CARL).build();
+    private final ReadOnlyGiatrosBook giatrosBookWithAmy = new GiatrosBookBuilder().withPatient(AMY).build();
+    private final ReadOnlyGiatrosBook giatrosBookWithBob = new GiatrosBookBuilder().withPatient(BOB).build();
+    private final ReadOnlyGiatrosBook giatrosBookWithCarl = new GiatrosBookBuilder().withPatient(CARL).build();
     private final ReadOnlyGiatrosBook emptyGiatrosBook = new GiatrosBookBuilder().build();
 
     @Test

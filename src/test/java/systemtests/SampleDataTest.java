@@ -9,7 +9,7 @@ import java.nio.file.Path;
 import org.junit.Test;
 
 import seedu.giatros.model.GiatrosBook;
-import seedu.giatros.model.person.Person;
+import seedu.giatros.model.patient.Patient;
 import seedu.giatros.model.util.SampleDataUtil;
 import seedu.giatros.testutil.TestUtil;
 
@@ -45,7 +45,7 @@ public class SampleDataTest extends GiatrosBookSystemTest {
 
     @Test
     public void addressBook_dataFileDoesNotExist_loadSampleData() {
-        Person[] expectedList = SampleDataUtil.getSamplePersons();
-        assertListMatching(getPersonListPanel(), expectedList);
+        Patient[] expectedList = SampleDataUtil.getSamplePatients();
+        assertListMatching(getPatientListPanel(), expectedList);
     }
 }

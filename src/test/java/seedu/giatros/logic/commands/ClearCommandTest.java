@@ -1,7 +1,7 @@
 package seedu.giatros.logic.commands;
 
 import static seedu.giatros.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.giatros.testutil.TypicalPersons.getTypicalGiatrosBook;
+import static seedu.giatros.testutil.TypicalPatients.getTypicalGiatrosBook;
 
 import org.junit.Test;
 

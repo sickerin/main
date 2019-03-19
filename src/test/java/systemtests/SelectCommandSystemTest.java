@@ -2,13 +2,13 @@ package systemtests;
 
 import static org.junit.Assert.assertTrue;
 import static seedu.giatros.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.giatros.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static seedu.giatros.commons.core.Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX;
 import static seedu.giatros.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.giatros.logic.commands.SelectCommand.MESSAGE_SELECT_PERSON_SUCCESS;
+import static seedu.giatros.logic.commands.SelectCommand.MESSAGE_SELECT_PATIENT_SUCCESS;
 import static seedu.giatros.testutil.TestUtil.getLastIndex;
 import static seedu.giatros.testutil.TestUtil.getMidIndex;
-import static seedu.giatros.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.giatros.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
+import static seedu.giatros.testutil.TypicalIndexes.INDEX_FIRST_PATIENT;
+import static seedu.giatros.testutil.TypicalPatients.KEYWORD_MATCHING_MEIER;
 
 import org.junit.Test;
 
@@ -23,16 +23,16 @@ public class SelectCommandSystemTest extends GiatrosBookSystemTest {
     public void select() {
         /* ------------------------ Perform select operations on the shown unfiltered list -------------------------- */
 
-        /* Case: select the first card in the person list, command with leading spaces and trailing spaces
+        /* Case: select the first card in the patient list, command with leading spaces and trailing spaces
          * -> selected
          */
-        String command = "   " + SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + "   ";
-        assertCommandSuccess(command, INDEX_FIRST_PERSON);
+        String command = "   " + SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_PATIENT.getOneBased() + "   ";
+        assertCommandSuccess(command, INDEX_FIRST_PATIENT);
 
-        /* Case: select the last card in the person list -> selected */
-        Index personCount = getLastIndex(getModel());
-        command = SelectCommand.COMMAND_WORD + " " + personCount.getOneBased();
-        assertCommandSuccess(command, personCount);
+        /* Case: select the last card in the patient list -> selected */
+        Index patientCount = getLastIndex(getModel());
+        command = SelectCommand.COMMAND_WORD + " " + patientCount.getOneBased();
+        assertCommandSuccess(command, patientCount);
 
         /* Case: undo previous selection -> rejected */
         command = UndoCommand.COMMAND_WORD;
@@ -44,7 +44,7 @@ public class SelectCommandSystemTest extends GiatrosBookSystemTest {
         expectedResultMessage = RedoCommand.MESSAGE_FAILURE;
         assertCommandFailure(command, expectedResultMessage);
 
-        /* Case: select the middle card in the person list -> selected */
+        /* Case: select the middle card in the patient list -> selected */
         Index middleIndex = getMidIndex(getModel());
         command = SelectCommand.COMMAND_WORD + " " + middleIndex.getOneBased();
         assertCommandSuccess(command, middleIndex);
@@ -54,16 +54,16 @@ public class SelectCommandSystemTest extends GiatrosBookSystemTest {
 
         /* ------------------------ Perform select operations on the shown filtered list ---------------------------- */
 
-        /* Case: filtered person list, select index within bounds of Giatros book but out of bounds of person list
+        /* Case: filtered patient list, select index within bounds of Giatros book but out of bounds of patient list
          * -> rejected
          */
-        showPersonsWithName(KEYWORD_MATCHING_MEIER);
-        int invalidIndex = getModel().getGiatrosBook().getPersonList().size();
-        assertCommandFailure(SelectCommand.COMMAND_WORD + " " + invalidIndex, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        showPatientsWithName(KEYWORD_MATCHING_MEIER);
+        int invalidIndex = getModel().getGiatrosBook().getPatientList().size();
+        assertCommandFailure(SelectCommand.COMMAND_WORD + " " + invalidIndex, MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
 
-        /* Case: filtered person list, select index within bounds of Giatros book and person list -> selected */
+        /* Case: filtered patient list, select index within bounds of Giatros book and patient list -> selected */
         Index validIndex = Index.fromOneBased(1);
-        assertTrue(validIndex.getZeroBased() < getModel().getFilteredPersonList().size());
+        assertTrue(validIndex.getZeroBased() < getModel().getFilteredPatientList().size());
         command = SelectCommand.COMMAND_WORD + " " + validIndex.getOneBased();
         assertCommandSuccess(command, validIndex);
 
@@ -78,8 +78,8 @@ public class SelectCommandSystemTest extends GiatrosBookSystemTest {
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE));
 
         /* Case: invalid index (size + 1) -> rejected */
-        invalidIndex = getModel().getFilteredPersonList().size() + 1;
-        assertCommandFailure(SelectCommand.COMMAND_WORD + " " + invalidIndex, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        invalidIndex = getModel().getFilteredPatientList().size() + 1;
+        assertCommandFailure(SelectCommand.COMMAND_WORD + " " + invalidIndex, MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
 
         /* Case: invalid arguments (alphabets) -> rejected */
         assertCommandFailure(SelectCommand.COMMAND_WORD + " abc",
@@ -93,9 +93,9 @@ public class SelectCommandSystemTest extends GiatrosBookSystemTest {
         assertCommandFailure("SeLeCt 1", MESSAGE_UNKNOWN_COMMAND);
 
         /* Case: select from empty Giatros book -> rejected */
-        deleteAllPersons();
-        assertCommandFailure(SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased(),
-                MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        deleteAllPatients();
+        assertCommandFailure(SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_PATIENT.getOneBased(),
+                MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
     }
 
     /**
@@ -103,8 +103,8 @@ public class SelectCommandSystemTest extends GiatrosBookSystemTest {
      * 1. Command box displays an empty string.<br>
      * 2. Command box has the default style class.<br>
      * 3. Result display box displays the success message of executing select command with the
-     * {@code expectedSelectedCardIndex} of the selected person.<br>
-     * 4. {@code Storage} and {@code PersonListPanel} remain unchanged.<br>
+     * {@code expectedSelectedCardIndex} of the selected patient.<br>
+     * 4. {@code Storage} and {@code PatientListPanel} remain unchanged.<br>
      * 5. Selected card is at {@code expectedSelectedCardIndex} and the browser url is updated accordingly.<br>
      * 6. Status bar remains unchanged.<br>
      * Verifications 1, 3 and 4 are performed by
@@ -115,8 +115,8 @@ public class SelectCommandSystemTest extends GiatrosBookSystemTest {
     private void assertCommandSuccess(String command, Index expectedSelectedCardIndex) {
         Model expectedModel = getModel();
         String expectedResultMessage = String.format(
-                MESSAGE_SELECT_PERSON_SUCCESS, expectedSelectedCardIndex.getOneBased());
-        int preExecutionSelectedCardIndex = getPersonListPanel().getSelectedCardIndex();
+                MESSAGE_SELECT_PATIENT_SUCCESS, expectedSelectedCardIndex.getOneBased());
+        int preExecutionSelectedCardIndex = getPatientListPanel().getSelectedCardIndex();
 
         executeCommand(command);
         assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
@@ -136,7 +136,7 @@ public class SelectCommandSystemTest extends GiatrosBookSystemTest {
      * 1. Command box displays {@code command}.<br>
      * 2. Command box has the error style class.<br>
      * 3. Result display box displays {@code expectedResultMessage}.<br>
-     * 4. {@code Storage} and {@code PersonListPanel} remain unchanged.<br>
+     * 4. {@code Storage} and {@code PatientListPanel} remain unchanged.<br>
      * 5. Browser url, selected card and status bar remain unchanged.<br>
      * Verifications 1, 3 and 4 are performed by
      * {@code GiatrosBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>

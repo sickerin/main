@@ -2,7 +2,7 @@ package seedu.giatros.storage;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static seedu.giatros.testutil.TypicalPersons.getTypicalGiatrosBook;
+import static seedu.giatros.testutil.TypicalPatients.getTypicalGiatrosBook;
 
 import java.nio.file.Path;
 

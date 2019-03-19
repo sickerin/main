@@ -2,8 +2,8 @@ package seedu.giatros.logic.commands;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.giatros.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.giatros.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.giatros.testutil.TypicalIndexes.INDEX_FIRST_PATIENT;
+import static seedu.giatros.testutil.TypicalIndexes.INDEX_SECOND_PATIENT;
 
 import java.nio.file.Path;
 import java.util.function.Predicate;
@@ -20,7 +20,7 @@ import seedu.giatros.logic.commands.exceptions.CommandException;
 import seedu.giatros.model.Model;
 import seedu.giatros.model.ReadOnlyGiatrosBook;
 import seedu.giatros.model.ReadOnlyUserPrefs;
-import seedu.giatros.model.person.Person;
+import seedu.giatros.model.patient.Patient;
 
 public class AddallCommandTest {
 
@@ -31,7 +31,7 @@ public class AddallCommandTest {
 
     @Test
     public void execute_throwsCommandException() throws Exception {
-        AddallCommand addallCommand = new AddallCommand(INDEX_FIRST_PERSON, "ibuprofen");
+        AddallCommand addallCommand = new AddallCommand(INDEX_FIRST_PATIENT, "ibuprofen");
         Model modelStub = new ModelStub();
 
         thrown.expect(CommandException.class);
@@ -41,11 +41,11 @@ public class AddallCommandTest {
 
     @Test
     public void equals() {
-        final AddallCommand standardCommand = new AddallCommand(INDEX_FIRST_PERSON, "ibuprofen");
+        final AddallCommand standardCommand = new AddallCommand(INDEX_FIRST_PATIENT, "ibuprofen");
 
         // same values -> returns true
         String copyAllergyString = "ibuprofen";
-        AddallCommand commandWithSameValues = new AddallCommand(INDEX_FIRST_PERSON, copyAllergyString);
+        AddallCommand commandWithSameValues = new AddallCommand(INDEX_FIRST_PATIENT, copyAllergyString);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -58,11 +58,11 @@ public class AddallCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new AddallCommand(INDEX_SECOND_PERSON, copyAllergyString)));
+        assertFalse(standardCommand.equals(new AddallCommand(INDEX_SECOND_PATIENT, copyAllergyString)));
 
         // different descriptor -> returns false
         String differentAllergyString = "paracetamol";
-        assertFalse(standardCommand.equals(new AddallCommand(INDEX_FIRST_PERSON, differentAllergyString)));
+        assertFalse(standardCommand.equals(new AddallCommand(INDEX_FIRST_PATIENT, differentAllergyString)));
     }
 
     /**
@@ -100,7 +100,7 @@ public class AddallCommandTest {
         }
 
         @Override
-        public void addPerson(Person person) {
+        public void addPatient(Patient patient) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -115,27 +115,27 @@ public class AddallCommandTest {
         }
 
         @Override
-        public boolean hasPerson(Person person) {
+        public boolean hasPatient(Patient patient) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void deletePerson(Person target) {
+        public void deletePatient(Patient target) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setPerson(Person target, Person editedPerson) {
+        public void setPatient(Patient target, Patient editedPatient) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ObservableList<Person> getFilteredPersonList() {
+        public ObservableList<Patient> getFilteredPatientList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateFilteredPersonList(Predicate<Person> predicate) {
+        public void updateFilteredPatientList(Predicate<Patient> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -165,17 +165,17 @@ public class AddallCommandTest {
         }
 
         @Override
-        public ReadOnlyProperty<Person> selectedPersonProperty() {
+        public ReadOnlyProperty<Patient> selectedPatientProperty() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public Person getSelectedPerson() {
+        public Patient getSelectedPatient() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setSelectedPerson(Person person) {
+        public void setSelectedPatient(Patient patient) {
             throw new AssertionError("This method should not be called.");
         }
     }

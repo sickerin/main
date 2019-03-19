@@ -1,12 +1,12 @@
 package seedu.giatros.testutil;
 
 import seedu.giatros.model.GiatrosBook;
-import seedu.giatros.model.person.Person;
+import seedu.giatros.model.patient.Patient;
 
 /**
  * A utility class to help with building Addressbook objects.
  * Example usage: <br>
- *     {@code GiatrosBook ab = new GiatrosBookBuilder().withPerson("John", "Doe").build();}
+ *     {@code GiatrosBook ab = new GiatrosBookBuilder().withPatient("John", "Doe").build();}
  */
 public class GiatrosBookBuilder {
 
@@ -21,10 +21,10 @@ public class GiatrosBookBuilder {
     }
 
     /**
-     * Adds a new {@code Person} to the {@code GiatrosBook} that we are building.
+     * Adds a new {@code Patient} to the {@code GiatrosBook} that we are building.
      */
-    public GiatrosBookBuilder withPerson(Person person) {
-        giatrosBook.addPerson(person);
+    public GiatrosBookBuilder withPatient(Patient patient) {
+        giatrosBook.addPatient(patient);
         return this;
     }
 

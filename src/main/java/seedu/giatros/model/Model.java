@@ -6,14 +6,14 @@ import java.util.function.Predicate;
 import javafx.beans.property.ReadOnlyProperty;
 import javafx.collections.ObservableList;
 import seedu.giatros.commons.core.GuiSettings;
-import seedu.giatros.model.person.Person;
+import seedu.giatros.model.patient.Patient;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Patient> PREDICATE_SHOW_ALL_PATIENTS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -54,37 +54,37 @@ public interface Model {
     ReadOnlyGiatrosBook getGiatrosBook();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the Giatros book.
+     * Returns true if a patient with the same identity as {@code patient} exists in the Giatros book.
      */
-    boolean hasPerson(Person person);
+    boolean hasPatient(Patient patient);
 
     /**
-     * Deletes the given person.
-     * The person must exist in the Giatros book.
+     * Deletes the given patient.
+     * The patient must exist in the Giatros book.
      */
-    void deletePerson(Person target);
+    void deletePatient(Patient target);
 
     /**
-     * Adds the given person.
-     * {@code person} must not already exist in the Giatros book.
+     * Adds the given patient.
+     * {@code patient} must not already exist in the Giatros book.
      */
-    void addPerson(Person person);
+    void addPatient(Patient patient);
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
+     * Replaces the given patient {@code target} with {@code editedPatient}.
      * {@code target} must exist in the Giatros book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the Giatros book.
+     * The patient identity of {@code editedPatient} must not be the same as another existing patient in the Giatros book.
      */
-    void setPerson(Person target, Person editedPerson);
+    void setPatient(Patient target, Patient editedPatient);
 
-    /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Person> getFilteredPersonList();
+    /** Returns an unmodifiable view of the filtered patient list */
+    ObservableList<Patient> getFilteredPatientList();
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered patient list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Person> predicate);
+    void updateFilteredPatientList(Predicate<Patient> predicate);
 
     /**
      * Returns true if the model has previous Giatros book states to restore.
@@ -112,19 +112,19 @@ public interface Model {
     void commitGiatrosBook();
 
     /**
-     * Selected person in the filtered person list.
-     * null if no person is selected.
+     * Selected patient in the filtered patient list.
+     * null if no patient is selected.
      */
-    ReadOnlyProperty<Person> selectedPersonProperty();
+    ReadOnlyProperty<Patient> selectedPatientProperty();
 
     /**
-     * Returns the selected person in the filtered person list.
-     * null if no person is selected.
+     * Returns the selected patient in the filtered patient list.
+     * null if no patient is selected.
      */
-    Person getSelectedPerson();
+    Patient getSelectedPatient();
 
     /**
-     * Sets the selected person in the filtered person list.
+     * Sets the selected patient in the filtered patient list.
      */
-    void setSelectedPerson(Person person);
+    void setSelectedPatient(Patient patient);
 }
