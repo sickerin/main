@@ -28,20 +28,21 @@ import seedu.giatros.testutil.PatientBuilder;
 
 public class AddallCommandTest {
 
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
-
     private static final String ALLERGY_STUB = "Some allergy";
 
     private Model model = new ModelManager(getTypicalGiatrosBook(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
+
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
 
     @Test
     public void execute_addAllergyUnfilteredList_success() {
         Patient firstPatient = model.getFilteredPatientList().get(INDEX_FIRST_PATIENT.getZeroBased());
         Patient editedPatient = new PatientBuilder(firstPatient).withAllergy(ALLERGY_STUB).build();
 
-        AddallCommand addallCommand = new AddallCommand(INDEX_FIRST_PATIENT, new Allergy(editedPatient.getAllergy().value));
+        AddallCommand addallCommand = new AddallCommand(INDEX_FIRST_PATIENT,
+                new Allergy(editedPatient.getAllergy().value));
 
         String expectedMessage = String.format(AddallCommand.MESSAGE_ADD_ALLERGY_SUCCESS, editedPatient);
 
@@ -74,10 +75,11 @@ public class AddallCommandTest {
         showPatientAtIndex(model, INDEX_FIRST_PATIENT);
 
         Patient firstPatient = model.getFilteredPatientList().get(INDEX_FIRST_PATIENT.getZeroBased());
-        Patient editedPatient = new PatientBuilder(model.getFilteredPatientList().get(INDEX_FIRST_PATIENT.getZeroBased()))
-                .withAllergy(ALLERGY_STUB).build();
+        Patient editedPatient = new PatientBuilder(model.getFilteredPatientList()
+                .get(INDEX_FIRST_PATIENT.getZeroBased())).withAllergy(ALLERGY_STUB).build();
 
-        AddallCommand addallCommand = new AddallCommand(INDEX_FIRST_PATIENT, new Allergy(editedPatient.getAllergy().value));
+        AddallCommand addallCommand = new AddallCommand(INDEX_FIRST_PATIENT,
+                new Allergy(editedPatient.getAllergy().value));
 
         String expectedMessage = String.format(AddallCommand.MESSAGE_ADD_ALLERGY_SUCCESS, editedPatient);
 
