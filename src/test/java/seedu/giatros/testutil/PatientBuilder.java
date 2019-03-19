@@ -91,6 +91,14 @@ public class PatientBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Allergy} of the {@code Patient} that we are building.
+     */
+    public PatientBuilder withAllergy(String allergy) {
+        this.allergy = new Allergy(allergy);
+        return this;
+    }
+
     public Patient build() {
         return new Patient(name, phone, email, address, allergy, tags);
     }
