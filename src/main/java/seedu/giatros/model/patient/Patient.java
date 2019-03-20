@@ -22,17 +22,19 @@ public class Patient {
 
     // Data fields
     private final Address address;
+    private final Allergy allergy;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Patient(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Patient(Name name, Phone phone, Email email, Address address, Allergy allergy, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.allergy = allergy;
         this.tags.addAll(tags);
     }
 
@@ -50,6 +52,10 @@ public class Patient {
 
     public Address getAddress() {
         return address;
+    }
+
+    public Allergy getAllergy() {
+        return allergy;
     }
 
     /**

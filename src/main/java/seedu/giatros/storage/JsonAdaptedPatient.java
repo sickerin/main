@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.giatros.commons.exceptions.IllegalValueException;
 import seedu.giatros.model.patient.Address;
+import seedu.giatros.model.patient.Allergy;
 import seedu.giatros.model.patient.Email;
 import seedu.giatros.model.patient.Name;
 import seedu.giatros.model.patient.Patient;
@@ -28,6 +29,7 @@ class JsonAdaptedPatient {
     private final String phone;
     private final String email;
     private final String address;
+    private final String allergy;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
@@ -41,6 +43,7 @@ class JsonAdaptedPatient {
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.allergy = ""; // Currently, cannot create patient with allergy immediately
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
@@ -54,6 +57,7 @@ class JsonAdaptedPatient {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        allergy = source.getAllergy().value;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -102,8 +106,13 @@ class JsonAdaptedPatient {
         }
         final Address modelAddress = new Address(address);
 
+        if (allergy == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Allergy.class.getSimpleName()));
+        }
+        final Allergy modelAllergy = new Allergy(allergy);
+
         final Set<Tag> modelTags = new HashSet<>(patientTags);
-        return new Patient(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        return new Patient(modelName, modelPhone, modelEmail, modelAddress, modelAllergy, modelTags);
     }
 
 }

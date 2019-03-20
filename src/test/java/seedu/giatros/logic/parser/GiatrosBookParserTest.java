@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.giatros.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.giatros.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.giatros.logic.parser.CliSyntax.PREFIX_ALLERGY;
 import static seedu.giatros.testutil.TypicalIndexes.INDEX_FIRST_PATIENT;
 
 import java.util.Arrays;
@@ -14,7 +15,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.giatros.commons.core.index.Index;
 import seedu.giatros.logic.commands.AddCommand;
 import seedu.giatros.logic.commands.AddallCommand;
 import seedu.giatros.logic.commands.ClearCommand;
@@ -30,6 +30,7 @@ import seedu.giatros.logic.commands.RedoCommand;
 import seedu.giatros.logic.commands.SelectCommand;
 import seedu.giatros.logic.commands.UndoCommand;
 import seedu.giatros.logic.parser.exceptions.ParseException;
+import seedu.giatros.model.patient.Allergy;
 import seedu.giatros.model.patient.NameContainsKeywordsPredicate;
 import seedu.giatros.model.patient.Patient;
 import seedu.giatros.testutil.EditPatientDescriptorBuilder;
@@ -119,9 +120,11 @@ public class GiatrosBookParserTest {
 
     @Test
     public void parseCommand_addall() throws Exception {
-        AddallCommand command = (AddallCommand) parser.parseCommand("addall 1 a/ibuprofen");
-        assertEquals(new AddallCommand(Index.fromOneBased(1), "ibuprofen"), command);
-        assertTrue(parser.parseCommand("addall 1 a/ibuprofen") instanceof AddallCommand);
+        final Allergy allergy = new Allergy("One allergy, and some other allergy");
+        AddallCommand command = (AddallCommand) parser.parseCommand(AddallCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_PATIENT.getOneBased() + " " + PREFIX_ALLERGY + allergy.value);
+        assertEquals(new AddallCommand(INDEX_FIRST_PATIENT, allergy), command);
+        assertTrue(parser.parseCommand("addall 1 y/Allergy") instanceof AddallCommand);
     }
 
     @Test

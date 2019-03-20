@@ -21,6 +21,7 @@ import seedu.giatros.logic.CommandHistory;
 import seedu.giatros.logic.commands.exceptions.CommandException;
 import seedu.giatros.model.Model;
 import seedu.giatros.model.patient.Address;
+import seedu.giatros.model.patient.Allergy;
 import seedu.giatros.model.patient.Email;
 import seedu.giatros.model.patient.Name;
 import seedu.giatros.model.patient.Patient;
@@ -99,9 +100,10 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPatientDescriptor.getPhone().orElse(patientToEdit.getPhone());
         Email updatedEmail = editPatientDescriptor.getEmail().orElse(patientToEdit.getEmail());
         Address updatedAddress = editPatientDescriptor.getAddress().orElse(patientToEdit.getAddress());
+        Allergy updatedAllergy = patientToEdit.getAllergy(); // Currently, cannot edit allergy yet
         Set<Tag> updatedTags = editPatientDescriptor.getTags().orElse(patientToEdit.getTags());
 
-        return new Patient(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Patient(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedAllergy, updatedTags);
     }
 
     @Override
