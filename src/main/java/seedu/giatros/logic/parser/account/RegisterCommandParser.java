@@ -7,8 +7,8 @@ import static seedu.giatros.logic.parser.CliSyntax.PREFIX_PASSWORD;
 import static seedu.giatros.logic.parser.ParserUtil.arePrefixesPresent;
 
 import seedu.giatros.logic.commands.account.RegisterCommand;
-import seedu.giatros.logic.parser.ArgumentTokenizer;
 import seedu.giatros.logic.parser.ArgumentMultimap;
+import seedu.giatros.logic.parser.ArgumentTokenizer;
 import seedu.giatros.logic.parser.Parser;
 import seedu.giatros.logic.parser.exceptions.ParseException;
 
