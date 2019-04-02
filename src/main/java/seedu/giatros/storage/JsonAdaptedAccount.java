@@ -55,7 +55,8 @@ class JsonAdaptedAccount {
         final Name modelName = new Name(name);
 
         if (username == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Username.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Username.class.getSimpleName()));
         }
         if (!Username.isValidUsername(username)) {
             throw new IllegalValueException(Username.MESSAGE_USERNAME_CONSTRAINT);
@@ -63,7 +64,8 @@ class JsonAdaptedAccount {
         final Username modelUsername = new Username(username);
 
         if (password == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Password.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Password.class.getSimpleName()));
         }
         if (!Password.isValidPassword(password)) {
             throw new IllegalValueException(Password.MESSAGE_PASSWORD_CONSTRAINT);

@@ -2,7 +2,6 @@ package seedu.giatros.storage;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -31,7 +30,8 @@ class JsonSerializableGiatrosBook {
      * Constructs a {@code JsonSerializableGiatrosBook} with the given patients.
      */
     @JsonCreator
-    public JsonSerializableGiatrosBook(@JsonProperty("patients") List<JsonAdaptedPatient> patients, @JsonProperty("accounts") List<JsonAdaptedAccount> accounts) {
+    public JsonSerializableGiatrosBook(@JsonProperty("patients") List<JsonAdaptedPatient> patients,
+                                       @JsonProperty("accounts") List<JsonAdaptedAccount> accounts) {
         this.patients.addAll(patients);
         this.accounts.addAll(accounts);
     }
