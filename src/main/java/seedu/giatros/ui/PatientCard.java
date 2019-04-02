@@ -49,19 +49,19 @@ public class PatientCard extends UiPart<Region> {
         phone.setText(patient.getPhone().value);
         address.setText(patient.getAddress().value);
         email.setText(patient.getEmail().value);
-        allergy.setText(patient.getAllergy().value);
-        createTag(patient);
-
+        allergy.setText(patient.getAllergy().allergyName);
+        createAllergy(patient);
     }
+
     /**
-     * Chooses a random colour for {@code tag}'s label
+     * Chooses a random colour for {@code allergy}'s label.
      */
-    private String chooseRandomColourFor(String tag) {
+    private String chooseRandomColourFor(String allergy) {
         String[] listOfColours = { "blue", "red", "yellow", "green", "orange", "black", "white"};
 
-        // Generate a random colour that will be consistent for the same tag, based on the value of the string
+        // Generate a random colour that will be consistent for the same allergy, based on the value of the string
         int valueOfString = 0;
-        for (char character : tag.toCharArray()) {
+        for (char character : allergy.toCharArray()) {
             valueOfString += (int) character;
         }
 
@@ -69,13 +69,13 @@ public class PatientCard extends UiPart<Region> {
     }
 
     /**
-     * Creates a coloured tag label for {@code Patient}
+     * Creates a coloured allergy label for {@code Patient}.
      */
-    private void createTag(Patient patient) {
-        patient.getTags().forEach(tag -> {
-            Label newTag = new Label(tag.tagName);
-            newTag.getStyleClass().add(chooseRandomColourFor(tag.tagName));
-            tags.getChildren().add(newTag);
+    private void createAllergy(Patient patient) {
+        patient.getAllergies().forEach(allergy -> {
+            Label newAllergy = new Label(allergy.allergyName);
+            newAllergy.getStyleClass().add(chooseRandomColourFor(allergy.allergyName));
+            tags.getChildren().add(newAllergy);
         });
     }
 

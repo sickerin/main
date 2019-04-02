@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.giatros.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.giatros.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.giatros.logic.commands.CommandTestUtil.VALID_ALLERGY_AMPICILLIN;
 import static seedu.giatros.testutil.TypicalPatients.ALICE;
 import static seedu.giatros.testutil.TypicalPatients.getTypicalGiatrosBook;
 
@@ -53,7 +53,7 @@ public class GiatrosBookTest {
     @Test
     public void resetData_withDuplicatePatients_throwsDuplicatePatientException() {
         // Two patients with the same identity fields
-        Patient editedAlice = new PatientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Patient editedAlice = new PatientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withAllergies(VALID_ALLERGY_AMPICILLIN)
                 .build();
         List<Patient> newPatients = Arrays.asList(ALICE, editedAlice);
         GiatrosBookStub newData = new GiatrosBookStub(newPatients);
@@ -82,7 +82,7 @@ public class GiatrosBookTest {
     @Test
     public void hasPatient_patientWithSameIdentityFieldsInGiatrosBook_returnsTrue() {
         giatrosBook.addPatient(ALICE);
-        Patient editedAlice = new PatientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Patient editedAlice = new PatientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withAllergies(VALID_ALLERGY_AMPICILLIN)
                 .build();
         assertTrue(giatrosBook.hasPatient(editedAlice));
     }

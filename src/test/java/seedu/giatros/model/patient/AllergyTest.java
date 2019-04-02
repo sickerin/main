@@ -5,14 +5,16 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import seedu.giatros.model.allergy.Allergy;
+
 public class AllergyTest {
 
     @Test
     public void equals() {
-        Allergy allergy = new Allergy("Some allergy");
+        Allergy allergy = new Allergy("someAllergy");
 
         // same values -> returns true
-        Allergy allergyCopy = new Allergy(allergy.value);
+        Allergy allergyCopy = new Allergy(allergy.allergyName);
         assertTrue(allergy.equals(allergyCopy));
 
         // same object -> returns true
@@ -22,10 +24,10 @@ public class AllergyTest {
         assertFalse(allergy.equals(null));
 
         // different types -> returns false
-        assertFalse(allergy.equals("Some allergy"));
+        assertFalse(allergy.equals("someAllergy"));
 
         // different allergy -> returns false
-        Allergy differentAllergy = new Allergy("Other allergy");
+        Allergy differentAllergy = new Allergy("otherAllergy");
         assertFalse(allergy.equals(differentAllergy));
     }
 }

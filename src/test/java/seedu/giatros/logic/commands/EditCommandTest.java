@@ -5,9 +5,9 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.giatros.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.giatros.logic.commands.CommandTestUtil.DESC_BOB;
+import static seedu.giatros.logic.commands.CommandTestUtil.VALID_ALLERGY_AMPICILLIN;
 import static seedu.giatros.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.giatros.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.giatros.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.giatros.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.giatros.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.giatros.logic.commands.CommandTestUtil.showPatientAtIndex;
@@ -59,10 +59,10 @@ public class EditCommandTest {
 
         PatientBuilder patientInList = new PatientBuilder(lastPatient);
         Patient editedPatient = patientInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+                .withAllergies(VALID_ALLERGY_AMPICILLIN).build();
 
         EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withPhone(VALID_PHONE_BOB).withAllergies(VALID_ALLERGY_AMPICILLIN).build();
         EditCommand editCommand = new EditCommand(indexLastPatient, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PATIENT_SUCCESS, editedPatient);

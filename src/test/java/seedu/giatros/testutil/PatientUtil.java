@@ -1,17 +1,18 @@
 package seedu.giatros.testutil;
 
 import static seedu.giatros.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.giatros.logic.parser.CliSyntax.PREFIX_ALLERGY;
 import static seedu.giatros.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.giatros.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.giatros.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.giatros.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.giatros.logic.parser.CliSyntax.PREFIX_ALLERGY;
 
 import java.util.Set;
 
 import seedu.giatros.logic.commands.AddCommand;
 import seedu.giatros.logic.commands.EditCommand.EditPatientDescriptor;
 import seedu.giatros.model.patient.Patient;
-import seedu.giatros.model.tag.Tag;
+import seedu.giatros.model.allergy.Allergy;
 
 /**
  * A utility class for Patient.
@@ -34,8 +35,8 @@ public class PatientUtil {
         sb.append(PREFIX_PHONE + patient.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + patient.getEmail().value + " ");
         sb.append(PREFIX_ADDRESS + patient.getAddress().value + " ");
-        patient.getTags().stream().forEach(
-            s -> sb.append(PREFIX_TAG + s.tagName + " ")
+        patient.getAllergies().stream().forEach(
+            s -> sb.append(PREFIX_ALLERGY + s.allergyName + " ")
         );
         return sb.toString();
     }
@@ -49,12 +50,12 @@ public class PatientUtil {
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
-        if (descriptor.getTags().isPresent()) {
-            Set<Tag> tags = descriptor.getTags().get();
-            if (tags.isEmpty()) {
-                sb.append(PREFIX_TAG);
+        if (descriptor.getAllergies().isPresent()) {
+            Set<Allergy> allergies = descriptor.getAllergies().get();
+            if (allergies.isEmpty()) {
+                sb.append(PREFIX_ALLERGY);
             } else {
-                tags.forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
+                allergies.forEach(s -> sb.append(PREFIX_ALLERGY).append(s.allergyName).append(" "));
             }
         }
         return sb.toString();

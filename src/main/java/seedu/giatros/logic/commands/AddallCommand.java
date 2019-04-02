@@ -11,7 +11,7 @@ import seedu.giatros.commons.core.index.Index;
 import seedu.giatros.logic.CommandHistory;
 import seedu.giatros.logic.commands.exceptions.CommandException;
 import seedu.giatros.model.Model;
-import seedu.giatros.model.patient.Allergy;
+import seedu.giatros.model.allergy.Allergy;
 import seedu.giatros.model.patient.Patient;
 
 /**
@@ -51,7 +51,7 @@ public class AddallCommand extends Command {
 
         Patient patientToEdit = lastShownList.get(index.getZeroBased());
         Patient editedPatient = new Patient(patientToEdit.getName(), patientToEdit.getPhone(), patientToEdit.getEmail(),
-                patientToEdit.getAddress(), allergy, patientToEdit.getTags());
+                patientToEdit.getAddress(), allergy, patientToEdit.getAllergies());
 
         model.setPatient(patientToEdit, editedPatient);
         model.updateFilteredPatientList(PREDICATE_SHOW_ALL_PATIENTS);
@@ -65,7 +65,7 @@ public class AddallCommand extends Command {
      * {@code patientToEdit}.
      */
     private String generateSuccessMessage(Patient patientToEdit) {
-        String message = !allergy.value.isEmpty() ? MESSAGE_ADD_ALLERGY_SUCCESS : MESSAGE_DELETE_ALLERGY_SUCCESS;
+        String message = !allergy.allergyName.isEmpty() ? MESSAGE_ADD_ALLERGY_SUCCESS : MESSAGE_DELETE_ALLERGY_SUCCESS;
         return String.format(message, patientToEdit);
     }
 

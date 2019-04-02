@@ -5,25 +5,25 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.giatros.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.giatros.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
+import static seedu.giatros.logic.commands.CommandTestUtil.ALLERGY_DESC_AMPICILLIN;
+import static seedu.giatros.logic.commands.CommandTestUtil.ALLERGY_DESC_IBUPROFEN;
 import static seedu.giatros.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.giatros.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.giatros.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
+import static seedu.giatros.logic.commands.CommandTestUtil.INVALID_ALLERGY_DESC;
 import static seedu.giatros.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.giatros.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.giatros.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
-import static seedu.giatros.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.giatros.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.giatros.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.giatros.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.giatros.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
-import static seedu.giatros.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
-import static seedu.giatros.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
+import static seedu.giatros.logic.commands.CommandTestUtil.VALID_ALLERGY_AMPICILLIN;
 import static seedu.giatros.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.giatros.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.giatros.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.giatros.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
-import static seedu.giatros.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.giatros.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.giatros.logic.parser.CliSyntax.PREFIX_ALLERGY;
 import static seedu.giatros.model.Model.PREDICATE_SHOW_ALL_PATIENTS;
 import static seedu.giatros.testutil.TypicalIndexes.INDEX_FIRST_PATIENT;
 import static seedu.giatros.testutil.TypicalIndexes.INDEX_SECOND_PATIENT;
@@ -44,7 +44,7 @@ import seedu.giatros.model.patient.Email;
 import seedu.giatros.model.patient.Name;
 import seedu.giatros.model.patient.Patient;
 import seedu.giatros.model.patient.Phone;
-import seedu.giatros.model.tag.Tag;
+import seedu.giatros.model.allergy.Allergy;
 import seedu.giatros.testutil.PatientBuilder;
 import seedu.giatros.testutil.PatientUtil;
 
@@ -61,8 +61,8 @@ public class EditCommandSystemTest extends GiatrosBookSystemTest {
          */
         Index index = INDEX_FIRST_PATIENT;
         String command = " " + EditCommand.COMMAND_WORD + "  " + index.getOneBased() + "  " + NAME_DESC_BOB + "  "
-                + PHONE_DESC_BOB + " " + EMAIL_DESC_BOB + "  " + ADDRESS_DESC_BOB + " " + TAG_DESC_HUSBAND + " ";
-        Patient editedPatient = new PatientBuilder(BOB).withTags(VALID_TAG_HUSBAND).build();
+                + PHONE_DESC_BOB + " " + EMAIL_DESC_BOB + "  " + ADDRESS_DESC_BOB + " " + ALLERGY_DESC_AMPICILLIN + " ";
+        Patient editedPatient = new PatientBuilder(BOB).withAllergies(VALID_ALLERGY_AMPICILLIN).build();
         assertCommandSuccess(command, index, editedPatient);
 
         /* Case: undo editing the last patient in the list -> last patient restored */
@@ -78,7 +78,7 @@ public class EditCommandSystemTest extends GiatrosBookSystemTest {
 
         /* Case: edit a patient with new values same as existing values -> edited */
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
+                + ADDRESS_DESC_BOB + ALLERGY_DESC_IBUPROFEN + ALLERGY_DESC_AMPICILLIN;
         assertCommandSuccess(command, index, BOB);
 
         /* Case: edit a patient with new values same as another patient's values but with different name -> edited */
@@ -86,7 +86,7 @@ public class EditCommandSystemTest extends GiatrosBookSystemTest {
         index = INDEX_SECOND_PATIENT;
         assertNotEquals(getModel().getFilteredPatientList().get(index.getZeroBased()), BOB);
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
+                + ADDRESS_DESC_BOB + ALLERGY_DESC_IBUPROFEN + ALLERGY_DESC_AMPICILLIN;
         editedPatient = new PatientBuilder(BOB).withName(VALID_NAME_AMY).build();
         assertCommandSuccess(command, index, editedPatient);
 
@@ -95,15 +95,15 @@ public class EditCommandSystemTest extends GiatrosBookSystemTest {
          */
         index = INDEX_SECOND_PATIENT;
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
+                + ADDRESS_DESC_BOB + ALLERGY_DESC_IBUPROFEN + ALLERGY_DESC_AMPICILLIN;
         editedPatient = new PatientBuilder(BOB).withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).build();
         assertCommandSuccess(command, index, editedPatient);
 
-        /* Case: clear tags -> cleared */
+        /* Case: clear allergies -> cleared */
         index = INDEX_FIRST_PATIENT;
-        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + " " + PREFIX_TAG.getPrefix();
+        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + " " + PREFIX_ALLERGY.getPrefix();
         Patient patientToEdit = getModel().getFilteredPatientList().get(index.getZeroBased());
-        editedPatient = new PatientBuilder(patientToEdit).withTags().build();
+        editedPatient = new PatientBuilder(patientToEdit).withAllergies().build();
         assertCommandSuccess(command, index, editedPatient);
 
         /* ------------------ Performing edit operation while a filtered list is being shown ------------------------ */
@@ -135,7 +135,7 @@ public class EditCommandSystemTest extends GiatrosBookSystemTest {
         index = INDEX_FIRST_PATIENT;
         selectPatient(index);
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                + ADDRESS_DESC_AMY + TAG_DESC_FRIEND;
+                + ADDRESS_DESC_AMY + ALLERGY_DESC_IBUPROFEN;
         // this can be misleading: card selection actually remains unchanged but the
         // browser's url is updated to reflect the new patient's name
         assertCommandSuccess(command, index, AMY, index);
@@ -179,9 +179,9 @@ public class EditCommandSystemTest extends GiatrosBookSystemTest {
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PATIENT.getOneBased() + INVALID_ADDRESS_DESC,
                 Address.MESSAGE_CONSTRAINTS);
 
-        /* Case: invalid tag -> rejected */
-        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PATIENT.getOneBased() + INVALID_TAG_DESC,
-                Tag.MESSAGE_CONSTRAINTS);
+        /* Case: invalid allergy -> rejected */
+        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PATIENT.getOneBased() + INVALID_ALLERGY_DESC,
+                Allergy.MESSAGE_CONSTRAINTS);
 
         /* Case: edit a patient with new values same as another patient's values -> rejected */
         executeCommand(PatientUtil.getAddCommand(BOB));
@@ -189,28 +189,28 @@ public class EditCommandSystemTest extends GiatrosBookSystemTest {
         index = INDEX_FIRST_PATIENT;
         assertFalse(getModel().getFilteredPatientList().get(index.getZeroBased()).equals(BOB));
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
+                + ADDRESS_DESC_BOB + ALLERGY_DESC_IBUPROFEN + ALLERGY_DESC_AMPICILLIN;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_PATIENT);
 
-        /* Case: edit a patient with new values same as another patient's values but with different tags -> rejected */
+        /* Case: edit a patient with new values same as another patient's values but with different allergies -> rejected */
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND;
+                + ADDRESS_DESC_BOB + ALLERGY_DESC_AMPICILLIN;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_PATIENT);
 
         /* Case: edit a patient with new values same as another patient's values but with different address -> rejected
          */
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_AMY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
+                + ADDRESS_DESC_AMY + ALLERGY_DESC_IBUPROFEN + ALLERGY_DESC_AMPICILLIN;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_PATIENT);
 
         /* Case: edit a patient with new values same as another patient's values but with different phone -> rejected */
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_AMY + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
+                + ADDRESS_DESC_BOB + ALLERGY_DESC_IBUPROFEN + ALLERGY_DESC_AMPICILLIN;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_PATIENT);
 
         /* Case: edit a patient with new values same as another patient's values but with different email -> rejected */
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_AMY
-                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
+                + ADDRESS_DESC_BOB + ALLERGY_DESC_IBUPROFEN + ALLERGY_DESC_AMPICILLIN;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_PATIENT);
     }
 
