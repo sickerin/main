@@ -1,7 +1,6 @@
 package seedu.giatros.model.account;
 
 import static seedu.giatros.commons.util.CollectionUtil.requireAllNonNull;
-import seedu.giatros.model.account.Name;
 
 import java.util.Objects;
 

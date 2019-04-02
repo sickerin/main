@@ -13,7 +13,6 @@ import seedu.giatros.logic.commands.CommandResult;
 import seedu.giatros.logic.commands.exceptions.CommandException;
 import seedu.giatros.model.Model;
 import seedu.giatros.model.account.Account;
-import seedu.giatros.model.account.Password;
 
 /**
  * Logs the user into an existing {@code Account}, and create a {@code UserSession}.
@@ -54,7 +53,7 @@ public class LoginCommand extends Command {
 
         if (!model.hasAccount(toLogin)) {
             throw new CommandException(MESSAGE_ACCOUNT_NOT_FOUND);
-        } else {  //wrong password but that is a valid username
+        } else { // wrong password but that is a valid username
             retrievedAccount = model.getAccount(toLogin);
 
             if (!retrievedAccount.getPassword().equals(toLogin.getPassword())) {
