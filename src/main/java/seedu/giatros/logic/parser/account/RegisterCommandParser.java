@@ -8,10 +8,9 @@ import static seedu.giatros.logic.parser.ParserUtil.arePrefixesPresent;
 
 import seedu.giatros.logic.commands.account.RegisterCommand;
 import seedu.giatros.logic.parser.ArgumentTokenizer;
-import seedu.giatros.logic.parser.Parser;
 import seedu.giatros.logic.parser.ArgumentMultimap;
+import seedu.giatros.logic.parser.Parser;
 import seedu.giatros.logic.parser.exceptions.ParseException;
-
 
 import seedu.giatros.model.account.Account;
 import seedu.giatros.model.account.Name;
