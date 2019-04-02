@@ -6,8 +6,8 @@ import java.util.stream.Collectors;
 
 import seedu.giatros.model.GiatrosBook;
 import seedu.giatros.model.ReadOnlyGiatrosBook;
-import seedu.giatros.model.patient.Address;
 import seedu.giatros.model.allergy.Allergy;
+import seedu.giatros.model.patient.Address;
 import seedu.giatros.model.patient.Email;
 import seedu.giatros.model.patient.Name;
 import seedu.giatros.model.patient.Patient;
