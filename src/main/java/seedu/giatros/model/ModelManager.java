@@ -15,6 +15,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.giatros.commons.core.GuiSettings;
 import seedu.giatros.commons.core.LogsCenter;
+import seedu.giatros.model.account.Account;
 import seedu.giatros.model.patient.Patient;
 import seedu.giatros.model.patient.exceptions.PatientNotFoundException;
 
@@ -161,6 +162,28 @@ public class ModelManager implements Model {
     @Override
     public void commitGiatrosBook() {
         versionedGiatrosBook.commit();
+    }
+
+    @Override
+    public void resetGiatrosBookVersion() {
+        versionedGiatrosBook.reset();
+    }
+
+    //=========== Accounts =================================================================================
+
+    @Override
+    public void addAccount(Account account) {
+        versionedGiatrosBook.addAccount(account);
+    }
+
+    @Override
+    public Account getAccount(Account account) {
+        return versionedGiatrosBook.getAccount(account);
+    }
+
+    @Override
+    public boolean hasAccount(Account account) {
+        return versionedGiatrosBook.hasAccount(account);
     }
 
     //=========== Selected patient ===========================================================================

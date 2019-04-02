@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.beans.property.ReadOnlyProperty;
 import javafx.collections.ObservableList;
 import seedu.giatros.commons.core.GuiSettings;
+import seedu.giatros.model.account.Account;
 import seedu.giatros.model.patient.Patient;
 
 /**
@@ -113,6 +114,11 @@ public interface Model {
     void commitGiatrosBook();
 
     /**
+     * Resets the version of the GiatrosBook
+     */
+    void resetGiatrosBookVersion();
+
+    /**
      * Selected patient in the filtered patient list.
      * null if no patient is selected.
      */
@@ -128,4 +134,23 @@ public interface Model {
      * Sets the selected patient in the filtered patient list.
      */
     void setSelectedPatient(Patient patient);
+
+    /**
+     * Adds the given account. {@code account} must not already exist in the account storage.
+     *
+     * @param account to be added.
+     */
+    void addAccount(Account account);
+
+    /**
+     * Retrieve the account. {@code account} must already exist in the account storage.
+     *
+     * @param account to retrieve.
+     */
+    Account getAccount(Account account);
+
+    /**
+     * Returns true if an account with the same identity as {@code Account} exists in the giatros book.
+     */
+    boolean hasAccount(Account account);
 }

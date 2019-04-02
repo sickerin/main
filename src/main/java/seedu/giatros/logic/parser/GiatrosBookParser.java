@@ -20,6 +20,10 @@ import seedu.giatros.logic.commands.ListCommand;
 import seedu.giatros.logic.commands.RedoCommand;
 import seedu.giatros.logic.commands.SelectCommand;
 import seedu.giatros.logic.commands.UndoCommand;
+import seedu.giatros.logic.commands.account.LoginCommand;
+import seedu.giatros.logic.commands.account.RegisterCommand;
+import seedu.giatros.logic.parser.account.LoginCommandParser;
+import seedu.giatros.logic.parser.account.RegisterCommandParser;
 import seedu.giatros.logic.parser.exceptions.ParseException;
 
 /**
@@ -48,6 +52,12 @@ public class GiatrosBookParser {
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
+
+        case LoginCommand.COMMAND_WORD:
+            return new LoginCommandParser().parse(arguments);
+
+        case RegisterCommand.COMMAND_WORD:
+            return new RegisterCommandParser().parse(arguments);
 
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);

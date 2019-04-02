@@ -6,6 +6,9 @@ import java.util.stream.Collectors;
 
 import seedu.giatros.model.GiatrosBook;
 import seedu.giatros.model.ReadOnlyGiatrosBook;
+import seedu.giatros.model.account.Account;
+import seedu.giatros.model.account.Password;
+import seedu.giatros.model.account.Username;
 import seedu.giatros.model.allergy.Allergy;
 import seedu.giatros.model.patient.Address;
 import seedu.giatros.model.patient.Email;
