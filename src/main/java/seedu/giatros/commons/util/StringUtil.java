@@ -39,6 +39,31 @@ public class StringUtil {
     }
 
     /**
+     * Returns true if the {@code sentence} contains the {@code subString}.
+     * <br>examples:<pre>
+     *      containsSubstringIgnoreCase("aachuaes", "chuaes") == true
+     *      containsSubstringIgnoreCase("aachuaes", "CHUAES") == true
+     *      containsSubstringIgnoreCase("root", "chuaes") == false //does not contain the substring
+     *      </pre>
+     *
+     * @param sentence cannot be null
+     * @param subString cannot be null, cannot be empty, must be a single word
+     */
+    public static boolean containsSubstringIgnoreCase(String sentence, String subString) {
+        requireNonNull(sentence);
+
+        String preppedString = subString.trim();
+        checkArgument(!preppedString.isEmpty(), "Sub-string parameter cannot be empty");
+        checkArgument(preppedString.split("\\s+").length == 1, "Sub-string parameter should be a single word");
+
+        String preppedSentence = sentence;
+        String[] wordsInPreppedSentence = preppedSentence.split("\\s+");
+
+        return Arrays.stream(wordsInPreppedSentence)
+                .anyMatch(preppedString::equalsIgnoreCase);
+    }
+
+    /**
      * Returns a detailed message of the t, including the stack trace.
      */
     public static String getDetails(Throwable t) {

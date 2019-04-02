@@ -23,6 +23,7 @@ import seedu.giatros.model.GiatrosBook;
 import seedu.giatros.model.Model;
 import seedu.giatros.model.ReadOnlyGiatrosBook;
 import seedu.giatros.model.ReadOnlyUserPrefs;
+import seedu.giatros.model.account.Account;
 import seedu.giatros.model.patient.Patient;
 import seedu.giatros.testutil.PatientBuilder;
 
@@ -92,6 +93,21 @@ public class AddCommandTest {
      * A default model stub that have all of the methods failing.
      */
     private class ModelStub implements Model {
+        @Override
+        public void addAccount(Account account) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Account getAccount(Account account) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasAccount(Account account) {
+            throw new AssertionError("This method should not be called.");
+        }
+
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
@@ -184,6 +200,11 @@ public class AddCommandTest {
 
         @Override
         public void commitGiatrosBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void resetGiatrosBookVersion() {
             throw new AssertionError("This method should not be called.");
         }
 

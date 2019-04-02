@@ -7,6 +7,8 @@ import java.util.List;
 import javafx.beans.InvalidationListener;
 import javafx.collections.ObservableList;
 import seedu.giatros.commons.util.InvalidationListenerManager;
+import seedu.giatros.model.account.Account;
+import seedu.giatros.model.account.UniqueAccountList;
 import seedu.giatros.model.patient.Patient;
 import seedu.giatros.model.patient.UniquePatientList;
 
@@ -17,6 +19,7 @@ import seedu.giatros.model.patient.UniquePatientList;
 public class GiatrosBook implements ReadOnlyGiatrosBook {
 
     private final UniquePatientList patients;
+    private final UniqueAccountList accounts;
     private final InvalidationListenerManager invalidationListenerManager = new InvalidationListenerManager();
 
     /*
@@ -28,6 +31,7 @@ public class GiatrosBook implements ReadOnlyGiatrosBook {
      */
     {
         patients = new UniquePatientList();
+        accounts = new UniqueAccountList();
     }
 
     public GiatrosBook() {}
@@ -101,6 +105,28 @@ public class GiatrosBook implements ReadOnlyGiatrosBook {
         indicateModified();
     }
 
+    /**
+     * Returns true if an account with the same identity as {@code Account} exists in the Giatros book.
+     */
+    public boolean hasAccount(Account account) {
+        return accounts.contains(account);
+    }
+
+    /**
+     * Returns the {@code Account} of the given {@code account}. That is, the account in storage is retrieved that
+     * matches the {@code account} input given by the user.
+     */
+    public Account getAccount(Account account) {
+        return accounts.get(account);
+    }
+
+    /**
+     * Adds an account to the account record. The account must not already exist in the account record.
+     */
+    public void addAccount(Account account) {
+        accounts.add(account);
+    }
+
     @Override
     public void addListener(InvalidationListener listener) {
         invalidationListenerManager.addListener(listener);
@@ -122,13 +148,19 @@ public class GiatrosBook implements ReadOnlyGiatrosBook {
 
     @Override
     public String toString() {
-        return patients.asUnmodifiableObservableList().size() + " patients";
+        return String.valueOf(accounts.asUnmodifiableObservableList().size() + " accounts\n"
+                + patients.asUnmodifiableObservableList().size() + " patients");
         // TODO: refine later
     }
 
     @Override
     public ObservableList<Patient> getPatientList() {
         return patients.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<Account> getAccountList() {
+        return accounts.asUnmodifiableObservableList();
     }
 
     @Override
