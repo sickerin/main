@@ -5,10 +5,10 @@ import static org.junit.Assert.assertTrue;
 import static seedu.giatros.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.giatros.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.giatros.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.giatros.logic.commands.CommandTestUtil.VALID_ALLERGY_AMPICILLIN;
 import static seedu.giatros.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.giatros.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.giatros.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.giatros.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
 import org.junit.Test;
 
@@ -51,8 +51,8 @@ public class EditPatientDescriptorTest {
         editedAmy = new EditPatientDescriptorBuilder(DESC_AMY).withAddress(VALID_ADDRESS_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
-        // different tags -> returns false
-        editedAmy = new EditPatientDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_HUSBAND).build();
+        // different allergies -> returns false
+        editedAmy = new EditPatientDescriptorBuilder(DESC_AMY).withAllergies(VALID_ALLERGY_AMPICILLIN).build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }
 }

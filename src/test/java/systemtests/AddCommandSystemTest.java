@@ -3,24 +3,24 @@ package systemtests;
 import static seedu.giatros.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.giatros.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.giatros.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
+import static seedu.giatros.logic.commands.CommandTestUtil.ALLERGY_DESC_AMPICILLIN;
+import static seedu.giatros.logic.commands.CommandTestUtil.ALLERGY_DESC_IBUPROFEN;
 import static seedu.giatros.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.giatros.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.giatros.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
+import static seedu.giatros.logic.commands.CommandTestUtil.INVALID_ALLERGY_DESC;
 import static seedu.giatros.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.giatros.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.giatros.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
-import static seedu.giatros.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.giatros.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.giatros.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.giatros.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.giatros.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
-import static seedu.giatros.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
-import static seedu.giatros.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.giatros.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.giatros.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.giatros.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.giatros.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.giatros.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.giatros.logic.parser.CliSyntax.PREFIX_ALLERGY;
 import static seedu.giatros.testutil.TypicalPatients.ALICE;
 import static seedu.giatros.testutil.TypicalPatients.AMY;
 import static seedu.giatros.testutil.TypicalPatients.BOB;
@@ -37,12 +37,12 @@ import seedu.giatros.logic.commands.AddCommand;
 import seedu.giatros.logic.commands.RedoCommand;
 import seedu.giatros.logic.commands.UndoCommand;
 import seedu.giatros.model.Model;
+import seedu.giatros.model.allergy.Allergy;
 import seedu.giatros.model.patient.Address;
 import seedu.giatros.model.patient.Email;
 import seedu.giatros.model.patient.Name;
 import seedu.giatros.model.patient.Patient;
 import seedu.giatros.model.patient.Phone;
-import seedu.giatros.model.tag.Tag;
 import seedu.giatros.testutil.PatientBuilder;
 import seedu.giatros.testutil.PatientUtil;
 
@@ -54,12 +54,12 @@ public class AddCommandSystemTest extends GiatrosBookSystemTest {
 
         /* ------------------------ Perform add operations on the shown unfiltered list ----------------------------- */
 
-        /* Case: add a patient without tags to a non-empty Giatros book, command with leading spaces and trailing spaces
-         * -> added
+        /* Case: add a patient without allergies to a non-empty Giatros book, command with leading spaces and trailing
+         * spaces -> added
          */
         Patient toAdd = AMY;
         String command = "   " + AddCommand.COMMAND_WORD + "  " + NAME_DESC_AMY + "  " + PHONE_DESC_AMY + " "
-                + EMAIL_DESC_AMY + "   " + ADDRESS_DESC_AMY + "   " + TAG_DESC_FRIEND + " ";
+                + EMAIL_DESC_AMY + "   " + ADDRESS_DESC_AMY + "   " + ALLERGY_DESC_IBUPROFEN + " ";
         assertCommandSuccess(command, toAdd);
 
         /* Case: undo adding Amy to the list -> Amy deleted */
@@ -76,7 +76,7 @@ public class AddCommandSystemTest extends GiatrosBookSystemTest {
         /* Case: add a patient with all fields same as another patient in the Giatros book except name -> added */
         toAdd = new PatientBuilder(AMY).withName(VALID_NAME_BOB).build();
         command = AddCommand.COMMAND_WORD + NAME_DESC_BOB + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
-                + TAG_DESC_FRIEND;
+                + ALLERGY_DESC_IBUPROFEN;
         assertCommandSuccess(command, toAdd);
 
         /* Case: add a patient with all fields same as another patient in the Giatros book except phone and email
@@ -90,13 +90,13 @@ public class AddCommandSystemTest extends GiatrosBookSystemTest {
         deleteAllPatients();
         assertCommandSuccess(ALICE);
 
-        /* Case: add a patient with tags, command with parameters in random order -> added */
+        /* Case: add a patient with allergies, command with parameters in random order -> added */
         toAdd = BOB;
-        command = AddCommand.COMMAND_WORD + TAG_DESC_FRIEND + PHONE_DESC_BOB + ADDRESS_DESC_BOB + NAME_DESC_BOB
-                + TAG_DESC_HUSBAND + EMAIL_DESC_BOB;
+        command = AddCommand.COMMAND_WORD + ALLERGY_DESC_IBUPROFEN + PHONE_DESC_BOB + ADDRESS_DESC_BOB + NAME_DESC_BOB
+                + ALLERGY_DESC_AMPICILLIN + EMAIL_DESC_BOB;
         assertCommandSuccess(command, toAdd);
 
-        /* Case: add a patient, missing tags -> added */
+        /* Case: add a patient, missing allergies -> added */
         assertCommandSuccess(HOON);
 
         /* -------------------------- Perform add operation on the shown filtered list ------------------------------ */
@@ -133,8 +133,8 @@ public class AddCommandSystemTest extends GiatrosBookSystemTest {
         command = PatientUtil.getAddCommand(toAdd);
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PATIENT);
 
-        /* Case: add a duplicate patient except with different tags -> rejected */
-        command = PatientUtil.getAddCommand(HOON) + " " + PREFIX_TAG.getPrefix() + "friends";
+        /* Case: add a duplicate patient except with different allergies -> rejected */
+        command = PatientUtil.getAddCommand(HOON) + " " + PREFIX_ALLERGY.getPrefix() + "paracetamol";
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PATIENT);
 
         /* Case: missing name -> rejected */
@@ -173,10 +173,10 @@ public class AddCommandSystemTest extends GiatrosBookSystemTest {
         command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + INVALID_ADDRESS_DESC;
         assertCommandFailure(command, Address.MESSAGE_CONSTRAINTS);
 
-        /* Case: invalid tag -> rejected */
+        /* Case: invalid allergy -> rejected */
         command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
-                + INVALID_TAG_DESC;
-        assertCommandFailure(command, Tag.MESSAGE_CONSTRAINTS);
+                + INVALID_ALLERGY_DESC;
+        assertCommandFailure(command, Allergy.MESSAGE_CONSTRAINTS);
     }
 
     /**

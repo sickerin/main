@@ -3,12 +3,12 @@ package seedu.giatros.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.giatros.model.allergy.Allergy;
 import seedu.giatros.model.patient.Address;
 import seedu.giatros.model.patient.Email;
 import seedu.giatros.model.patient.Name;
 import seedu.giatros.model.patient.Patient;
 import seedu.giatros.model.patient.Phone;
-import seedu.giatros.model.tag.Tag;
 import seedu.giatros.model.util.SampleDataUtil;
 
 /**
@@ -20,19 +20,22 @@ public class PatientBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "alice@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_ALLERGY = "none";
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
-    private Set<Tag> tags;
+    private Allergy allergy;
+    private Set<Allergy> allergies;
 
     public PatientBuilder() {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
-        tags = new HashSet<>();
+        allergy = new Allergy(DEFAULT_ALLERGY);
+        allergies = new HashSet<>();
     }
 
     /**
@@ -43,7 +46,8 @@ public class PatientBuilder {
         phone = patientToCopy.getPhone();
         email = patientToCopy.getEmail();
         address = patientToCopy.getAddress();
-        tags = new HashSet<>(patientToCopy.getTags());
+        allergy = patientToCopy.getAllergy();
+        allergies = new HashSet<>(patientToCopy.getAllergies());
     }
 
     /**
@@ -55,10 +59,10 @@ public class PatientBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Patient} that we are building.
+     * Parses the {@code allergies} into a {@code Set<Allergy>} and set it to the {@code Patient} that we are building.
      */
-    public PatientBuilder withTags(String ... tags) {
-        this.tags = SampleDataUtil.getTagSet(tags);
+    public PatientBuilder withAllergies(String ... allergies) {
+        this.allergies = SampleDataUtil.getAllergySet(allergies);
         return this;
     }
 
@@ -86,8 +90,16 @@ public class PatientBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Allergy} of the {@code Patient} that we are building.
+     */
+    public PatientBuilder withAllergy(String allergy) {
+        this.allergy = new Allergy(allergy);
+        return this;
+    }
+
     public Patient build() {
-        return new Patient(name, phone, email, address, tags);
+        return new Patient(name, phone, email, address, allergy, allergies);
     }
 
 }

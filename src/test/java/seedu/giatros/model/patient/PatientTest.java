@@ -3,10 +3,10 @@ package seedu.giatros.model.patient;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.giatros.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.giatros.logic.commands.CommandTestUtil.VALID_ALLERGY_AMPICILLIN;
 import static seedu.giatros.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.giatros.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.giatros.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.giatros.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.giatros.testutil.TypicalPatients.ALICE;
 import static seedu.giatros.testutil.TypicalPatients.BOB;
 
@@ -24,7 +24,7 @@ public class PatientTest {
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
         Patient patient = new PatientBuilder().build();
         thrown.expect(UnsupportedOperationException.class);
-        patient.getTags().remove(0);
+        patient.getAllergies().remove(0);
     }
 
     @Test
@@ -45,16 +45,17 @@ public class PatientTest {
 
         // same name, same phone, different attributes -> returns true
         editedAlice = new PatientBuilder(ALICE).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+                .withAllergies(VALID_ALLERGY_AMPICILLIN).build();
         assertTrue(ALICE.isSamePatient(editedAlice));
 
         // same name, same email, different attributes -> returns true
         editedAlice = new PatientBuilder(ALICE).withPhone(VALID_PHONE_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+                .withAllergies(VALID_ALLERGY_AMPICILLIN).build();
         assertTrue(ALICE.isSamePatient(editedAlice));
 
         // same name, same phone, same email, different attributes -> returns true
-        editedAlice = new PatientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
+        editedAlice = new PatientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB)
+                .withAllergies(VALID_ALLERGY_AMPICILLIN).build();
         assertTrue(ALICE.isSamePatient(editedAlice));
     }
 
@@ -92,8 +93,8 @@ public class PatientTest {
         editedAlice = new PatientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different tags -> returns false
-        editedAlice = new PatientBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
+        // different allergies -> returns false
+        editedAlice = new PatientBuilder(ALICE).withAllergies(VALID_ALLERGY_AMPICILLIN).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 }

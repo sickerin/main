@@ -1,13 +1,17 @@
 package seedu.giatros.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.giatros.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.giatros.logic.parser.CliSyntax.PREFIX_ALLERGY;
 
 import seedu.giatros.commons.core.index.Index;
+import seedu.giatros.commons.exceptions.IllegalValueException;
 import seedu.giatros.logic.commands.AddallCommand;
 import seedu.giatros.logic.parser.exceptions.ParseException;
+import seedu.giatros.model.allergy.Allergy;
 
 /**
- * Parses input arguments and creates a new AddallCommand object
+ * Parses input arguments and creates a new {@code AddallCommand} object.
  */
 public class AddallCommandParser implements Parser<AddallCommand> {
 
@@ -22,22 +26,16 @@ public class AddallCommandParser implements Parser<AddallCommand> {
         Index index;
         String allergyString;
 
-        // Implement a simple parser locally first
-        String delims = "[ ]+";
-        String[] tokens = args.trim().split(delims);
-        System.out.println(tokens[0]);
-
-        index = Index.fromOneBased(Integer.valueOf(tokens[0])); // The first argument is the index
-        allergyString = tokens[1]; // The second argument is the allergyString
-
-        if (!(allergyString.contains("a/"))) {
-            throw new ParseException("Invalid format");
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_ALLERGY);
+        try {
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        } catch (IllegalValueException exc) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddallCommand.MESSAGE_USAGE), exc);
         }
 
+        allergyString = argMultimap.getValue(PREFIX_ALLERGY).orElse("");
 
-        allergyString = allergyString.substring(2); // Trim off the tag a/ in the beginning
-
-        return new AddallCommand(index, allergyString);
+        return new AddallCommand(index, new Allergy(allergyString));
     }
 
 }
