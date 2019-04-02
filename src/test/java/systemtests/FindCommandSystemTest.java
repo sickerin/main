@@ -19,7 +19,7 @@ import seedu.giatros.logic.commands.FindCommand;
 import seedu.giatros.logic.commands.RedoCommand;
 import seedu.giatros.logic.commands.UndoCommand;
 import seedu.giatros.model.Model;
-import seedu.giatros.model.tag.Tag;
+import seedu.giatros.model.allergy.Allergy;
 
 public class FindCommandSystemTest extends GiatrosBookSystemTest {
 
@@ -126,9 +126,9 @@ public class FindCommandSystemTest extends GiatrosBookSystemTest {
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find tags of patient in Giatros book -> 0 patients found */
-        List<Tag> tags = new ArrayList<>(DANIEL.getTags());
-        command = FindCommand.COMMAND_WORD + " " + tags.get(0).tagName;
+        /* Case: find allergies of patient in Giatros book -> 0 patients found */
+        List<Allergy> allergies = new ArrayList<>(DANIEL.getAllergies());
+        command = FindCommand.COMMAND_WORD + " " + allergies.get(0).allergyName;
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 

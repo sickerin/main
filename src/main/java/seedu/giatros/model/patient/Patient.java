@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.giatros.model.tag.Tag;
+import seedu.giatros.model.allergy.Allergy;
 
 /**
  * Represents a Patient in the Giatros book.
@@ -23,19 +23,19 @@ public class Patient {
     // Data fields
     private final Address address;
     private final Allergy allergy;
-    private final Set<Tag> tags = new HashSet<>();
+    private final Set<Allergy> allergies = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Patient(Name name, Phone phone, Email email, Address address, Allergy allergy, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Patient(Name name, Phone phone, Email email, Address address, Allergy allergy, Set<Allergy> allergies) {
+        requireAllNonNull(name, phone, email, address, allergy, allergies);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.allergy = allergy;
-        this.tags.addAll(tags);
+        this.allergies.addAll(allergies);
     }
 
     public Name getName() {
@@ -59,11 +59,11 @@ public class Patient {
     }
 
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable allergy set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public Set<Allergy> getAllergies() {
+        return Collections.unmodifiableSet(allergies);
     }
 
     /**
@@ -99,13 +99,13 @@ public class Patient {
                 && otherPatient.getPhone().equals(getPhone())
                 && otherPatient.getEmail().equals(getEmail())
                 && otherPatient.getAddress().equals(getAddress())
-                && otherPatient.getTags().equals(getTags());
+                && otherPatient.getAllergies().equals(getAllergies());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, allergies);
     }
 
     @Override
@@ -118,8 +118,8 @@ public class Patient {
                 .append(getEmail())
                 .append(" Address: ")
                 .append(getAddress())
-                .append(" Tags: ");
-        getTags().forEach(builder::append);
+                .append(" Allergies: ");
+        getAllergies().forEach(builder::append);
         return builder.toString();
     }
 

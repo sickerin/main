@@ -11,12 +11,12 @@ import org.junit.Test;
 
 import seedu.giatros.commons.core.index.Index;
 import seedu.giatros.logic.commands.AddallCommand;
-import seedu.giatros.model.patient.Allergy;
+import seedu.giatros.model.allergy.Allergy;
 
 public class AddallCommandParserTest {
 
     private AddallCommandParser parser = new AddallCommandParser();
-    private final String nonEmptyAllergy = "One allergy, and some other allergy";
+    private final String nonEmptyAllergy = "someAllergy";
 
     @Test
     public void parse_allFieldsPresent_success() {
@@ -24,10 +24,6 @@ public class AddallCommandParserTest {
         Index index = INDEX_FIRST_PATIENT;
         String input = index.getOneBased() + " " + PREFIX_ALLERGY + nonEmptyAllergy;
         assertParseSuccess(parser, input, new AddallCommand(INDEX_FIRST_PATIENT, new Allergy(nonEmptyAllergy)));
-
-        // adding an empty allergy
-        input = index.getOneBased() + " " + PREFIX_ALLERGY + "";
-        assertParseSuccess(parser, input, new AddallCommand(INDEX_FIRST_PATIENT, new Allergy("")));
     }
 
     @Test
@@ -41,11 +37,11 @@ public class AddallCommandParserTest {
         String input = PREFIX_ALLERGY + " " + nonEmptyAllergy;
         assertParseFailure(parser, input, expectedMessage);
 
-        // no tag provided
+        // no prefix provided
         input = INDEX_FIRST_PATIENT.getOneBased() + " " + nonEmptyAllergy;
         assertParseFailure(parser, input, expectedMessage);
 
-        // invalid tag specified
+        // invalid prefix specified
         input = INDEX_FIRST_PATIENT.getOneBased() + " " + PREFIX_ADDRESS + " " + nonEmptyAllergy;
         assertParseFailure(parser, input, expectedMessage);
 

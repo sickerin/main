@@ -10,13 +10,12 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.giatros.commons.exceptions.IllegalValueException;
+import seedu.giatros.model.allergy.Allergy;
 import seedu.giatros.model.patient.Address;
-import seedu.giatros.model.patient.Allergy;
 import seedu.giatros.model.patient.Email;
 import seedu.giatros.model.patient.Name;
 import seedu.giatros.model.patient.Patient;
 import seedu.giatros.model.patient.Phone;
-import seedu.giatros.model.tag.Tag;
 
 /**
  * Jackson-friendly version of {@link Patient}.
@@ -30,7 +29,7 @@ class JsonAdaptedPatient {
     private final String email;
     private final String address;
     private final String allergy;
-    private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final List<JsonAdaptedAllergy> allergied = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPatient} with the given patient details.
@@ -38,14 +37,14 @@ class JsonAdaptedPatient {
     @JsonCreator
     public JsonAdaptedPatient(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+            @JsonProperty("allergied") List<JsonAdaptedAllergy> allergied) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.allergy = ""; // Currently, cannot create patient with allergy immediately
-        if (tagged != null) {
-            this.tagged.addAll(tagged);
+        this.allergy = "none"; // Currently, cannot create patient with allergy immediately
+        if (allergied != null) {
+            this.allergied.addAll(allergied);
         }
     }
 
@@ -57,9 +56,9 @@ class JsonAdaptedPatient {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-        allergy = source.getAllergy().value;
-        tagged.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
+        allergy = source.getAllergy().allergyName;
+        allergied.addAll(source.getAllergies().stream()
+                .map(JsonAdaptedAllergy::new)
                 .collect(Collectors.toList()));
     }
 
@@ -69,9 +68,9 @@ class JsonAdaptedPatient {
      * @throws IllegalValueException if there were any data constraints violated in the adapted patient.
      */
     public Patient toModelType() throws IllegalValueException {
-        final List<Tag> patientTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tagged) {
-            patientTags.add(tag.toModelType());
+        final List<Allergy> patientAllergies = new ArrayList<>();
+        for (JsonAdaptedAllergy allergy : allergied) {
+            patientAllergies.add(allergy.toModelType());
         }
 
         if (name == null) {
@@ -111,8 +110,8 @@ class JsonAdaptedPatient {
         }
         final Allergy modelAllergy = new Allergy(allergy);
 
-        final Set<Tag> modelTags = new HashSet<>(patientTags);
-        return new Patient(modelName, modelPhone, modelEmail, modelAddress, modelAllergy, modelTags);
+        final Set<Allergy> modelAllergies = new HashSet<>(patientAllergies);
+        return new Patient(modelName, modelPhone, modelEmail, modelAddress, modelAllergy, modelAllergies);
     }
 
 }

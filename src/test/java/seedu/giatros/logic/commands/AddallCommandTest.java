@@ -20,13 +20,13 @@ import seedu.giatros.model.GiatrosBook;
 import seedu.giatros.model.Model;
 import seedu.giatros.model.ModelManager;
 import seedu.giatros.model.UserPrefs;
-import seedu.giatros.model.patient.Allergy;
+import seedu.giatros.model.allergy.Allergy;
 import seedu.giatros.model.patient.Patient;
 import seedu.giatros.testutil.PatientBuilder;
 
 public class AddallCommandTest {
 
-    private static final String ALLERGY_STUB = "Some allergy";
+    private static final String ALLERGY_STUB = "someAllergy";
 
     private Model model = new ModelManager(getTypicalGiatrosBook(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
@@ -37,26 +37,9 @@ public class AddallCommandTest {
         Patient editedPatient = new PatientBuilder(firstPatient).withAllergy(ALLERGY_STUB).build();
 
         AddallCommand addallCommand = new AddallCommand(INDEX_FIRST_PATIENT,
-                new Allergy(editedPatient.getAllergy().value));
+                new Allergy(editedPatient.getAllergy().allergyName));
 
         String expectedMessage = String.format(AddallCommand.MESSAGE_ADD_ALLERGY_SUCCESS, editedPatient);
-
-        Model expectedModel = new ModelManager(new GiatrosBook(model.getGiatrosBook()), new UserPrefs());
-        expectedModel.setPatient(firstPatient, editedPatient);
-        expectedModel.commitGiatrosBook();
-
-        assertCommandSuccess(addallCommand, model, commandHistory, expectedMessage, expectedModel);
-    }
-
-    @Test
-    public void execute_deleteAllergyUnfilteredList_success() {
-        Patient firstPatient = model.getFilteredPatientList().get(INDEX_FIRST_PATIENT.getZeroBased());
-        Patient editedPatient = new PatientBuilder(firstPatient).withAllergy("").build();
-
-        AddallCommand addallCommand = new AddallCommand(INDEX_FIRST_PATIENT,
-                new Allergy(editedPatient.getAllergy().toString()));
-
-        String expectedMessage = String.format(AddallCommand.MESSAGE_DELETE_ALLERGY_SUCCESS, editedPatient);
 
         Model expectedModel = new ModelManager(new GiatrosBook(model.getGiatrosBook()), new UserPrefs());
         expectedModel.setPatient(firstPatient, editedPatient);
@@ -74,7 +57,7 @@ public class AddallCommandTest {
                 .get(INDEX_FIRST_PATIENT.getZeroBased())).withAllergy(ALLERGY_STUB).build();
 
         AddallCommand addallCommand = new AddallCommand(INDEX_FIRST_PATIENT,
-                new Allergy(editedPatient.getAllergy().value));
+                new Allergy(editedPatient.getAllergy().allergyName));
 
         String expectedMessage = String.format(AddallCommand.MESSAGE_ADD_ALLERGY_SUCCESS, editedPatient);
 
@@ -133,7 +116,7 @@ public class AddallCommandTest {
     @Test
     public void executeUndoRedo_invalidIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPatientList().size() + 1);
-        AddallCommand addallCommand = new AddallCommand(outOfBoundIndex, new Allergy(""));
+        AddallCommand addallCommand = new AddallCommand(outOfBoundIndex, new Allergy("none"));
 
         // execution failed -> giatros book state not added into model
         assertCommandFailure(addallCommand, model, commandHistory, Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);

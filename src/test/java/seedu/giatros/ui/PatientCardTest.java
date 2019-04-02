@@ -15,17 +15,17 @@ public class PatientCardTest extends GuiUnitTest {
 
     @Test
     public void display() {
-        // no tags
-        Patient patientWithNoTags = new PatientBuilder().withTags(new String[0]).build();
-        PatientCard patientCard = new PatientCard(patientWithNoTags, 1);
+        // no allergies
+        Patient patientWithNoAllergies = new PatientBuilder().withAllergies(new String[0]).build();
+        PatientCard patientCard = new PatientCard(patientWithNoAllergies, 1);
         uiPartRule.setUiPart(patientCard);
-        assertCardDisplay(patientCard, patientWithNoTags, 1);
+        assertCardDisplay(patientCard, patientWithNoAllergies, 1);
 
-        // with tags
-        Patient patientWithTags = new PatientBuilder().build();
-        patientCard = new PatientCard(patientWithTags, 2);
+        // with allergies
+        Patient patientWithAllergies = new PatientBuilder().build();
+        patientCard = new PatientCard(patientWithAllergies, 2);
         uiPartRule.setUiPart(patientCard);
-        assertCardDisplay(patientCard, patientWithTags, 2);
+        assertCardDisplay(patientCard, patientWithAllergies, 2);
     }
 
     @Test
