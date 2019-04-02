@@ -46,8 +46,8 @@ public class UniquePatientListTest {
     @Test
     public void contains_patientWithSameIdentityFieldsInList_returnsTrue() {
         uniquePatientList.add(ALICE);
-        Patient editedAlice = new PatientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withAllergies(VALID_ALLERGY_AMPICILLIN)
-                .build();
+        Patient editedAlice = new PatientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB)
+                .withAllergies(VALID_ALLERGY_AMPICILLIN).build();
         assertTrue(uniquePatientList.contains(editedAlice));
     }
 
@@ -94,8 +94,8 @@ public class UniquePatientListTest {
     @Test
     public void setPatient_editedPatientHasSameIdentity_success() {
         uniquePatientList.add(ALICE);
-        Patient editedAlice = new PatientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withAllergies(VALID_ALLERGY_AMPICILLIN)
-                .build();
+        Patient editedAlice = new PatientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB)
+                .withAllergies(VALID_ALLERGY_AMPICILLIN).build();
         uniquePatientList.setPatient(ALICE, editedAlice);
         UniquePatientList expectedUniquePatientList = new UniquePatientList();
         expectedUniquePatientList.add(editedAlice);

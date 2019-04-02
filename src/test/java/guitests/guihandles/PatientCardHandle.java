@@ -87,8 +87,7 @@ public class PatientCardHandle extends NodeHandle<Node> {
                 && getAddress().equals(patient.getAddress().value)
                 && getPhone().equals(patient.getPhone().value)
                 && getEmail().equals(patient.getEmail().value)
-                && ImmutableMultiset.copyOf(getAllergies()).equals(ImmutableMultiset.copyOf(patient.getAllergies().stream()
-                        .map(allergy -> allergy.allergyName)
-                        .collect(Collectors.toList())));
+                && ImmutableMultiset.copyOf(getAllergies()).equals(ImmutableMultiset.copyOf(patient.getAllergies()
+                        .stream().map(allergy -> allergy.allergyName).collect(Collectors.toList())));
     }
 }

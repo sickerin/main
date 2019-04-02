@@ -39,12 +39,12 @@ import seedu.giatros.logic.commands.EditCommand;
 import seedu.giatros.logic.commands.RedoCommand;
 import seedu.giatros.logic.commands.UndoCommand;
 import seedu.giatros.model.Model;
+import seedu.giatros.model.allergy.Allergy;
 import seedu.giatros.model.patient.Address;
 import seedu.giatros.model.patient.Email;
 import seedu.giatros.model.patient.Name;
 import seedu.giatros.model.patient.Patient;
 import seedu.giatros.model.patient.Phone;
-import seedu.giatros.model.allergy.Allergy;
 import seedu.giatros.testutil.PatientBuilder;
 import seedu.giatros.testutil.PatientUtil;
 
@@ -192,7 +192,9 @@ public class EditCommandSystemTest extends GiatrosBookSystemTest {
                 + ADDRESS_DESC_BOB + ALLERGY_DESC_IBUPROFEN + ALLERGY_DESC_AMPICILLIN;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_PATIENT);
 
-        /* Case: edit a patient with new values same as another patient's values but with different allergies -> rejected */
+        /* Case: edit a patient with new values same as another patient's values but with different allergies
+         * -> rejected
+         */
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + ALLERGY_DESC_AMPICILLIN;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_PATIENT);

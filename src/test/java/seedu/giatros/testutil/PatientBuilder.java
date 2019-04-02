@@ -3,8 +3,8 @@ package seedu.giatros.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.giatros.model.patient.Address;
 import seedu.giatros.model.allergy.Allergy;
+import seedu.giatros.model.patient.Address;
 import seedu.giatros.model.patient.Email;
 import seedu.giatros.model.patient.Name;
 import seedu.giatros.model.patient.Patient;

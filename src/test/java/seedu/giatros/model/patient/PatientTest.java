@@ -54,7 +54,8 @@ public class PatientTest {
         assertTrue(ALICE.isSamePatient(editedAlice));
 
         // same name, same phone, same email, different attributes -> returns true
-        editedAlice = new PatientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withAllergies(VALID_ALLERGY_AMPICILLIN).build();
+        editedAlice = new PatientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB)
+                .withAllergies(VALID_ALLERGY_AMPICILLIN).build();
         assertTrue(ALICE.isSamePatient(editedAlice));
     }
 

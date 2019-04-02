@@ -16,11 +16,11 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.giatros.logic.parser.exceptions.ParseException;
+import seedu.giatros.model.allergy.Allergy;
 import seedu.giatros.model.patient.Address;
 import seedu.giatros.model.patient.Email;
 import seedu.giatros.model.patient.Name;
 import seedu.giatros.model.patient.Phone;
-import seedu.giatros.model.allergy.Allergy;
 import seedu.giatros.testutil.Assert;
 
 public class ParserUtilTest {
@@ -201,7 +201,8 @@ public class ParserUtilTest {
     @Test
     public void parseAllergies_collectionWithValidAllergies_returnsAllergySet() throws Exception {
         Set<Allergy> actualAllergySet = ParserUtil.parseAllergies(Arrays.asList(VALID_ALLERGY_1, VALID_ALLERGY_2));
-        Set<Allergy> expectedAllergySet = new HashSet<Allergy>(Arrays.asList(new Allergy(VALID_ALLERGY_1), new Allergy(VALID_ALLERGY_2)));
+        Set<Allergy> expectedAllergySet = new HashSet<Allergy>(Arrays.asList(new Allergy(VALID_ALLERGY_1),
+                new Allergy(VALID_ALLERGY_2)));
 
         assertEquals(expectedAllergySet, actualAllergySet);
     }

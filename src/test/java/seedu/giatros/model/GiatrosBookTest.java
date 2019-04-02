@@ -53,8 +53,8 @@ public class GiatrosBookTest {
     @Test
     public void resetData_withDuplicatePatients_throwsDuplicatePatientException() {
         // Two patients with the same identity fields
-        Patient editedAlice = new PatientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withAllergies(VALID_ALLERGY_AMPICILLIN)
-                .build();
+        Patient editedAlice = new PatientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB)
+                .withAllergies(VALID_ALLERGY_AMPICILLIN).build();
         List<Patient> newPatients = Arrays.asList(ALICE, editedAlice);
         GiatrosBookStub newData = new GiatrosBookStub(newPatients);
 
@@ -82,8 +82,8 @@ public class GiatrosBookTest {
     @Test
     public void hasPatient_patientWithSameIdentityFieldsInGiatrosBook_returnsTrue() {
         giatrosBook.addPatient(ALICE);
-        Patient editedAlice = new PatientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withAllergies(VALID_ALLERGY_AMPICILLIN)
-                .build();
+        Patient editedAlice = new PatientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB)
+                .withAllergies(VALID_ALLERGY_AMPICILLIN).build();
         assertTrue(giatrosBook.hasPatient(editedAlice));
     }
 

@@ -5,14 +5,13 @@ import static seedu.giatros.logic.parser.CliSyntax.PREFIX_ALLERGY;
 import static seedu.giatros.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.giatros.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.giatros.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.giatros.logic.parser.CliSyntax.PREFIX_ALLERGY;
 
 import java.util.Set;
 
 import seedu.giatros.logic.commands.AddCommand;
 import seedu.giatros.logic.commands.EditCommand.EditPatientDescriptor;
-import seedu.giatros.model.patient.Patient;
 import seedu.giatros.model.allergy.Allergy;
+import seedu.giatros.model.patient.Patient;
 
 /**
  * A utility class for Patient.

@@ -32,12 +32,12 @@ import static seedu.giatros.testutil.TypicalPatients.BOB;
 import org.junit.Test;
 
 import seedu.giatros.logic.commands.AddCommand;
+import seedu.giatros.model.allergy.Allergy;
 import seedu.giatros.model.patient.Address;
 import seedu.giatros.model.patient.Email;
 import seedu.giatros.model.patient.Name;
 import seedu.giatros.model.patient.Patient;
 import seedu.giatros.model.patient.Phone;
-import seedu.giatros.model.allergy.Allergy;
 import seedu.giatros.testutil.PatientBuilder;
 
 public class AddCommandParserTest {
@@ -68,8 +68,8 @@ public class AddCommandParserTest {
                 + ADDRESS_DESC_BOB + ALLERGY_DESC_IBUPROFEN, new AddCommand(expectedPatient));
 
         // multiple allergies - all accepted
-        Patient expectedPatientMultipleAllergies = new PatientBuilder(BOB).withAllergies(VALID_ALLERGY_IBUPROFEN, VALID_ALLERGY_AMPICILLIN)
-                .build();
+        Patient expectedPatientMultipleAllergies = new PatientBuilder(BOB)
+                .withAllergies(VALID_ALLERGY_IBUPROFEN, VALID_ALLERGY_AMPICILLIN).build();
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + ALLERGY_DESC_AMPICILLIN + ALLERGY_DESC_IBUPROFEN, new AddCommand(expectedPatientMultipleAllergies));
     }

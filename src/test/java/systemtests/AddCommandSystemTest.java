@@ -3,19 +3,19 @@ package systemtests;
 import static seedu.giatros.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.giatros.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.giatros.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
+import static seedu.giatros.logic.commands.CommandTestUtil.ALLERGY_DESC_AMPICILLIN;
+import static seedu.giatros.logic.commands.CommandTestUtil.ALLERGY_DESC_IBUPROFEN;
 import static seedu.giatros.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.giatros.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.giatros.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
+import static seedu.giatros.logic.commands.CommandTestUtil.INVALID_ALLERGY_DESC;
 import static seedu.giatros.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.giatros.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.giatros.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
-import static seedu.giatros.logic.commands.CommandTestUtil.INVALID_ALLERGY_DESC;
 import static seedu.giatros.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.giatros.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.giatros.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.giatros.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
-import static seedu.giatros.logic.commands.CommandTestUtil.ALLERGY_DESC_AMPICILLIN;
-import static seedu.giatros.logic.commands.CommandTestUtil.ALLERGY_DESC_IBUPROFEN;
 import static seedu.giatros.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.giatros.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.giatros.logic.commands.CommandTestUtil.VALID_NAME_BOB;
@@ -37,12 +37,12 @@ import seedu.giatros.logic.commands.AddCommand;
 import seedu.giatros.logic.commands.RedoCommand;
 import seedu.giatros.logic.commands.UndoCommand;
 import seedu.giatros.model.Model;
+import seedu.giatros.model.allergy.Allergy;
 import seedu.giatros.model.patient.Address;
 import seedu.giatros.model.patient.Email;
 import seedu.giatros.model.patient.Name;
 import seedu.giatros.model.patient.Patient;
 import seedu.giatros.model.patient.Phone;
-import seedu.giatros.model.allergy.Allergy;
 import seedu.giatros.testutil.PatientBuilder;
 import seedu.giatros.testutil.PatientUtil;
 
@@ -54,8 +54,8 @@ public class AddCommandSystemTest extends GiatrosBookSystemTest {
 
         /* ------------------------ Perform add operations on the shown unfiltered list ----------------------------- */
 
-        /* Case: add a patient without allergies to a non-empty Giatros book, command with leading spaces and trailing spaces
-         * -> added
+        /* Case: add a patient without allergies to a non-empty Giatros book, command with leading spaces and trailing
+         * spaces -> added
          */
         Patient toAdd = AMY;
         String command = "   " + AddCommand.COMMAND_WORD + "  " + NAME_DESC_AMY + "  " + PHONE_DESC_AMY + " "
