@@ -37,7 +37,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
 * *`list`* : lists all patients
-* **`add`**`n/John Doe p/94785930 a/Ibuprofen` : adds a patient named `John Doe`, who is allergic to `Ibuprofen` into Giatros
+* **`add`**`n/John Doe p/94785930 y/Ibuprofen` : adds a patient named `John Doe`, who is allergic to `Ibuprofen` into Giatros
 * **`delete`**`3` : deletes the 3rd patient shown in the current list
 * *`exit`* : exits the app
 
@@ -50,9 +50,9 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 *Command Format*
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-* Items in square brackets are optional e.g `n/NAME [a/ALLERGY]` can be used as `n/John Doe t/Ibuprofen` or as `n/John Doe`.
-* Items with `…`​ after them can be used multiple times including zero times e.g. `[a/ALLERGY]...` can be used as `{nbsp}` (i.e. 0 times), `a/Ibuprofen`,
-`a/Ibuprofen a/Penicillin` etc.
+* Items in square brackets are optional e.g `n/NAME [y/ALLERGY]` can be used as `n/John Doe y/Ibuprofen` or as `n/John Doe`.
+* Items with `…`​ after them can be used multiple times including zero times e.g. `[y/ALLERGY]...` can be used as `{nbsp}` (i.e. 0 times), `y/Ibuprofen`,
+`y/Ibuprofen y/Penicillin` etc.
 * Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 ====
 
@@ -64,18 +64,15 @@ Format: `help`
 === Adding a patient: `add`
 
 Adds a patient into Giatros. +
-Format: `add n/NAME p/PHONE_NUMBER [x/NEXT_APPOINTMENT] [a/ALLERGY]... `
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [y/ALLERGY]... `
 
 [TIP]
 A patient can have any number of allergies (including 0)
-[TIP]
-A patient can only have either 0 or 1 next appointment. If a patient has more than one appointment scheduled, only the
-first appointment will be recorded
 
 Examples:
 
-* `add n/John Doe p/98765432 x/28-02-2019 a/Ibuprofen`
-* `add n/Betsy Crowe p/12345678 a/Ibuprofen a/Penicillin`
+* `add n/John Doe p/98765432 e/johndoe@gmail.com a/120 Jurong West St 23, #13-189 y/Ibuprofen`
+* `add n/Betsy Crowe p/12345678 e/ betsy@ymail.com.sg a/56 Lorong 2 Toa Payoh, #01-129 y/Ibuprofen y/Penicillin`
 
 === Listing all patients : `list`
 
@@ -85,10 +82,10 @@ Format: `list`
 === Editing a patient : `edit`
 
 Edits an existing patient stored in Giatros. +
-Format: `edit INDEX [n/NAME] [p/PHONE] [x/NEXT_APPOINTMENT] [a/ALLERGY]...`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [y/ALLERGY]...`
 
 [TIP]
-This feature can be used to add, remove, or update a patient's next appointment and allergy
+This feature can be used to add, remove, or update a patient's name, phone, email, address, or allergy
 
 ****
 * Edits the patient at the specified `INDEX`. The index refers to the index number shown in the displayed patient list.
@@ -96,14 +93,14 @@ The index *must be a positive integer* 1, 2, 3, ...
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing allergies, the existing allergies of the person will be removed i.e adding of allergies is not cumulative.
-* You can remove all the person's allergies by typing `a/` without specifying any allergies after it.
+* You can remove all the person's allergies by typing `y/` without specifying any allergies after it.
 ****
 
 Examples:
 
-* `edit 1 p/10293847 x/02-03-2019` +
-Edits the phone number and next appointment of the 1st patient to be `10293847` and `02-03-2019` respectively.
-* `edit 2 n/Betsy Crower a/` +
+* `edit 1 p/10293847` +
+Edits the phone number of the 1st patient to be `10293847`.
+* `edit 2 n/Betsy Crower y/` +
 Edits the name of the 2nd patient to be `Betsy Crower` and clears all existing allergies.
 
 === Locating patients by name: `find`
@@ -114,8 +111,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 [TIP]
 This feature is useful to find out whether a patient has been registered in the system.
 [TIP]
-Doctors and pharmacists can also use this feature to find out more about a specific patient,
-e.g. details of next appointment, patient's allergy
+Doctors and pharmacists can also use this feature to find out more about a specific patient, e.g. patient's allergy
 
 ****
 * The search is case insensitive. e.g `hans` will match `Hans`
@@ -152,14 +148,14 @@ Deletes the 2nd patient stored in Giatros.
 `delete 1` +
 Deletes the 1st patient in the results of the `find` command.
 
-=== Selecting a person : `select` `[coming in v2.0]`
+=== Selecting a patient : `select`
 
-Selects the person identified by the index number used in the displayed person list. +
+Selects the patient identified by the index number used in the displayed patient list. +
 Format: `select INDEX`
 
 ****
-* Selects the person and loads the Google search page the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* Selects the patient and loads the Google search page the patient at the specified `INDEX`.
+* The index refers to the index number shown in the displayed patient list.
 * The index *must be a positive integer* `1, 2, 3, ...`
 ****
 
@@ -167,12 +163,12 @@ Examples:
 
 * `list` +
 `select 2` +
-Selects the 2nd person in the address book.
+Selects the 2nd patient in the address book.
 * `find Betsy` +
 `select 1` +
-Selects the 1st person in the results of the `find` command.
+Selects the 1st patient in the results of the `find` command.
 
-=== Listing entered commands : `history` `[coming in v2.0]`
+=== Listing entered commands : `history`
 
 Lists all the commands that you have entered in reverse chronological order. +
 Format: `history`
@@ -183,14 +179,14 @@ Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and 
 ====
 
 // tag::undoredo[]
-=== Undoing previous command : `undo` `[coming in v2.0]`
+=== Undoing previous command : `undo`
 
-Restores the address book to the state before the previous _undoable_ command was executed. +
+Restores the Giatros book to the state before the previous _undoable_ command was executed. +
 Format: `undo`
 
 [NOTE]
 ====
-Undoable commands: those commands that modify the address book's content (`add`, `delete`, `edit` and `clear`).
+Undoable commands: those commands that modify the Giatros book's content (`add`, `delete`, `edit` and `clear`).
 ====
 
 Examples:
@@ -209,7 +205,7 @@ The `undo` command fails as there are no undoable commands executed previously.
 `undo` (reverses the `clear` command) +
 `undo` (reverses the `delete 1` command) +
 
-=== Redoing the previously undone command : `redo` `[coming in v2.0]`
+=== Redoing the previously undone command : `redo`
 
 Reverses the most recent `undo` command. +
 Format: `redo`
@@ -258,14 +254,14 @@ _{explain how the user can enable/disable data encryption}_
 *Q*: How do I transfer my data to another Computer? +
 *A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Giatros folder.
 
-== Command Summary `[coming in v2.0]`
+== Command Summary
 
-* *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
-e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+* *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [y/ALLERGY]...` +
+e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 y/paracetamol y/ibuprofen`
 * *Clear* : `clear`
 * *Delete* : `delete INDEX` +
 e.g. `delete 3`
-* *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
+* *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [y/ALLERGY]...` +
 e.g. `edit 2 n/James Lee e/jameslee@example.com`
 * *Find* : `find KEYWORD [MORE_KEYWORDS]` +
 e.g. `find James Jake`
