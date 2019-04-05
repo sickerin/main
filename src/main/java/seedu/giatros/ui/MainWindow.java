@@ -8,6 +8,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.giatros.commons.core.GuiSettings;
@@ -16,6 +17,7 @@ import seedu.giatros.logic.Logic;
 import seedu.giatros.logic.commands.CommandResult;
 import seedu.giatros.logic.commands.exceptions.CommandException;
 import seedu.giatros.logic.parser.exceptions.ParseException;
+import seedu.giatros.ui.account.UsernameDisplay;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -46,6 +48,9 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
+    private Pane usernameDisplayPlaceholder;
+
+    @FXML
     private StackPane patientListPanelPlaceholder;
 
     @FXML
@@ -65,6 +70,7 @@ public class MainWindow extends UiPart<Stage> {
         setWindowDefaultSize(logic.getGuiSettings());
 
         setAccelerators();
+        registerAsAnEventHandler(this);
 
         helpWindow = new HelpWindow();
     }
@@ -126,6 +132,17 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand, logic.getHistory());
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        UsernameDisplay usernameDisplay = new UsernameDisplay();
+        // Centralize the width
+        usernameDisplay.getRoot().layoutXProperty().bind(usernameDisplayPlaceholder.widthProperty()
+                .subtract(usernameDisplay.getRoot().widthProperty())
+                .divide(2));
+        // Centralize the height
+        usernameDisplay.getRoot().layoutYProperty().bind(usernameDisplayPlaceholder.heightProperty()
+                .subtract(usernameDisplay.getRoot().heightProperty())
+                .divide(2));
+        usernameDisplayPlaceholder.getChildren().add(usernameDisplay.getRoot());
     }
 
     /**

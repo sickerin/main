@@ -30,6 +30,17 @@ public class VersionedGiatrosBook extends GiatrosBook {
         indicateModified();
     }
 
+
+    /**
+     * Resets the pointer of the versioned Giatros book after saving the latest state.
+     */
+    public void reset() {
+        ReadOnlyGiatrosBook finalState = giatrosBookStateList.get(currentStatePointer);
+        giatrosBookStateList.clear();
+        giatrosBookStateList.add(finalState);
+        currentStatePointer = 0;
+    }
+
     private void removeStatesAfterCurrentPointer() {
         giatrosBookStateList.subList(currentStatePointer + 1, giatrosBookStateList.size()).clear();
     }

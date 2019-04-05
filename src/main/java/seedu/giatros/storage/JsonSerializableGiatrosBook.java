@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.giatros.commons.exceptions.IllegalValueException;
 import seedu.giatros.model.GiatrosBook;
 import seedu.giatros.model.ReadOnlyGiatrosBook;
+import seedu.giatros.model.account.Account;
 import seedu.giatros.model.patient.Patient;
 
 /**
@@ -20,15 +21,19 @@ import seedu.giatros.model.patient.Patient;
 class JsonSerializableGiatrosBook {
 
     public static final String MESSAGE_DUPLICATE_PATIENT = "Patients list contains duplicate patient(s).";
+    public static final String MESSAGE_DUPLICATE_ACCOUNT = "Account list contains duplicate username(s).";
 
     private final List<JsonAdaptedPatient> patients = new ArrayList<>();
+    private final List<JsonAdaptedAccount> accounts = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableGiatrosBook} with the given patients.
      */
     @JsonCreator
-    public JsonSerializableGiatrosBook(@JsonProperty("patients") List<JsonAdaptedPatient> patients) {
+    public JsonSerializableGiatrosBook(@JsonProperty("patients") List<JsonAdaptedPatient> patients,
+                                       @JsonProperty("accounts") List<JsonAdaptedAccount> accounts) {
         this.patients.addAll(patients);
+        this.accounts.addAll(accounts);
     }
 
     /**
@@ -38,6 +43,7 @@ class JsonSerializableGiatrosBook {
      */
     public JsonSerializableGiatrosBook(ReadOnlyGiatrosBook source) {
         patients.addAll(source.getPatientList().stream().map(JsonAdaptedPatient::new).collect(Collectors.toList()));
+        accounts.addAll(source.getAccountList().stream().map(JsonAdaptedAccount::new).collect(Collectors.toList()));
     }
 
     /**
@@ -54,7 +60,13 @@ class JsonSerializableGiatrosBook {
             }
             giatrosBook.addPatient(patient);
         }
+        for (JsonAdaptedAccount jsonAdaptedAccount : accounts) {
+            Account account = jsonAdaptedAccount.toModelType();
+            if (giatrosBook.hasAccount(account)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_ACCOUNT);
+            }
+            giatrosBook.addAccount(account);
+        }
         return giatrosBook;
     }
-
 }

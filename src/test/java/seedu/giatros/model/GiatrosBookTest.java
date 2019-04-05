@@ -21,6 +21,7 @@ import javafx.beans.InvalidationListener;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.giatros.model.account.Account;
 import seedu.giatros.model.patient.Patient;
 import seedu.giatros.model.patient.exceptions.DuplicatePatientException;
 import seedu.giatros.testutil.PatientBuilder;
@@ -117,9 +118,11 @@ public class GiatrosBookTest {
      */
     private static class GiatrosBookStub implements ReadOnlyGiatrosBook {
         private final ObservableList<Patient> patients = FXCollections.observableArrayList();
+        private final ObservableList<Account> accounts = FXCollections.observableArrayList();
 
         GiatrosBookStub(Collection<Patient> patients) {
             this.patients.setAll(patients);
+            //this.accounts.setAll(accounts);
         }
 
         @Override
@@ -135,6 +138,11 @@ public class GiatrosBookTest {
         @Override
         public void removeListener(InvalidationListener listener) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Account> getAccountList() {
+            return accounts;
         }
     }
 
