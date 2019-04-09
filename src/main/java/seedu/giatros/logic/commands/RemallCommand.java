@@ -66,8 +66,7 @@ public class RemallCommand extends Command {
 
         if (!patientToEdit.equals(editedPatient)) {
             return new CommandResult(generateSuccessMessage(editedPatient));
-        }
-        else {
+        } else {
             return new CommandResult(generateFailureMessage(editedPatient));
         }
     }
