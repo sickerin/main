@@ -36,9 +36,5 @@
     "address" : "Blk 45 Aljunied Street 85, #11-31",
     "allergied" : [ "amoxicillin" ]
   } ],
-  "accounts" : [ {
-    "name" : "sssssssssssssss",
-    "username" : "chuaes",
-    "password" : "1122qq"
-  } ]
+  "accounts" : [ ]
 }

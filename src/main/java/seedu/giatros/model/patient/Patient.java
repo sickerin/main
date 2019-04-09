@@ -61,17 +61,6 @@ public class Patient {
     }
 
     /**
-     *
-     */
-    public Set<Allergy> removeAllergy(Allergy allergy) {
-        boolean removed = allergies.remove(allergy);
-        if (!removed) {
-            // Returns an error that says no such allergy found
-        }
-        return allergies;
-    }
-
-    /**
      * Returns true if both patients of the same name have at least one other identity field that is the same.
      * This defines a weaker notion of equality between two patients.
      */
