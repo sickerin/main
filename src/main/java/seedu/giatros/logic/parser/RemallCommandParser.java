@@ -8,7 +8,6 @@ import java.util.Set;
 
 import seedu.giatros.commons.core.index.Index;
 import seedu.giatros.commons.exceptions.IllegalValueException;
-import seedu.giatros.logic.commands.AddallCommand;
 import seedu.giatros.logic.commands.RemallCommand;
 import seedu.giatros.logic.parser.exceptions.ParseException;
 import seedu.giatros.model.allergy.Allergy;
