@@ -49,6 +49,10 @@ public class BrowserPanel extends UiPart<Region> {
         loadDefaultPage();
     }
 
+    /**
+     * Loads a Google search page for the first allergy associated with the {@Code Patient},
+     * if the {@code Patient} has some allergies. Otherwise, loads the default homepage.
+     */
     private void loadPatientPage(Patient patient) {
         // Modify the method to load the patient's allergy instead of the name of the patient
         if (patient.getAllergies().isEmpty()) {
