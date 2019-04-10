@@ -22,7 +22,7 @@ public class BrowserPanel extends UiPart<Region> {
 
     public static final URL DEFAULT_PAGE =
             requireNonNull(MainApp.class.getResource(FXML_FILE_FOLDER + "default.html"));
-    public static final String SEARCH_PAGE_URL = "https://se-education.org/dummy-search-page/?name=";
+    public static final String SEARCH_PAGE_URL = "https://www.google.com/search?q=";
 
     private static final String FXML = "BrowserPanel.fxml";
 
@@ -50,7 +50,13 @@ public class BrowserPanel extends UiPart<Region> {
     }
 
     private void loadPatientPage(Patient patient) {
-        loadPage(SEARCH_PAGE_URL + patient.getName().fullName);
+        // Modify the method to load the patient's allergy instead of the name of the patient
+        if (patient.getAllergies().isEmpty()) {
+            loadDefaultPage();
+            return;
+        }
+
+        loadPage(SEARCH_PAGE_URL + patient.getAllergies().toArray()[0]);
     }
 
     public void loadPage(String url) {
