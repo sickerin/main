@@ -12,6 +12,7 @@ import org.junit.Test;
 
 import guitests.guihandles.BrowserPanelHandle;
 import javafx.beans.property.SimpleObjectProperty;
+import seedu.giatros.model.allergy.Allergy;
 import seedu.giatros.model.patient.Patient;
 
 public class BrowserPanelTest extends GuiUnitTest {
@@ -34,7 +35,8 @@ public class BrowserPanelTest extends GuiUnitTest {
 
         // associated web page of a patient
         guiRobot.interact(() -> selectedPatient.set(ALICE));
-        URL expectedPatientUrl = new URL(BrowserPanel.SEARCH_PAGE_URL + ALICE.getAllergies().toArray()[0]);
+        Allergy expectedAllergy = (Allergy) ALICE.getAllergies().toArray()[0];
+        URL expectedPatientUrl = new URL(BrowserPanel.SEARCH_PAGE_URL + expectedAllergy.allergyName);
 
         waitUntilBrowserLoaded(browserPanelHandle);
         assertEquals(expectedPatientUrl, browserPanelHandle.getLoadedUrl());

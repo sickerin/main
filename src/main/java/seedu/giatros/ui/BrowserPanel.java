@@ -13,6 +13,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.web.WebView;
 import seedu.giatros.MainApp;
 import seedu.giatros.commons.core.LogsCenter;
+import seedu.giatros.model.allergy.Allergy;
 import seedu.giatros.model.patient.Patient;
 
 /**
@@ -60,7 +61,9 @@ public class BrowserPanel extends UiPart<Region> {
             return;
         }
 
-        loadPage(SEARCH_PAGE_URL + patient.getAllergies().toArray()[0]);
+        Allergy firstAllergy = (Allergy) patient.getAllergies().toArray()[0];
+
+        loadPage(SEARCH_PAGE_URL + firstAllergy.allergyName);
     }
 
     public void loadPage(String url) {
