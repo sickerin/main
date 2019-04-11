@@ -29,6 +29,10 @@ public class AccountCreator {
         name = accountToCopy.getName();
     }
 
+    /**
+     * Build an Account with the username and password given
+     * @return
+     */
     public Account build() {
         return new Account(username, password, name);
     }
