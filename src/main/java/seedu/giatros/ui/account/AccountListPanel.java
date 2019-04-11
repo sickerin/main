@@ -8,7 +8,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
-import seedu.giatros.commons.core.EventsCenter;
 import seedu.giatros.commons.core.LogsCenter;
 import seedu.giatros.model.account.Account;
 import seedu.giatros.ui.UiPart;
