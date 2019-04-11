@@ -10,11 +10,23 @@ import seedu.giatros.commons.core.GuiSettings;
 import seedu.giatros.commons.core.LogsCenter;
 import seedu.giatros.commons.core.Messages;
 import seedu.giatros.commons.core.session.UserSession;
+import seedu.giatros.logic.commands.AddCommand;
+import seedu.giatros.logic.commands.AddallCommand;
+import seedu.giatros.logic.commands.ClearCommand;
 import seedu.giatros.logic.commands.Command;
 import seedu.giatros.logic.commands.CommandResult;
+import seedu.giatros.logic.commands.DeleteCommand;
+import seedu.giatros.logic.commands.EditCommand;
 import seedu.giatros.logic.commands.ExitCommand;
+import seedu.giatros.logic.commands.FindCommand;
 import seedu.giatros.logic.commands.HelpCommand;
+import seedu.giatros.logic.commands.HistoryCommand;
+import seedu.giatros.logic.commands.ListCommand;
+import seedu.giatros.logic.commands.RedoCommand;
+import seedu.giatros.logic.commands.RemallCommand;
+import seedu.giatros.logic.commands.SelectCommand;
 import seedu.giatros.logic.commands.account.LoginCommand;
+import seedu.giatros.logic.commands.account.LogoutCommand;
 import seedu.giatros.logic.commands.exceptions.CommandException;
 import seedu.giatros.logic.parser.GiatrosBookParser;
 import seedu.giatros.logic.parser.exceptions.ParseException;
@@ -60,6 +72,22 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public boolean isStaffCommand(Command command, boolean test) {
+        if (test == false) {
+            return command instanceof LoginCommand || command instanceof HelpCommand
+                    || command instanceof AddallCommand || command instanceof AddCommand
+                    || command instanceof ClearCommand || command instanceof DeleteCommand
+                    || command instanceof EditCommand || command instanceof FindCommand
+                    || command instanceof HistoryCommand || command instanceof ListCommand
+                    || command instanceof RedoCommand || command instanceof RemallCommand
+                    || command instanceof SelectCommand || command instanceof LogoutCommand
+                    || command instanceof ExitCommand;
+        } else {
+            return true;
+        }
+    }
+
+    @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         giatrosBookModified = false;
@@ -69,6 +97,9 @@ public class LogicManager implements Logic {
             Command command = giatrosBookParser.parseCommand(commandText);
 
             if (!isGuestCommand(command, isTest) && !UserSession.isAuthenticated()) {
+                throw new CommandException(Messages.MESSAGE_COMMAND_RESTRICTED);
+            }
+            if (!isStaffCommand(command, isTest) && UserSession.isAuthenticated() && !UserSession.getAccount().getUsername().toString().equals("HEADSTAFF")) {
                 throw new CommandException(Messages.MESSAGE_COMMAND_RESTRICTED);
             }
 
