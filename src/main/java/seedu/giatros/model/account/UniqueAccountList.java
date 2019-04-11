@@ -5,11 +5,9 @@ import static seedu.giatros.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.giatros.commons.core.LogsCenter;
 import seedu.giatros.model.ModelManager;
 import seedu.giatros.model.account.exceptions.AccountNotFoundException;
 import seedu.giatros.model.account.exceptions.DuplicateAccountException;
@@ -28,8 +26,6 @@ import seedu.giatros.model.account.exceptions.DuplicateAccountException;
 public class UniqueAccountList implements Iterable<Account> {
 
     private final ObservableList<Account> internalList = FXCollections.observableArrayList();
-
-    private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     /**
      * Returns true if the list contains an equivalent account as the given argument.
@@ -128,7 +124,6 @@ public class UniqueAccountList implements Iterable<Account> {
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Account> asUnmodifiableObservableList() {
-        logger.info("UAL:" + internalList);
         return internalList;
     }
 

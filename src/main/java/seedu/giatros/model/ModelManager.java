@@ -45,9 +45,7 @@ public class ModelManager implements Model {
         versionedGiatrosBook = new VersionedGiatrosBook(giatrosBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPatients = new FilteredList<>(versionedGiatrosBook.getPatientList());
-        logger.info("MM-after-fp: " + filteredPatients);
         filteredAccounts = new FilteredList<>(versionedGiatrosBook.getAccountList());
-        logger.info("MM-after-fa: " + filteredAccounts);
         filteredPatients.addListener(this::ensureSelectedPatientIsValid);
         filteredAccounts.addListener(this::ensureSelectedAccountIsValid);
     }
@@ -247,6 +245,9 @@ public class ModelManager implements Model {
         }
     }
 
+    /**
+     * Ensures {@code selectedAccount} is a valid account in {@code filteredAccounts}.
+     */
     private void ensureSelectedAccountIsValid(ListChangeListener.Change<? extends Account> change) {
         while (change.next()) {
             if (selectedAccount.getValue() == null) {

@@ -4,11 +4,9 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.logging.Logger;
 
 import javafx.beans.InvalidationListener;
 import javafx.collections.ObservableList;
-import seedu.giatros.commons.core.LogsCenter;
 import seedu.giatros.commons.util.InvalidationListenerManager;
 import seedu.giatros.model.account.Account;
 import seedu.giatros.model.account.UniqueAccountList;
@@ -25,7 +23,6 @@ public class GiatrosBook implements ReadOnlyGiatrosBook {
     private final UniqueAccountList accounts;
     private final InvalidationListenerManager invalidationListenerManager = new InvalidationListenerManager();
 
-    private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
     /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
@@ -160,11 +157,8 @@ public class GiatrosBook implements ReadOnlyGiatrosBook {
 
     @Override
     public String toString() {
-        logger.info("GB: " + String.valueOf(accounts.asUnmodifiableObservableList().size() + " accounts\n"
-                + patients.asUnmodifiableObservableList().size() + " patients"));
         return String.valueOf(accounts.asUnmodifiableObservableList().size() + " accounts\n"
                 + patients.asUnmodifiableObservableList().size() + " patients");
-        // TODO: refine later
     }
 
     @Override
@@ -174,7 +168,6 @@ public class GiatrosBook implements ReadOnlyGiatrosBook {
 
     @Override
     public ObservableList<Account> getAccountList() {
-        logger.info("GB-gal: " + accounts.asUnmodifiableObservableList());
         return accounts.asUnmodifiableObservableList();
     }
 

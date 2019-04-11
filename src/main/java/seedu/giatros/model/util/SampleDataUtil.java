@@ -6,9 +6,6 @@ import java.util.stream.Collectors;
 
 import seedu.giatros.model.GiatrosBook;
 import seedu.giatros.model.ReadOnlyGiatrosBook;
-import seedu.giatros.model.account.Account;
-import seedu.giatros.model.account.Password;
-import seedu.giatros.model.account.Username;
 import seedu.giatros.model.allergy.Allergy;
 import seedu.giatros.model.patient.Address;
 import seedu.giatros.model.patient.Email;
@@ -20,13 +17,6 @@ import seedu.giatros.model.patient.Phone;
  * Contains utility methods for populating {@code GiatrosBook} with sample data.
  */
 public class SampleDataUtil {
-
-    //public static Account[] getSampleAccounts() {
-        //return new Account[] {
-                //new Account(new Username("MANAGER"), new Password("1122qq"), new Name("MANAGER")),
-                //new Account(new Username("ces"), new Password("1122qq"), new Name("ces"))
-        //};
-    //}
 
     public static Patient[] getSamplePatients() {
         return new Patient[] {

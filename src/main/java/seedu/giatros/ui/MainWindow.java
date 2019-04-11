@@ -2,7 +2,6 @@ package seedu.giatros.ui;
 
 import java.util.logging.Logger;
 
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -141,7 +140,6 @@ public class MainWindow extends UiPart<Stage> {
         CommandBox commandBox = new CommandBox(this::executeCommand, logic.getHistory());
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
-        logger.info("Accounts in json file: " + logic.getFilteredAccountList());
         accountListPanel = new AccountListPanel(logic.getFilteredAccountList());
         UsernameDisplay usernameDisplay = new UsernameDisplay();
         // Centralize the width
