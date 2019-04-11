@@ -6,6 +6,7 @@ import static seedu.giatros.logic.parser.CliSyntax.PREFIX_PASSWORD;
 
 import seedu.giatros.commons.core.EventsCenter;
 import seedu.giatros.commons.core.session.UserSession;
+import seedu.giatros.commons.events.ui.ToggleSidePanelVisibilityEvent;
 import seedu.giatros.commons.events.ui.accounts.LoginEvent;
 import seedu.giatros.logic.CommandHistory;
 import seedu.giatros.logic.commands.Command;
@@ -29,7 +30,7 @@ public class LoginCommand extends Command {
             + PREFIX_ID + "chuaes "
             + PREFIX_PASSWORD + "112233";
 
-    public static final String MESSAGE_SUCCESS = "Successfully logged in to %s";
+    public static final String MESSAGE_SUCCESS = "Successfully logged in";
     public static final String MESSAGE_ACCOUNT_NOT_FOUND = "The account does not exist";
     public static final String MESSAGE_WRONG_PASSWORD = "The credential is invalid";
     public static final String MESSAGE_ALREADY_AUTHENTICATED = "You are already logged in";
@@ -45,24 +46,22 @@ public class LoginCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        Account retrievedAccount;
-
         if (UserSession.isAuthenticated()) {
             throw new CommandException(MESSAGE_ALREADY_AUTHENTICATED);
         }
 
-        if (!model.hasAccount(toLogin)) {
-            throw new CommandException(MESSAGE_ACCOUNT_NOT_FOUND);
-        } else { // wrong password but that is a valid username
-            retrievedAccount = model.getAccount(toLogin);
+        if (model.hasAccount(toLogin)) {
+            Account retrievedAccount = model.getAccount(toLogin);
 
             if (!retrievedAccount.getPassword().equals(toLogin.getPassword())) {
                 throw new CommandException(MESSAGE_WRONG_PASSWORD);
             }
             EventsCenter.getInstance().post(new LoginEvent(retrievedAccount));
+            EventsCenter.getInstance().post(new ToggleSidePanelVisibilityEvent(true));
+        } else {
+            throw new CommandException(MESSAGE_ACCOUNT_NOT_FOUND);
         }
-
-        return new CommandResult(String.format(MESSAGE_SUCCESS, retrievedAccount));
+        return new CommandResult(String.format(MESSAGE_SUCCESS));
     }
 
     @Override

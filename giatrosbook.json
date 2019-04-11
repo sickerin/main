@@ -36,5 +36,11 @@
     "address" : "Blk 45 Aljunied Street 85, #11-31",
     "allergied" : [ "amoxicillin" ]
   } ],
-  "accounts" : [ ]
+  "accounts" : [
+    {
+      "name": "ces",
+      "username": "ces",
+      "password": "1122qq"
+    }
+  ]
 }

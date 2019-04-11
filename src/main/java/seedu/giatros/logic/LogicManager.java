@@ -8,13 +8,19 @@ import javafx.beans.property.ReadOnlyProperty;
 import javafx.collections.ObservableList;
 import seedu.giatros.commons.core.GuiSettings;
 import seedu.giatros.commons.core.LogsCenter;
+import seedu.giatros.commons.core.Messages;
+import seedu.giatros.commons.core.session.UserSession;
 import seedu.giatros.logic.commands.Command;
 import seedu.giatros.logic.commands.CommandResult;
+import seedu.giatros.logic.commands.ExitCommand;
+import seedu.giatros.logic.commands.HelpCommand;
+import seedu.giatros.logic.commands.account.LoginCommand;
 import seedu.giatros.logic.commands.exceptions.CommandException;
 import seedu.giatros.logic.parser.GiatrosBookParser;
 import seedu.giatros.logic.parser.exceptions.ParseException;
 import seedu.giatros.model.Model;
 import seedu.giatros.model.ReadOnlyGiatrosBook;
+import seedu.giatros.model.account.Account;
 import seedu.giatros.model.patient.Patient;
 import seedu.giatros.storage.Storage;
 
@@ -31,6 +37,8 @@ public class LogicManager implements Logic {
     private final GiatrosBookParser giatrosBookParser;
     private boolean giatrosBookModified;
 
+    private boolean isTest = false;
+
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
@@ -42,6 +50,16 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public boolean isGuestCommand(Command command, boolean test) {
+        if (test == false) {
+            return command instanceof LoginCommand || command instanceof HelpCommand
+                    || command instanceof ExitCommand;
+        } else {
+            return true;
+        }
+    }
+
+    @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         giatrosBookModified = false;
@@ -49,6 +67,11 @@ public class LogicManager implements Logic {
         CommandResult commandResult;
         try {
             Command command = giatrosBookParser.parseCommand(commandText);
+
+            if (!isGuestCommand(command, isTest) && !UserSession.isAuthenticated()) {
+                throw new CommandException(Messages.MESSAGE_COMMAND_RESTRICTED);
+            }
+
             commandResult = command.execute(model, history);
         } finally {
             history.add(commandText);
@@ -74,6 +97,11 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Patient> getFilteredPatientList() {
         return model.getFilteredPatientList();
+    }
+
+    @Override
+    public ObservableList<Account> getFilteredAccountList() {
+        return model.getFilteredAccountList();
     }
 
     @Override
@@ -104,5 +132,10 @@ public class LogicManager implements Logic {
     @Override
     public void setSelectedPatient(Patient patient) {
         model.setSelectedPatient(patient);
+    }
+
+    @Override
+    public void setIsTest(boolean isTest) {
+        this.isTest = isTest;
     }
 }
