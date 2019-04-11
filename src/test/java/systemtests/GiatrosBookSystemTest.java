@@ -33,6 +33,7 @@ import seedu.giatros.TestApp;
 import seedu.giatros.commons.core.EventsCenter;
 import seedu.giatros.commons.core.index.Index;
 import seedu.giatros.commons.events.ui.ToggleSidePanelVisibilityEvent;
+import seedu.giatros.commons.events.ui.accounts.LoginEvent;
 import seedu.giatros.logic.commands.ClearCommand;
 import seedu.giatros.logic.commands.FindCommand;
 import seedu.giatros.logic.commands.ListCommand;
@@ -42,6 +43,7 @@ import seedu.giatros.model.Model;
 import seedu.giatros.testutil.TypicalPatients;
 import seedu.giatros.ui.BrowserPanel;
 import seedu.giatros.ui.CommandBox;
+import seedu.giatros.ui.testutil.AccountCreator;
 
 /**
  * A system test class for GiatrosBook, which provides access to handles of GUI components and helper methods
@@ -62,6 +64,7 @@ public abstract class GiatrosBookSystemTest {
     @BeforeClass
     public static void setupBeforeClass() {
         SystemTestSetupHelper.initialize();
+        EventsCenter.getInstance().post(new LoginEvent(new AccountCreator().build()));
     }
 
     @Before

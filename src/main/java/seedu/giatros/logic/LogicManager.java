@@ -37,6 +37,8 @@ public class LogicManager implements Logic {
     private final GiatrosBookParser giatrosBookParser;
     private boolean giatrosBookModified;
 
+    private boolean isTest = false;
+
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
@@ -47,12 +49,14 @@ public class LogicManager implements Logic {
         model.getGiatrosBook().addListener(observable -> giatrosBookModified = true);
     }
 
-    /**
-     * Verifies if a {@code Command} is a guest command which can be executed without being authenticated.
-     */
-    private boolean isGuestCommand(Command command) {
-        return command instanceof LoginCommand || command instanceof HelpCommand
-                || command instanceof ExitCommand;
+    @Override
+    public boolean isGuestCommand(Command command, boolean test) {
+        if (test == false) {
+            return command instanceof LoginCommand || command instanceof HelpCommand
+                    || command instanceof ExitCommand;
+        } else {
+            return true;
+        }
     }
 
     @Override
@@ -64,7 +68,7 @@ public class LogicManager implements Logic {
         try {
             Command command = giatrosBookParser.parseCommand(commandText);
 
-            if (!isGuestCommand(command) && !UserSession.isAuthenticated()) {
+            if (!isGuestCommand(command, isTest) && !UserSession.isAuthenticated()) {
                 throw new CommandException(Messages.MESSAGE_COMMAND_RESTRICTED);
             }
 
@@ -128,5 +132,10 @@ public class LogicManager implements Logic {
     @Override
     public void setSelectedPatient(Patient patient) {
         model.setSelectedPatient(patient);
+    }
+
+    @Override
+    public void setIsTest(boolean isTest) {
+        this.isTest = isTest;
     }
 }
