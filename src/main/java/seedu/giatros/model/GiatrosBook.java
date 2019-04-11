@@ -3,9 +3,12 @@ package seedu.giatros.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.logging.Logger;
 
 import javafx.beans.InvalidationListener;
 import javafx.collections.ObservableList;
+import seedu.giatros.commons.core.LogsCenter;
 import seedu.giatros.commons.util.InvalidationListenerManager;
 import seedu.giatros.model.account.Account;
 import seedu.giatros.model.account.UniqueAccountList;
@@ -22,6 +25,7 @@ public class GiatrosBook implements ReadOnlyGiatrosBook {
     private final UniqueAccountList accounts;
     private final InvalidationListenerManager invalidationListenerManager = new InvalidationListenerManager();
 
+    private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
     /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
@@ -54,13 +58,21 @@ public class GiatrosBook implements ReadOnlyGiatrosBook {
         this.patients.setPatients(patients);
         indicateModified();
     }
+    /**
+     * Replaces the contents of the account list with {@code accounts}.
+     * {@code patients} must not contain duplicate accounts.
+     */
+    public void setAccounts(List<Account> accounts) {
+        this.accounts.setAccounts(accounts);
+        indicateModified();
+    }
 
     /**
      * Resets the existing data of this {@code GiatrosBook} with {@code newData}.
      */
     public void resetData(ReadOnlyGiatrosBook newData) {
         requireNonNull(newData);
-
+        setAccounts(newData.getAccountList());
         setPatients(newData.getPatientList());
     }
 
@@ -148,6 +160,8 @@ public class GiatrosBook implements ReadOnlyGiatrosBook {
 
     @Override
     public String toString() {
+        logger.info("GB: " + String.valueOf(accounts.asUnmodifiableObservableList().size() + " accounts\n"
+                + patients.asUnmodifiableObservableList().size() + " patients"));
         return String.valueOf(accounts.asUnmodifiableObservableList().size() + " accounts\n"
                 + patients.asUnmodifiableObservableList().size() + " patients");
         // TODO: refine later
@@ -160,18 +174,18 @@ public class GiatrosBook implements ReadOnlyGiatrosBook {
 
     @Override
     public ObservableList<Account> getAccountList() {
+        logger.info("GB-gal: " + accounts.asUnmodifiableObservableList());
         return accounts.asUnmodifiableObservableList();
     }
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof GiatrosBook // instanceof handles nulls
-                && patients.equals(((GiatrosBook) other).patients));
+        return accounts.equals(((GiatrosBook) other).accounts)
+                && patients.equals(((GiatrosBook) other).patients);
     }
 
     @Override
     public int hashCode() {
-        return patients.hashCode();
+        return Objects.hash(accounts, patients);
     }
 }

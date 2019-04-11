@@ -9,6 +9,7 @@ import seedu.giatros.logic.commands.CommandResult;
 import seedu.giatros.logic.commands.exceptions.CommandException;
 import seedu.giatros.logic.parser.exceptions.ParseException;
 import seedu.giatros.model.ReadOnlyGiatrosBook;
+import seedu.giatros.model.account.Account;
 import seedu.giatros.model.patient.Patient;
 
 /**
@@ -33,6 +34,9 @@ public interface Logic {
 
     /** Returns an unmodifiable view of the filtered list of patients */
     ObservableList<Patient> getFilteredPatientList();
+
+    /** Returns an unmodifiable view of the filtered list of patients */
+    ObservableList<Account> getFilteredAccountList();
 
     /**
      * Returns an unmodifiable view of the list of commands entered by the user.

@@ -8,13 +8,19 @@ import javafx.beans.property.ReadOnlyProperty;
 import javafx.collections.ObservableList;
 import seedu.giatros.commons.core.GuiSettings;
 import seedu.giatros.commons.core.LogsCenter;
+import seedu.giatros.commons.core.Messages;
+import seedu.giatros.commons.core.session.UserSession;
 import seedu.giatros.logic.commands.Command;
 import seedu.giatros.logic.commands.CommandResult;
+import seedu.giatros.logic.commands.ExitCommand;
+import seedu.giatros.logic.commands.HelpCommand;
+import seedu.giatros.logic.commands.account.LoginCommand;
 import seedu.giatros.logic.commands.exceptions.CommandException;
 import seedu.giatros.logic.parser.GiatrosBookParser;
 import seedu.giatros.logic.parser.exceptions.ParseException;
 import seedu.giatros.model.Model;
 import seedu.giatros.model.ReadOnlyGiatrosBook;
+import seedu.giatros.model.account.Account;
 import seedu.giatros.model.patient.Patient;
 import seedu.giatros.storage.Storage;
 
@@ -41,6 +47,14 @@ public class LogicManager implements Logic {
         model.getGiatrosBook().addListener(observable -> giatrosBookModified = true);
     }
 
+    /**
+     * Verifies if a {@code Command} is a guest command which can be executed without being authenticated.
+     */
+    private boolean isGuestCommand(Command command) {
+        return command instanceof LoginCommand || command instanceof HelpCommand
+                || command instanceof ExitCommand;
+    }
+
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
@@ -49,6 +63,11 @@ public class LogicManager implements Logic {
         CommandResult commandResult;
         try {
             Command command = giatrosBookParser.parseCommand(commandText);
+
+            if (!isGuestCommand(command) && !UserSession.isAuthenticated()) {
+                throw new CommandException(Messages.MESSAGE_COMMAND_RESTRICTED);
+            }
+
             commandResult = command.execute(model, history);
         } finally {
             history.add(commandText);
@@ -74,6 +93,11 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Patient> getFilteredPatientList() {
         return model.getFilteredPatientList();
+    }
+
+    @Override
+    public ObservableList<Account> getFilteredAccountList() {
+        return model.getFilteredAccountList();
     }
 
     @Override

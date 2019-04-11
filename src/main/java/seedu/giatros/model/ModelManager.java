@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 
 import javafx.beans.property.ReadOnlyProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -28,7 +29,9 @@ public class ModelManager implements Model {
     private final VersionedGiatrosBook versionedGiatrosBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Patient> filteredPatients;
+    private final FilteredList<Account> filteredAccounts;
     private final SimpleObjectProperty<Patient> selectedPatient = new SimpleObjectProperty<>();
+    private final SimpleObjectProperty<Account> selectedAccount = new SimpleObjectProperty<>();
 
     /**
      * Initializes a ModelManager with the given GiatrosBook and userPrefs.
@@ -42,7 +45,11 @@ public class ModelManager implements Model {
         versionedGiatrosBook = new VersionedGiatrosBook(giatrosBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPatients = new FilteredList<>(versionedGiatrosBook.getPatientList());
+        logger.info("MM-after-fp: " + filteredPatients);
+        filteredAccounts = new FilteredList<>(versionedGiatrosBook.getAccountList());
+        logger.info("MM-after-fa: " + filteredAccounts);
         filteredPatients.addListener(this::ensureSelectedPatientIsValid);
+        filteredAccounts.addListener(this::ensureSelectedAccountIsValid);
     }
 
     public ModelManager() {
@@ -172,6 +179,11 @@ public class ModelManager implements Model {
     //=========== Accounts =================================================================================
 
     @Override
+    public ObservableList<Account> getFilteredAccountList() {
+        return FXCollections.unmodifiableObservableList(filteredAccounts);
+    }
+
+    @Override
     public void addAccount(Account account) {
         versionedGiatrosBook.addAccount(account);
     }
@@ -235,6 +247,33 @@ public class ModelManager implements Model {
         }
     }
 
+    private void ensureSelectedAccountIsValid(ListChangeListener.Change<? extends Account> change) {
+        while (change.next()) {
+            if (selectedAccount.getValue() == null) {
+                // null is always a valid selected patient, so we do not need to check that it is valid anymore.
+                return;
+            }
+
+            boolean wasSelectedAccountReplaced = change.wasReplaced() && change.getAddedSize()
+                    == change.getRemovedSize() && change.getRemoved().contains(selectedAccount.getValue());
+            if (wasSelectedAccountReplaced) {
+                // Update selectedPatient to its new value.
+                int index = change.getRemoved().indexOf(selectedAccount.getValue());
+                selectedAccount.setValue(change.getAddedSubList().get(index));
+                continue;
+            }
+
+            boolean wasSelectedAccountRemoved = change.getRemoved().stream()
+                    .anyMatch(removedAccount -> selectedAccount.getValue().isSameUsername(removedAccount));
+            if (wasSelectedAccountRemoved) {
+                // Select the patient that came before it in the list,
+                // or clear the selection if there is no such patient.
+                selectedAccount.setValue(change.getFrom() > 0 ? change.getList().get(change.getFrom() - 1) : null);
+            }
+        }
+    }
+
+
     @Override
     public boolean equals(Object obj) {
         // short circuit if same object
@@ -251,6 +290,8 @@ public class ModelManager implements Model {
         ModelManager other = (ModelManager) obj;
         return versionedGiatrosBook.equals(other.versionedGiatrosBook)
                 && userPrefs.equals(other.userPrefs)
+                && filteredAccounts.equals(other.filteredAccounts)
+                && Objects.equals(selectedAccount.get(), other.selectedAccount.get())
                 && filteredPatients.equals(other.filteredPatients)
                 && Objects.equals(selectedPatient.get(), other.selectedPatient.get());
     }
