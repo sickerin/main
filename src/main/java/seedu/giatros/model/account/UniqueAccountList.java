@@ -8,7 +8,6 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.giatros.model.ModelManager;
 import seedu.giatros.model.account.exceptions.AccountNotFoundException;
 import seedu.giatros.model.account.exceptions.DuplicateAccountException;
 
