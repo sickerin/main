@@ -3,11 +3,6 @@ package seedu.giatros.logic;
 import static org.junit.Assert.assertEquals;
 import static seedu.giatros.commons.core.Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX;
 import static seedu.giatros.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.giatros.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
-import static seedu.giatros.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
-import static seedu.giatros.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-import static seedu.giatros.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
-import static seedu.giatros.testutil.TypicalPatients.AMY;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -18,7 +13,6 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
 
-import seedu.giatros.logic.commands.AddCommand;
 import seedu.giatros.logic.commands.CommandResult;
 import seedu.giatros.logic.commands.HistoryCommand;
 import seedu.giatros.logic.commands.ListCommand;
@@ -28,12 +22,9 @@ import seedu.giatros.model.Model;
 import seedu.giatros.model.ModelManager;
 import seedu.giatros.model.ReadOnlyGiatrosBook;
 import seedu.giatros.model.UserPrefs;
-import seedu.giatros.model.patient.Patient;
 import seedu.giatros.storage.JsonGiatrosBookStorage;
 import seedu.giatros.storage.JsonUserPrefsStorage;
 import seedu.giatros.storage.StorageManager;
-import seedu.giatros.testutil.PatientBuilder;
-
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy exception");
@@ -53,6 +44,7 @@ public class LogicManagerTest {
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.newFile().toPath());
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
+        logic.setIsTest(true);
     }
 
     @Test
@@ -85,16 +77,6 @@ public class LogicManagerTest {
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
 
-        // Execute add command
-        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                + ADDRESS_DESC_AMY;
-        Patient expectedPatient = new PatientBuilder(AMY).withAllergies().build();
-        ModelManager expectedModel = new ModelManager();
-        expectedModel.addPatient(expectedPatient);
-        expectedModel.commitGiatrosBook();
-        String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
-        assertCommandBehavior(CommandException.class, addCommand, expectedMessage, expectedModel);
-        assertHistoryCorrect(addCommand);
     }
 
     @Test
@@ -168,7 +150,7 @@ public class LogicManagerTest {
             String expectedMessage = String.format(
                     HistoryCommand.MESSAGE_SUCCESS, String.join("\n", expectedCommands));
             assertEquals(expectedMessage, result.getFeedbackToUser());
-        } catch (ParseException | CommandException e) {
+        } catch (CommandException | ParseException e) {
             throw new AssertionError("Parsing and execution of HistoryCommand.COMMAND_WORD should succeed.", e);
         }
     }

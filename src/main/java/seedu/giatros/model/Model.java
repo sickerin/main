@@ -88,6 +88,9 @@ public interface Model {
      */
     void updateFilteredPatientList(Predicate<Patient> predicate);
 
+    /** Returns an unmodifiable view of the filtered patient list */
+    ObservableList<Account> getFilteredAccountList();
+
     /**
      * Returns true if the model has previous Giatros book states to restore.
      */

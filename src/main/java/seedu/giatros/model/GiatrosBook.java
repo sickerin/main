@@ -3,6 +3,7 @@ package seedu.giatros.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Objects;
 
 import javafx.beans.InvalidationListener;
 import javafx.collections.ObservableList;
@@ -54,13 +55,21 @@ public class GiatrosBook implements ReadOnlyGiatrosBook {
         this.patients.setPatients(patients);
         indicateModified();
     }
+    /**
+     * Replaces the contents of the account list with {@code accounts}.
+     * {@code patients} must not contain duplicate accounts.
+     */
+    public void setAccounts(List<Account> accounts) {
+        this.accounts.setAccounts(accounts);
+        indicateModified();
+    }
 
     /**
      * Resets the existing data of this {@code GiatrosBook} with {@code newData}.
      */
     public void resetData(ReadOnlyGiatrosBook newData) {
         requireNonNull(newData);
-
+        setAccounts(newData.getAccountList());
         setPatients(newData.getPatientList());
     }
 
@@ -150,7 +159,6 @@ public class GiatrosBook implements ReadOnlyGiatrosBook {
     public String toString() {
         return String.valueOf(accounts.asUnmodifiableObservableList().size() + " accounts\n"
                 + patients.asUnmodifiableObservableList().size() + " patients");
-        // TODO: refine later
     }
 
     @Override
@@ -165,13 +173,12 @@ public class GiatrosBook implements ReadOnlyGiatrosBook {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof GiatrosBook // instanceof handles nulls
-                && patients.equals(((GiatrosBook) other).patients));
+        return accounts.equals(((GiatrosBook) other).accounts)
+                && patients.equals(((GiatrosBook) other).patients);
     }
 
     @Override
     public int hashCode() {
-        return patients.hashCode();
+        return Objects.hash(accounts, patients);
     }
 }
