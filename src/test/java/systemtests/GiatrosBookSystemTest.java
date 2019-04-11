@@ -25,6 +25,7 @@ import guitests.guihandles.BrowserPanelHandle;
 import guitests.guihandles.CommandBoxHandle;
 import guitests.guihandles.MainMenuHandle;
 import guitests.guihandles.MainWindowHandle;
+import guitests.guihandles.PatientCardHandle;
 import guitests.guihandles.PatientListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.StatusBarFooterHandle;
@@ -208,13 +209,16 @@ public abstract class GiatrosBookSystemTest {
      */
     protected void assertSelectedCardChanged(Index expectedSelectedCardIndex) {
         getPatientListPanel().navigateToCard(getPatientListPanel().getSelectedCardIndex());
-        String selectedCardName = getPatientListPanel().getHandleToSelectedCard().getName();
+        PatientCardHandle selectedCard = getPatientListPanel().getHandleToSelectedCard();
         URL expectedUrl;
         try {
-            expectedUrl = new URL(BrowserPanel.SEARCH_PAGE_URL + selectedCardName.replaceAll(" ", "%20"));
+            expectedUrl = new URL(BrowserPanel.SEARCH_PAGE_URL + selectedCard.getAllergies().toArray()[0]);
         } catch (MalformedURLException mue) {
             throw new AssertionError("URL expected to be valid.", mue);
+        } catch (IndexOutOfBoundsException ioube) {
+            expectedUrl = BrowserPanel.DEFAULT_PAGE;
         }
+
         assertEquals(expectedUrl, getBrowserPanel().getLoadedUrl());
 
         assertEquals(expectedSelectedCardIndex.getZeroBased(), getPatientListPanel().getSelectedCardIndex());
