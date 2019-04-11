@@ -99,7 +99,8 @@ public class LogicManager implements Logic {
             if (!isGuestCommand(command, isTest) && !UserSession.isAuthenticated()) {
                 throw new CommandException(Messages.MESSAGE_COMMAND_RESTRICTED);
             }
-            if (!isStaffCommand(command, isTest) && UserSession.isAuthenticated() && !UserSession.getAccount().getUsername().toString().equals("HEADSTAFF")) {
+            if (!isStaffCommand(command, isTest) && UserSession.isAuthenticated() && !UserSession.getAccount()
+                    .getUsername().toString().equals("HEADSTAFF")) {
                 throw new CommandException(Messages.MESSAGE_COMMAND_RESTRICTED);
             }
 
