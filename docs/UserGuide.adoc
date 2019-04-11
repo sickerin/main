@@ -228,6 +228,59 @@ The `redo` command fails as there are no `undo` commands executed previously.
 `redo` (reapplies the `clear` command) +
 // end::undoredo[]
 
+// tag:addremall[]
+=== Adding allergy to a patient: `addall`
+
+Adds one or more allergies to an existing patient in Giatros. +
+Format: `addall INDEX y/ALLERGY [y/ALLERGY]...`
+
+[NOTE]
+====
+Allergy names should be alphanumeric, i.e. `ibuprofen`, `C6H6` are acceptable but `anti-inflammatory` is not acceptable.
+====
+
+****
+* Adds one or more allergies to the patient at the specified `INDEX`. The index refers to the index number shown in the displayed patient list.
+The index *must be a positive integer* 1, 2, 3, ...
+* Multiple allergies can be added at a time by separating the distinct allergies with distinct `y/` tags, e.g. `y/aspirin y/ibuprofen`.
+* Allergies already associated with the patient will be ignored. For example, if the 1st patient is allergic to `aspirin`, `addall 1 y/aspirin`
+will not modify the allergy list while `addall 1 y/aspirin y/ibuprofen` will just add `ibuprofen` to the allergy list.
+****
+
+Examples:
+
+* `addall 1 y/ibuprofen` +
+Adds the allergy `ibuprofen` to the 1st patient in the list.
+* `addall 3 y/aspirin y/amoxicillin` +
+Adds two allergies, `aspirin` and `amoxicillin` to the 3rd patient in the list.
+
+
+=== Removing allergy from a patient: `remall`
+
+[NOTE]
+====
+Allergy names should be alphanumeric, i.e. `ibuprofen`, `C6H6` are acceptable but `anti-inflammatory` is not acceptable.
+====
+
+Removes one or more allergies to an existing patient in Giatros. +
+Format: `remall INDEX y/ALLERGY [y/ALLERGY]...`
+
+****
+* Removes one or more allergies to the patient at the specified `INDEX`. The index refers to the index number shown in the displayed patient list.
+The index *must be a positive integer* 1, 2, 3, ...
+* Multiple allergies can be removed at a time by separating the distinct allergies with distinct `y/` tags, e.g. `y/aspirin y/ibuprofen`.
+* Allergies not already associated with the patient will be ignored. For example, if the 1st patient is allergic to `aspirin`, `addall 1 y/ibuprofen`
+  will not modify the allergy list while `addall 1 y/aspirin y/ibuprofen` will just remove `aspirin` from the allergy list.
+****
+
+Examples:
+
+* `remall 1 y/ibuprofen` +
+Removes the allergy `ibuprofen` from the 1st patient in the list.
+* `remall 3 y/aspirin y/amoxicillin` +
+Removes two allergies, `aspirin` and `amoxicillin` from the 3rd patient in the list.
+// end:addremall[]
+
 === Clearing all entries : `clear`
 
 Clears all entries from Giatros. +
