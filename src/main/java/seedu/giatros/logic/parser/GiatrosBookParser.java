@@ -22,6 +22,7 @@ import seedu.giatros.logic.commands.RemallCommand;
 import seedu.giatros.logic.commands.SelectCommand;
 import seedu.giatros.logic.commands.UndoCommand;
 import seedu.giatros.logic.commands.account.LoginCommand;
+import seedu.giatros.logic.commands.account.LogoutCommand;
 import seedu.giatros.logic.commands.account.RegisterCommand;
 import seedu.giatros.logic.parser.account.LoginCommandParser;
 import seedu.giatros.logic.parser.account.RegisterCommandParser;
@@ -59,6 +60,9 @@ public class GiatrosBookParser {
 
         case RegisterCommand.COMMAND_WORD:
             return new RegisterCommandParser().parse(arguments);
+
+        case LogoutCommand.COMMAND_WORD:
+            return new LogoutCommand();
 
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);

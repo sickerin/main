@@ -30,7 +30,9 @@ import guitests.guihandles.PatientListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.StatusBarFooterHandle;
 import seedu.giatros.TestApp;
+import seedu.giatros.commons.core.EventsCenter;
 import seedu.giatros.commons.core.index.Index;
+import seedu.giatros.commons.events.ui.ToggleSidePanelVisibilityEvent;
 import seedu.giatros.logic.commands.ClearCommand;
 import seedu.giatros.logic.commands.FindCommand;
 import seedu.giatros.logic.commands.ListCommand;
@@ -70,6 +72,8 @@ public abstract class GiatrosBookSystemTest {
 
         waitUntilBrowserLoaded(getBrowserPanel());
         assertApplicationStartingStateIsCorrect();
+
+        EventsCenter.getInstance().post(new ToggleSidePanelVisibilityEvent(true));
     }
 
     @After
