@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.giatros.model.allergy.Allergy;
+import seedu.giatros.model.appointment.Appointment;
 
 /**
  * Represents a Patient in the Giatros book.
@@ -23,17 +24,19 @@ public class Patient {
     // Data fields
     private final Address address;
     private final Set<Allergy> allergies = new HashSet<>();
+    private final Set<Appointment> appointments = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Patient(Name name, Phone phone, Email email, Address address, Set<Allergy> allergies) {
+    public Patient(Name name, Phone phone, Email email, Address address, Set<Allergy> allergies, Set<Appointment> appointments) {
         requireAllNonNull(name, phone, email, address, allergies);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.allergies.addAll(allergies);
+        this.appointments.addAll(appointments);
     }
 
     public Name getName() {
@@ -59,6 +62,15 @@ public class Patient {
     public Set<Allergy> getAllergies() {
         return Collections.unmodifiableSet(allergies);
     }
+
+    /**
+     * Returns an immutable allergy set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Appointment> getAppointments(){
+        return Collections.unmodifiableSet(appointments);
+    }
+
 
     /**
      * Returns true if both patients of the same name have at least one other identity field that is the same.
@@ -93,16 +105,18 @@ public class Patient {
                 && otherPatient.getPhone().equals(getPhone())
                 && otherPatient.getEmail().equals(getEmail())
                 && otherPatient.getAddress().equals(getAddress())
-                && otherPatient.getAllergies().equals(getAllergies());
+                && otherPatient.getAllergies().equals(getAllergies())
+                && otherPatient.getAppointments().equals(getAppointments());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, allergies);
+        return Objects.hash(name, phone, email, address, allergies, appointments);
     }
 
     @Override
+    // TODO to string builder for appointment
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())

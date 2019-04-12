@@ -2,7 +2,7 @@ package seedu.giatros.logic.commands;
 
 import static seedu.giatros.commons.util.CollectionUtil.requireAllNonNull;
 // TODO the import below does not exist
-// import static seedu.giatros.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
+import static seedu.giatros.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
 import static seedu.giatros.model.Model.PREDICATE_SHOW_ALL_PATIENTS;
 
 import java.util.HashSet;
@@ -62,11 +62,12 @@ public class AddaptCommand extends Command {
         Patient patientToEdit = lastShownList.get(index.getZeroBased());
 
         Set<Appointment> newAppointment = new HashSet<>();
-        newAppointment.addAll(patientToEdit.getAllergies());
+        // TODO add getAppointment method to patient class
+        newAppointment.addAll(patientToEdit.getAppointments());
         newAppointment.addAll(appointments);
 
         Patient editedPatient = new Patient(patientToEdit.getName(), patientToEdit.getPhone(), patientToEdit.getEmail(),
-                patientToEdit.getAddress(), newAppointment);
+                patientToEdit.getAddress(), patientToEdit.getAllergies(), newAppointment);
 
         model.setPatient(patientToEdit, editedPatient);
         model.updateFilteredPatientList(PREDICATE_SHOW_ALL_PATIENTS);
@@ -114,3 +115,4 @@ public class AddaptCommand extends Command {
     }
 
 }
+
