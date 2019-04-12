@@ -13,6 +13,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.web.WebView;
 import seedu.giatros.MainApp;
 import seedu.giatros.commons.core.LogsCenter;
+import seedu.giatros.model.allergy.Allergy;
 import seedu.giatros.model.patient.Patient;
 
 /**
@@ -22,7 +23,7 @@ public class BrowserPanel extends UiPart<Region> {
 
     public static final URL DEFAULT_PAGE =
             requireNonNull(MainApp.class.getResource(FXML_FILE_FOLDER + "default.html"));
-    public static final String SEARCH_PAGE_URL = "https://se-education.org/dummy-search-page/?name=";
+    public static final String SEARCH_PAGE_URL = "https://www.google.com/search?q=";
 
     private static final String FXML = "BrowserPanel.fxml";
 
@@ -49,8 +50,20 @@ public class BrowserPanel extends UiPart<Region> {
         loadDefaultPage();
     }
 
+    /**
+     * Loads a Google search page for the first allergy associated with the {@Code Patient},
+     * if the {@code Patient} has some allergies. Otherwise, loads the default homepage.
+     */
     private void loadPatientPage(Patient patient) {
-        loadPage(SEARCH_PAGE_URL + patient.getName().fullName);
+        // Modify the method to load the patient's allergy instead of the name of the patient
+        if (patient.getAllergies().isEmpty()) {
+            loadDefaultPage();
+            return;
+        }
+
+        Allergy firstAllergy = (Allergy) patient.getAllergies().toArray()[0];
+
+        loadPage(SEARCH_PAGE_URL + firstAllergy.allergyName);
     }
 
     public void loadPage(String url) {

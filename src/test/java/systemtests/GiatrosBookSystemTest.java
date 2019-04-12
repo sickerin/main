@@ -25,11 +25,15 @@ import guitests.guihandles.BrowserPanelHandle;
 import guitests.guihandles.CommandBoxHandle;
 import guitests.guihandles.MainMenuHandle;
 import guitests.guihandles.MainWindowHandle;
+import guitests.guihandles.PatientCardHandle;
 import guitests.guihandles.PatientListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.StatusBarFooterHandle;
 import seedu.giatros.TestApp;
+import seedu.giatros.commons.core.EventsCenter;
 import seedu.giatros.commons.core.index.Index;
+import seedu.giatros.commons.events.ui.ToggleSidePanelVisibilityEvent;
+import seedu.giatros.commons.events.ui.accounts.LoginEvent;
 import seedu.giatros.logic.commands.ClearCommand;
 import seedu.giatros.logic.commands.FindCommand;
 import seedu.giatros.logic.commands.ListCommand;
@@ -39,6 +43,7 @@ import seedu.giatros.model.Model;
 import seedu.giatros.testutil.TypicalPatients;
 import seedu.giatros.ui.BrowserPanel;
 import seedu.giatros.ui.CommandBox;
+import seedu.giatros.ui.testutil.AccountCreator;
 
 /**
  * A system test class for GiatrosBook, which provides access to handles of GUI components and helper methods
@@ -59,6 +64,7 @@ public abstract class GiatrosBookSystemTest {
     @BeforeClass
     public static void setupBeforeClass() {
         SystemTestSetupHelper.initialize();
+        EventsCenter.getInstance().post(new LoginEvent(new AccountCreator().build()));
     }
 
     @Before
@@ -69,6 +75,8 @@ public abstract class GiatrosBookSystemTest {
 
         waitUntilBrowserLoaded(getBrowserPanel());
         assertApplicationStartingStateIsCorrect();
+
+        EventsCenter.getInstance().post(new ToggleSidePanelVisibilityEvent(true));
     }
 
     @After
@@ -208,13 +216,16 @@ public abstract class GiatrosBookSystemTest {
      */
     protected void assertSelectedCardChanged(Index expectedSelectedCardIndex) {
         getPatientListPanel().navigateToCard(getPatientListPanel().getSelectedCardIndex());
-        String selectedCardName = getPatientListPanel().getHandleToSelectedCard().getName();
+        PatientCardHandle selectedCard = getPatientListPanel().getHandleToSelectedCard();
         URL expectedUrl;
         try {
-            expectedUrl = new URL(BrowserPanel.SEARCH_PAGE_URL + selectedCardName.replaceAll(" ", "%20"));
+            expectedUrl = new URL(BrowserPanel.SEARCH_PAGE_URL + selectedCard.getAllergies().toArray()[0]);
         } catch (MalformedURLException mue) {
             throw new AssertionError("URL expected to be valid.", mue);
+        } catch (IndexOutOfBoundsException ioube) {
+            expectedUrl = BrowserPanel.DEFAULT_PAGE;
         }
+
         assertEquals(expectedUrl, getBrowserPanel().getLoadedUrl());
 
         assertEquals(expectedSelectedCardIndex.getZeroBased(), getPatientListPanel().getSelectedCardIndex());

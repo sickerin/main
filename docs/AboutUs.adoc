@@ -39,7 +39,7 @@ Responsibilities: Feature Development, UI
 
 === Ronald Santoso
 image::wfxronald.png[width="150", align="left"]
-{empty}[http://github.com/wfxronald[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/wfxronald[github]] [<<wfxronald#, portfolio>>]
 
 Role: Developer +
 Responsibilities: Feature Development, Integration

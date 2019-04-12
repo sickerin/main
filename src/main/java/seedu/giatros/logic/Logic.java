@@ -5,16 +5,29 @@ import java.nio.file.Path;
 import javafx.beans.property.ReadOnlyProperty;
 import javafx.collections.ObservableList;
 import seedu.giatros.commons.core.GuiSettings;
+import seedu.giatros.logic.commands.Command;
 import seedu.giatros.logic.commands.CommandResult;
 import seedu.giatros.logic.commands.exceptions.CommandException;
 import seedu.giatros.logic.parser.exceptions.ParseException;
 import seedu.giatros.model.ReadOnlyGiatrosBook;
+import seedu.giatros.model.account.Account;
 import seedu.giatros.model.patient.Patient;
 
 /**
  * API of the Logic component
  */
 public interface Logic {
+
+    /**
+     * Verifies if a {@code Command} is a guest command which can be executed without being authenticated.
+     */
+    public boolean isGuestCommand(Command command, boolean test);
+
+    /**
+     * Verifies if a {@code Command} is a staff command which can executed without proper head staff account.
+     */
+    public boolean isStaffCommand(Command command, boolean test);
+
     /**
      * Executes the command and returns the result.
      * @param commandText The command as entered by the user.
@@ -33,6 +46,9 @@ public interface Logic {
 
     /** Returns an unmodifiable view of the filtered list of patients */
     ObservableList<Patient> getFilteredPatientList();
+
+    /** Returns an unmodifiable view of the filtered list of patients */
+    ObservableList<Account> getFilteredAccountList();
 
     /**
      * Returns an unmodifiable view of the list of commands entered by the user.
@@ -69,4 +85,8 @@ public interface Logic {
      * @see seedu.giatros.model.Model#setSelectedPatient(Patient)
      */
     void setSelectedPatient(Patient patient);
+    /**
+     * Sets true if a test is running this.
+     */
+    void setIsTest(boolean isTest);
 }
