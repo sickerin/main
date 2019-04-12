@@ -35,8 +35,9 @@ public class AddallCommandParser implements Parser<AddallCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddallCommand.MESSAGE_USAGE), exc);
         }
 
+        // At least one allergy must be provided, so this is invalid format
         if (!argMultimap.getValue(PREFIX_ALLERGY).isPresent()) {
-            throw new ParseException(AddallCommand.MESSAGE_INCORRECT_ALLERGY);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddallCommand.MESSAGE_USAGE));
         }
 
         allergies = ParserUtil.parseAllergies(argMultimap.getAllValues(PREFIX_ALLERGY));

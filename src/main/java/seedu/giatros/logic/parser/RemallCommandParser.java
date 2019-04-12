@@ -35,8 +35,9 @@ public class RemallCommandParser implements Parser<RemallCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemallCommand.MESSAGE_USAGE), exc);
         }
 
+        // At least one allergy must be provided, so this is invalid format
         if (!argMultimap.getValue(PREFIX_ALLERGY).isPresent()) {
-            throw new ParseException(RemallCommand.MESSAGE_INCORRECT_ALLERGY);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemallCommand.MESSAGE_USAGE));
         }
 
         allergies = ParserUtil.parseAllergies(argMultimap.getAllValues(PREFIX_ALLERGY));

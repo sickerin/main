@@ -49,19 +49,15 @@ public class RemallCommandTest {
     }
 
     @Test
-    public void execute_removeNonExistentAllergyUnfilteredList_success() {
+    public void execute_removeNonExistentAllergyUnfilteredList_failure() {
         Patient firstPatient = model.getFilteredPatientList().get(INDEX_FIRST_PATIENT.getZeroBased());
-        Patient editedPatient = new PatientBuilder(firstPatient).build();
+        Allergy nonExistentAllergy = new Allergy("randomAllergy");
+        RemallCommand remallCommand = new RemallCommand(INDEX_FIRST_PATIENT, nonExistentAllergy);
+        // ensures that nonExistentAllergy is indeed not found in first patient
+        assertFalse(firstPatient.getAllergies().contains(nonExistentAllergy));
 
-        RemallCommand remallCommand = new RemallCommand(INDEX_FIRST_PATIENT, new Allergy("randomAllergy"));
-
-        String expectedMessage = String.format(RemallCommand.MESSAGE_REMOVE_ALLERGY_FAILURE, editedPatient);
-
-        Model expectedModel = new ModelManager(new GiatrosBook(model.getGiatrosBook()), new UserPrefs());
-        expectedModel.setPatient(firstPatient, editedPatient);
-        expectedModel.commitGiatrosBook();
-
-        assertCommandSuccess(remallCommand, model, commandHistory, expectedMessage, expectedModel);
+        assertCommandFailure(remallCommand, model, commandHistory,
+                String.format(RemallCommand.MESSAGE_REMOVE_ALLERGY_FAILURE, firstPatient));
     }
 
     @Test

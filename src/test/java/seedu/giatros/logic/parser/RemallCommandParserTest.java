@@ -39,7 +39,7 @@ public class RemallCommandParserTest {
 
         // no allergy provided
         input = INDEX_FIRST_PATIENT.getOneBased() + " ";
-        assertParseFailure(parser, input, String.format(RemallCommand.MESSAGE_INCORRECT_ALLERGY));
+        assertParseFailure(parser, input, expectedMessage);
 
         // no prefix provided
         input = INDEX_FIRST_PATIENT.getOneBased() + " " + nonEmptyAllergy;
