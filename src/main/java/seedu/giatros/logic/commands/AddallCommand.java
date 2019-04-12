@@ -43,6 +43,7 @@ public class AddallCommand extends Command {
         this.allergies = allergies;
     }
 
+    // Overloaded constructor if only one allergy is given
     public AddallCommand(Index index, Allergy allergy) {
         requireAllNonNull(index, allergy);
 
