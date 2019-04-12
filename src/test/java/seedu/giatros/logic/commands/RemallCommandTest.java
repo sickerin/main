@@ -24,7 +24,6 @@ import seedu.giatros.model.ModelManager;
 import seedu.giatros.model.UserPrefs;
 import seedu.giatros.model.allergy.Allergy;
 import seedu.giatros.model.patient.Patient;
-import seedu.giatros.testutil.PatientBuilder;
 
 public class RemallCommandTest {
 
