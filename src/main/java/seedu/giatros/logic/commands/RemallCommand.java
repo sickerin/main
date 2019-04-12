@@ -43,6 +43,17 @@ public class RemallCommand extends Command {
         this.allergies = allergies;
     }
 
+    // Overloaded constructor if only one allergy is given
+    public RemallCommand(Index index, Allergy allergy) {
+        requireAllNonNull(index, allergy);
+
+        Set<Allergy> allergies = new HashSet<>();
+        allergies.add(allergy);
+
+        this.index = index;
+        this.allergies = allergies;
+    }
+
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         List<Patient> lastShownList = model.getFilteredPatientList();

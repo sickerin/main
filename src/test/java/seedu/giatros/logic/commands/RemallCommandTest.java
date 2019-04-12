@@ -11,6 +11,8 @@ import static seedu.giatros.testutil.TypicalIndexes.INDEX_FIRST_PATIENT;
 import static seedu.giatros.testutil.TypicalIndexes.INDEX_SECOND_PATIENT;
 import static seedu.giatros.testutil.TypicalPatients.getTypicalGiatrosBook;
 
+import java.util.HashSet;
+
 import org.junit.Test;
 
 import seedu.giatros.commons.core.Messages;
@@ -24,43 +26,42 @@ import seedu.giatros.model.allergy.Allergy;
 import seedu.giatros.model.patient.Patient;
 import seedu.giatros.testutil.PatientBuilder;
 
-public class AddallCommandTest {
-
-    private static final String ALLERGY_STUB = "someAllergy";
+public class RemallCommandTest {
 
     private Model model = new ModelManager(getTypicalGiatrosBook(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
-    public void execute_addAllergyUnfilteredList_success() {
+    public void execute_removeAllergyUnfilteredList_success() {
         Patient firstPatient = model.getFilteredPatientList().get(INDEX_FIRST_PATIENT.getZeroBased());
-        Patient editedPatient = new PatientBuilder(firstPatient).withAllergy(ALLERGY_STUB).build();
+        Patient editedPatient = new Patient(firstPatient.getName(), firstPatient.getPhone(), firstPatient.getEmail(),
+                firstPatient.getAddress(), new HashSet<>());
 
-        AddallCommand addallCommand = new AddallCommand(INDEX_FIRST_PATIENT, editedPatient.getAllergies());
+        RemallCommand remallCommand = new RemallCommand(INDEX_FIRST_PATIENT, firstPatient.getAllergies());
 
-        String expectedMessage = String.format(AddallCommand.MESSAGE_ADD_ALLERGY_SUCCESS, editedPatient);
+        String expectedMessage = String.format(RemallCommand.MESSAGE_REMOVE_ALLERGY_SUCCESS, editedPatient);
 
         Model expectedModel = new ModelManager(new GiatrosBook(model.getGiatrosBook()), new UserPrefs());
         expectedModel.setPatient(firstPatient, editedPatient);
         expectedModel.commitGiatrosBook();
 
-        assertCommandSuccess(addallCommand, model, commandHistory, expectedMessage, expectedModel);
+        assertCommandSuccess(remallCommand, model, commandHistory, expectedMessage, expectedModel);
     }
 
     @Test
-    public void execute_addDuplicateAllergyUnfilteredList_success() {
+    public void execute_removeNonExistentAllergyUnfilteredList_success() {
         Patient firstPatient = model.getFilteredPatientList().get(INDEX_FIRST_PATIENT.getZeroBased());
         Patient editedPatient = new PatientBuilder(firstPatient).build();
 
-        AddallCommand addallCommand = new AddallCommand(INDEX_FIRST_PATIENT, firstPatient.getAllergies());
+        RemallCommand remallCommand = new RemallCommand(INDEX_FIRST_PATIENT, new Allergy("randomAllergy"));
 
-        String expectedMessage = String.format(AddallCommand.MESSAGE_ADD_ALLERGY_FAILURE, firstPatient);
+        String expectedMessage = String.format(RemallCommand.MESSAGE_REMOVE_ALLERGY_FAILURE, editedPatient);
 
         Model expectedModel = new ModelManager(new GiatrosBook(model.getGiatrosBook()), new UserPrefs());
         expectedModel.setPatient(firstPatient, editedPatient);
         expectedModel.commitGiatrosBook();
 
-        assertCommandSuccess(addallCommand, model, commandHistory, expectedMessage, expectedModel);
+        assertCommandSuccess(remallCommand, model, commandHistory, expectedMessage, expectedModel);
     }
 
     @Test
@@ -68,26 +69,26 @@ public class AddallCommandTest {
         showPatientAtIndex(model, INDEX_FIRST_PATIENT);
 
         Patient firstPatient = model.getFilteredPatientList().get(INDEX_FIRST_PATIENT.getZeroBased());
-        Patient editedPatient = new PatientBuilder(model.getFilteredPatientList()
-                .get(INDEX_FIRST_PATIENT.getZeroBased())).withAllergy(ALLERGY_STUB).build();
+        Patient editedPatient = new Patient(firstPatient.getName(), firstPatient.getPhone(), firstPatient.getEmail(),
+                firstPatient.getAddress(), new HashSet<>());
 
-        AddallCommand addallCommand = new AddallCommand(INDEX_FIRST_PATIENT, editedPatient.getAllergies());
+        RemallCommand remallCommand = new RemallCommand(INDEX_FIRST_PATIENT, firstPatient.getAllergies());
 
-        String expectedMessage = String.format(AddallCommand.MESSAGE_ADD_ALLERGY_SUCCESS, editedPatient);
+        String expectedMessage = String.format(RemallCommand.MESSAGE_REMOVE_ALLERGY_SUCCESS, editedPatient);
 
         Model expectedModel = new ModelManager(new GiatrosBook(model.getGiatrosBook()), new UserPrefs());
         expectedModel.setPatient(firstPatient, editedPatient);
         expectedModel.commitGiatrosBook();
 
-        assertCommandSuccess(addallCommand, model, commandHistory, expectedMessage, expectedModel);
+        assertCommandSuccess(remallCommand, model, commandHistory, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_invalidPatientIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPatientList().size() + 1);
-        AddallCommand addallCommand = new AddallCommand(outOfBoundIndex, new Allergy(VALID_ALLERGY_BOB));
+        RemallCommand remallCommand = new RemallCommand(outOfBoundIndex, new Allergy(VALID_ALLERGY_BOB));
 
-        assertCommandFailure(addallCommand, model, commandHistory, Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
+        assertCommandFailure(remallCommand, model, commandHistory, Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
     }
 
     /**
@@ -101,22 +102,25 @@ public class AddallCommandTest {
         // ensures that outOfBoundIndex is still in bounds of giatros book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getGiatrosBook().getPatientList().size());
 
-        AddallCommand addallCommand = new AddallCommand(outOfBoundIndex, new Allergy(VALID_ALLERGY_BOB));
+        RemallCommand remallCommand = new RemallCommand(outOfBoundIndex, new Allergy(VALID_ALLERGY_BOB));
 
-        assertCommandFailure(addallCommand, model, commandHistory, Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
+        assertCommandFailure(remallCommand, model, commandHistory, Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
     }
 
     @Test
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
         Patient patientToModify = model.getFilteredPatientList().get(INDEX_FIRST_PATIENT.getZeroBased());
-        Patient modifiedPatient = new PatientBuilder(patientToModify).withAllergy(ALLERGY_STUB).build();
-        AddallCommand addallCommand = new AddallCommand(INDEX_FIRST_PATIENT, new Allergy(ALLERGY_STUB));
+        Patient modifiedPatient = new Patient(patientToModify.getName(), patientToModify.getPhone(),
+                patientToModify.getEmail(), patientToModify.getAddress(), new HashSet<>());
+
+        RemallCommand remallCommand = new RemallCommand(INDEX_FIRST_PATIENT, patientToModify.getAllergies());
+
         Model expectedModel = new ModelManager(model.getGiatrosBook(), new UserPrefs());
         expectedModel.setPatient(patientToModify, modifiedPatient);
         expectedModel.commitGiatrosBook();
 
-        // addall -> first patient allergy changed
-        addallCommand.execute(model, commandHistory);
+        // remall -> first patient allergy changed
+        remallCommand.execute(model, commandHistory);
 
         // undo -> reverts giatrosbook back to previous state and filtered patient list to show all patients
         expectedModel.undoGiatrosBook();
@@ -130,10 +134,10 @@ public class AddallCommandTest {
     @Test
     public void executeUndoRedo_invalidIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPatientList().size() + 1);
-        AddallCommand addallCommand = new AddallCommand(outOfBoundIndex, new Allergy("none"));
+        RemallCommand remallCommand = new RemallCommand(outOfBoundIndex, new Allergy("randomAllergy"));
 
         // execution failed -> giatros book state not added into model
-        assertCommandFailure(addallCommand, model, commandHistory, Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
+        assertCommandFailure(remallCommand, model, commandHistory, Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
 
         // single giatros book state in model -> undoCommand and redoCommand fail
         assertCommandFailure(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_FAILURE);
@@ -149,17 +153,20 @@ public class AddallCommandTest {
      */
     @Test
     public void executeUndoRedo_validIndexFilteredList_samePatientDeleted() throws Exception {
-        AddallCommand addallCommand = new AddallCommand(INDEX_FIRST_PATIENT, new Allergy(ALLERGY_STUB));
+        showPatientAtIndex(model, INDEX_SECOND_PATIENT);
+
+        Patient patientToModify = model.getFilteredPatientList().get(INDEX_FIRST_PATIENT.getZeroBased());
+        Patient modifiedPatient = new Patient(patientToModify.getName(), patientToModify.getPhone(),
+                patientToModify.getEmail(), patientToModify.getAddress(), new HashSet<>());
+
+        RemallCommand remallCommand = new RemallCommand(INDEX_FIRST_PATIENT, patientToModify.getAllergies());
         Model expectedModel = new ModelManager(model.getGiatrosBook(), new UserPrefs());
 
-        showPatientAtIndex(model, INDEX_SECOND_PATIENT);
-        Patient patientToModify = model.getFilteredPatientList().get(INDEX_FIRST_PATIENT.getZeroBased());
-        Patient modifiedPatient = new PatientBuilder(patientToModify).withAllergy(ALLERGY_STUB).build();
         expectedModel.setPatient(patientToModify, modifiedPatient);
         expectedModel.commitGiatrosBook();
 
-        // addall -> modifies second patient in unfiltered patient list / first patient in filtered patient list
-        addallCommand.execute(model, commandHistory);
+        // remall -> modifies second patient in unfiltered patient list / first patient in filtered patient list
+        remallCommand.execute(model, commandHistory);
 
         // undo -> reverts giatrosbook back to previous state and filtered patient list to show all patients
         expectedModel.undoGiatrosBook();
@@ -172,10 +179,10 @@ public class AddallCommandTest {
 
     @Test
     public void equals() {
-        final AddallCommand standardCommand = new AddallCommand(INDEX_FIRST_PATIENT, new Allergy(VALID_ALLERGY_AMY));
+        final RemallCommand standardCommand = new RemallCommand(INDEX_FIRST_PATIENT, new Allergy(VALID_ALLERGY_AMY));
 
         // same values -> returns true
-        AddallCommand commandWithSameValues = new AddallCommand(INDEX_FIRST_PATIENT, new Allergy(VALID_ALLERGY_AMY));
+        RemallCommand commandWithSameValues = new RemallCommand(INDEX_FIRST_PATIENT, new Allergy(VALID_ALLERGY_AMY));
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -188,10 +195,10 @@ public class AddallCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new AddallCommand(INDEX_SECOND_PATIENT, new Allergy(VALID_ALLERGY_AMY))));
+        assertFalse(standardCommand.equals(new RemallCommand(INDEX_SECOND_PATIENT, new Allergy(VALID_ALLERGY_AMY))));
 
         // different descriptor -> returns false
-        assertFalse(standardCommand.equals(new AddallCommand(INDEX_FIRST_PATIENT, new Allergy(VALID_ALLERGY_BOB))));
+        assertFalse(standardCommand.equals(new RemallCommand(INDEX_FIRST_PATIENT, new Allergy(VALID_ALLERGY_BOB))));
     }
 
 }

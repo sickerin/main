@@ -27,6 +27,7 @@ import seedu.giatros.logic.commands.HelpCommand;
 import seedu.giatros.logic.commands.HistoryCommand;
 import seedu.giatros.logic.commands.ListCommand;
 import seedu.giatros.logic.commands.RedoCommand;
+import seedu.giatros.logic.commands.RemallCommand;
 import seedu.giatros.logic.commands.SelectCommand;
 import seedu.giatros.logic.commands.UndoCommand;
 import seedu.giatros.logic.parser.exceptions.ParseException;
@@ -124,7 +125,14 @@ public class GiatrosBookParserTest {
         AddallCommand command = (AddallCommand) parser.parseCommand(AddallCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PATIENT.getOneBased() + " " + PREFIX_ALLERGY + allergy.allergyName);
         assertEquals(new AddallCommand(INDEX_FIRST_PATIENT, allergy), command);
-        assertTrue(parser.parseCommand("addall 1 y/Allergy") instanceof AddallCommand);
+    }
+
+    @Test
+    public void parseCommand_remall() throws Exception {
+        final Allergy allergy = new Allergy("someAllergy");
+        RemallCommand command = (RemallCommand) parser.parseCommand(RemallCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_PATIENT.getOneBased() + " " + PREFIX_ALLERGY + allergy.allergyName);
+        assertEquals(new RemallCommand(INDEX_FIRST_PATIENT, allergy), command);
     }
 
     @Test
