@@ -24,6 +24,11 @@ public interface Logic {
     public boolean isGuestCommand(Command command, boolean test);
 
     /**
+     * Verifies if a {@code Command} is a staff command which can executed without proper head staff account.
+     */
+    public boolean isStaffCommand(Command command, boolean test);
+
+    /**
      * Executes the command and returns the result.
      * @param commandText The command as entered by the user.
      * @return the result of the command execution.
