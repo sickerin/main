@@ -228,7 +228,7 @@ The `redo` command fails as there are no `undo` commands executed previously.
 `redo` (reapplies the `clear` command) +
 // end::undoredo[]
 
-// tag:addremall[]
+// tag::addremall[]
 === Adding allergy to a patient: `addall`
 
 Adds one or more allergies to an existing patient in Giatros. +
@@ -279,7 +279,7 @@ Examples:
 Removes the allergy `ibuprofen` from the 1st patient in the list.
 * `remall 3 y/aspirin y/amoxicillin` +
 Removes two allergies, `aspirin` and `amoxicillin` from the 3rd patient in the list.
-// end:addremall[]
+// end::addremall[]
 
 === Clearing all entries : `clear`
 

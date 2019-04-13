@@ -152,16 +152,16 @@ test {
         }
 
         if (runNonGuiTests) {
-            test.include 'giatros/**'
+            test.include 'seedu/giatros/**'
         }
 
         if (runGuiTests) {
             test.include 'systemtests/**'
-            test.include 'giatros/ui/**'
+            test.include 'seedu/giatros/ui/**'
         }
 
         if (!runGuiTests) {
-            test.exclude 'giatros/ui/**'
+            test.exclude 'seedu/giatros/ui/**'
         }
     }
 }
