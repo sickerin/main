@@ -3,6 +3,7 @@ package seedu.giatros.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.giatros.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.giatros.logic.parser.CliSyntax.PREFIX_ALLERGY;
+import static seedu.giatros.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
 import static seedu.giatros.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.giatros.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.giatros.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -21,6 +22,7 @@ import seedu.giatros.logic.CommandHistory;
 import seedu.giatros.logic.commands.exceptions.CommandException;
 import seedu.giatros.model.Model;
 import seedu.giatros.model.allergy.Allergy;
+import seedu.giatros.model.appointment.Appointment;
 import seedu.giatros.model.patient.Address;
 import seedu.giatros.model.patient.Email;
 import seedu.giatros.model.patient.Name;
@@ -42,7 +44,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_ALLERGY + "ALLERGY]...\n"
+            + "[" + PREFIX_ALLERGY + "ALLERGY] "
+            + "[" + PREFIX_APPOINTMENT + "APPOINTMENT]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -100,8 +103,9 @@ public class EditCommand extends Command {
         Email updatedEmail = editPatientDescriptor.getEmail().orElse(patientToEdit.getEmail());
         Address updatedAddress = editPatientDescriptor.getAddress().orElse(patientToEdit.getAddress());
         Set<Allergy> updatedAllergies = editPatientDescriptor.getAllergies().orElse(patientToEdit.getAllergies());
+        Set<Appointment> updatedAppointments = editPatientDescriptor.getAppointments().orElse(patientToEdit.getAppointments());
 
-        return new Patient(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedAllergies);
+        return new Patient(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedAllergies, updatedAppointments);
     }
 
     @Override
@@ -132,12 +136,14 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Set<Allergy> allergies;
+        private Set<Appointment> appointments;
 
         public EditPatientDescriptor() {}
 
         /**
          * Copy constructor.
          * A defensive copy of {@code allergies} is used internally.
+         * A defensive copy of {@code appointments} is used internally.
          */
         public EditPatientDescriptor(EditPatientDescriptor toCopy) {
             setName(toCopy.name);
@@ -145,13 +151,14 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setAllergies(toCopy.allergies);
+            setAppointments(toCopy.appointments);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, allergies);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, allergies, appointments);
         }
 
         public void setName(Name name) {
@@ -203,6 +210,24 @@ public class EditCommand extends Command {
             return (allergies != null) ? Optional.of(Collections.unmodifiableSet(allergies)) : Optional.empty();
         }
 
+
+        /**
+         * Sets {@code appointments} to this object's {@code appointments}.
+         * A defensive copy of {@code appointments} is used internally.
+         */
+        public void setAppointments(Set<Appointment> appointments) {
+            this.appointments = (appointments != null) ? new HashSet<>(appointments) : null;
+        }
+
+        /**
+         * Returns an unmodifiable appointment set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code appointments} is null.
+         */
+        public Optional<Set<Appointment>> getAppointments() {
+            return (appointments != null) ? Optional.of(Collections.unmodifiableSet(appointments)) : Optional.empty();
+        }
+
         @Override
         public boolean equals(Object other) {
             // short circuit if same object
@@ -222,7 +247,8 @@ public class EditCommand extends Command {
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
-                    && getAllergies().equals(e.getAllergies());
+                    && getAllergies().equals(e.getAllergies())
+                    && getAppointments().equals(e.getAppointments());
         }
     }
 }
