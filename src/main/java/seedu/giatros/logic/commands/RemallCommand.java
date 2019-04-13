@@ -26,12 +26,11 @@ public class RemallCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes the allergy from the patient identified "
             + "by the index number used in the patient listing.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_ALLERGY + "[ALLERGY]\n"
+            + PREFIX_ALLERGY + "ALLERGY [" + PREFIX_ALLERGY + "ALLERGY]\n"
             + "Example: " + COMMAND_WORD + " 1 " + PREFIX_ALLERGY + "ibuprofen.";
 
     public static final String MESSAGE_REMOVE_ALLERGY_SUCCESS = "Removed allergy from Patient: %1$s";
     public static final String MESSAGE_REMOVE_ALLERGY_FAILURE = "Such allergy is not found in Patient: %1$s";
-    public static final String MESSAGE_INCORRECT_ALLERGY = "At least one allergy must be provided";
 
     private Index index;
     private Set<Allergy> allergies;
@@ -71,15 +70,16 @@ public class RemallCommand extends Command {
         Patient editedPatient = new Patient(patientToEdit.getName(), patientToEdit.getPhone(), patientToEdit.getEmail(),
                 patientToEdit.getAddress(), newAllergy);
 
+        // No allergy has been removed because it does not exist in the set
+        if (patientToEdit.equals(editedPatient)) {
+            throw new CommandException(String.format(MESSAGE_REMOVE_ALLERGY_FAILURE, patientToEdit));
+        }
+
         model.setPatient(patientToEdit, editedPatient);
         model.updateFilteredPatientList(PREDICATE_SHOW_ALL_PATIENTS);
         model.commitGiatrosBook();
 
-        if (!patientToEdit.equals(editedPatient)) {
-            return new CommandResult(generateSuccessMessage(editedPatient));
-        } else {
-            return new CommandResult(generateFailureMessage(editedPatient));
-        }
+        return new CommandResult(generateSuccessMessage(editedPatient));
     }
 
     /**
@@ -87,14 +87,6 @@ public class RemallCommand extends Command {
      */
     private String generateSuccessMessage(Patient patientToEdit) {
         String message = MESSAGE_REMOVE_ALLERGY_SUCCESS;
-        return String.format(message, patientToEdit);
-    }
-
-    /**
-     * Generates a command execution failure message when the allergy is not removed from {@code patientToEdit}.
-     */
-    private String generateFailureMessage(Patient patientToEdit) {
-        String message = MESSAGE_REMOVE_ALLERGY_FAILURE;
         return String.format(message, patientToEdit);
     }
 
