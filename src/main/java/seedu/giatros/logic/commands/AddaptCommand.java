@@ -25,8 +25,9 @@ public class AddaptCommand extends Command {
             + "by the index number used in the patient listing.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_APPOINTMENT + "[APPOINTMENT]\n"
-            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_APPOINTMENT + "yyyy/MM/dd HH:mm:ss";
+            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_APPOINTMENT + "yyyy-MM-dd HH:mm:ss";
             // TODO give a proper example
+            // TODO write what the propper format is
 
     public static final String MESSAGE_ADD_APPOINTMENT_SUCCESS = "Added appointment to Patient: %1$s";
     public static final String MESSAGE_ADD_APPOINTMENT_FAILURE = "Such appointment is already associated with Patient: %1$s";

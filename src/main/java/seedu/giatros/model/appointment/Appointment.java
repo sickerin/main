@@ -13,7 +13,6 @@ import java.util.Arrays;
 
 public class Appointment {
     // TODO make sure that the regex stuff below is correct.
-    public static final String MESSAGE_CONSTRAINTS = "Appointment should not be blank and should be in the format: yyyy/MM/dd HH:mm:ss";
     // public static final String DAY = "";
     // public static final String TIME = "{";
     // TODO have a flexible regex, 
@@ -21,6 +20,7 @@ public class Appointment {
     public static final String[] VALIDATION_REGEX_LIST = {"yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd HH:mm", "yyyy-MM-dd HH"};;
     // TODO use day of week object and convert date to day
     // ? should it be final if appointment is editable?
+    public static final String MESSAGE_CONSTRAINTS = "Appointment should not be blank and should be in one of the formats: " + String.join(" , ", VALIDATION_REGEX_LIST);
     // public String day;
     // public String date;
     public final String appointment;
