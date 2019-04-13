@@ -34,6 +34,8 @@ public class RegisterCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New account registered: %1$s";
     public static final String MESSAGE_DUPLICATE_USERNAME = "This username already exists. Please choose another "
             + "username";
+    public static final String MESSAGE_RESTRICTED_USERNAME =
+            "Restricted word for username: manager. Please use a different username!";
 
     private final Account account;
 
@@ -46,6 +48,9 @@ public class RegisterCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
+        if (account.getUsername().toString().toLowerCase().equals("manager")) {
+            throw new CommandException(MESSAGE_RESTRICTED_USERNAME);
+        }
         if (model.hasAccount(account)) {
             throw new CommandException(MESSAGE_DUPLICATE_USERNAME);
         }

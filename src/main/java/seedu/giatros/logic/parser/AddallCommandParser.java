@@ -1,12 +1,14 @@
 package seedu.giatros.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.giatros.commons.core.Messages.MESSAGE_COMMAND_RESTRICTED;
 import static seedu.giatros.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.giatros.logic.parser.CliSyntax.PREFIX_ALLERGY;
 
 import java.util.Set;
 
 import seedu.giatros.commons.core.index.Index;
+import seedu.giatros.commons.core.session.UserSession;
 import seedu.giatros.commons.exceptions.IllegalValueException;
 import seedu.giatros.logic.commands.AddallCommand;
 import seedu.giatros.logic.parser.exceptions.ParseException;
@@ -32,7 +34,11 @@ public class AddallCommandParser implements Parser<AddallCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (IllegalValueException exc) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddallCommand.MESSAGE_USAGE), exc);
+            if (UserSession.isAuthenticated()) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddallCommand.MESSAGE_USAGE), exc);
+            } else {
+                throw new ParseException(String.format(MESSAGE_COMMAND_RESTRICTED, AddallCommand.MESSAGE_USAGE), exc);
+            }
         }
 
         // At least one allergy must be provided, so this is invalid format

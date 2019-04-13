@@ -25,10 +25,13 @@ import seedu.giatros.logic.commands.ListCommand;
 import seedu.giatros.logic.commands.RedoCommand;
 import seedu.giatros.logic.commands.RemallCommand;
 import seedu.giatros.logic.commands.SelectCommand;
+import seedu.giatros.logic.commands.UndoCommand;
 import seedu.giatros.logic.commands.account.LoginCommand;
 import seedu.giatros.logic.commands.account.LogoutCommand;
+import seedu.giatros.logic.commands.account.RegisterCommand;
 import seedu.giatros.logic.commands.exceptions.CommandException;
 import seedu.giatros.logic.parser.GiatrosBookParser;
+import seedu.giatros.logic.parser.account.RegisterCommandParser;
 import seedu.giatros.logic.parser.exceptions.ParseException;
 import seedu.giatros.model.Model;
 import seedu.giatros.model.ReadOnlyGiatrosBook;
@@ -50,6 +53,8 @@ public class LogicManager implements Logic {
     private boolean giatrosBookModified;
 
     private boolean isTest = false;
+
+    public static final String HEAD_STAFF_USERNAME = "MANAGER";
 
     public LogicManager(Model model, Storage storage) {
         this.model = model;
@@ -81,7 +86,7 @@ public class LogicManager implements Logic {
                     || command instanceof HistoryCommand || command instanceof ListCommand
                     || command instanceof RedoCommand || command instanceof RemallCommand
                     || command instanceof SelectCommand || command instanceof LogoutCommand
-                    || command instanceof ExitCommand;
+                    || command instanceof UndoCommand || command instanceof ExitCommand;
         } else {
             return true;
         }
@@ -100,7 +105,7 @@ public class LogicManager implements Logic {
                 throw new CommandException(Messages.MESSAGE_COMMAND_RESTRICTED);
             }
             if (!isStaffCommand(command, isTest) && UserSession.isAuthenticated() && !UserSession.getAccount()
-                    .getUsername().toString().equals("HEADSTAFF")) {
+                    .getUsername().toString().equals(HEAD_STAFF_USERNAME)) {
                 throw new CommandException(Messages.MESSAGE_COMMAND_RESTRICTED);
             }
 

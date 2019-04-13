@@ -7,16 +7,25 @@ import static seedu.giatros.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.giatros.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.giatros.testutil.TypicalIndexes.INDEX_FIRST_PATIENT;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 
+import seedu.giatros.commons.core.EventsCenter;
 import seedu.giatros.commons.core.index.Index;
+import seedu.giatros.commons.events.ui.accounts.LoginEvent;
 import seedu.giatros.logic.commands.RemallCommand;
 import seedu.giatros.model.allergy.Allergy;
+import seedu.giatros.ui.testutil.AccountCreator;
 
 public class RemallCommandParserTest {
 
     private RemallCommandParser parser = new RemallCommandParser();
     private final String nonEmptyAllergy = "someAllergy";
+
+    @BeforeClass
+    public static void setupBeforeClass() {
+        EventsCenter.getInstance().post(new LoginEvent(new AccountCreator().build()));
+    }
 
     @Test
     public void parse_allFieldsPresent_success() {
