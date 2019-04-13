@@ -58,7 +58,7 @@ public class RemallCommand extends Command {
         newAllergy.removeAll(allergies);
 
         Patient editedPatient = new Patient(patientToEdit.getName(), patientToEdit.getPhone(), patientToEdit.getEmail(),
-                patientToEdit.getAddress(), newAllergy);
+                patientToEdit.getAddress(), newAllergy, patientToEdit.getAppointments());
 
         model.setPatient(patientToEdit, editedPatient);
         model.updateFilteredPatientList(PREDICATE_SHOW_ALL_PATIENTS);
