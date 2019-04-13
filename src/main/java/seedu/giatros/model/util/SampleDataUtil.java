@@ -44,10 +44,10 @@ public class SampleDataUtil {
                 new Address("Blk 436 Serangoon Gardens Street 26, #16-43"), getAllergySet("penicillin"),
                 getAppointmentSet("2019-03-12 13:30")),
             new Patient(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
-                new Address("Blk 47 Tampines Street 20, #17-35"), getAllergySet("ibuprofen")
+                new Address("Blk 47 Tampines Street 20, #17-35"), getAllergySet("ibuprofen"),
                 getAppointmentSet("2019-01-23 14")),
             new Patient(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                new Address("Blk 45 Aljunied Street 85, #11-31"), getAllergySet("amoxicilin")
+                new Address("Blk 45 Aljunied Street 85, #11-31"), getAllergySet("amoxicilin"),
                 getAppointmentSet("2019-03-10 21:30"))
         };
     }
