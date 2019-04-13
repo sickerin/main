@@ -5,7 +5,7 @@
     "email" : "alexyeoh@example.com",
     "address" : "Blk 30 Geylang Street 29, #06-40",
     "allergies" : [ "ono", "rando" ],
-    "appointments" : [ "2019-03-01 14" ]
+    "appointments" : [ "2019-03-01 20", "2019-03-01 20:34", "2019-03-01 14", "2019-03-01 20:34:44", "2019-03-01 19", "2019-03-01 20:32" ]
   }, {
     "name" : "Bernice Yu",
     "phone" : "99272758",

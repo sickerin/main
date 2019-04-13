@@ -1,11 +1,11 @@
 package seedu.giatros.storage;
 
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import seedu.giatros.commons.exceptions.IllegalValueException;
 import seedu.giatros.model.appointment.Appointment;
+
 
 /**
  * Jackson-friendly version of {@link Appointment}
@@ -26,7 +26,7 @@ public class JsonAdaptedAppointment {
      * Converts a given {@code Appointment} into this class for Jackson use.
      */
     public JsonAdaptedAppointment(Appointment source) {
-        appointment = source.appointment;
+        appointment = source.appointmentString;
     }
 
     @JsonValue
