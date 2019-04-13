@@ -24,7 +24,8 @@ public class SelectCommandParser implements Parser<SelectCommand> {
             return new SelectCommand(index);
         } catch (ParseException pe) {
             if (UserSession.isAuthenticated()) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE), pe);
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE),
+                        pe);
             } else {
                 throw new ParseException(String.format(MESSAGE_COMMAND_RESTRICTED, SelectCommand.MESSAGE_USAGE), pe);
             }

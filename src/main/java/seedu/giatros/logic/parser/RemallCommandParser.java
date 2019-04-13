@@ -35,7 +35,8 @@ public class RemallCommandParser implements Parser<RemallCommand> {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (IllegalValueException exc) {
             if (UserSession.isAuthenticated()) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemallCommand.MESSAGE_USAGE), exc);
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemallCommand.MESSAGE_USAGE),
+                        exc);
             } else {
                 throw new ParseException(String.format(MESSAGE_COMMAND_RESTRICTED, RemallCommand.MESSAGE_USAGE), exc);
             }

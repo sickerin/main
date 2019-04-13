@@ -6,7 +6,6 @@ import static seedu.giatros.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import seedu.giatros.commons.core.index.Index;
 import seedu.giatros.commons.core.session.UserSession;
 import seedu.giatros.logic.commands.DeleteCommand;
-import seedu.giatros.logic.commands.HelpCommand;
 import seedu.giatros.logic.parser.exceptions.ParseException;
 
 /**
@@ -25,7 +24,8 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             return new DeleteCommand(index);
         } catch (ParseException pe) {
             if (UserSession.isAuthenticated()) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE),
+                        pe);
             } else {
                 throw new ParseException(String.format(MESSAGE_COMMAND_RESTRICTED, DeleteCommand.MESSAGE_USAGE), pe);
             }

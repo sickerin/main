@@ -28,10 +28,8 @@ import seedu.giatros.logic.commands.SelectCommand;
 import seedu.giatros.logic.commands.UndoCommand;
 import seedu.giatros.logic.commands.account.LoginCommand;
 import seedu.giatros.logic.commands.account.LogoutCommand;
-import seedu.giatros.logic.commands.account.RegisterCommand;
 import seedu.giatros.logic.commands.exceptions.CommandException;
 import seedu.giatros.logic.parser.GiatrosBookParser;
-import seedu.giatros.logic.parser.account.RegisterCommandParser;
 import seedu.giatros.logic.parser.exceptions.ParseException;
 import seedu.giatros.model.Model;
 import seedu.giatros.model.ReadOnlyGiatrosBook;
@@ -44,6 +42,7 @@ import seedu.giatros.storage.Storage;
  */
 public class LogicManager implements Logic {
     public static final String FILE_OPS_ERROR_MESSAGE = "Could not save data to file: ";
+    public static final String HEAD_STAFF_USERNAME = "MANAGER";
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
     private final Model model;
@@ -53,8 +52,6 @@ public class LogicManager implements Logic {
     private boolean giatrosBookModified;
 
     private boolean isTest = false;
-
-    public static final String HEAD_STAFF_USERNAME = "MANAGER";
 
     public LogicManager(Model model, Storage storage) {
         this.model = model;

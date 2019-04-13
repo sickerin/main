@@ -15,7 +15,6 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.giatros.commons.core.GuiSettings;
 import seedu.giatros.commons.core.LogsCenter;
-import seedu.giatros.commons.core.session.UserSession;
 import seedu.giatros.commons.events.ui.ToggleSidePanelVisibilityEvent;
 import seedu.giatros.logic.Logic;
 import seedu.giatros.logic.commands.CommandResult;
