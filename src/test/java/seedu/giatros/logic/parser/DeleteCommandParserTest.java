@@ -5,9 +5,13 @@ import static seedu.giatros.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.giatros.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.giatros.testutil.TypicalIndexes.INDEX_FIRST_PATIENT;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 
+import seedu.giatros.commons.core.EventsCenter;
+import seedu.giatros.commons.events.ui.accounts.LoginEvent;
 import seedu.giatros.logic.commands.DeleteCommand;
+import seedu.giatros.ui.testutil.AccountCreator;
 
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations
@@ -19,6 +23,11 @@ import seedu.giatros.logic.commands.DeleteCommand;
 public class DeleteCommandParserTest {
 
     private DeleteCommandParser parser = new DeleteCommandParser();
+
+    @BeforeClass
+    public static void setupBeforeClass() {
+        EventsCenter.getInstance().post(new LoginEvent(new AccountCreator().build()));
+    }
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {

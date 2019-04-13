@@ -11,10 +11,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import seedu.giatros.commons.core.EventsCenter;
+import seedu.giatros.commons.events.ui.accounts.LoginEvent;
 import seedu.giatros.logic.commands.AddCommand;
 import seedu.giatros.logic.commands.AddallCommand;
 import seedu.giatros.logic.commands.ClearCommand;
@@ -37,12 +40,18 @@ import seedu.giatros.model.patient.Patient;
 import seedu.giatros.testutil.EditPatientDescriptorBuilder;
 import seedu.giatros.testutil.PatientBuilder;
 import seedu.giatros.testutil.PatientUtil;
+import seedu.giatros.ui.testutil.AccountCreator;
 
 public class GiatrosBookParserTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
     private final GiatrosBookParser parser = new GiatrosBookParser();
+
+    @BeforeClass
+    public static void setupBeforeClass() {
+        EventsCenter.getInstance().post(new LoginEvent(new AccountCreator().build()));
+    }
 
     @Test
     public void parseCommand_add() throws Exception {
