@@ -8,11 +8,14 @@ import java.io.IOException;
 import java.nio.file.Path;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
 
+import seedu.giatros.commons.core.EventsCenter;
+import seedu.giatros.commons.events.ui.accounts.LoginEvent;
 import seedu.giatros.logic.commands.CommandResult;
 import seedu.giatros.logic.commands.HistoryCommand;
 import seedu.giatros.logic.commands.ListCommand;
@@ -25,6 +28,7 @@ import seedu.giatros.model.UserPrefs;
 import seedu.giatros.storage.JsonGiatrosBookStorage;
 import seedu.giatros.storage.JsonUserPrefsStorage;
 import seedu.giatros.storage.StorageManager;
+import seedu.giatros.ui.testutil.AccountCreator;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy exception");
@@ -37,6 +41,11 @@ public class LogicManagerTest {
 
     private Model model = new ModelManager();
     private Logic logic;
+
+    @BeforeClass
+    public static void setupBeforeClass() {
+        EventsCenter.getInstance().post(new LoginEvent(new AccountCreator().build()));
+    }
 
     @Before
     public void setUp() throws Exception {

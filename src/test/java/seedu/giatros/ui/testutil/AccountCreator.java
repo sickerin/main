@@ -9,9 +9,9 @@ import seedu.giatros.model.account.Username;
  * Properly sets up an account
  */
 public class AccountCreator {
-    public static final String DEFAULT_USERNAME = "HEADSTAFF";
+    public static final String DEFAULT_USERNAME = "MANAGER";
     public static final String DEFAULT_PASSWORD = "1122qq";
-    public static final String DEFAULT_NAME = "HEADSTAFF";
+    public static final String DEFAULT_NAME = "MANAGER";
 
     private Username username;
     private Password password;

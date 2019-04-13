@@ -6,14 +6,23 @@ import static seedu.giatros.logic.parser.CommandParserTestUtil.assertParseSucces
 
 import java.util.Arrays;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 
+import seedu.giatros.commons.core.EventsCenter;
+import seedu.giatros.commons.events.ui.accounts.LoginEvent;
 import seedu.giatros.logic.commands.FindCommand;
 import seedu.giatros.model.patient.NameContainsKeywordsPredicate;
+import seedu.giatros.ui.testutil.AccountCreator;
 
 public class FindCommandParserTest {
 
     private FindCommandParser parser = new FindCommandParser();
+
+    @BeforeClass
+    public static void setupBeforeClass() {
+        EventsCenter.getInstance().post(new LoginEvent(new AccountCreator().build()));
+    }
 
     @Test
     public void parse_emptyArg_throwsParseException() {

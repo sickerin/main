@@ -35,14 +35,24 @@
     "email" : "royb@example.com",
     "address" : "Blk 45 Aljunied Street 85, #11-31",
     "allergied" : [ "amoxicillin" ]
+  }, {
+    "name" : "Ronald",
+    "phone" : "93948394",
+    "email" : "23@m.com",
+    "address" : "aaa",
+    "allergied" : [ ]
   } ],
   "accounts" : [ {
-    "name" : "HEADSTAFF",
-    "username" : "HEADSTAFF",
+    "name" : "MANAGER",
+    "username" : "MANAGER",
     "password" : "1122qq"
   }, {
     "name" : "ces",
     "username" : "ces",
+    "password" : "1122qq"
+  }, {
+    "name" : "csm",
+    "username" : "csm",
     "password" : "1122qq"
   } ]
 }

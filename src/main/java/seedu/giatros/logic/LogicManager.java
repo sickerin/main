@@ -25,6 +25,7 @@ import seedu.giatros.logic.commands.ListCommand;
 import seedu.giatros.logic.commands.RedoCommand;
 import seedu.giatros.logic.commands.RemallCommand;
 import seedu.giatros.logic.commands.SelectCommand;
+import seedu.giatros.logic.commands.UndoCommand;
 import seedu.giatros.logic.commands.account.LoginCommand;
 import seedu.giatros.logic.commands.account.LogoutCommand;
 import seedu.giatros.logic.commands.exceptions.CommandException;
@@ -41,6 +42,7 @@ import seedu.giatros.storage.Storage;
  */
 public class LogicManager implements Logic {
     public static final String FILE_OPS_ERROR_MESSAGE = "Could not save data to file: ";
+    public static final String HEAD_STAFF_USERNAME = "MANAGER";
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
     private final Model model;
@@ -81,7 +83,7 @@ public class LogicManager implements Logic {
                     || command instanceof HistoryCommand || command instanceof ListCommand
                     || command instanceof RedoCommand || command instanceof RemallCommand
                     || command instanceof SelectCommand || command instanceof LogoutCommand
-                    || command instanceof ExitCommand;
+                    || command instanceof UndoCommand || command instanceof ExitCommand;
         } else {
             return true;
         }
@@ -100,7 +102,7 @@ public class LogicManager implements Logic {
                 throw new CommandException(Messages.MESSAGE_COMMAND_RESTRICTED);
             }
             if (!isStaffCommand(command, isTest) && UserSession.isAuthenticated() && !UserSession.getAccount()
-                    .getUsername().toString().equals("HEADSTAFF")) {
+                    .getUsername().toString().equals(HEAD_STAFF_USERNAME)) {
                 throw new CommandException(Messages.MESSAGE_COMMAND_RESTRICTED);
             }
 
