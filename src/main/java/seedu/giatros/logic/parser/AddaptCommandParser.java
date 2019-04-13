@@ -30,7 +30,7 @@ public class AddaptCommandParser implements Parser<AddaptCommand> {
         }
 
         // TODO make parse appointment in parseutil
-        appointments = ParserUtil.parseAppointment(argMultimap.getAllValues(PREFIX_APPOINTMENT));
+        appointments = ParserUtil.parseAppointments(argMultimap.getAllValues(PREFIX_APPOINTMENT));
 
         return new AddaptCommand(index, appointments);
     }

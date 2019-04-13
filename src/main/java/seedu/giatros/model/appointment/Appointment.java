@@ -8,11 +8,12 @@ import java.time.DayOfWeek;
 
 public class Appointment {
     // TODO make sure that the regex stuff below is correct.
-    public static final String MESSAGE_CONSTRAINTS = "Appointment should not be blank and should be in the format:";
+    public static final String MESSAGE_CONSTRAINTS = "Appointment should not be blank and should be in the format: yyyy/MM/dd HH:mm:ss";
     public static final String DAY = "";
     public static final String TIME = "";
+    // TODO have a flexible regex
     public static final String VALIDATION_REGEX = "";
-    // TODO use day of week object
+    // TODO use day of week object and convert date to day
     // ? should it be final if appointment is editable?
     public String day;
     public String time;
