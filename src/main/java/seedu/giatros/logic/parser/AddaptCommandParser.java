@@ -2,7 +2,7 @@ package seedu.giatros.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.giatros.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-// import static seedu.giatros.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
+import static seedu.giatros.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
 
 import java.util.Set;
 
@@ -14,7 +14,7 @@ import seedu.giatros.model.appointment.Appointment;
 
 public class AddaptCommandParser implements Parser<AddaptCommand> { 
     
-    public AddaptCommand parse(Strings args) throws ParseException {
+    public AddaptCommand parse(String args) throws ParseException {
         requireNonNull(args);
         Index index;
         Set<Appointment> appointments;
@@ -29,8 +29,8 @@ public class AddaptCommandParser implements Parser<AddaptCommand> {
             throw new ParseException(AddaptCommand.MESSAGE_INCORRECT_APPOINTMENT);
         }
 
-        // TODO make parse appointment
-        aptergies = ParserUtil.parseAppointment(argMultimap.getAllValues(PREFIX_APPOINTMENT));
+        // TODO make parse appointment in parseutil
+        appointments = ParserUtil.parseAppointment(argMultimap.getAllValues(PREFIX_APPOINTMENT));
 
         return new AddaptCommand(index, appointments);
     }

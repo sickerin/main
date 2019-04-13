@@ -8,7 +8,7 @@ import java.time.DayOfWeek;
 
 public class Appointment {
     // TODO make sure that the regex stuff below is correct.
-    public static final String MESSAGE_CONTRAINTS = "Appointment should not be blank and should be in the format:";
+    public static final String MESSAGE_CONSTRAINTS = "Appointment should not be blank and should be in the format:";
     public static final String DAY = "";
     public static final String TIME = "";
     public static final String VALIDATION_REGEX = "";
@@ -23,12 +23,13 @@ public class Appointment {
 
     public Appointment(String appointment){
         requireNonNull(appointment);
-        checkArgument(isValidAppointment(appointment), MESSAGE_CONTRAINTS);
+        checkArgument(isValidAppointment(appointment), MESSAGE_CONSTRAINTS);
         this.appointment= appointment;
         this.day = day;
         this.time = time;
     }
 
+    // TODO move parser to the ParserUtil class
     public void parseAppointment(String appointment){
         String[] appointmentArray = appointment.split("\\s+");
         day = appointmentArray[0].trim();
