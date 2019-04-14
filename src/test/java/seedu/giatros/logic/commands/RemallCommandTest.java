@@ -161,7 +161,6 @@ public class RemallCommandTest {
         expectedModel.setPatient(patientToModify, modifiedPatient);
         expectedModel.commitGiatrosBook();
 
-//        System.out.println(expectedModel.getFilteredPatientList());
         // remall -> modifies second patient in unfiltered patient list / first patient in filtered patient list
         remallCommand.execute(model, commandHistory);
 

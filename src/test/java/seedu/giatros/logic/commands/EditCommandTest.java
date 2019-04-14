@@ -212,8 +212,6 @@ public class EditCommandTest {
 
         // undo -> reverts addressbook back to previous state and filtered patient list to show all patients
         expectedModel.undoGiatrosBook();
-        System.out.println(model);
-        System.out.println(expectedModel);
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         assertNotEquals(model.getFilteredPatientList().get(INDEX_FIRST_PATIENT.getZeroBased()), patientToEdit);
