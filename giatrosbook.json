@@ -43,12 +43,16 @@
     "appointments" : [ ]
   } ],
   "accounts" : [ {
-    "name" : "HEADSTAFF",
-    "username" : "HEADSTAFF",
+    "name" : "MANAGER",
+    "username" : "MANAGER",
     "password" : "1122qq"
   }, {
     "name" : "ces",
     "username" : "ces",
+    "password" : "1122qq"
+  }, {
+    "name" : "csm",
+    "username" : "csm",
     "password" : "1122qq"
   } ]
 }

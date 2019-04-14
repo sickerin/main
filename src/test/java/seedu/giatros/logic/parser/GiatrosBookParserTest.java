@@ -11,10 +11,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import seedu.giatros.commons.core.EventsCenter;
+import seedu.giatros.commons.events.ui.accounts.LoginEvent;
 import seedu.giatros.logic.commands.AddCommand;
 import seedu.giatros.logic.commands.AddallCommand;
 import seedu.giatros.logic.commands.ClearCommand;
@@ -27,6 +30,7 @@ import seedu.giatros.logic.commands.HelpCommand;
 import seedu.giatros.logic.commands.HistoryCommand;
 import seedu.giatros.logic.commands.ListCommand;
 import seedu.giatros.logic.commands.RedoCommand;
+import seedu.giatros.logic.commands.RemallCommand;
 import seedu.giatros.logic.commands.SelectCommand;
 import seedu.giatros.logic.commands.UndoCommand;
 import seedu.giatros.logic.parser.exceptions.ParseException;
@@ -36,12 +40,18 @@ import seedu.giatros.model.patient.Patient;
 import seedu.giatros.testutil.EditPatientDescriptorBuilder;
 import seedu.giatros.testutil.PatientBuilder;
 import seedu.giatros.testutil.PatientUtil;
+import seedu.giatros.ui.testutil.AccountCreator;
 
 public class GiatrosBookParserTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
     private final GiatrosBookParser parser = new GiatrosBookParser();
+
+    @BeforeClass
+    public static void setupBeforeClass() {
+        EventsCenter.getInstance().post(new LoginEvent(new AccountCreator().build()));
+    }
 
     @Test
     public void parseCommand_add() throws Exception {
@@ -125,7 +135,14 @@ public class GiatrosBookParserTest {
         AddallCommand command = (AddallCommand) parser.parseCommand(AddallCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PATIENT.getOneBased() + " " + PREFIX_ALLERGY + allergy.allergyName);
         assertEquals(new AddallCommand(INDEX_FIRST_PATIENT, allergy), command);
-        assertTrue(parser.parseCommand("addall 1 y/Allergy") instanceof AddallCommand);
+    }
+
+    @Test
+    public void parseCommand_remall() throws Exception {
+        final Allergy allergy = new Allergy("someAllergy");
+        RemallCommand command = (RemallCommand) parser.parseCommand(RemallCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_PATIENT.getOneBased() + " " + PREFIX_ALLERGY + allergy.allergyName);
+        assertEquals(new RemallCommand(INDEX_FIRST_PATIENT, allergy), command);
     }
 
     @Test

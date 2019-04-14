@@ -39,9 +39,11 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private BrowserPanel browserPanel;
     private PatientListPanel patientListPanel;
+    private AccountListPanel usernamePanel;
     private AccountListPanel accountListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private UsernameDisplay usernameDisplay;
 
     @FXML
     private StackPane browserPlaceholder;
@@ -56,7 +58,7 @@ public class MainWindow extends UiPart<Stage> {
     private Pane usernameDisplayPlaceholder;
 
     @FXML
-    private StackPane patientListPanelPlaceholder;
+    private StackPane dataListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -123,13 +125,12 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
 
-        browserPanel = new BrowserPanel(logic.selectedPatientProperty());
-        browserPlaceholder.getChildren().add(browserPanel.getRoot());
-
+        accountListPanel = new AccountListPanel(logic.getGiatrosBook().getAccountList());
         patientListPanel = new PatientListPanel(logic.getFilteredPatientList(), logic.selectedPatientProperty(),
                 logic::setSelectedPatient);
-        patientListPanelPlaceholder.getChildren().add(patientListPanel.getRoot());
-        patientListPanelPlaceholder.setVisible(false);
+
+        browserPanel = new BrowserPanel(logic.selectedPatientProperty());
+        browserPlaceholder.getChildren().add(browserPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -140,8 +141,8 @@ public class MainWindow extends UiPart<Stage> {
         CommandBox commandBox = new CommandBox(this::executeCommand, logic.getHistory());
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
-        accountListPanel = new AccountListPanel(logic.getFilteredAccountList());
-        UsernameDisplay usernameDisplay = new UsernameDisplay();
+        usernamePanel = new AccountListPanel(logic.getFilteredAccountList());
+        usernameDisplay = new UsernameDisplay();
         // Centralize the width
         usernameDisplay.getRoot().layoutXProperty().bind(usernameDisplayPlaceholder.widthProperty()
                 .subtract(usernameDisplay.getRoot().widthProperty())
@@ -151,6 +152,9 @@ public class MainWindow extends UiPart<Stage> {
                 .subtract(usernameDisplay.getRoot().heightProperty())
                 .divide(2));
         usernameDisplayPlaceholder.getChildren().add(usernameDisplay.getRoot());
+
+        dataListPanelPlaceholder.getChildren().add(patientListPanel.getRoot());
+        dataListPanelPlaceholder.setVisible(false);
     }
 
     /**
@@ -226,6 +230,27 @@ public class MainWindow extends UiPart<Stage> {
     @Subscribe
     private void handleToggleSidePanelVisibilityEvent(ToggleSidePanelVisibilityEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        patientListPanelPlaceholder.setVisible(event.isVisible);
+
+        dataListPanelPlaceholder.getChildren().clear();
+        if (usernameDisplay.getRoot().toString().indexOf("MANAGER") != -1) {
+            switchToAccountInfoSidePanel();
+        } else {
+            switchToPatientInfoSidePanel();
+        }
+        dataListPanelPlaceholder.setVisible(event.isVisible);
+    }
+
+    /**
+     * Input the side panel with account management information
+     */
+    private void switchToAccountInfoSidePanel() {
+        dataListPanelPlaceholder.getChildren().add(accountListPanel.getRoot());
+    }
+
+    /**
+     * Input the side panel with patient management information
+     */
+    private void switchToPatientInfoSidePanel() {
+        dataListPanelPlaceholder.getChildren().add(patientListPanel.getRoot());
     }
 }

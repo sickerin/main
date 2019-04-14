@@ -1,5 +1,6 @@
 package seedu.giatros.logic.parser;
 
+import static seedu.giatros.commons.core.Messages.MESSAGE_COMMAND_RESTRICTED;
 import static seedu.giatros.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.giatros.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.giatros.logic.parser.CliSyntax.PREFIX_ALLERGY;
@@ -11,6 +12,7 @@ import static seedu.giatros.logic.parser.CliSyntax.PREFIX_PHONE;
 import java.util.Set;
 import java.util.stream.Stream;
 
+import seedu.giatros.commons.core.session.UserSession;
 import seedu.giatros.logic.commands.AddCommand;
 import seedu.giatros.logic.parser.exceptions.ParseException;
 import seedu.giatros.model.allergy.Allergy;
@@ -38,7 +40,11 @@ public class AddCommandParser implements Parser<AddCommand> {
                         
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+            if (UserSession.isAuthenticated()) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+            } else {
+                throw new ParseException(String.format(MESSAGE_COMMAND_RESTRICTED, AddCommand.MESSAGE_USAGE));
+            }
         }
 
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());

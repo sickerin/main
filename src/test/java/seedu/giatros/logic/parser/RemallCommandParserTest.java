@@ -13,13 +13,13 @@ import org.junit.Test;
 import seedu.giatros.commons.core.EventsCenter;
 import seedu.giatros.commons.core.index.Index;
 import seedu.giatros.commons.events.ui.accounts.LoginEvent;
-import seedu.giatros.logic.commands.AddallCommand;
+import seedu.giatros.logic.commands.RemallCommand;
 import seedu.giatros.model.allergy.Allergy;
 import seedu.giatros.ui.testutil.AccountCreator;
 
-public class AddallCommandParserTest {
+public class RemallCommandParserTest {
 
-    private AddallCommandParser parser = new AddallCommandParser();
+    private RemallCommandParser parser = new RemallCommandParser();
     private final String nonEmptyAllergy = "someAllergy";
 
     @BeforeClass
@@ -32,12 +32,12 @@ public class AddallCommandParserTest {
         // adding non-empty allergy
         Index index = INDEX_FIRST_PATIENT;
         String input = index.getOneBased() + " " + PREFIX_ALLERGY + nonEmptyAllergy;
-        assertParseSuccess(parser, input, new AddallCommand(INDEX_FIRST_PATIENT, new Allergy(nonEmptyAllergy)));
+        assertParseSuccess(parser, input, new RemallCommand(INDEX_FIRST_PATIENT, new Allergy(nonEmptyAllergy)));
     }
 
     @Test
     public void parse_invalidFormat_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddallCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemallCommand.MESSAGE_USAGE);
 
         // no parameters provided
         assertParseFailure(parser, "", expectedMessage);

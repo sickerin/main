@@ -1,11 +1,13 @@
 package seedu.giatros.logic.parser;
 
+import static seedu.giatros.commons.core.Messages.MESSAGE_COMMAND_RESTRICTED;
 import static seedu.giatros.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.giatros.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import seedu.giatros.commons.core.session.UserSession;
 import seedu.giatros.logic.commands.AddCommand;
 import seedu.giatros.logic.commands.AddallCommand;
 import seedu.giatros.logic.commands.AddaptCommand;
@@ -48,12 +50,19 @@ public class GiatrosBookParser {
      */
     public Command parseCommand(String userInput) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
-        if (!matcher.matches()) {
+
+        if (!matcher.matches() && UserSession.isAuthenticated()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
 
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
+
+        if (!UserSession.isAuthenticated() && !(commandWord.equals("login") || commandWord.equals("help")
+                || commandWord.equals("exit"))) {
+            throw new ParseException(String.format(MESSAGE_COMMAND_RESTRICTED, HelpCommand.MESSAGE_USAGE));
+        }
+
         switch (commandWord) {
 
         case LoginCommand.COMMAND_WORD:

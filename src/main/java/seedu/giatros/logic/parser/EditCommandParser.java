@@ -1,6 +1,7 @@
 package seedu.giatros.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.giatros.commons.core.Messages.MESSAGE_COMMAND_RESTRICTED;
 import static seedu.giatros.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.giatros.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.giatros.logic.parser.CliSyntax.PREFIX_ALLERGY;
@@ -15,6 +16,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.giatros.commons.core.index.Index;
+import seedu.giatros.commons.core.session.UserSession;
 import seedu.giatros.logic.commands.EditCommand;
 import seedu.giatros.logic.commands.EditCommand.EditPatientDescriptor;
 import seedu.giatros.logic.parser.exceptions.ParseException;
@@ -42,7 +44,11 @@ public class EditCommandParser implements Parser<EditCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
+            if (UserSession.isAuthenticated()) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
+            } else {
+                throw new ParseException(String.format(MESSAGE_COMMAND_RESTRICTED, EditCommand.MESSAGE_USAGE), pe);
+            }
         }
 
         EditPatientDescriptor editPatientDescriptor = new EditPatientDescriptor();

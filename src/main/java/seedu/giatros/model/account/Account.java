@@ -57,7 +57,6 @@ public class Account {
         if (otherAccount == this) {
             return true;
         }
-
         return otherAccount != null && otherAccount.getUsername().equals(getUsername());
     }
 

@@ -25,19 +25,11 @@ public class AccountListPanel extends UiPart<Region> {
 
     public AccountListPanel(ObservableList<Account> accountList) {
         super(FXML);
-        setConnections(accountList);
-        registerAsAnEventHandler(this);
-    }
+        accountListView.setItems(accountList);
 
-    @FXML
-    private void handleMouseClick() {
+        accountListView.setCellFactory(listView -> new AccountListViewCell());
         Account account = accountListView.getSelectionModel().getSelectedItem();
         logger.fine("Selection in account list panel changed to : '" + account + "'");
-    }
-
-    private void setConnections(ObservableList<Account> itemList) {
-        accountListView.setItems(itemList);
-        accountListView.setCellFactory(listView -> new AccountListViewCell());
     }
 
     /**

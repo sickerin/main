@@ -57,6 +57,9 @@ public class SampleDataUtil {
         for (Patient samplePatient : getSamplePatients()) {
             sampleAb.addPatient(samplePatient);
         }
+        for (Account sampleAccount : getSampleAccount()) {
+            sampleAb.addAccount(sampleAccount);
+        }
         return sampleAb;
     }
 

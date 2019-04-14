@@ -34,8 +34,11 @@ import static seedu.giatros.logic.parser.CommandParserTestUtil.assertParseSucces
 import static seedu.giatros.testutil.TypicalPatients.AMY;
 import static seedu.giatros.testutil.TypicalPatients.BOB;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 
+import seedu.giatros.commons.core.EventsCenter;
+import seedu.giatros.commons.events.ui.accounts.LoginEvent;
 import seedu.giatros.logic.commands.AddCommand;
 import seedu.giatros.model.allergy.Allergy;
 import seedu.giatros.model.appointment.Appointment;
@@ -45,9 +48,15 @@ import seedu.giatros.model.patient.Name;
 import seedu.giatros.model.patient.Patient;
 import seedu.giatros.model.patient.Phone;
 import seedu.giatros.testutil.PatientBuilder;
+import seedu.giatros.ui.testutil.AccountCreator;
 
 public class AddCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();
+
+    @BeforeClass
+    public static void setupBeforeClass() {
+        EventsCenter.getInstance().post(new LoginEvent(new AccountCreator().build()));
+    }
 
     @Test
     public void parse_allFieldsPresent_success() {
