@@ -24,7 +24,8 @@ remove appointments from the existing list associated to a patient.
 
 * *Minor enhancement*:
 
-* *Code contributed*: [https://nus-cs2103-ay1819s2.github.io/cs2103-dashboard/#search=sickerin&sort=displayName&since=2019-02-10&until=2019-04-13&timeframe=day&reverse=false&repoSort=true[Project Code Dashboard]][https://github.com[Functional code addapt]]
+* *Code contributed*: [https://nus-cs2103-ay1819s2.github.io/cs2103-dashboard/#search=sickerin&sort=displayName&since=2019-02-10&until=2019-04-13&timeframe=day&reverse=false&repoSort=true[Project Code Dashboard]]
+[https://github.com/sickerin/main/blob/master/src/main/java/seedu/giatros/logic/commands/AddaptCommand.java[Functional code addapt]]
 [https://github.com[Functional code remapt]]
 [https://github.com[Test code addapt]]
 [https://github.com[Test code remapt]]
