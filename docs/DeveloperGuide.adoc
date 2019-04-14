@@ -313,12 +313,38 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
 // end::undoredo[]
 
-// tag::dataencryption[]
-=== [Proposed] Data Encryption
+// tag::addremall[]
+=== Add/Remove Allergy Feature
+==== Current Implementation
 
-_{Explain here how the data encryption feature will be implemented}_
+The add and remove allergy feature is implemented to extend the functionality of `Allergy` tags.
+Currently, the `edit` command will overwrite the existing `Allergy` tags if user attempts to edit the existing `Allergy`.
+With the `addall` and `remall` command, it is now possible to add or remove a single or multiple allergies associated with a patient.
 
-// end::dataencryption[]
+The functionality of the classes related to `addall` and `remall` are listed below:
+
+* `AddallCommandParser` and `RemallCommandParser` -- Reads the user input and create `AddallCommand` and `RemallCommand` object respectively.
+* `AddallCommand` and `RemallCommand` -- When executed, the command will result in the addition or removal of a single or multiple allergies.
+* `Allergy` -- An object that models allergy. It contains a String describing the name of the allergy.
+
+A patient's `Allergy` is stored in a Java HashSet, which stores only unique `Allergy` object.
+This feature makes use of this behaviour of a HashSet to allow user to add or remove allergies from the patient.
+
+* `addall` command uses the `.addAll()` method, which takes in a set of `Allergy` objects and add them in if they are not inside the set already.
+* `remall` command uses the `.remAll()` method, which takes in a set of `Allergy` objects and remove them if they are actually inside in the set.
+
+Given below is an example usage scenario and how the add/remove allergy mechanism behaves at each step.
+
+{_describe step-by-step_}
+
+{_draw sequence diagram_}
+
+{_draw flowchart_}
+
+==== Design Consideration
+===== Aspect:
+
+// end::addremall[]
 
 === Logging
 

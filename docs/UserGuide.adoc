@@ -269,8 +269,8 @@ Format: `remall INDEX y/ALLERGY [y/ALLERGY]...`
 * Removes one or more allergies to the patient at the specified `INDEX`. The index refers to the index number shown in the displayed patient list.
 The index *must be a positive integer* 1, 2, 3, ...
 * Multiple allergies can be removed at a time by separating the distinct allergies with distinct `y/` tags, e.g. `y/aspirin y/ibuprofen`.
-* Allergies not already associated with the patient will be ignored. For example, if the 1st patient is allergic to `aspirin`, `addall 1 y/ibuprofen`
-  will not modify the allergy list while `addall 1 y/aspirin y/ibuprofen` will just remove `aspirin` from the allergy list.
+* Allergies not already associated with the patient will be ignored. For example, if the 1st patient is allergic to `aspirin`, `remall 1 y/ibuprofen`
+  will not modify the allergy list while `remall 1 y/aspirin y/ibuprofen` will just remove `aspirin` from the allergy list.
 ****
 
 Examples:
@@ -325,3 +325,5 @@ e.g.`select 2`
 * *History* : `history`
 * *Undo* : `undo`
 * *Redo* : `redo`
+* *Add Allergy* : `addall INDEX y/ALLERGY [y/ALLERGY]`
+* *Remove Allergy* : `remall INDEX y/ALLERGY [y/ALLERGY]`
