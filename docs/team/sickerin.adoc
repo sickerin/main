@@ -10,8 +10,8 @@
 == Overview
 
 Giatros is a desktop patient record application used to keep track of patient data in a hospital. Written in Java, the user interacts with it using a CLI, and it has a GUI created with JavaFX.
-One of the main features of Giatros is its ability to track various appointments for each patient, something that medical professionals often overlook. This may lead to tragedy, such as death
-due to drug allergy, as seen in this https://www.straitstimes.com/singapore/courts-crime/womans-death-from-drug-allergy-found-to-be-a-medical-misadventure[news article]. Moreover, hospitals have a large number of patients, thereby staff can be easily overwhelmed, thus requiring a systematic way to make and manage appointments for instance. 
+One of the main features of Giatros is its ability to track various appointments for each patient, something that medical professionals often overlook. This may lead to tragedy, such as deathdue to drug allergy,
+as seen in this https://www.straitstimes.com/singapore/courts-crime/womans-death-from-drug-allergy-found-to-be-a-medical-misadventure[news article]. Moreover, hospitals have a large number of patients, thereby staff can be easily overwhelmed, thus requiring a systematic way to make and manage appointments for instance.
 This software is built upon an existing application: Address Book - Level 4 by MIT SE-EDU.
 
 == Summary of contributions
@@ -24,8 +24,8 @@ remove appointments from the existing list associated to a patient.
 
 * *Minor enhancement*:
 
-* *Code contributed*: [https://nus-cs2103-ay1819s2.github.io/cs2103-dashboard/#search=sickerin&sort=displayName&since=2019-02-10&until=2019-04-13&timeframe=day&reverse=false&repoSort=true[Project Code Dashboard]][https://github.com[Functional code addapt]] 
-[https://github.com[Functional code remapt]] 
+* *Code contributed*: [https://nus-cs2103-ay1819s2.github.io/cs2103-dashboard/#search=sickerin&sort=displayName&since=2019-02-10&until=2019-04-13&timeframe=day&reverse=false&repoSort=true[Project Code Dashboard]][https://github.com[Functional code addapt]]
+[https://github.com[Functional code remapt]]
 [https://github.com[Test code addapt]]
 [https://github.com[Test code remapt]]
 
