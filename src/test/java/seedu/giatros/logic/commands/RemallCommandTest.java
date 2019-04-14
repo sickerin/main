@@ -152,7 +152,8 @@ public class RemallCommandTest {
 
         Patient patientToModify = model.getFilteredPatientList().get(INDEX_FIRST_PATIENT.getZeroBased());
         Patient modifiedPatient = new Patient(patientToModify.getName(), patientToModify.getPhone(),
-                patientToModify.getEmail(), patientToModify.getAddress(), new HashSet<>(), new HashSet<>());
+                patientToModify.getEmail(), patientToModify.getAddress(), new HashSet<>(),
+                patientToModify.getAppointments());
 
         RemallCommand remallCommand = new RemallCommand(INDEX_FIRST_PATIENT, patientToModify.getAllergies());
         Model expectedModel = new ModelManager(model.getGiatrosBook(), new UserPrefs());
@@ -160,7 +161,7 @@ public class RemallCommandTest {
         expectedModel.setPatient(patientToModify, modifiedPatient);
         expectedModel.commitGiatrosBook();
 
-        System.out.println(expectedModel.getFilteredPatientList());
+//        System.out.println(expectedModel.getFilteredPatientList());
         // remall -> modifies second patient in unfiltered patient list / first patient in filtered patient list
         remallCommand.execute(model, commandHistory);
 
