@@ -64,10 +64,11 @@ Format: `help`
 === Adding a patient: `add`
 
 Adds a patient into Giatros. +
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [y/ALLERGY]... `
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [y/ALLERGY] [apt/APPOINTMENT]... `
 
 [TIP]
 A patient can have any number of allergies (including 0)
+A patient can have any number of appointments (including 0)
 
 Examples:
 
@@ -85,23 +86,24 @@ Edits an existing patient stored in Giatros. +
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [y/ALLERGY]...`
 
 [TIP]
-This feature can be used to add, remove, or update a patient's name, phone, email, address, or allergy
+This feature can be used to add, remove, or update a patient's name, phone, email, address, allergy or appointment
 
 ****
 * Edits the patient at the specified `INDEX`. The index refers to the index number shown in the displayed patient list.
 The index *must be a positive integer* 1, 2, 3, ...
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing allergies, the existing allergies of the person will be removed i.e adding of allergies is not cumulative.
+* When editing allergies or appointments, the existing allergies or appointments of the person will be removed i.e adding of allergies or appointments is not cumulative.
 * You can remove all the person's allergies by typing `y/` without specifying any allergies after it.
+* You can remove all the person's appointments by typing `apt/` without specifying any appointments after it.
 ****
 
 Examples:
 
 * `edit 1 p/10293847` +
 Edits the phone number of the 1st patient to be `10293847`.
-* `edit 2 n/Betsy Crower y/` +
-Edits the name of the 2nd patient to be `Betsy Crower` and clears all existing allergies.
+* `edit 2 n/Betsy Crower y/ apt/` +
+Edits the name of the 2nd patient to be `Betsy Crower` and clears all existing allergies and appointments.
 
 === Locating patients by name: `find`
 
@@ -111,7 +113,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 [TIP]
 This feature is useful to find out whether a patient has been registered in the system.
 [TIP]
-Doctors and pharmacists can also use this feature to find out more about a specific patient, e.g. patient's allergy
+Doctors and pharmacists can also use this feature to find out more about a specific patient, e.g. patient's allergies and appointments
 
 ****
 * The search is case insensitive. e.g `hans` will match `Hans`
@@ -281,6 +283,60 @@ Removes the allergy `ibuprofen` from the 1st patient in the list.
 Removes two allergies, `aspirin` and `amoxicillin` from the 3rd patient in the list.
 // end::addremall[]
 
+// tag::addremapt[]
+=== Adding appointment to a patient: `addapt`
+
+Adds one or more appointments to an existing patient in Giatros. +
+Format: `addapt INDEX apt/APPOINTMENT [apt/APPOINTMENT]...`
+
+[NOTE]
+====
+Appointments should be in one of the following forms, 'yyyy-MM-dd HH:mm:ss'
+            , 'yyyy-MM-dd HH:mm', 'yyyy-MM-dd HH', and should be a valid date-time. Entering '2016-01-01' (no time value), '2019-02-29 10:10' (leap year, day does not exist), '2019-02-29 25:10' (impossible time), etc is not acceptable.
+====
+
+****
+* Adds one or more appointments to the patient at the specified `INDEX`. The index refers to the index number shown in the displayed patient list.
+The index *must be a positive integer* 1, 2, 3, ...
+* Multiple appointments can be added at a time by separating the distinct appointments with distinct `apt/` tags, e.g. `apt/2019-01-01 15:15 apt/2019-01-01 15`.
+* Appointments already associated with the patient will be ignored. For example, if the 1st patient has an appointment at `2019-01-01 15:15`, `addapt 1 apt/2019-01-01 15:15`
+will not modify the appointment list while `addapt 1 apt/2019-01-01 15:15 apt/2019-01-01 15` will just add `2019-01-01 15` to the appointment list.
+****
+
+Examples:
+
+* `addapt 1 apt/2019-01-01 15` +
+Adds the appointment `2019-01-01 15` to the 1st patient in the list.
+* `addapt 3 apt/2019-01-01 15:15 apt/2019-02-02 15:15:30` +
+Adds two appointments, `2019-01-01 15:15` and `2019-02-02 15:15:30` to the 3rd patient in the list.
+
+=== Removing appointment from a patient: `remapt`
+
+[NOTE]
+====
+Appointments should be in one of the following forms, 'yyyy-MM-dd HH:mm:ss'
+            , 'yyyy-MM-dd HH:mm', 'yyyy-MM-dd HH', and should be a valid date-time. Entering '2016-01-01' (no time value), '2019-02-29 10:10' (leap year, day does not exist), '2019-02-29 25:10' (impossible time), etc is not acceptable.
+====
+
+Removes one or more appointments to an existing patient in Giatros. +
+Format: `remapt INDEX apt/APPOINTMENT [apt/APPOINTMENT]...`
+
+****
+* Removes one or more appointments to the patient at the specified `INDEX`. The index refers to the index number shown in the displayed patient list.
+The index *must be a positive integer* 1, 2, 3, ...
+* Multiple appointments can be removed at a time by separating the distinct appointments with distinct `apt/` tags, e.g. `apt/2019-01-01 15:15 apt/2019-01-01 15`.
+* Appointments not already associated with the patient will be ignored. For example, if the 1st patient has an appointment at `2019-01-01 15:15`, `addapt 1 apt/2019-01-01 15`
+  will not modify the appointment list while `addapt 1 apt/2019-01-01 15:15 apt/2019-01-01 15` will just remove `2019-01-01 15:15` from the appointment list.
+****
+
+Examples:
+
+* `remapt 1 apt/2019-01-01 15` +
+Removes the appointment `2019-01-01 15` from the 1st patient in the list.
+* `remapt 3 apt/2019-01-01 15:15 apt/2019-02-02 15:15:30` +
+Removes two appointments, `2019-01-01 15:15` and `2019-02-02 15:15:30` from the 3rd patient in the list.
+// end::addremapt[]
+
 === Clearing all entries : `clear`
 
 Clears all entries from Giatros. +
@@ -309,12 +365,16 @@ _{explain how the user can enable/disable data encryption}_
 
 == Command Summary
 
-* *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [y/ALLERGY]...` +
+* *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [y/ALLERGY] [y/APPOINTMENT]...` +
 e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 y/paracetamol y/ibuprofen`
+* *Add appointment* `addapt INDEX apt/APPOINTMENT [apt/APPOINTMENT]...` +
+e.g. `addapt 1 apt/2019-01-01 15`
+* *Remove appointment* `remapt INDEX apt/APPOINTMENT [apt/APPOINTMENT]...` +
+e.g. `remapt 1 apt/2019-01-01 15`
 * *Clear* : `clear`
 * *Delete* : `delete INDEX` +
 e.g. `delete 3`
-* *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [y/ALLERGY]...` +
+* *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [y/ALLERGY]  [y/ALLERGY]...` +
 e.g. `edit 2 n/James Lee e/jameslee@example.com`
 * *Find* : `find KEYWORD [MORE_KEYWORDS]` +
 e.g. `find James Jake`
