@@ -83,7 +83,7 @@ Format: `list`
 === Editing a patient : `edit`
 
 Edits an existing patient stored in Giatros. +
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [y/ALLERGY]...`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [y/ALLERGY] [apt/APPOINTMENT]...`
 
 [TIP]
 This feature can be used to add, remove, or update a patient's name, phone, email, address, allergy or appointment
@@ -374,7 +374,7 @@ e.g. `remapt 1 apt/2019-01-01 15`
 * *Clear* : `clear`
 * *Delete* : `delete INDEX` +
 e.g. `delete 3`
-* *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [y/ALLERGY]  [y/ALLERGY]...` +
+* *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [y/ALLERGY] [apt/APPOINTMENT]...` +
 e.g. `edit 2 n/James Lee e/jameslee@example.com`
 * *Find* : `find KEYWORD [MORE_KEYWORDS]` +
 e.g. `find James Jake`
