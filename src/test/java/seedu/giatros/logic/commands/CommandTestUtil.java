@@ -63,7 +63,7 @@ public class CommandTestUtil {
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_ALLERGY_DESC = " " + PREFIX_ALLERGY + "*allergy"; // '*' not allowed in allergies
-    public static final String INVALID_APPOINTMENT_DESC = " " + PREFIX_ALLERGY + "2019"; // it must be in one of the accepted formats
+    public static final String INVALID_APPOINTMENT_DESC = " " + PREFIX_APPOINTMENT + "2019"; // it must be in one of the accepted formats
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

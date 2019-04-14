@@ -27,10 +27,10 @@ public class Patient {
     private final Set<Appointment> appointments = new HashSet<>();
 
     /**
-     * Every field must be present and not null.
+     * Every field, except for appointments and allergies must be present and not null.
      */
     public Patient(Name name, Phone phone, Email email, Address address, Set<Allergy> allergies, Set<Appointment> appointments) {
-        requireAllNonNull(name, phone, email, address, allergies);
+        requireAllNonNull(name, phone, email, address);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -127,6 +127,7 @@ public class Patient {
                 .append(getAddress())
                 .append(" Allergies: ");
         getAllergies().forEach(builder::append);
+        builder.append(" Appointments: ");
         getAppointments().forEach(builder::append);
         return builder.toString();
     }

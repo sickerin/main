@@ -4,6 +4,8 @@ import static seedu.giatros.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.giatros.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.giatros.logic.commands.CommandTestUtil.VALID_ALLERGY_AMPICILLIN;
 import static seedu.giatros.logic.commands.CommandTestUtil.VALID_ALLERGY_IBUPROFEN;
+import static seedu.giatros.logic.commands.CommandTestUtil.VALID_APPOINTMENT_YMDH;
+import static seedu.giatros.logic.commands.CommandTestUtil.VALID_APPOINTMENT_YMDHM;
 import static seedu.giatros.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.giatros.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.giatros.logic.commands.CommandTestUtil.VALID_NAME_AMY;
@@ -51,10 +53,12 @@ public class TypicalPatients {
 
     // Manually added - Patient's details found in {@code CommandTestUtil}
     public static final Patient AMY = new PatientBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
-            .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withAllergies(VALID_ALLERGY_IBUPROFEN).build();
+            .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withAllergies(VALID_ALLERGY_IBUPROFEN)
+            .withAppointments(VALID_APPOINTMENT_YMDH).build();
     public static final Patient BOB = new PatientBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-            .withAllergies(VALID_ALLERGY_AMPICILLIN, VALID_ALLERGY_IBUPROFEN).build();
+            .withAllergies(VALID_ALLERGY_AMPICILLIN, VALID_ALLERGY_IBUPROFEN)
+            .withAppointments(VALID_APPOINTMENT_YMDH, VALID_APPOINTMENT_YMDHM).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
