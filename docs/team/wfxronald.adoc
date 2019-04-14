@@ -49,6 +49,7 @@ remove allergies from the existing list associated to a patient.
 |===
 
 include::../UserGuide.adoc[tag=addremall]
+include::../UserGuide.adoc[tag=authentication]
 
 == Contributions to the Developer Guide
 
