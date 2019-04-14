@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.giatros.model.allergy.Allergy;
+import seedu.giatros.model.appointment.Appointment;
 import seedu.giatros.model.patient.Address;
 import seedu.giatros.model.patient.Email;
 import seedu.giatros.model.patient.Name;
@@ -21,13 +22,16 @@ public class PatientBuilder {
     public static final String DEFAULT_EMAIL = "alice@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_ALLERGY = "none";
+    public static final String DEFAULT_APPOINTMENT = "2019-01-01 00:00:00";
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
     private Allergy allergy;
+    private Appointment appointment;
     private Set<Allergy> allergies;
+    private Set<Appointment> appointments;
 
     public PatientBuilder() {
         name = new Name(DEFAULT_NAME);
@@ -36,6 +40,8 @@ public class PatientBuilder {
         address = new Address(DEFAULT_ADDRESS);
         allergy = new Allergy(DEFAULT_ALLERGY);
         allergies = new HashSet<>();
+        appointment = new Appointment(DEFAULT_APPOINTMENT);
+        appointments = new HashSet<>();
     }
 
     /**
@@ -47,6 +53,7 @@ public class PatientBuilder {
         email = patientToCopy.getEmail();
         address = patientToCopy.getAddress();
         allergies = new HashSet<>(patientToCopy.getAllergies());
+        appointments = new HashSet<>(patientToCopy.getAppointments());
     }
 
     /**
@@ -54,30 +61,6 @@ public class PatientBuilder {
      */
     public PatientBuilder withName(String name) {
         this.name = new Name(name);
-        return this;
-    }
-
-    /**
-     * Parses the {@code allergies} into a {@code Set<Allergy>} and set it to the {@code Patient} that we are building.
-     */
-    public PatientBuilder withAllergies(String ... allergies) {
-        this.allergies = SampleDataUtil.getAllergySet(allergies);
-        return this;
-    }
-
-    /**
-     * Adds a new {@code allergy} to the {@code Patient} that we are building.
-     */
-    public PatientBuilder withAllergy(String allergy) {
-        this.allergies.add(new Allergy(allergy));
-        return this;
-    }
-
-    /**
-     * Sets the {@code Address} of the {@code Patient} that we are building.
-     */
-    public PatientBuilder withAddress(String address) {
-        this.address = new Address(address);
         return this;
     }
 
@@ -97,8 +80,50 @@ public class PatientBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Address} of the {@code Patient} that we are building.
+     */
+    public PatientBuilder withAddress(String address) {
+        this.address = new Address(address);
+        return this;
+    }
+
+
+    /**
+     * Parses the {@code allergies} into a {@code Set<Allergy>} and set it to the {@code Patient} that we are building.
+     */
+    public PatientBuilder withAllergies(String ... allergies) {
+        this.allergies = SampleDataUtil.getAllergySet(allergies);
+        return this;
+    }
+
+    /**
+     * Adds a new {@code allergy} to the {@code Patient} that we are building.
+     */
+    public PatientBuilder withAllergy(String allergy) {
+        this.allergies.add(new Allergy(allergy));
+        return this;
+    }
+
+    /**
+     * Parses the {@code appointments} into a {@code Set<Appointment>}
+     * and set it to the {@code Patient} that we are building.
+     */
+    public PatientBuilder withAppointments(String ... appointments) {
+        this.appointments = SampleDataUtil.getAppointmentSet(appointments);
+        return this;
+    }
+
+    /**
+     * Adds a new {@code appointment} to the {@code Patient} that we are building.
+     */
+    public PatientBuilder withAppointment(String appointment) {
+        this.appointments.add(new Appointment(appointment));
+        return this;
+    }
+
     public Patient build() {
-        return new Patient(name, phone, email, address, allergies);
+        return new Patient(name, phone, email, address, allergies, appointments);
     }
 
 }

@@ -2,6 +2,7 @@ package seedu.giatros.testutil;
 
 import static seedu.giatros.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.giatros.logic.parser.CliSyntax.PREFIX_ALLERGY;
+import static seedu.giatros.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
 import static seedu.giatros.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.giatros.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.giatros.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -11,6 +12,7 @@ import java.util.Set;
 import seedu.giatros.logic.commands.AddCommand;
 import seedu.giatros.logic.commands.EditCommand.EditPatientDescriptor;
 import seedu.giatros.model.allergy.Allergy;
+import seedu.giatros.model.appointment.Appointment;
 import seedu.giatros.model.patient.Patient;
 
 /**
@@ -37,6 +39,11 @@ public class PatientUtil {
         patient.getAllergies().stream().forEach(
             s -> sb.append(PREFIX_ALLERGY + s.allergyName + " ")
         );
+        // ! temporary fix, need space or in test we get y/apt/
+        sb.append(" ");
+        patient.getAppointments().stream().forEach(
+            s -> sb.append(PREFIX_APPOINTMENT + s.appointmentString + " ")
+        );
         return sb.toString();
     }
 
@@ -55,6 +62,16 @@ public class PatientUtil {
                 sb.append(PREFIX_ALLERGY);
             } else {
                 allergies.forEach(s -> sb.append(PREFIX_ALLERGY).append(s.allergyName).append(" "));
+            }
+        }
+        // ! temporary fix, need space or in test we get y/apt/
+        sb.append(" ");
+        if (descriptor.getAppointments().isPresent()) {
+            Set<Appointment> appointments = descriptor.getAppointments().get();
+            if (appointments.isEmpty()) {
+                sb.append(PREFIX_APPOINTMENT);
+            } else {
+                appointments.forEach(s -> sb.append(PREFIX_APPOINTMENT).append(s.appointmentString).append(" "));
             }
         }
         return sb.toString();

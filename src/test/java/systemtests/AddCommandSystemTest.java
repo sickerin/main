@@ -5,6 +5,8 @@ import static seedu.giatros.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.giatros.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static seedu.giatros.logic.commands.CommandTestUtil.ALLERGY_DESC_AMPICILLIN;
 import static seedu.giatros.logic.commands.CommandTestUtil.ALLERGY_DESC_IBUPROFEN;
+import static seedu.giatros.logic.commands.CommandTestUtil.APPOINTMENT_DESC_YMDH;
+import static seedu.giatros.logic.commands.CommandTestUtil.APPOINTMENT_DESC_YMDHM;
 import static seedu.giatros.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.giatros.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.giatros.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
@@ -59,7 +61,8 @@ public class AddCommandSystemTest extends GiatrosBookSystemTest {
          */
         Patient toAdd = AMY;
         String command = "   " + AddCommand.COMMAND_WORD + "  " + NAME_DESC_AMY + "  " + PHONE_DESC_AMY + " "
-                + EMAIL_DESC_AMY + "   " + ADDRESS_DESC_AMY + "   " + ALLERGY_DESC_IBUPROFEN + " ";
+                + EMAIL_DESC_AMY + "   " + ADDRESS_DESC_AMY + "   "
+                + ALLERGY_DESC_IBUPROFEN + " " + APPOINTMENT_DESC_YMDH;
         assertCommandSuccess(command, toAdd);
 
         /* Case: undo adding Amy to the list -> Amy deleted */
@@ -76,7 +79,7 @@ public class AddCommandSystemTest extends GiatrosBookSystemTest {
         /* Case: add a patient with all fields same as another patient in the Giatros book except name -> added */
         toAdd = new PatientBuilder(AMY).withName(VALID_NAME_BOB).build();
         command = AddCommand.COMMAND_WORD + NAME_DESC_BOB + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
-                + ALLERGY_DESC_IBUPROFEN;
+                + ALLERGY_DESC_IBUPROFEN + APPOINTMENT_DESC_YMDH;
         assertCommandSuccess(command, toAdd);
 
         /* Case: add a patient with all fields same as another patient in the Giatros book except phone and email
@@ -92,8 +95,8 @@ public class AddCommandSystemTest extends GiatrosBookSystemTest {
 
         /* Case: add a patient with allergies, command with parameters in random order -> added */
         toAdd = BOB;
-        command = AddCommand.COMMAND_WORD + ALLERGY_DESC_IBUPROFEN + PHONE_DESC_BOB + ADDRESS_DESC_BOB + NAME_DESC_BOB
-                + ALLERGY_DESC_AMPICILLIN + EMAIL_DESC_BOB;
+        command = AddCommand.COMMAND_WORD + ALLERGY_DESC_IBUPROFEN + PHONE_DESC_BOB + APPOINTMENT_DESC_YMDHM
+                + ADDRESS_DESC_BOB + NAME_DESC_BOB + ALLERGY_DESC_AMPICILLIN + EMAIL_DESC_BOB + APPOINTMENT_DESC_YMDH;
         assertCommandSuccess(command, toAdd);
 
         /* Case: add a patient, missing allergies -> added */
