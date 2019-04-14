@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 import seedu.giatros.logic.commands.EditCommand.EditPatientDescriptor;
 import seedu.giatros.model.allergy.Allergy;
+import seedu.giatros.model.appointment.Appointment;
 import seedu.giatros.model.patient.Address;
 import seedu.giatros.model.patient.Email;
 import seedu.giatros.model.patient.Name;
@@ -37,6 +38,7 @@ public class EditPatientDescriptorBuilder {
         descriptor.setEmail(patient.getEmail());
         descriptor.setAddress(patient.getAddress());
         descriptor.setAllergies(patient.getAllergies());
+        descriptor.setAppointments(patient.getAppointments());
     }
 
     /**
@@ -78,6 +80,16 @@ public class EditPatientDescriptorBuilder {
     public EditPatientDescriptorBuilder withAllergies(String... allergies) {
         Set<Allergy> allergySet = Stream.of(allergies).map(Allergy::new).collect(Collectors.toSet());
         descriptor.setAllergies(allergySet);
+        return this;
+    }
+
+    /**
+     * Parses the {@code appointments} into a {@code Set<Appointment>} and set it to the {@code EditPatientDescriptor}
+     * that we are building.
+     */
+    public EditPatientDescriptorBuilder withAppointments(String... appointments) {
+        Set<Appointment> appointmentSet = Stream.of(appointments).map(Appointment::new).collect(Collectors.toSet());
+        descriptor.setAppointments(appointmentSet);
         return this;
     }
 

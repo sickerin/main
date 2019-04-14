@@ -51,5 +51,4 @@ public class AddallCommandParser implements Parser<AddallCommand> {
 
         return new AddallCommand(index, allergies);
     }
-
 }

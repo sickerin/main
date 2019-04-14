@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.giatros.commons.exceptions.IllegalValueException;
 import seedu.giatros.model.allergy.Allergy;
+import seedu.giatros.model.appointment.Appointment;
 import seedu.giatros.model.patient.Address;
 import seedu.giatros.model.patient.Email;
 import seedu.giatros.model.patient.Name;
@@ -27,8 +28,10 @@ class JsonAdaptedPatient {
     private final String name;
     private final String phone;
     private final String email;
+
     private final String address;
-    private final List<JsonAdaptedAllergy> allergied = new ArrayList<>();
+    private final List<JsonAdaptedAllergy> allergies = new ArrayList<>();
+    private final List<JsonAdaptedAppointment> appointments = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPatient} with the given patient details.
@@ -36,13 +39,17 @@ class JsonAdaptedPatient {
     @JsonCreator
     public JsonAdaptedPatient(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("allergied") List<JsonAdaptedAllergy> allergied) {
+            @JsonProperty("allergies") List<JsonAdaptedAllergy> allergies,
+            @JsonProperty("appointments") List<JsonAdaptedAppointment> appointments) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        if (allergied != null) {
-            this.allergied.addAll(allergied);
+        if (allergies != null) {
+            this.allergies.addAll(allergies);
+        }
+        if (appointments != null) {
+            this.appointments.addAll(appointments);
         }
     }
 
@@ -54,8 +61,11 @@ class JsonAdaptedPatient {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-        allergied.addAll(source.getAllergies().stream()
+        allergies.addAll(source.getAllergies().stream()
                 .map(JsonAdaptedAllergy::new)
+                .collect(Collectors.toList()));
+        appointments.addAll(source.getAppointments().stream()
+                .map(JsonAdaptedAppointment::new)
                 .collect(Collectors.toList()));
     }
 
@@ -66,8 +76,13 @@ class JsonAdaptedPatient {
      */
     public Patient toModelType() throws IllegalValueException {
         final List<Allergy> patientAllergies = new ArrayList<>();
-        for (JsonAdaptedAllergy allergy : allergied) {
+        final List<Appointment> patientAppointments = new ArrayList<>();
+        for (JsonAdaptedAllergy allergy : allergies) {
             patientAllergies.add(allergy.toModelType());
+        }
+
+        for (JsonAdaptedAppointment appointment : appointments) {
+            patientAppointments.add(appointment.toModelType());
         }
 
         if (name == null) {
@@ -103,7 +118,8 @@ class JsonAdaptedPatient {
         final Address modelAddress = new Address(address);
 
         final Set<Allergy> modelAllergies = new HashSet<>(patientAllergies);
-        return new Patient(modelName, modelPhone, modelEmail, modelAddress, modelAllergies);
+        final Set<Appointment> modelAppointments = new HashSet<>(patientAppointments);
+        return new Patient(modelName, modelPhone, modelEmail, modelAddress, modelAllergies, modelAppointments);
     }
 
 }
