@@ -92,12 +92,12 @@ public class AddCommandParserTest {
                 + APPOINTMENT_DESC_YMDH, new AddCommand(expectedPatientMultipleAllergies));
 
         // multiple appointments - all accepted
-         Patient expectedPatientMultipleAppointments = new PatientBuilder(BOB)
-                 .withAllergies(VALID_ALLERGY_IBUPROFEN)
-                 .withAppointments(VALID_APPOINTMENT_YMDH, VALID_APPOINTMENT_YMDHM).build();
-         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                 + ALLERGY_DESC_IBUPROFEN + APPOINTMENT_DESC_YMDH
-                 + APPOINTMENT_DESC_YMDHM, new AddCommand(expectedPatientMultipleAppointments));
+        Patient expectedPatientMultipleAppointments = new PatientBuilder(BOB)
+                .withAllergies(VALID_ALLERGY_IBUPROFEN)
+                .withAppointments(VALID_APPOINTMENT_YMDH, VALID_APPOINTMENT_YMDHM).build();
+        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + ALLERGY_DESC_IBUPROFEN + APPOINTMENT_DESC_YMDH
+                + APPOINTMENT_DESC_YMDHM, new AddCommand(expectedPatientMultipleAppointments));
     }
 
     @Test
@@ -162,8 +162,8 @@ public class AddCommandParserTest {
 
         // invalid appointment
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + ALLERGY_DESC_AMPICILLIN + ALLERGY_DESC_IBUPROFEN +
-                INVALID_APPOINTMENT_DESC , Appointment.MESSAGE_CONSTRAINTS);
+                + ALLERGY_DESC_AMPICILLIN + ALLERGY_DESC_IBUPROFEN
+                + INVALID_APPOINTMENT_DESC , Appointment.MESSAGE_CONSTRAINTS);
 
 
         // two invalid values, only first invalid value reported

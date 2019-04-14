@@ -106,10 +106,11 @@ public class PatientBuilder {
     }
 
     /**
-     * Parses the {@code appointments} into a {@code Set<Appointment>} and set it to the {@code Patient} that we are building.
+     * Parses the {@code appointments} into a {@code Set<Appointment>}
+     * and set it to the {@code Patient} that we are building.
      */
     public PatientBuilder withAppointments(String ... appointments) {
-        this.appointments= SampleDataUtil.getAppointmentSet(appointments);
+        this.appointments = SampleDataUtil.getAppointmentSet(appointments);
         return this;
     }
 
@@ -120,7 +121,6 @@ public class PatientBuilder {
         this.appointments.add(new Appointment(appointment));
         return this;
     }
-    
 
     public Patient build() {
         return new Patient(name, phone, email, address, allergies, appointments);

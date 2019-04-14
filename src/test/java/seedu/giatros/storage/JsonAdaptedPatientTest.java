@@ -25,7 +25,8 @@ public class JsonAdaptedPatientTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_ALLERGY = "#friend";
-    private static final List<JsonAdaptedAppointment> INVALID_APPOINTMENTS = Arrays.asList(new JsonAdaptedAppointment("2019"));
+    private static final List<JsonAdaptedAppointment> INVALID_APPOINTMENTS = Arrays
+            .asList(new JsonAdaptedAppointment("2019"));
     // private static final String INVALID_APPOINTMENT = "2019";
 
     private static final String VALID_NAME = BENSON.getName().toString();

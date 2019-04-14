@@ -29,7 +29,6 @@ import static seedu.giatros.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.giatros.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.giatros.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.giatros.logic.parser.CliSyntax.PREFIX_ALLERGY;
-import static seedu.giatros.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
 import static seedu.giatros.model.Model.PREDICATE_SHOW_ALL_PATIENTS;
 import static seedu.giatros.testutil.TypicalIndexes.INDEX_FIRST_PATIENT;
 import static seedu.giatros.testutil.TypicalIndexes.INDEX_SECOND_PATIENT;
@@ -147,7 +146,7 @@ public class EditCommandSystemTest extends GiatrosBookSystemTest {
         index = INDEX_FIRST_PATIENT;
         selectPatient(index);
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                + ADDRESS_DESC_AMY + ALLERGY_DESC_IBUPROFEN + APPOINTMENT_DESC_YMDH ;
+                + ADDRESS_DESC_AMY + ALLERGY_DESC_IBUPROFEN + APPOINTMENT_DESC_YMDH;
         // this can be misleading: card selection actually remains unchanged but the
         // browser's url is updated to reflect the new patient's name
         assertCommandSuccess(command, index, AMY, index);
