@@ -6,12 +6,11 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import seedu.giatros.commons.exceptions.IllegalValueException;
 import seedu.giatros.model.appointment.Appointment;
 
-
 /**
  * Jackson-friendly version of {@link Appointment}
  */
 public class JsonAdaptedAppointment {
-    
+
     private final String appointment;
 
     /**

@@ -10,15 +10,13 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.giatros.commons.exceptions.IllegalValueException;
-import seedu.giatros.model.patient.Address;
 import seedu.giatros.model.allergy.Allergy;
 import seedu.giatros.model.appointment.Appointment;
+import seedu.giatros.model.patient.Address;
 import seedu.giatros.model.patient.Email;
 import seedu.giatros.model.patient.Name;
 import seedu.giatros.model.patient.Patient;
 import seedu.giatros.model.patient.Phone;
-import seedu.giatros.storage.JsonAdaptedAllergy;
-import seedu.giatros.storage.JsonAdaptedAppointment;
 
 /**
  * Jackson-friendly version of {@link Patient}.
@@ -50,7 +48,7 @@ class JsonAdaptedPatient {
         if (allergies != null) {
             this.allergies.addAll(allergies);
         }
-        if (appointments != null){
+        if (appointments != null) {
             this.appointments.addAll(appointments);
         }
     }

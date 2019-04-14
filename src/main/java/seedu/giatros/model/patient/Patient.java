@@ -29,7 +29,8 @@ public class Patient {
     /**
      * Every field, except for appointments and allergies must be present and not null.
      */
-    public Patient(Name name, Phone phone, Email email, Address address, Set<Allergy> allergies, Set<Appointment> appointments) {
+    public Patient(Name name, Phone phone, Email email, Address address,
+                   Set<Allergy> allergies, Set<Appointment> appointments) {
         requireAllNonNull(name, phone, email, address);
         this.name = name;
         this.phone = phone;
@@ -67,13 +68,14 @@ public class Patient {
      * Returns an immutable appointment set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Appointment> getAppointments(){
+    public Set<Appointment> getAppointments() {
         return Collections.unmodifiableSet(appointments);
     }
 
 
     /**
-     * Returns true if both patients of the same name have at least one other possibly unique identity field that is the same.
+     * Returns true if both patients of the same name have at least one other possibly
+     * unique identity field that is the same.
      * This defines a weaker notion of equality between two patients.
      */
     public boolean isSamePatient(Patient otherPatient) {

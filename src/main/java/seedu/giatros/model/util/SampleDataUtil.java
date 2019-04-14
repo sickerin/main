@@ -32,11 +32,11 @@ public class SampleDataUtil {
     public static Patient[] getSamplePatients() {
         return new Patient[] {
             new Patient(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
-                new Address("Blk 30 Geylang Street 29, #06-40"), getAllergySet("amoxicillin"), 
+                new Address("Blk 30 Geylang Street 29, #06-40"), getAllergySet("amoxicillin"),
                 getAppointmentSet("2019-04-01 14:30")),
             new Patient(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
-                new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"), getAllergySet("ampicillin", "penicillin"), 
-                getAppointmentSet("2019-04-01 13:30", "2019-04-03 14")),
+                new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
+                getAllergySet("ampicillin", "penicillin"), getAppointmentSet("2019-04-01 13:30", "2019-04-03 14")),
             new Patient(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
                 new Address("Blk 11 Ang Mo Kio Street 74, #11-04"), getAllergySet("aspirin"),
                 getAppointmentSet("2019-03-10 13:30", "2019-12-14 14")),

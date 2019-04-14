@@ -20,11 +20,13 @@ import java.util.Date;
  */
 public class Appointment {
     // ? is there an issue with the style below?
-    public static final String[] VALIDATION_REGEX_LIST = {"yyyy-MM-dd HH:mm:ss"
-            , "yyyy-MM-dd HH:mm", "yyyy-MM-dd HH"};
-    public static final String MESSAGE_CONSTRAINTS = "Appointment should not be blank and should be in one of the formats: "
+    public static final String[] VALIDATION_REGEX_LIST = {"yyyy-MM-dd HH:mm:ss",
+        "yyyy-MM-dd HH:mm", "yyyy-MM-dd HH"};
+    public static final String MESSAGE_CONSTRAINTS = "Appointment should not be blank "
+            + "and should be in one of the formats: "
             + String.join(" , ", VALIDATION_REGEX_LIST)
-            + ".\nEnsure that your date and time isn't one that does not exist. I.e account for leap years, months that have only 30 days, etc.";
+            + ".\nEnsure that your date and time isn't one that does not exist. "
+            + "I.e account for leap years, months that have only 30 days, etc.";
     public final String appointmentString;
     private Date appointment;
     // TODO make it figure out day from the time.
@@ -38,6 +40,11 @@ public class Appointment {
         // this.date = date;
     }
 
+    /**
+     * Converts a {@code appointmentString} into a {@Date} object
+     * @param appointmentString
+     * @return convertedDate
+     */
     public static Date convertStringtoDate(String appointmentString) {
         Date convertedDate = null;
         String format = Arrays.asList(VALIDATION_REGEX_LIST).stream()
@@ -59,18 +66,21 @@ public class Appointment {
         return convertedDate;
     }
 
+    /**
+     * Returns true if a given string is a valid appointment.
+     */
     public static boolean isValidAppointment(String test) {
         // * reference https://www.codota.com/code/java/methods/java.util.stream.Stream/anyMatch
         // ? with regards to style should it be VALIDATION_REGEX??
         boolean match = Arrays.asList(VALIDATION_REGEX_LIST).stream()
                 .anyMatch(VALIDATION_REGEX -> {
                     try {
-                        DateTimeFormatter CUSTOM_FORMAT = new DateTimeFormatterBuilder().appendPattern(VALIDATION_REGEX)
+                        DateTimeFormatter customFormat = new DateTimeFormatterBuilder().appendPattern(VALIDATION_REGEX)
                                 .parseDefaulting(ChronoField.ERA, 1)
                                 .toFormatter()
                                 .withChronology(IsoChronology.INSTANCE)
                                 .withResolverStyle(ResolverStyle.STRICT);
-                        LocalDateTime.parse(test, CUSTOM_FORMAT);
+                        LocalDateTime.parse(test, customFormat);
                         return true;
                     } catch (Exception e) {
                         return false;

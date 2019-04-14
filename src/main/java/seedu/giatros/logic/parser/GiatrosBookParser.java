@@ -112,7 +112,7 @@ public class GiatrosBookParser {
 
         case AddallCommand.COMMAND_WORD:
             return new AddallCommandParser().parse(arguments);
-        
+
         case AddaptCommand.COMMAND_WORD:
             return new AddaptCommandParser().parse(arguments);
 

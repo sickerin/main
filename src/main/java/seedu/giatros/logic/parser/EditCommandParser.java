@@ -64,8 +64,10 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
             editPatientDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
-        parseAllergiesForEdit(argMultimap.getAllValues(PREFIX_ALLERGY)).ifPresent(editPatientDescriptor::setAllergies);
-        parseAppointmentsForEdit(argMultimap.getAllValues(PREFIX_APPOINTMENT)).ifPresent(editPatientDescriptor::setAppointments);
+        parseAllergiesForEdit(argMultimap.getAllValues(PREFIX_ALLERGY))
+                .ifPresent(editPatientDescriptor::setAllergies);
+        parseAppointmentsForEdit(argMultimap.getAllValues(PREFIX_APPOINTMENT))
+                .ifPresent(editPatientDescriptor::setAppointments);
 
         if (!editPatientDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
@@ -91,7 +93,8 @@ public class EditCommandParser implements Parser<EditCommand> {
     }
 
     /**
-     * Parses {@code Collection<String> appointments} into a {@code Set<Appointment>} if {@code appointments} is non-empty.
+     * Parses {@code Collection<String> appointments} into a {@code Set<Appointment>}
+     * if {@code appointments} is non-empty.
      * If {@code appointments} contain only one element which is an empty string, it will be parsed into a
      * {@code Set<Appointment>} containing zero appointments.
      */

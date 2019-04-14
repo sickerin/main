@@ -15,8 +15,8 @@ import seedu.giatros.model.appointment.Appointment;
 /**
  * Parses input arguments and creates a new {@code AddaptCommand} object.
  */
-public class AddaptCommandParser implements Parser<AddaptCommand> { 
-    
+public class AddaptCommandParser implements Parser<AddaptCommand> {
+
     /**
      * Parses the given {@code String} of arguments in the context of the AddaptCommand
      * and returns an AddaptCommand object for execution.

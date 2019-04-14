@@ -90,14 +90,13 @@ public class PatientCard extends UiPart<Region> {
      */
     private void createAppointment(Patient patient) {
         patient.getAppointments().forEach(appointment -> {
-            Label newAppointment= new Label(appointment.appointmentString);
+            Label newAppointment = new Label(appointment.appointmentString);
             newAppointment.getStyleClass().add(chooseRandomColourFor(appointment.appointmentString));
             appointments.getChildren().add(newAppointment);
         });
     }
 
     /**
-     * 
      * Fetches earliest upcoming appointment for {@code Patient}.
      */
     private void fetchAppointment(Patient patient) {
