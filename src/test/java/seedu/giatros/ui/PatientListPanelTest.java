@@ -84,7 +84,7 @@ public class PatientListPanelTest extends GuiUnitTest {
             Phone phone = new Phone("000");
             Email email = new Email("a@aa");
             Address address = new Address("a");
-            Patient patient = new Patient(name, phone, email, address, Collections.emptySet());
+            Patient patient = new Patient(name, phone, email, address, Collections.emptySet(), Collections.emptySet());
             backingList.add(patient);
         }
         return backingList;

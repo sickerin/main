@@ -1,7 +1,6 @@
 package seedu.giatros.logic.commands;
 
 import static seedu.giatros.commons.util.CollectionUtil.requireAllNonNull;
-// TODO the import below does not exist
 import static seedu.giatros.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
 import static seedu.giatros.model.Model.PREDICATE_SHOW_ALL_PATIENTS;
 
@@ -17,6 +16,9 @@ import seedu.giatros.model.Model;
 import seedu.giatros.model.appointment.Appointment;
 import seedu.giatros.model.patient.Patient;
 
+/**
+ * Adds an appointment to an existing patient in the giatros book.
+ */
 public class AddaptCommand extends Command {
 
     public static final String COMMAND_WORD = "addapt";
@@ -25,12 +27,12 @@ public class AddaptCommand extends Command {
             + "by the index number used in the patient listing.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_APPOINTMENT + "[APPOINTMENT]\n"
-            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_APPOINTMENT + "yyyy-MM-dd HH:mm:ss";
-            // TODO give a proper example
-            // TODO write what the propper format is
+            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_APPOINTMENT
+            + "2019-03-19 10:30:00";
 
     public static final String MESSAGE_ADD_APPOINTMENT_SUCCESS = "Added appointment to Patient: %1$s";
-    public static final String MESSAGE_ADD_APPOINTMENT_FAILURE = "Such appointment is already associated with Patient: %1$s";
+    public static final String MESSAGE_ADD_APPOINTMENT_FAILURE = "Such appointment is already"
+            + "associated with Patient: %1$s";
     public static final String MESSAGE_INCORRECT_APPOINTMENT = "At least one appointment must be provided";
 
     private Index index;
@@ -64,7 +66,6 @@ public class AddaptCommand extends Command {
         Patient patientToEdit = lastShownList.get(index.getZeroBased());
 
         Set<Appointment> newAppointment = new HashSet<>();
-        // TODO add getAppointment method to patient class
         newAppointment.addAll(patientToEdit.getAppointments());
         newAppointment.addAll(appointments);
 

@@ -124,7 +124,7 @@ public class ParserUtil {
         return allergySet;
     }
 
-     /**
+    /**
      * Parses a {@code String appointment} into a {@code Appointment}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -150,8 +150,6 @@ public class ParserUtil {
         }
         return appointmentSet;
     }
-
-
 
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given {@code

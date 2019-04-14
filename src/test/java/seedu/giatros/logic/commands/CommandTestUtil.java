@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.giatros.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.giatros.logic.parser.CliSyntax.PREFIX_ALLERGY;
+import static seedu.giatros.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
 import static seedu.giatros.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.giatros.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.giatros.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -38,6 +39,10 @@ public class CommandTestUtil {
     public static final String VALID_ALLERGY_IBUPROFEN = "ibuprofen";
     public static final String VALID_ALLERGY_AMY = "ibuprofen";
     public static final String VALID_ALLERGY_BOB = "paracetamol";
+    public static final String VALID_APPOINTMENT_YMDH = "2019-01-01 10";
+    public static final String VALID_APPOINTMENT_YMDHM = "2019-01-01 10:10";
+    public static final String VALID_APPOINTMENT_BOB = "2019-04-19 10:00";
+
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -49,12 +54,16 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String ALLERGY_DESC_IBUPROFEN = " " + PREFIX_ALLERGY + VALID_ALLERGY_IBUPROFEN;
     public static final String ALLERGY_DESC_AMPICILLIN = " " + PREFIX_ALLERGY + VALID_ALLERGY_AMPICILLIN;
+    public static final String APPOINTMENT_DESC_YMDH = " " + PREFIX_APPOINTMENT + VALID_APPOINTMENT_YMDH;
+    public static final String APPOINTMENT_DESC_YMDHM = " " + PREFIX_APPOINTMENT + VALID_APPOINTMENT_YMDHM;
+
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_ALLERGY_DESC = " " + PREFIX_ALLERGY + "*allergy"; // '*' not allowed in allergies
+    public static final String INVALID_APPOINTMENT_DESC = " " + PREFIX_ALLERGY + "2019"; // it must be in one of the accepted formats
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -68,7 +77,8 @@ public class CommandTestUtil {
                 .withAllergies(VALID_ALLERGY_IBUPROFEN).build();
         DESC_BOB = new EditPatientDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withAllergies(VALID_ALLERGY_AMPICILLIN, VALID_ALLERGY_IBUPROFEN).build();
+                .withAllergies(VALID_ALLERGY_AMPICILLIN, VALID_ALLERGY_IBUPROFEN)
+                .withAppointments(VALID_APPOINTMENT_BOB).build();
     }
 
     /**

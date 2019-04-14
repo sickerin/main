@@ -102,10 +102,13 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPatientDescriptor.getPhone().orElse(patientToEdit.getPhone());
         Email updatedEmail = editPatientDescriptor.getEmail().orElse(patientToEdit.getEmail());
         Address updatedAddress = editPatientDescriptor.getAddress().orElse(patientToEdit.getAddress());
-        Set<Allergy> updatedAllergies = editPatientDescriptor.getAllergies().orElse(patientToEdit.getAllergies());
-        Set<Appointment> updatedAppointments = editPatientDescriptor.getAppointments().orElse(patientToEdit.getAppointments());
+        Set<Allergy> updatedAllergies = editPatientDescriptor.getAllergies()
+            .orElse(patientToEdit.getAllergies());
+        Set<Appointment> updatedAppointments = editPatientDescriptor.getAppointments()
+            .orElse(patientToEdit.getAppointments());
 
-        return new Patient(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedAllergies, updatedAppointments);
+        return new Patient(updatedName, updatedPhone, updatedEmail, updatedAddress, 
+            updatedAllergies, updatedAppointments);
     }
 
     @Override

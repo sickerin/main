@@ -83,6 +83,11 @@ public class PatientCard extends UiPart<Region> {
         });
     }
 
+
+
+    /**
+     * Creates an appointment label for {@code Patient}.
+     */
     private void createAppointment(Patient patient) {
         patient.getAppointments().forEach(appointment -> {
             Label newAppointment= new Label(appointment.appointmentString);
@@ -93,7 +98,7 @@ public class PatientCard extends UiPart<Region> {
 
     /**
      * 
-     * Fetchs earliest upcoming appointment for {@code Patient}.
+     * Fetches earliest upcoming appointment for {@code Patient}.
      */
     private void fetchAppointment(Patient patient) {
         // ! Depricated unless we change format

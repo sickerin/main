@@ -12,8 +12,16 @@ import seedu.giatros.logic.commands.AddaptCommand;
 import seedu.giatros.logic.parser.exceptions.ParseException;
 import seedu.giatros.model.appointment.Appointment;
 
+/**
+ * Parses input arguments and creates a new {@code AddaptCommand} object.
+ */
 public class AddaptCommandParser implements Parser<AddaptCommand> { 
     
+    /**
+     * Parses the given {@code String} of arguments in the context of the AddaptCommand
+     * and returns an AddaptCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */
     public AddaptCommand parse(String args) throws ParseException {
         requireNonNull(args);
         Index index;
@@ -29,7 +37,6 @@ public class AddaptCommandParser implements Parser<AddaptCommand> {
             throw new ParseException(AddaptCommand.MESSAGE_INCORRECT_APPOINTMENT);
         }
 
-        // TODO make parse appointment in parseutil
         appointments = ParserUtil.parseAppointments(argMultimap.getAllValues(PREFIX_APPOINTMENT));
 
         return new AddaptCommand(index, appointments);

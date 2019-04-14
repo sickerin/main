@@ -63,6 +63,7 @@ public class EditCommandSystemTest extends GiatrosBookSystemTest {
         String command = " " + EditCommand.COMMAND_WORD + "  " + index.getOneBased() + "  " + NAME_DESC_BOB + "  "
                 + PHONE_DESC_BOB + " " + EMAIL_DESC_BOB + "  " + ADDRESS_DESC_BOB + " " + ALLERGY_DESC_AMPICILLIN + " ";
         Patient editedPatient = new PatientBuilder(BOB).withAllergies(VALID_ALLERGY_AMPICILLIN).build();
+        Patient
         assertCommandSuccess(command, index, editedPatient);
 
         /* Case: undo editing the last patient in the list -> last patient restored */

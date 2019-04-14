@@ -17,7 +17,6 @@ import seedu.giatros.model.patient.Email;
 import seedu.giatros.model.patient.Name;
 import seedu.giatros.model.patient.Patient;
 import seedu.giatros.model.patient.Phone;
-// ! is this part below necessary?
 import seedu.giatros.storage.JsonAdaptedAllergy;
 import seedu.giatros.storage.JsonAdaptedAppointment;
 

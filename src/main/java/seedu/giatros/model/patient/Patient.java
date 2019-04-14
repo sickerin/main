@@ -64,7 +64,7 @@ public class Patient {
     }
 
     /**
-     * Returns an immutable allergy set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable appointment set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<Appointment> getAppointments(){
@@ -73,7 +73,7 @@ public class Patient {
 
 
     /**
-     * Returns true if both patients of the same name have at least one other identity field that is the same.
+     * Returns true if both patients of the same name have at least one other possibly unique identity field that is the same.
      * This defines a weaker notion of equality between two patients.
      */
     public boolean isSamePatient(Patient otherPatient) {
@@ -116,7 +116,6 @@ public class Patient {
     }
 
     @Override
-    // TODO to string builder for appointment
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
@@ -128,6 +127,7 @@ public class Patient {
                 .append(getAddress())
                 .append(" Allergies: ");
         getAllergies().forEach(builder::append);
+        getAppointments().forEach(builder::append);
         return builder.toString();
     }
 
