@@ -5,6 +5,7 @@ import static seedu.giatros.commons.core.Messages.MESSAGE_COMMAND_RESTRICTED;
 import static seedu.giatros.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.giatros.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.giatros.logic.parser.CliSyntax.PREFIX_ALLERGY;
+import static seedu.giatros.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
 import static seedu.giatros.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.giatros.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.giatros.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -20,6 +21,7 @@ import seedu.giatros.logic.commands.EditCommand;
 import seedu.giatros.logic.commands.EditCommand.EditPatientDescriptor;
 import seedu.giatros.logic.parser.exceptions.ParseException;
 import seedu.giatros.model.allergy.Allergy;
+import seedu.giatros.model.appointment.Appointment;
 
 /**
  * Parses input arguments and creates a new EditCommand object.
@@ -35,7 +37,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                        PREFIX_ALLERGY);
+                        PREFIX_ALLERGY, PREFIX_APPOINTMENT);
 
         Index index;
 
@@ -62,7 +64,10 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
             editPatientDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
-        parseAllergiesForEdit(argMultimap.getAllValues(PREFIX_ALLERGY)).ifPresent(editPatientDescriptor::setAllergies);
+        parseAllergiesForEdit(argMultimap.getAllValues(PREFIX_ALLERGY))
+                .ifPresent(editPatientDescriptor::setAllergies);
+        parseAppointmentsForEdit(argMultimap.getAllValues(PREFIX_APPOINTMENT))
+                .ifPresent(editPatientDescriptor::setAppointments);
 
         if (!editPatientDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
@@ -85,6 +90,23 @@ public class EditCommandParser implements Parser<EditCommand> {
         Collection<String> allergySet =
                 allergies.size() == 1 && allergies.contains("") ? Collections.emptySet() : allergies;
         return Optional.of(ParserUtil.parseAllergies(allergySet));
+    }
+
+    /**
+     * Parses {@code Collection<String> appointments} into a {@code Set<Appointment>}
+     * if {@code appointments} is non-empty.
+     * If {@code appointments} contain only one element which is an empty string, it will be parsed into a
+     * {@code Set<Appointment>} containing zero appointments.
+     */
+    private Optional<Set<Appointment>> parseAppointmentsForEdit(Collection<String> appointments) throws ParseException {
+        assert appointments != null;
+
+        if (appointments.isEmpty()) {
+            return Optional.empty();
+        }
+        Collection<String> appointmentSet =
+                appointments.size() == 1 && appointments.contains("") ? Collections.emptySet() : appointments;
+        return Optional.of(ParserUtil.parseAppointments(appointmentSet));
     }
 
 }

@@ -68,7 +68,7 @@ public class RemallCommand extends Command {
         newAllergy.removeAll(allergies);
 
         Patient editedPatient = new Patient(patientToEdit.getName(), patientToEdit.getPhone(), patientToEdit.getEmail(),
-                patientToEdit.getAddress(), newAllergy);
+                patientToEdit.getAddress(), newAllergy, patientToEdit.getAppointments());
 
         // No allergy has been removed because it does not exist in the set
         if (patientToEdit.equals(editedPatient)) {

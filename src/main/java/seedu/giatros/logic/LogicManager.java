@@ -12,6 +12,7 @@ import seedu.giatros.commons.core.Messages;
 import seedu.giatros.commons.core.session.UserSession;
 import seedu.giatros.logic.commands.AddCommand;
 import seedu.giatros.logic.commands.AddallCommand;
+import seedu.giatros.logic.commands.AddaptCommand;
 import seedu.giatros.logic.commands.ClearCommand;
 import seedu.giatros.logic.commands.Command;
 import seedu.giatros.logic.commands.CommandResult;
@@ -77,13 +78,14 @@ public class LogicManager implements Logic {
     public boolean isStaffCommand(Command command, boolean test) {
         if (test == false) {
             return command instanceof LoginCommand || command instanceof HelpCommand
-                    || command instanceof AddallCommand || command instanceof AddCommand
-                    || command instanceof ClearCommand || command instanceof DeleteCommand
-                    || command instanceof EditCommand || command instanceof FindCommand
-                    || command instanceof HistoryCommand || command instanceof ListCommand
-                    || command instanceof RedoCommand || command instanceof RemallCommand
-                    || command instanceof SelectCommand || command instanceof LogoutCommand
-                    || command instanceof UndoCommand || command instanceof ExitCommand;
+                    || command instanceof AddCommand || command instanceof AddallCommand
+                    || command instanceof AddaptCommand || command instanceof ClearCommand
+                    || command instanceof DeleteCommand || command instanceof EditCommand
+                    || command instanceof FindCommand || command instanceof HistoryCommand
+                    || command instanceof ListCommand || command instanceof RedoCommand
+                    || command instanceof RemallCommand || command instanceof SelectCommand
+                    || command instanceof LogoutCommand || command instanceof UndoCommand
+                    || command instanceof ExitCommand;
         } else {
             return true;
         }

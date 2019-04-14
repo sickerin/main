@@ -19,7 +19,7 @@ public class PatientCardHandle extends NodeHandle<Node> {
     private static final String ADDRESS_FIELD_ID = "#address";
     private static final String PHONE_FIELD_ID = "#phone";
     private static final String EMAIL_FIELD_ID = "#email";
-    private static final String ALLERGIES_FIELD_ID = "#tags";
+    private static final String ALLERGIES_FIELD_ID = "#allergies";
 
     private final Label idLabel;
     private final Label nameLabel;
