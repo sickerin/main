@@ -31,7 +31,7 @@ remove allergies from the existing list associated to a patient.
 * *Other contributions*:
 
 ** Project management:
-*** Managed releases `v1.2` - `v1.4` (3 releases) on GitHub
+*** Managed releases `v1.0` - `v1.4` (3 releases) on GitHub
 ** Enhancements to existing features:
 *** _{to be added}_
 ** Documentation:
