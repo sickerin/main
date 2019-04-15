@@ -37,8 +37,8 @@ public class RegisterCommandParserTest {
     @Test
     public void parse_NotManagerAccount_throwsException() {
         UserSession.destroy();
-        assertParseFailure(parser, PREAMBLE_WHITESPACE + PREFIX_WITH_VALID_USERNAME +
-                        PREFIX_WITH_VALID_PASSWORD + PREFIX_WITH_VALID_NAME, MESSAGE_COMMAND_RESTRICTED);
+        assertParseFailure(parser, PREAMBLE_WHITESPACE + PREFIX_WITH_INVALID_USERNAME
+                + PREFIX_WITH_VALID_PASSWORD + PREFIX_WITH_VALID_NAME, MESSAGE_COMMAND_RESTRICTED);
         EventsCenter.getInstance().post(new LoginEvent(new AccountCreator().build()));
     }
 
