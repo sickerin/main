@@ -8,8 +8,8 @@ import static seedu.giatros.logic.commands.CommandTestUtil.PREFIX_WITH_VALID_PAS
 import static seedu.giatros.logic.commands.CommandTestUtil.PREFIX_WITH_VALID_USERNAME;
 import static seedu.giatros.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.giatros.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.giatros.ui.testutil.AccountCreator.DEFAULT_PASSWORD;
-import static seedu.giatros.ui.testutil.AccountCreator.DEFAULT_USERNAME;
+import static seedu.giatros.ui.testutil.AccountCreator.DEFAULT_MANAGER_PASSWORD;
+import static seedu.giatros.ui.testutil.AccountCreator.DEFAULT_MANAGER_USERNAME;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -44,11 +44,14 @@ public class LoginCommandParserTest {
         assertParseFailure(parser, "", expectedMessage);
 
         // missing 1 prefix
-        assertParseFailure(parser, PREFIX_WITH_VALID_USERNAME + DEFAULT_PASSWORD, expectedMessage);
+
+
+        assertParseFailure(parser, PREFIX_WITH_VALID_USERNAME + DEFAULT_MANAGER_PASSWORD, expectedMessage);
 
         // all prefixes missing
-        assertParseFailure(parser, DEFAULT_USERNAME + DEFAULT_PASSWORD, expectedMessage);
+        assertParseFailure(parser, DEFAULT_MANAGER_USERNAME + DEFAULT_MANAGER_PASSWORD, expectedMessage);
     }
+
 
     @Test
     public void parse_invalidValue_failure() {

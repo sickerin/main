@@ -26,7 +26,7 @@ public class DeleteCommandParserTest {
 
     @BeforeClass
     public static void setupBeforeClass() {
-        EventsCenter.getInstance().post(new LoginEvent(new AccountCreator().build()));
+        EventsCenter.getInstance().post(new LoginEvent(new AccountCreator("staff").build()));
     }
 
     @Test
