@@ -44,46 +44,46 @@ public class UsernameContainsKeywordPredicateTest {
     public void test_nameContainsKeywords_returnsTrue() {
         // One keyword only since account username cannot have spaces
         UsernameContainsKeywordPredicate predicate = new UsernameContainsKeywordPredicate("MANAGER");
-        assertTrue(predicate.test(new AccountCreator().withUsername("MANAGER").build()));
+        assertTrue(predicate.test(new AccountCreator("manager").withUsername("MANAGER").build()));
 
         // Only one matching keyword
         predicate = new UsernameContainsKeywordPredicate("ces");
-        assertTrue(predicate.test(new AccountCreator().withUsername("ces").build()));
+        assertTrue(predicate.test(new AccountCreator("manager").withUsername("ces").build()));
 
         // Mixed-case keywords
         predicate = new UsernameContainsKeywordPredicate("MANAGER");
-        assertTrue(predicate.test(new AccountCreator().withUsername("MANAGER").build()));
+        assertTrue(predicate.test(new AccountCreator("manager").withUsername("MANAGER").build()));
     }
 
     @Test
     public void test_usernameDoesNotContainKeywords_returnsFalse() {
         // Non-matching keyword
         UsernameContainsKeywordPredicate predicate = new UsernameContainsKeywordPredicate("zhikai");
-        assertFalse(predicate.test(new AccountCreator().withUsername("MANAGER").build()));
+        assertFalse(predicate.test(new AccountCreator("manager").withUsername("MANAGER").build()));
 
         // Non-matching keyword with symbols
         predicate = new UsernameContainsKeywordPredicate("kai^");
-        assertFalse(predicate.test(new AccountCreator().withUsername("zhikai").build()));
+        assertFalse(predicate.test(new AccountCreator("manager").withUsername("zhikai").build()));
     }
 
     @Test
     public void test_emptyKeyword_throwsIllegalArgumentException() {
         thrown.expect(IllegalArgumentException.class);
         UsernameContainsKeywordPredicate predicate = new UsernameContainsKeywordPredicate("");
-        predicate.test(new AccountCreator().withUsername("MANAGER").build());
+        predicate.test(new AccountCreator("manager").withUsername("MANAGER").build());
     }
 
     @Test
     public void test_spaceOnlyKeyword_throwsIllegalArgumentException() {
         thrown.expect(IllegalArgumentException.class);
         UsernameContainsKeywordPredicate predicate = new UsernameContainsKeywordPredicate(" ");
-        predicate.test(new AccountCreator().withUsername("MANAGER").build());
+        predicate.test(new AccountCreator("manager").withUsername("MANAGER").build());
     }
 
     @Test
     public void test_multipleKeyword_throwsIllegalArgumentException() {
         thrown.expect(IllegalArgumentException.class);
         UsernameContainsKeywordPredicate predicate = new UsernameContainsKeywordPredicate("MANAGER root1 root3");
-        predicate.test(new AccountCreator().withUsername("MANAGER").build());
+        predicate.test(new AccountCreator("manager").withUsername("MANAGER").build());
     }
 }

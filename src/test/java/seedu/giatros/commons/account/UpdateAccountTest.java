@@ -29,14 +29,14 @@ public class UpdateAccountTest {
         UserSession.create(new Account(new Username("baba"), new Password("112233"), new Name("baba")));
         assertNotNull(UserSession.getAccount());
         assertEquals(UserSession.getAccount().getUsername().toString(), "baba");
-        updateAccount = new UpdateAccountEvent(new AccountCreator().build());
+        updateAccount = new UpdateAccountEvent(new AccountCreator("manager").build());
         assertNotNull(updateAccount.username);
         assertEquals(UserSession.getAccount().getUsername().toString(), "MANAGER");
     }
 
     @Test
     public void simpleName_returnEqualAndNotNull() {
-        updateAccount = new UpdateAccountEvent(new AccountCreator().build());
+        updateAccount = new UpdateAccountEvent(new AccountCreator("manager").build());
         assertNotNull(updateAccount.toString());
         assertEquals(updateAccount.toString(), "UpdateAccountEvent");
     }
