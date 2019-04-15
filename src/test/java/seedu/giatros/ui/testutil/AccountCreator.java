@@ -9,9 +9,9 @@ import seedu.giatros.model.account.Username;
  * Properly sets up an account
  */
 public class AccountCreator {
-    public static final String DEFAULT_USERNAME = "HEADSTAFF";
+    public static final String DEFAULT_USERNAME = "MANAGER";
     public static final String DEFAULT_PASSWORD = "1122qq";
-    public static final String DEFAULT_NAME = "HEADSTAFF";
+    public static final String DEFAULT_NAME = "MANAGER";
 
     private Username username;
     private Password password;
@@ -30,6 +30,30 @@ public class AccountCreator {
         username = accountToCopy.getUsername();
         password = accountToCopy.getPassword();
         name = accountToCopy.getName();
+    }
+
+    /**
+     * Sets the {@code Username} of the {@code Account} that we are building.
+     */
+    public AccountCreator withUsername(String username) {
+        this.username = new Username(username);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Password} of the {@code Account} that we are building.
+     */
+    public AccountCreator withPassword(String password) {
+        this.password = new Password(password);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Name} of the {@code Account} that we are building.
+     */
+    public AccountCreator withName(String name) {
+        this.name = new Name(name);
+        return this;
     }
 
     /**

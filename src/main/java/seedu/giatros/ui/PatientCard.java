@@ -1,5 +1,9 @@
 package seedu.giatros.ui;
 
+import java.util.Date;
+import java.util.NavigableSet;
+import java.util.TreeSet;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -37,7 +41,9 @@ public class PatientCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private FlowPane tags;
+    private FlowPane appointments;
+    @FXML
+    private FlowPane allergies;
 
     public PatientCard(Patient patient, int displayedIndex) {
         super(FXML);
@@ -48,6 +54,7 @@ public class PatientCard extends UiPart<Region> {
         address.setText(patient.getAddress().value);
         email.setText(patient.getEmail().value);
         createAllergy(patient);
+        createAppointment(patient);
     }
 
     /**
@@ -72,9 +79,35 @@ public class PatientCard extends UiPart<Region> {
         patient.getAllergies().forEach(allergy -> {
             Label newAllergy = new Label(allergy.allergyName);
             newAllergy.getStyleClass().add(chooseRandomColourFor(allergy.allergyName));
-            tags.getChildren().add(newAllergy);
+            allergies.getChildren().add(newAllergy);
         });
     }
+
+
+
+    /**
+     * Creates an appointment label for {@code Patient}.
+     */
+    private void createAppointment(Patient patient) {
+        patient.getAppointments().forEach(appointment -> {
+            Label newAppointment = new Label(appointment.appointmentString);
+            newAppointment.getStyleClass().add(chooseRandomColourFor(appointment.appointmentString));
+            appointments.getChildren().add(newAppointment);
+        });
+    }
+
+    /**
+     * Fetches earliest upcoming appointment for {@code Patient}.
+     */
+    private void fetchAppointment(Patient patient) {
+        // ! Depricated unless we change format
+        // TODO make sure that time is always checked and updated....
+        NavigableSet<Date> upcomingAppointments = new TreeSet<Date>();
+        Date now = new Date();
+        Date closestAppointment = upcomingAppointments.lower(now);
+    }
+
+
 
     @Override
     public boolean equals(Object other) {

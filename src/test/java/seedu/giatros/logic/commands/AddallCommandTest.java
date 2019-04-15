@@ -48,6 +48,15 @@ public class AddallCommandTest {
     }
 
     @Test
+    public void execute_addDuplicateAllergyUnfilteredList_failure() {
+        Patient firstPatient = model.getFilteredPatientList().get(INDEX_FIRST_PATIENT.getZeroBased());
+        AddallCommand addallCommand = new AddallCommand(INDEX_FIRST_PATIENT, firstPatient.getAllergies());
+
+        assertCommandFailure(addallCommand, model, commandHistory,
+                String.format(AddallCommand.MESSAGE_ADD_ALLERGY_FAILURE, firstPatient));
+    }
+
+    @Test
     public void execute_filteredList_success() {
         showPatientAtIndex(model, INDEX_FIRST_PATIENT);
 
@@ -94,7 +103,9 @@ public class AddallCommandTest {
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
         Patient patientToModify = model.getFilteredPatientList().get(INDEX_FIRST_PATIENT.getZeroBased());
         Patient modifiedPatient = new PatientBuilder(patientToModify).withAllergy(ALLERGY_STUB).build();
+
         AddallCommand addallCommand = new AddallCommand(INDEX_FIRST_PATIENT, new Allergy(ALLERGY_STUB));
+
         Model expectedModel = new ModelManager(model.getGiatrosBook(), new UserPrefs());
         expectedModel.setPatient(patientToModify, modifiedPatient);
         expectedModel.commitGiatrosBook();

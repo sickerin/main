@@ -11,6 +11,7 @@ import seedu.giatros.commons.core.index.Index;
 import seedu.giatros.commons.util.StringUtil;
 import seedu.giatros.logic.parser.exceptions.ParseException;
 import seedu.giatros.model.allergy.Allergy;
+import seedu.giatros.model.appointment.Appointment;
 import seedu.giatros.model.patient.Address;
 import seedu.giatros.model.patient.Email;
 import seedu.giatros.model.patient.Name;
@@ -121,6 +122,33 @@ public class ParserUtil {
             allergySet.add(parseAllergy(allergyName));
         }
         return allergySet;
+    }
+
+    /**
+     * Parses a {@code String appointment} into a {@code Appointment}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code appointment} is invalid.
+     */
+    public static Appointment parseAppointment(String appointment) throws ParseException {
+        requireNonNull(appointment);
+        String trimmedAppointment = appointment.trim();
+        if (!Appointment.isValidAppointment(trimmedAppointment)) {
+            throw new ParseException(Appointment.MESSAGE_CONSTRAINTS);
+        }
+        return new Appointment(trimmedAppointment);
+    }
+
+    /**
+     * Parses {@code Collection<String> appointments} into a {@code Set<Appointments>}.
+     */
+    public static Set<Appointment> parseAppointments(Collection<String> appointments) throws ParseException {
+        requireNonNull(appointments);
+        final Set<Appointment> appointmentSet = new HashSet<>();
+        for (String appointment : appointments) {
+            appointmentSet.add(parseAppointment(appointment));
+        }
+        return appointmentSet;
     }
 
     /**

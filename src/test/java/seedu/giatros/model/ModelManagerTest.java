@@ -4,7 +4,12 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.giatros.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.giatros.logic.commands.CommandTestUtil.VALID_NAME;
+import static seedu.giatros.logic.commands.CommandTestUtil.VALID_PASSWORD;
+import static seedu.giatros.logic.commands.CommandTestUtil.VALID_USERNAME;
 import static seedu.giatros.model.Model.PREDICATE_SHOW_ALL_PATIENTS;
+import static seedu.giatros.testutil.TypicalAccounts.BABA;
+import static seedu.giatros.testutil.TypicalAccounts.MANAGER;
 import static seedu.giatros.testutil.TypicalPatients.ALICE;
 import static seedu.giatros.testutil.TypicalPatients.BENSON;
 import static seedu.giatros.testutil.TypicalPatients.BOB;
@@ -19,6 +24,11 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.giatros.commons.core.GuiSettings;
+import seedu.giatros.model.account.Account;
+import seedu.giatros.model.account.Name;
+import seedu.giatros.model.account.Password;
+import seedu.giatros.model.account.Username;
+import seedu.giatros.model.account.exceptions.AccountNotFoundException;
 import seedu.giatros.model.patient.NameContainsKeywordsPredicate;
 import seedu.giatros.model.patient.Patient;
 import seedu.giatros.model.patient.exceptions.PatientNotFoundException;
@@ -148,6 +158,38 @@ public class ModelManagerTest {
         modelManager.setSelectedPatient(ALICE);
         assertEquals(ALICE, modelManager.getSelectedPatient());
     }
+
+    @Test
+    public void hasAccount_nullAccount_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        modelManager.hasAccount(null);
+    }
+
+    @Test
+    public void hasAccount_accounttNotInGiatrosBook_returnsFalse() {
+        assertFalse(modelManager.hasAccount(BABA));
+    }
+
+    @Test
+    public void hasAccount_accountInGiatrosBook_returnsTrue() {
+        modelManager.addAccount(BABA);
+        assertTrue(modelManager.hasAccount(BABA));
+    }
+
+    @Test
+    public void hasAccount_accountWithSameIdentityFieldsInGiatrosBook_returnsTrue() {
+        modelManager.addAccount(BABA);
+        Account editedBaba = new Account(new Username(VALID_USERNAME), new Password(VALID_PASSWORD),
+                new Name(VALID_NAME));
+        assertTrue(modelManager.hasAccount(editedBaba));
+    }
+
+    @Test
+    public void getAccount() {
+        thrown.expect(AccountNotFoundException.class);
+        modelManager.getAccount(MANAGER);
+    }
+
 
     @Test
     public void equals() {

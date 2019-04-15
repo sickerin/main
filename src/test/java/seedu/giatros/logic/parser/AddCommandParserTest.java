@@ -5,10 +5,13 @@ import static seedu.giatros.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.giatros.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static seedu.giatros.logic.commands.CommandTestUtil.ALLERGY_DESC_AMPICILLIN;
 import static seedu.giatros.logic.commands.CommandTestUtil.ALLERGY_DESC_IBUPROFEN;
+import static seedu.giatros.logic.commands.CommandTestUtil.APPOINTMENT_DESC_YMDH;
+import static seedu.giatros.logic.commands.CommandTestUtil.APPOINTMENT_DESC_YMDHM;
 import static seedu.giatros.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.giatros.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.giatros.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static seedu.giatros.logic.commands.CommandTestUtil.INVALID_ALLERGY_DESC;
+import static seedu.giatros.logic.commands.CommandTestUtil.INVALID_APPOINTMENT_DESC;
 import static seedu.giatros.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.giatros.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.giatros.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
@@ -21,6 +24,8 @@ import static seedu.giatros.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.giatros.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.giatros.logic.commands.CommandTestUtil.VALID_ALLERGY_AMPICILLIN;
 import static seedu.giatros.logic.commands.CommandTestUtil.VALID_ALLERGY_IBUPROFEN;
+import static seedu.giatros.logic.commands.CommandTestUtil.VALID_APPOINTMENT_YMDH;
+import static seedu.giatros.logic.commands.CommandTestUtil.VALID_APPOINTMENT_YMDHM;
 import static seedu.giatros.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.giatros.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.giatros.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
@@ -29,55 +34,76 @@ import static seedu.giatros.logic.parser.CommandParserTestUtil.assertParseSucces
 import static seedu.giatros.testutil.TypicalPatients.AMY;
 import static seedu.giatros.testutil.TypicalPatients.BOB;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 
+import seedu.giatros.commons.core.EventsCenter;
+import seedu.giatros.commons.events.ui.accounts.LoginEvent;
 import seedu.giatros.logic.commands.AddCommand;
 import seedu.giatros.model.allergy.Allergy;
+import seedu.giatros.model.appointment.Appointment;
 import seedu.giatros.model.patient.Address;
 import seedu.giatros.model.patient.Email;
 import seedu.giatros.model.patient.Name;
 import seedu.giatros.model.patient.Patient;
 import seedu.giatros.model.patient.Phone;
 import seedu.giatros.testutil.PatientBuilder;
+import seedu.giatros.ui.testutil.AccountCreator;
 
 public class AddCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();
 
+    @BeforeClass
+    public static void setupBeforeClass() {
+        EventsCenter.getInstance().post(new LoginEvent(new AccountCreator().build()));
+    }
+
     @Test
     public void parse_allFieldsPresent_success() {
-        Patient expectedPatient = new PatientBuilder(BOB).withAllergies(VALID_ALLERGY_IBUPROFEN).build();
+        Patient expectedPatient = new PatientBuilder(BOB)
+                .withAllergies(VALID_ALLERGY_IBUPROFEN).withAppointments(VALID_APPOINTMENT_YMDH).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + ALLERGY_DESC_IBUPROFEN, new AddCommand(expectedPatient));
+                + ADDRESS_DESC_BOB + ALLERGY_DESC_IBUPROFEN + APPOINTMENT_DESC_YMDH, new AddCommand(expectedPatient));
 
         // multiple names - last name accepted
         assertParseSuccess(parser, NAME_DESC_AMY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + ALLERGY_DESC_IBUPROFEN, new AddCommand(expectedPatient));
+                + ADDRESS_DESC_BOB + ALLERGY_DESC_IBUPROFEN + APPOINTMENT_DESC_YMDH, new AddCommand(expectedPatient));
 
         // multiple phones - last phone accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + ALLERGY_DESC_IBUPROFEN, new AddCommand(expectedPatient));
+                + ADDRESS_DESC_BOB + ALLERGY_DESC_IBUPROFEN + APPOINTMENT_DESC_YMDH , new AddCommand(expectedPatient));
 
         // multiple emails - last email accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_AMY + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + ALLERGY_DESC_IBUPROFEN, new AddCommand(expectedPatient));
+                + ADDRESS_DESC_BOB + ALLERGY_DESC_IBUPROFEN + APPOINTMENT_DESC_YMDH, new AddCommand(expectedPatient));
 
         // multiple addresses - last address accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_AMY
-                + ADDRESS_DESC_BOB + ALLERGY_DESC_IBUPROFEN, new AddCommand(expectedPatient));
+                + ADDRESS_DESC_BOB + ALLERGY_DESC_IBUPROFEN + APPOINTMENT_DESC_YMDH, new AddCommand(expectedPatient));
 
         // multiple allergies - all accepted
         Patient expectedPatientMultipleAllergies = new PatientBuilder(BOB)
-                .withAllergies(VALID_ALLERGY_IBUPROFEN, VALID_ALLERGY_AMPICILLIN).build();
+                .withAllergies(VALID_ALLERGY_IBUPROFEN, VALID_ALLERGY_AMPICILLIN)
+                .withAppointments(VALID_APPOINTMENT_YMDH).build();
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + ALLERGY_DESC_AMPICILLIN + ALLERGY_DESC_IBUPROFEN, new AddCommand(expectedPatientMultipleAllergies));
+                + ALLERGY_DESC_AMPICILLIN + ALLERGY_DESC_IBUPROFEN
+                + APPOINTMENT_DESC_YMDH, new AddCommand(expectedPatientMultipleAllergies));
+
+        // multiple appointments - all accepted
+        Patient expectedPatientMultipleAppointments = new PatientBuilder(BOB)
+                .withAllergies(VALID_ALLERGY_IBUPROFEN)
+                .withAppointments(VALID_APPOINTMENT_YMDH, VALID_APPOINTMENT_YMDHM).build();
+        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + ALLERGY_DESC_IBUPROFEN + APPOINTMENT_DESC_YMDH
+                + APPOINTMENT_DESC_YMDHM, new AddCommand(expectedPatientMultipleAppointments));
     }
 
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero allergies
-        Patient expectedPatient = new PatientBuilder(AMY).withAllergies().build();
+        Patient expectedPatient = new PatientBuilder(AMY).withAllergies().withAppointments().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY,
                 new AddCommand(expectedPatient));
     }
@@ -111,23 +137,34 @@ public class AddCommandParserTest {
     public void parse_invalidValue_failure() {
         // invalid name
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + ALLERGY_DESC_AMPICILLIN + ALLERGY_DESC_IBUPROFEN, Name.MESSAGE_CONSTRAINTS);
+                + ALLERGY_DESC_AMPICILLIN + ALLERGY_DESC_IBUPROFEN
+                + APPOINTMENT_DESC_YMDH + APPOINTMENT_DESC_YMDHM, Name.MESSAGE_CONSTRAINTS);
 
         // invalid phone
         assertParseFailure(parser, NAME_DESC_BOB + INVALID_PHONE_DESC + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + ALLERGY_DESC_AMPICILLIN + ALLERGY_DESC_IBUPROFEN, Phone.MESSAGE_CONSTRAINTS);
+                + ALLERGY_DESC_AMPICILLIN + ALLERGY_DESC_IBUPROFEN
+                + APPOINTMENT_DESC_YMDH + APPOINTMENT_DESC_YMDHM, Phone.MESSAGE_CONSTRAINTS);
 
         // invalid email
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_EMAIL_DESC + ADDRESS_DESC_BOB
-                + ALLERGY_DESC_AMPICILLIN + ALLERGY_DESC_IBUPROFEN, Email.MESSAGE_CONSTRAINTS);
+                + ALLERGY_DESC_AMPICILLIN + ALLERGY_DESC_IBUPROFEN
+                + APPOINTMENT_DESC_YMDH + APPOINTMENT_DESC_YMDHM, Email.MESSAGE_CONSTRAINTS);
 
         // invalid address
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
-                + ALLERGY_DESC_AMPICILLIN + ALLERGY_DESC_IBUPROFEN, Address.MESSAGE_CONSTRAINTS);
+                + ALLERGY_DESC_AMPICILLIN + ALLERGY_DESC_IBUPROFEN
+                + APPOINTMENT_DESC_YMDH + APPOINTMENT_DESC_YMDHM, Address.MESSAGE_CONSTRAINTS);
 
         // invalid allergy
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + INVALID_ALLERGY_DESC + VALID_ALLERGY_IBUPROFEN, Allergy.MESSAGE_CONSTRAINTS);
+                + INVALID_ALLERGY_DESC + ALLERGY_DESC_IBUPROFEN
+                + APPOINTMENT_DESC_YMDH + APPOINTMENT_DESC_YMDHM, Allergy.MESSAGE_CONSTRAINTS);
+
+        // invalid appointment
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + ALLERGY_DESC_AMPICILLIN + ALLERGY_DESC_IBUPROFEN
+                + INVALID_APPOINTMENT_DESC , Appointment.MESSAGE_CONSTRAINTS);
+
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC,

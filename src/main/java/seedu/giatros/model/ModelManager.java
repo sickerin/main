@@ -47,7 +47,6 @@ public class ModelManager implements Model {
         filteredPatients = new FilteredList<>(versionedGiatrosBook.getPatientList());
         filteredAccounts = new FilteredList<>(versionedGiatrosBook.getAccountList());
         filteredPatients.addListener(this::ensureSelectedPatientIsValid);
-        filteredAccounts.addListener(this::ensureSelectedAccountIsValid);
     }
 
     public ModelManager() {
@@ -244,36 +243,6 @@ public class ModelManager implements Model {
             }
         }
     }
-
-    /**
-     * Ensures {@code selectedAccount} is a valid account in {@code filteredAccounts}.
-     */
-    private void ensureSelectedAccountIsValid(ListChangeListener.Change<? extends Account> change) {
-        while (change.next()) {
-            if (selectedAccount.getValue() == null) {
-                // null is always a valid selected patient, so we do not need to check that it is valid anymore.
-                return;
-            }
-
-            boolean wasSelectedAccountReplaced = change.wasReplaced() && change.getAddedSize()
-                    == change.getRemovedSize() && change.getRemoved().contains(selectedAccount.getValue());
-            if (wasSelectedAccountReplaced) {
-                // Update selectedPatient to its new value.
-                int index = change.getRemoved().indexOf(selectedAccount.getValue());
-                selectedAccount.setValue(change.getAddedSubList().get(index));
-                continue;
-            }
-
-            boolean wasSelectedAccountRemoved = change.getRemoved().stream()
-                    .anyMatch(removedAccount -> selectedAccount.getValue().isSameUsername(removedAccount));
-            if (wasSelectedAccountRemoved) {
-                // Select the patient that came before it in the list,
-                // or clear the selection if there is no such patient.
-                selectedAccount.setValue(change.getFrom() > 0 ? change.getList().get(change.getFrom() - 1) : null);
-            }
-        }
-    }
-
 
     @Override
     public boolean equals(Object obj) {

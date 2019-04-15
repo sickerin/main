@@ -26,12 +26,11 @@ public class AddallCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds the allergy to the patient identified "
             + "by the index number used in the patient listing.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_ALLERGY + "[ALLERGY]\n"
+            + PREFIX_ALLERGY + "ALLERGY [" + PREFIX_ALLERGY + "ALLERGY]\n"
             + "Example: " + COMMAND_WORD + " 1 " + PREFIX_ALLERGY + "ibuprofen.";
 
     public static final String MESSAGE_ADD_ALLERGY_SUCCESS = "Added allergy to Patient: %1$s";
     public static final String MESSAGE_ADD_ALLERGY_FAILURE = "Such allergy is already associated with Patient: %1$s";
-    public static final String MESSAGE_INCORRECT_ALLERGY = "At least one allergy must be provided";
 
     private Index index;
     private Set<Allergy> allergies;
@@ -43,6 +42,7 @@ public class AddallCommand extends Command {
         this.allergies = allergies;
     }
 
+    // Overloaded constructor if only one allergy is given
     public AddallCommand(Index index, Allergy allergy) {
         requireAllNonNull(index, allergy);
 
@@ -68,17 +68,18 @@ public class AddallCommand extends Command {
         newAllergy.addAll(allergies);
 
         Patient editedPatient = new Patient(patientToEdit.getName(), patientToEdit.getPhone(), patientToEdit.getEmail(),
-                patientToEdit.getAddress(), newAllergy);
+                patientToEdit.getAddress(), newAllergy, patientToEdit.getAppointments());
+
+        // No allergy has been added because it has already existed in the set
+        if (editedPatient.equals(patientToEdit)) {
+            throw new CommandException(String.format(MESSAGE_ADD_ALLERGY_FAILURE, patientToEdit));
+        }
 
         model.setPatient(patientToEdit, editedPatient);
         model.updateFilteredPatientList(PREDICATE_SHOW_ALL_PATIENTS);
         model.commitGiatrosBook();
 
-        if (!editedPatient.equals(patientToEdit)) {
-            return new CommandResult(generateSuccessMessage(editedPatient));
-        } else {
-            return new CommandResult(generateFailureMessage(editedPatient));
-        }
+        return new CommandResult(generateSuccessMessage(editedPatient));
     }
 
     /**
@@ -86,14 +87,6 @@ public class AddallCommand extends Command {
      */
     private String generateSuccessMessage(Patient patientToEdit) {
         String message = MESSAGE_ADD_ALLERGY_SUCCESS;
-        return String.format(message, patientToEdit);
-    }
-
-    /**
-     * Generates a command execution failure message when the allergy is not added to {@code patientToEdit}.
-     */
-    private String generateFailureMessage(Patient patientToEdit) {
-        String message = MESSAGE_ADD_ALLERGY_FAILURE;
         return String.format(message, patientToEdit);
     }
 

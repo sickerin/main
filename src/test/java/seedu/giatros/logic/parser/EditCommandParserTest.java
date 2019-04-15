@@ -31,9 +31,12 @@ import static seedu.giatros.testutil.TypicalIndexes.INDEX_FIRST_PATIENT;
 import static seedu.giatros.testutil.TypicalIndexes.INDEX_SECOND_PATIENT;
 import static seedu.giatros.testutil.TypicalIndexes.INDEX_THIRD_PATIENT;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 
+import seedu.giatros.commons.core.EventsCenter;
 import seedu.giatros.commons.core.index.Index;
+import seedu.giatros.commons.events.ui.accounts.LoginEvent;
 import seedu.giatros.logic.commands.EditCommand;
 import seedu.giatros.logic.commands.EditCommand.EditPatientDescriptor;
 import seedu.giatros.model.allergy.Allergy;
@@ -42,6 +45,7 @@ import seedu.giatros.model.patient.Email;
 import seedu.giatros.model.patient.Name;
 import seedu.giatros.model.patient.Phone;
 import seedu.giatros.testutil.EditPatientDescriptorBuilder;
+import seedu.giatros.ui.testutil.AccountCreator;
 
 public class EditCommandParserTest {
 
@@ -51,6 +55,11 @@ public class EditCommandParserTest {
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
 
     private EditCommandParser parser = new EditCommandParser();
+
+    @BeforeClass
+    public static void setupBeforeClass() {
+        EventsCenter.getInstance().post(new LoginEvent(new AccountCreator().build()));
+    }
 
     @Test
     public void parse_missingParts_failure() {

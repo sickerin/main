@@ -5,18 +5,23 @@ import static org.junit.Assert.assertTrue;
 import static seedu.giatros.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.giatros.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.giatros.logic.parser.CliSyntax.PREFIX_ALLERGY;
+import static seedu.giatros.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
 import static seedu.giatros.testutil.TypicalIndexes.INDEX_FIRST_PATIENT;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import seedu.giatros.commons.core.EventsCenter;
+import seedu.giatros.commons.events.ui.accounts.LoginEvent;
 import seedu.giatros.logic.commands.AddCommand;
 import seedu.giatros.logic.commands.AddallCommand;
+import seedu.giatros.logic.commands.AddaptCommand;
 import seedu.giatros.logic.commands.ClearCommand;
 import seedu.giatros.logic.commands.DeleteCommand;
 import seedu.giatros.logic.commands.EditCommand;
@@ -27,21 +32,30 @@ import seedu.giatros.logic.commands.HelpCommand;
 import seedu.giatros.logic.commands.HistoryCommand;
 import seedu.giatros.logic.commands.ListCommand;
 import seedu.giatros.logic.commands.RedoCommand;
+import seedu.giatros.logic.commands.RemallCommand;
+import seedu.giatros.logic.commands.RemaptCommand;
 import seedu.giatros.logic.commands.SelectCommand;
 import seedu.giatros.logic.commands.UndoCommand;
 import seedu.giatros.logic.parser.exceptions.ParseException;
 import seedu.giatros.model.allergy.Allergy;
+import seedu.giatros.model.appointment.Appointment;
 import seedu.giatros.model.patient.NameContainsKeywordsPredicate;
 import seedu.giatros.model.patient.Patient;
 import seedu.giatros.testutil.EditPatientDescriptorBuilder;
 import seedu.giatros.testutil.PatientBuilder;
 import seedu.giatros.testutil.PatientUtil;
+import seedu.giatros.ui.testutil.AccountCreator;
 
 public class GiatrosBookParserTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
     private final GiatrosBookParser parser = new GiatrosBookParser();
+
+    @BeforeClass
+    public static void setupBeforeClass() {
+        EventsCenter.getInstance().post(new LoginEvent(new AccountCreator().build()));
+    }
 
     @Test
     public void parseCommand_add() throws Exception {
@@ -124,7 +138,30 @@ public class GiatrosBookParserTest {
         AddallCommand command = (AddallCommand) parser.parseCommand(AddallCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PATIENT.getOneBased() + " " + PREFIX_ALLERGY + allergy.allergyName);
         assertEquals(new AddallCommand(INDEX_FIRST_PATIENT, allergy), command);
-        assertTrue(parser.parseCommand("addall 1 y/Allergy") instanceof AddallCommand);
+    }
+
+    @Test
+    public void parseCommand_remall() throws Exception {
+        final Allergy allergy = new Allergy("someAllergy");
+        RemallCommand command = (RemallCommand) parser.parseCommand(RemallCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_PATIENT.getOneBased() + " " + PREFIX_ALLERGY + allergy.allergyName);
+        assertEquals(new RemallCommand(INDEX_FIRST_PATIENT, allergy), command);
+    }
+
+    @Test
+    public void parseCommand_addapt() throws Exception {
+        final Appointment appointment = new Appointment("2019-01-01 10");
+        AddaptCommand command = (AddaptCommand) parser.parseCommand(AddaptCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_PATIENT.getOneBased() + " " + PREFIX_APPOINTMENT + appointment.appointmentString);
+        assertEquals(new AddaptCommand(INDEX_FIRST_PATIENT, appointment), command);
+    }
+
+    @Test
+    public void parseCommand_remapt() throws Exception {
+        final Appointment appointment = new Appointment("2019-01-01 10");
+        RemaptCommand command = (RemaptCommand) parser.parseCommand(RemaptCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_PATIENT.getOneBased() + " " + PREFIX_APPOINTMENT + appointment.appointmentString);
+        assertEquals(new RemaptCommand(INDEX_FIRST_PATIENT, appointment), command);
     }
 
     @Test

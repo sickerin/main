@@ -57,7 +57,6 @@ public class Account {
         if (otherAccount == this) {
             return true;
         }
-
         return otherAccount != null && otherAccount.getUsername().equals(getUsername());
     }
 
@@ -92,10 +91,6 @@ public class Account {
 
     @Override
     public String toString() {
-        final StringBuilder builder = new StringBuilder();
-        builder.append(username.toString())
-                .append(" password: ")
-                .append(password.toString());
-        return builder.toString();
+        return username.toString();
     }
 }

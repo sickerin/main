@@ -21,12 +21,12 @@ public interface Logic {
     /**
      * Verifies if a {@code Command} is a guest command which can be executed without being authenticated.
      */
-    public boolean isGuestCommand(Command command, boolean test);
+    public boolean isGuestCommand(Command command);
 
     /**
      * Verifies if a {@code Command} is a staff command which can executed without proper head staff account.
      */
-    public boolean isStaffCommand(Command command, boolean test);
+    public boolean isStaffCommand(Command command);
 
     /**
      * Executes the command and returns the result.
@@ -85,8 +85,4 @@ public interface Logic {
      * @see seedu.giatros.model.Model#setSelectedPatient(Patient)
      */
     void setSelectedPatient(Patient patient);
-    /**
-     * Sets true if a test is running this.
-     */
-    void setIsTest(boolean isTest);
 }
