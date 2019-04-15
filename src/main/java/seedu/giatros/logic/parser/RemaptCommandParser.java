@@ -10,21 +10,21 @@ import java.util.Set;
 import seedu.giatros.commons.core.index.Index;
 import seedu.giatros.commons.core.session.UserSession;
 import seedu.giatros.commons.exceptions.IllegalValueException;
-import seedu.giatros.logic.commands.AddaptCommand;
+import seedu.giatros.logic.commands.RemaptCommand;
 import seedu.giatros.logic.parser.exceptions.ParseException;
 import seedu.giatros.model.appointment.Appointment;
 
 /**
- * Parses input arguments and creates a new {@code AddaptCommand} object.
+ * Parses input arguments and creates a new {@code RemaptCommand} object.
  */
-public class AddaptCommandParser implements Parser<AddaptCommand> {
+public class RemaptCommandParser implements Parser<RemaptCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AddaptCommand
-     * and returns an AddaptCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the RemaptCommand
+     * and returns a RemaptCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public AddaptCommand parse(String args) throws ParseException {
+    public RemaptCommand parse(String args) throws ParseException {
         requireNonNull(args);
 
         Index index;
@@ -34,23 +34,22 @@ public class AddaptCommandParser implements Parser<AddaptCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (IllegalValueException exc) {
-            // ? what's this for?
             if (UserSession.isAuthenticated()) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddaptCommand.MESSAGE_USAGE),
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemaptCommand.MESSAGE_USAGE),
                         exc);
             } else {
-                throw new ParseException(String.format(MESSAGE_COMMAND_RESTRICTED, AddaptCommand.MESSAGE_USAGE), exc);
+                throw new ParseException(String.format(MESSAGE_COMMAND_RESTRICTED, RemaptCommand.MESSAGE_USAGE), exc);
             }
         }
 
-        // At least one appointment must be provided, so this is an invalid format
+        // At least one appointment must be provided, so this is invalid format
         if (!argMultimap.getValue(PREFIX_APPOINTMENT).isPresent()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddaptCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemaptCommand.MESSAGE_USAGE));
         }
 
         appointments = ParserUtil.parseAppointments(argMultimap.getAllValues(PREFIX_APPOINTMENT));
 
-        return new AddaptCommand(index, appointments);
+        return new RemaptCommand(index, appointments);
     }
 
 }
