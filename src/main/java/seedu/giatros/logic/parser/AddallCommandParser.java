@@ -34,6 +34,7 @@ public class AddallCommandParser implements Parser<AddallCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (IllegalValueException exc) {
+            // ? what's this for?
             if (UserSession.isAuthenticated()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddallCommand.MESSAGE_USAGE),
                         exc);

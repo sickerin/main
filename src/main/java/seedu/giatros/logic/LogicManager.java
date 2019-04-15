@@ -12,6 +12,7 @@ import seedu.giatros.commons.core.Messages;
 import seedu.giatros.commons.core.session.UserSession;
 import seedu.giatros.logic.commands.AddCommand;
 import seedu.giatros.logic.commands.AddallCommand;
+import seedu.giatros.logic.commands.AddaptCommand;
 import seedu.giatros.logic.commands.ClearCommand;
 import seedu.giatros.logic.commands.Command;
 import seedu.giatros.logic.commands.CommandResult;
@@ -24,6 +25,7 @@ import seedu.giatros.logic.commands.HistoryCommand;
 import seedu.giatros.logic.commands.ListCommand;
 import seedu.giatros.logic.commands.RedoCommand;
 import seedu.giatros.logic.commands.RemallCommand;
+import seedu.giatros.logic.commands.RemaptCommand;
 import seedu.giatros.logic.commands.SelectCommand;
 import seedu.giatros.logic.commands.UndoCommand;
 import seedu.giatros.logic.commands.account.LoginCommand;
@@ -72,13 +74,14 @@ public class LogicManager implements Logic {
     @Override
     public boolean isStaffCommand(Command command) { //the commands below are allowed for normal staff
         return command instanceof LoginCommand || command instanceof HelpCommand
-                || command instanceof AddallCommand || command instanceof AddCommand
-                || command instanceof ClearCommand || command instanceof DeleteCommand
-                || command instanceof EditCommand || command instanceof FindCommand
-                || command instanceof HistoryCommand || command instanceof ListCommand
-                || command instanceof RedoCommand || command instanceof RemallCommand
-                || command instanceof SelectCommand || command instanceof LogoutCommand
-                || command instanceof UndoCommand || command instanceof ExitCommand;
+                    || command instanceof AddCommand || command instanceof AddallCommand
+                    || command instanceof DeleteCommand || command instanceof EditCommand
+                    || command instanceof AddaptCommand || command instanceof ClearCommand
+                    || command instanceof FindCommand || command instanceof HistoryCommand
+                    || command instanceof ListCommand || command instanceof RedoCommand
+                    || command instanceof RemallCommand || command instanceof RemaptCommand
+                    || command instanceof SelectCommand || command instanceof LogoutCommand
+                    || command instanceof UndoCommand || command instanceof ExitCommand;
     }
 
     @Override

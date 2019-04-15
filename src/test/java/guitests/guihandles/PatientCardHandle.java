@@ -20,6 +20,7 @@ public class PatientCardHandle extends NodeHandle<Node> {
     private static final String PHONE_FIELD_ID = "#phone";
     private static final String EMAIL_FIELD_ID = "#email";
     private static final String ALLERGIES_FIELD_ID = "#allergies";
+    private static final String APPOINTMENTS_FIELD_ID = "#appointments";
 
     private final Label idLabel;
     private final Label nameLabel;
@@ -27,6 +28,7 @@ public class PatientCardHandle extends NodeHandle<Node> {
     private final Label phoneLabel;
     private final Label emailLabel;
     private final List<Label> allergyLabels;
+    private final List<Label> appointmentLabels;
 
     public PatientCardHandle(Node cardNode) {
         super(cardNode);
@@ -39,6 +41,13 @@ public class PatientCardHandle extends NodeHandle<Node> {
 
         Region allergiesContainer = getChildNode(ALLERGIES_FIELD_ID);
         allergyLabels = allergiesContainer
+                .getChildrenUnmodifiable()
+                .stream()
+                .map(Label.class::cast)
+                .collect(Collectors.toList());
+
+        Region appointmentsContainer = getChildNode(APPOINTMENTS_FIELD_ID);
+        appointmentLabels = appointmentsContainer
                 .getChildrenUnmodifiable()
                 .stream()
                 .map(Label.class::cast)
@@ -72,6 +81,13 @@ public class PatientCardHandle extends NodeHandle<Node> {
                 .collect(Collectors.toList());
     }
 
+    public List<String> getAppointments() {
+        return appointmentLabels
+                .stream()
+                .map(Label::getText)
+                .collect(Collectors.toList());
+    }
+
     /**
      * Returns true if this handle contains {@code patient}.
      */
@@ -81,6 +97,8 @@ public class PatientCardHandle extends NodeHandle<Node> {
                 && getPhone().equals(patient.getPhone().value)
                 && getEmail().equals(patient.getEmail().value)
                 && ImmutableMultiset.copyOf(getAllergies()).equals(ImmutableMultiset.copyOf(patient.getAllergies()
-                        .stream().map(allergy -> allergy.allergyName).collect(Collectors.toList())));
+                        .stream().map(allergy -> allergy.allergyName).collect(Collectors.toList())))
+                && ImmutableMultiset.copyOf(getAppointments()).equals(ImmutableMultiset.copyOf(patient.getAppointments()
+                        .stream().map(appointment -> appointment.appointmentString).collect(Collectors.toList())));
     }
 }

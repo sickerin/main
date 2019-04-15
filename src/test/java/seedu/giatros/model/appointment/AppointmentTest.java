@@ -23,7 +23,7 @@ public class AppointmentTest {
     @Test
     public void isValidAppointment() {
         // null appointment
-        // Assert.assertThrows(NullPointerException.class, () -> Appointment.isValidAppointment(null));
+        Assert.assertThrows(NullPointerException.class, () -> Appointment.isValidAppointment(null));
 
         // invalid appointment
         assertFalse(Appointment.isValidAppointment("2020-01-01")); // no time

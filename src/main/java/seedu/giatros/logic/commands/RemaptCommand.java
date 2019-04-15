@@ -17,28 +17,26 @@ import seedu.giatros.model.appointment.Appointment;
 import seedu.giatros.model.patient.Patient;
 
 /**
- * Adds an appointment to an existing patient in the giatros book.
+ * Removes an appointment of the existing patient in the giatros book.
  */
-public class AddaptCommand extends Command {
+public class RemaptCommand extends Command {
 
-    public static final String COMMAND_WORD = "addapt";
+    public static final String COMMAND_WORD = "remapt";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds the appointment to the patient identified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes the appointment from the patient identified "
             + "by the index number used in the patient listing.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_APPOINTMENT + "APPOINTMENT [" + PREFIX_APPOINTMENT + "APPOINTMENT]\n"
             + "Example: " + COMMAND_WORD + " 1 " + PREFIX_APPOINTMENT
             + "2019-03-19 10:30:00.";
 
-    public static final String MESSAGE_ADD_APPOINTMENT_SUCCESS = "Added appointment to Patient: %1$s";
-    public static final String MESSAGE_ADD_APPOINTMENT_FAILURE = "Such appointment is already"
-            + "associated with Patient: %1$s";
-    public static final String MESSAGE_INCORRECT_APPOINTMENT = "At least one appointment must be provided";
+    public static final String MESSAGE_REMOVE_APPOINTMENT_SUCCESS = "Removed appointment from Patient: %1$s";
+    public static final String MESSAGE_REMOVE_APPOINTMENT_FAILURE = "Such appointment is not found in Patient: %1$s";
 
     private Index index;
     private Set<Appointment> appointments;
 
-    public AddaptCommand(Index index, Set<Appointment> appointments) {
+    public RemaptCommand(Index index, Set<Appointment> appointments) {
         requireAllNonNull(index, appointments);
 
         this.index = index;
@@ -46,7 +44,7 @@ public class AddaptCommand extends Command {
     }
 
     // Overloaded constructor if only one appointment is given
-    public AddaptCommand(Index index, Appointment appointment) {
+    public RemaptCommand(Index index, Appointment appointment) {
         requireAllNonNull(index, appointment);
 
         Set<Appointment> appointments = new HashSet<>();
@@ -68,14 +66,14 @@ public class AddaptCommand extends Command {
 
         Set<Appointment> newAppointment = new HashSet<>();
         newAppointment.addAll(patientToEdit.getAppointments());
-        newAppointment.addAll(appointments);
+        newAppointment.removeAll(appointments);
 
         Patient editedPatient = new Patient(patientToEdit.getName(), patientToEdit.getPhone(), patientToEdit.getEmail(),
                 patientToEdit.getAddress(), patientToEdit.getAllergies(), newAppointment);
 
-        // No appointment has been added because it has already existed in the set
-        if (editedPatient.equals(patientToEdit)) {
-            throw new CommandException(String.format(MESSAGE_ADD_APPOINTMENT_FAILURE, patientToEdit));
+        // No appointment has been removed because it does not exist in the set
+        if (patientToEdit.equals(editedPatient)) {
+            throw new CommandException(String.format(MESSAGE_REMOVE_APPOINTMENT_FAILURE, patientToEdit));
         }
 
         model.setPatient(patientToEdit, editedPatient);
@@ -86,10 +84,10 @@ public class AddaptCommand extends Command {
     }
 
     /**
-     * Generates a command execution success message when the appointment has been added to {@code patientToEdit}.
+     * Generates a command execution success message when the appointment has been removed from {@code patientToEdit}.
      */
     private String generateSuccessMessage(Patient patientToEdit) {
-        String message = MESSAGE_ADD_APPOINTMENT_SUCCESS;
+        String message = MESSAGE_REMOVE_APPOINTMENT_SUCCESS;
         return String.format(message, patientToEdit);
     }
 
@@ -101,15 +99,14 @@ public class AddaptCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddaptCommand)) {
+        if (!(other instanceof RemaptCommand)) {
             return false;
         }
 
         // state check
-        AddaptCommand e = (AddaptCommand) other;
+        RemaptCommand e = (RemaptCommand) other;
         return index.equals(e.index)
                 && appointments.equals(e.appointments);
     }
 
 }
-
