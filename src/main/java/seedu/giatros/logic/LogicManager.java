@@ -19,6 +19,7 @@ import seedu.giatros.logic.commands.CommandResult;
 import seedu.giatros.logic.commands.DeleteCommand;
 import seedu.giatros.logic.commands.EditCommand;
 import seedu.giatros.logic.commands.ExitCommand;
+import seedu.giatros.logic.commands.ExportCommand;
 import seedu.giatros.logic.commands.FindCommand;
 import seedu.giatros.logic.commands.HelpCommand;
 import seedu.giatros.logic.commands.HistoryCommand;
@@ -81,7 +82,8 @@ public class LogicManager implements Logic {
                     || command instanceof ListCommand || command instanceof RedoCommand
                     || command instanceof RemallCommand || command instanceof RemaptCommand
                     || command instanceof SelectCommand || command instanceof LogoutCommand
-                    || command instanceof UndoCommand || command instanceof ExitCommand;
+                    || command instanceof UndoCommand || command instanceof ExitCommand
+                    || command instanceof ExportCommand;
     }
 
     @Override
