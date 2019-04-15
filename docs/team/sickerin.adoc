@@ -52,7 +52,7 @@ remove appointments from the existing list associated to a patient.
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-include::../UserGuide.adoc[tag=aptremall]
+include::../UserGuide.adoc[tag=addremapt]
 
 == Contributions to the Developer Guide
 
