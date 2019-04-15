@@ -26,12 +26,12 @@ remove allergies from the existing list associated to a patient.
 ** Added colours to the various allergies for easier identification.
 ** Changed the UI to show the search result of the first allergy when the patient is selected.
 
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+* *Code contributed*: [https://nus-cs2103-ay1819s2.github.io/cs2103-dashboard/#=undefined&search=githbub_wfxronald[Code contribution]]
 
 * *Other contributions*:
 
 ** Project management:
-*** Managed releases `v1.2` - `v1.4` (3 releases) on GitHub
+*** Managed releases `v1.0` - `v1.4` (5 releases) on GitHub
 ** Enhancements to existing features:
 *** _{to be added}_
 ** Documentation:
@@ -49,6 +49,7 @@ remove allergies from the existing list associated to a patient.
 |===
 
 include::../UserGuide.adoc[tag=addremall]
+include::../UserGuide.adoc[tag=authentication]
 
 == Contributions to the Developer Guide
 
@@ -56,4 +57,7 @@ include::../UserGuide.adoc[tag=addremall]
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-_{to be added}_
+include::../DeveloperGuide.adoc[tag=addremall]
+include::../DeveloperGuide.adoc[tag=usecase]
+include::../DeveloperGuide.adoc[tag=manualtest1]
+include::../DeveloperGuide.adoc[tag=manualtest2]
