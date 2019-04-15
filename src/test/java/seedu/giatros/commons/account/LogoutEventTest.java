@@ -5,7 +5,6 @@ import seedu.giatros.commons.events.ui.accounts.LogoutEvent;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertEquals;
-
 import org.junit.Test;
 
 public class LogoutEventTest {
