@@ -154,6 +154,14 @@ public class GiatrosBookParserTest {
                 + INDEX_FIRST_PATIENT.getOneBased() + " " + PREFIX_APPOINTMENT + appointment.appointmentString);
         assertEquals(new AddaptCommand(INDEX_FIRST_PATIENT, appointment), command);
     }
+
+    // @Test
+    // public void parseCommand_remapt() throws Exception {
+    //     final Appointment appointment = new Appointment("2019-01-01 10");
+    //     RemaptCommand command = (RemaptCommand) parser.parseCommand(RemaptCommand.COMMAND_WORD + " "
+    //             + INDEX_FIRST_PATIENT.getOneBased() + " " + PREFIX_APPOINTMENT + appointment.appointmentString);
+    //     assertEquals(new RemaptCommand(INDEX_FIRST_PATIENT, appointment), command);
+    // }
     
     @Test
     public void parseCommand_redoCommandWord_returnsRedoCommand() throws Exception {
