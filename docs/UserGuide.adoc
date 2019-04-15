@@ -49,7 +49,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 .  Refer to <<Features>> for details of each command.
 
-// tag::authentication
+// tag::authentication[]
 [[Authentication]]
 == User Authentication Features
 When the application is first opened, it will be in Guest mode and no command can be executed except the `login` command.
@@ -79,7 +79,7 @@ Format: `register id/USERNAME pw/PASSWORD n/NAME`
 ****
 
 NOTE: A dummy manager account is available by default. Username: `MANAGER` and Password: `1122qq`
-// end::authentication
+// end::authentication[]
 
 [[Features]]
 == Application Features
@@ -131,9 +131,9 @@ This feature can be used to add, remove, or update a patient's name, phone, emai
 The index *must be a positive integer* 1, 2, 3, ...
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing allergies or appointments, the existing allergies or appointments of the person will be removed i.e adding of allergies or appointments is not cumulative.
-* You can remove all the person's allergies by typing `y/` without specifying any allergies after it.
-* You can remove all the person's appointments by typing `apt/` without specifying any appointments after it.
+* When editing allergies or appointments, the existing allergies or appointments of the patient will be removed i.e adding of allergies or appointments is not cumulative.
+* You can remove all the patient's allergies by typing `y/` without specifying any allergies after it.
+* You can remove all the patient's appointments by typing `apt/` without specifying any appointments after it.
 ****
 
 Examples:
@@ -390,6 +390,16 @@ Format: `exit`
 Giatros data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
+=== Exporting the data `export`
+
+Exports the giatros book to a cvs file saved on the local disk at the specified `DESTINATION`. +
+Format: `export` [d/`DESTINATION`]
+
+* `DESTINATION` can end with an extension of .csv or end as a path to a directory. +
+* Existing data file at `DESTINATION` will be overwritten. +
+* A table view of the exported data will appear on execution of command.
+* .csv files can be opened and edited in Microsoft Excel
+
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
@@ -431,3 +441,5 @@ e.g.`select 2`
 e.g. `addall 1 y/ibuprofen`
 * *Remove allergy* : `remall INDEX y/ALLERGY [y/ALLERGY]`
 e.g. `remall 1 y/aspirin y/paracetamol`
+* *Export* : `export [d/DESTINATION]`
+e.g. `export d/~/Desktop`

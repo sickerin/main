@@ -15,7 +15,7 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/CS2103-AY1819S2-W13-4/main
 
-By: `CS2103-AY1819S2-W13-4`      Since: `January 2019`      Licence: `MIT`
+By: `CS2103-AY1819S2-W13-4`      Since: `January 2019`      Licence: `MIT`
 
 == Setting up
 
@@ -393,6 +393,44 @@ The following sequence diagram shows how the add appointment operation works:
 image::AddaptergySequenceDiagram.png[width="800"]
 
 ==== Design Consideration
+===== Aspect:
+
+// end::addremapt[]
+
+// tag::export[]
+=== Export Feature
+==== Current Implementation
+The following feature is mainly used to export data for report analysis.
+The export feature is available to admin only.
+
+The functionality of the classes related to `export` are listed below:
+
+* `ExportCommandParser` -- Reads the user input and creates `ExportCommand`.
+* `ExportCommand` -- When executed, the command will result in a cvs file saved on the local disk at the specified `DESTINATION`.
+* `DESTINATION` can end with an extension of .csv or end as a path to a directory.
+* Existing data file at `DESTINATION` will be overwritten.
+* A table view of the exported data will appear on execution of command.
+* .csv files can be opened and edited in Microsoft Excel
+
+Given below is an example usage scenario and how the export mechanism behaves at each step.
+
+Step 1. The user launches the application and logs into the STAFF account.
+
+Step 2. Assuming that the patient list is not empty, the user executes `export` to save the current Giastro's book to a csv file
+
+Step 3. This command in string format will be passed to the ExportCommandParser, which will check if the command format is valid.
+
+Step 4. Since this command has a valid format, the system will create a new ExportCommand object, which will be executed.
+
+Step 5. The system will locate the the desired destination, and save the giastrobook.csv file to the path.
+
+The process is described in sequence diagram shown below:
+The following sequence diagram shows how the add appointment operation works:
+
+==== Design Consideration
+* Create different csv files for each type of user. Due to only having patients in our book, we can currently only create csv files for that type of user.
+* Create cvs file for filtered lists
+
 ===== Aspect:
 
 // end::addremapt[]
@@ -1046,4 +1084,15 @@ You may need to restart your application if you just finished testing the `undo`
 . Test case: `redo` +
   Expected: An error will occur. No commands to redo.
 
+=== Exporting Giatros Book
+
+Prerequisites: Have a non-empty list of patients.
+You may need to restart your application if you just finished testing the `undo` command.
+
+. Test case: `export` +
+  Expected: Export sucessful. Giatros book csv file located at ~/Downloads. CSV file will open automatically.
+. Test case: `export d/~/Desktop` +
+  Expected: Export sucessful. Giatros book csv file located at ~/Desktop. CSV file will open automatically.
+. Test case: `export d/` +
+  Expected: An error will occur. Invalid destination specified
 //end::manualtest2
