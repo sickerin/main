@@ -47,7 +47,6 @@ public class HelpWindowTest extends GuiUnitTest {
 
     @Test
     public void focus_helpWindowNotFocused_focused() throws Exception {
-        // TODO: This test skip can be removed once this bug is fixed:
         // https://github.com/javafxports/openjdk-jfx/issues/50
         //
         // When there are two stages (stage1 and stage2) shown,

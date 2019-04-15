@@ -32,7 +32,7 @@ public class AddaptCommand extends Command {
 
     public static final String MESSAGE_ADD_APPOINTMENT_SUCCESS = "Added appointment to Patient: %1$s";
     public static final String MESSAGE_ADD_APPOINTMENT_FAILURE = "Such appointment is already"
-            + "associated with Patient: %1$s";
+            + " associated with Patient: %1$s";
     public static final String MESSAGE_INCORRECT_APPOINTMENT = "At least one appointment must be provided";
 
     private Index index;

@@ -131,9 +131,9 @@ This feature can be used to add, remove, or update a patient's name, phone, emai
 The index *must be a positive integer* 1, 2, 3, ...
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing allergies or appointments, the existing allergies or appointments of the person will be removed i.e adding of allergies or appointments is not cumulative.
-* You can remove all the person's allergies by typing `y/` without specifying any allergies after it.
-* You can remove all the person's appointments by typing `apt/` without specifying any appointments after it.
+* When editing allergies or appointments, the existing allergies or appointments of the patient will be removed i.e adding of allergies or appointments is not cumulative.
+* You can remove all the patient's allergies by typing `y/` without specifying any allergies after it.
+* You can remove all the patient's appointments by typing `apt/` without specifying any appointments after it.
 ****
 
 Examples:
