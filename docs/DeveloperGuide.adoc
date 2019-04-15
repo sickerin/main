@@ -508,7 +508,7 @@ image::AddAppointmentActivityDiagram.png[width="800"]
 ** Pros: Guarantees unique elements, and we can have the elements stored in a sorted fashion.
 ** Cons: Not too many. It's doable, but I didn't have time.
 
-// end::export[]
+// end::addremapt[]
 
 // tag::export[]
 === Export Feature
@@ -546,7 +546,7 @@ The following sequence diagram shows how the add appointment operation works:
 
 ===== Aspect:
 
-// end::addremapt[]
+// end::export[]
 
 === Logging
 
