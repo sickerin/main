@@ -25,7 +25,7 @@ public class UserSessionTest {
 
     @Before
     public void setUp() {
-        UserSession.create(new AccountCreator().build());
+        UserSession.create(new AccountCreator("staff").build());
     }
 
     @AfterClass

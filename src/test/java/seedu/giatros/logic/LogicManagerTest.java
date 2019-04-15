@@ -63,7 +63,7 @@ public class LogicManagerTest {
 
     @BeforeClass
     public static void setupBeforeClass() {
-        EventsCenter.getInstance().post(new LoginEvent(new AccountCreator().build()));
+        EventsCenter.getInstance().post(new LoginEvent(new AccountCreator("staff").build()));
     }
 
     @Before
@@ -240,7 +240,7 @@ public class LogicManagerTest {
         assertFalse(logic.isGuestCommand(command));
         assertTrue(logic.isStaffCommand(command));
 
-        EventsCenter.getInstance().post(new LoginEvent(new AccountCreator().build()));
+        EventsCenter.getInstance().post(new LoginEvent(new AccountCreator("staff").build()));
     }
 
 }

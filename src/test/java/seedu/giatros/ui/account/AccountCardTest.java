@@ -13,14 +13,14 @@ public class AccountCardTest extends GuiUnitTest {
 
     @Test
     public void display() {
-        Account account = new AccountCreator().build();
+        Account account = new AccountCreator("staff").build();
         AccountCard accountCard = new AccountCard(account, 2);
         uiPartRule.setUiPart(accountCard);
     }
 
     @Test
     public void equals() {
-        Account account = new AccountCreator().build();
+        Account account = new AccountCreator("staff").build();
         AccountCard accountCard = new AccountCard(account, 0);
 
         // same account, same index -> returns true
@@ -37,7 +37,7 @@ public class AccountCardTest extends GuiUnitTest {
         assertFalse(accountCard.equals(0));
 
         // different account, same index -> returns false
-        Account differentPatient = new AccountCreator().withName("differentName").build();
+        Account differentPatient = new AccountCreator("staff").withName("differentName").build();
         assertFalse(accountCard.equals(new AccountCard(differentPatient, 0)));
 
         // same account, different index -> returns false

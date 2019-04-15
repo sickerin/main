@@ -9,18 +9,28 @@ import seedu.giatros.model.account.Username;
  * Properly sets up an account
  */
 public class AccountCreator {
-    public static final String DEFAULT_USERNAME = "MANAGER";
-    public static final String DEFAULT_PASSWORD = "1122qq";
-    public static final String DEFAULT_NAME = "MANAGER";
+    public static final String DEFAULT_MANAGER_USERNAME = "MANAGER";
+    public static final String DEFAULT_MANAGER_PASSWORD = "1122qq";
+    public static final String DEFAULT_MANAGER_NAME = "MANAGER";
+
+    public static final String DEFAULT_STAFF_USERNAME = "STAFF";
+    public static final String DEFAULT_STAFF_PASSWORD = "1122qq";
+    public static final String DEFAULT_STAFF_NAME = "STAFF";
 
     private Username username;
     private Password password;
     private Name name;
 
-    public AccountCreator() {
-        username = new Username(DEFAULT_USERNAME);
-        password = new Password(DEFAULT_PASSWORD);
-        name = new Name(DEFAULT_NAME);
+    public AccountCreator(String user) {
+        if (user.equals("manager")) {
+            username = new Username(DEFAULT_MANAGER_USERNAME);
+            password = new Password(DEFAULT_MANAGER_PASSWORD);
+            name = new Name(DEFAULT_MANAGER_NAME);
+        } else {
+            username = new Username(DEFAULT_STAFF_USERNAME);
+            password = new Password(DEFAULT_STAFF_PASSWORD);
+            name = new Name(DEFAULT_STAFF_NAME);
+        }
     }
 
     /**
