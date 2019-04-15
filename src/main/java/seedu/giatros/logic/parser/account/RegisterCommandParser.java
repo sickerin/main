@@ -1,6 +1,5 @@
 package seedu.giatros.logic.parser.account;
 
-import static seedu.giatros.commons.core.Messages.MESSAGE_COMMAND_RESTRICTED;
 import static seedu.giatros.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.giatros.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.giatros.logic.parser.CliSyntax.PREFIX_NAME;
