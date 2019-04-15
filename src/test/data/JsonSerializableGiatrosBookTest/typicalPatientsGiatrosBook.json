@@ -5,7 +5,8 @@
     "phone" : "94351253",
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
-    "allergies" : [ "amoxicillin" ]
+    "allergies" : [ "amoxicillin" ],
+    "appointments" : [ "2019-01-01 00:00:00" ]
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
