@@ -82,7 +82,7 @@ NOTE: A dummy manager account is available by default. Username: `MANAGER` and P
 // end::authentication
 
 [[Features]]
-== Staff Features
+== Application Features
 
 ====
 *Command Format*
@@ -390,18 +390,22 @@ Format: `exit`
 Giatros data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
-// tag::dataencryption[]
-=== Encrypting data files `[coming in v2.0]`
-
-_{explain how the user can enable/disable data encryption}_
-// end::dataencryption[]
-
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
 *A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Giatros folder.
 
 == Command Summary
+
+=== User Authentication Features
+
+* *Login (Guest-only)* `login id/USERNAME pw/PASSWORD`
+e.g. `login id/STAFF pw/1122qq`
+* *Logout (Staff-only)* `logout`
+* *Register (Manager-only)* `register id/USERNAME pw/PASSWORD n/NAME`
+e.g. `register id/USER pw/1122qq n/New User`
+
+=== Application Features
 
 * *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [y/ALLERGY] [y/APPOINTMENT]...` +
 e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 y/paracetamol y/ibuprofen`
@@ -423,5 +427,7 @@ e.g.`select 2`
 * *History* : `history`
 * *Undo* : `undo`
 * *Redo* : `redo`
-* *Add Allergy* : `addall INDEX y/ALLERGY [y/ALLERGY]`
-* *Remove Allergy* : `remall INDEX y/ALLERGY [y/ALLERGY]`
+* *Add allergy* : `addall INDEX y/ALLERGY [y/ALLERGY]`
+e.g. `addall 1 y/ibuprofen`
+* *Remove allergy* : `remall INDEX y/ALLERGY [y/ALLERGY]`
+e.g. `remall 1 y/aspirin y/paracetamol`
