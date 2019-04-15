@@ -74,8 +74,8 @@ public class CommandTestUtil {
     public static final String INVALID_PASSWORD = "1122 qq";
     public static final String INVALID_NAME = "bab @ b";
 
-    public static final String VALID_DEST_PATH =  System.getProperty("user.home") + "/Desktop";
-    public static final String INVALID_DEST_PATH =  " ";
+    public static final String VALID_DEST_PATH = System.getProperty("user.home") + "/Desktop";
+    public static final String INVALID_DEST_PATH = " ";
 
     public static final String PREFIX_WITH_VALID_USERNAME = " " + PREFIX_ID + VALID_USERNAME;
     public static final String PREFIX_WITH_VALID_PASSWORD = " " + PREFIX_PASSWORD + VALID_PASSWORD;

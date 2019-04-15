@@ -31,7 +31,8 @@ public class ExportCommandTest {
     public void execute_nonemptyGiatrosBookDefault_success() {
         ExportCommand exportCommand = new ExportCommand();
         ModelManager expectedModel = new ModelManager(model.getGiatrosBook(), new UserPrefs());
-        assertCommandSuccess(exportCommand, model, commandHistory, ExportCommand.MESSAGE_SUCCESS + ExportCommand.getCurLocation(), expectedModel);
+        assertCommandSuccess(exportCommand, model, commandHistory, ExportCommand.MESSAGE_SUCCESS
+                + ExportCommand.getCurLocation(), expectedModel);
 
     }
 
@@ -40,7 +41,8 @@ public class ExportCommandTest {
         Path validPath = Paths.get("src", "test", "data", "sandbox");
         ExportCommand exportCommand = new ExportCommand(validPath.toString());
         ModelManager expectedModel = new ModelManager(model.getGiatrosBook(), new UserPrefs());
-        assertCommandSuccess(exportCommand, model, commandHistory, ExportCommand.MESSAGE_SUCCESS + ExportCommand.getCurLocation(), expectedModel);
+        assertCommandSuccess(exportCommand, model, commandHistory, ExportCommand.MESSAGE_SUCCESS
+                + ExportCommand.getCurLocation(), expectedModel);
 
     }
 
