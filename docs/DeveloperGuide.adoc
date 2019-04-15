@@ -233,6 +233,74 @@ Classes used by multiple components are in the `seedu.giatrosbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+// tag::authentication[]
+=== User authentication feature
+==== Current Implementation
+
+The user account mechanism is facilitated by `GiatrosBook`. Additionally, it implements the following operations:
+
+* `GiatrosBook#addAccount(Account)` -- Saves the new account.
+
+These operations are exposed in the `Model` interface as `Model#getAccount(Account)`. The following commands will
+invoke the aforementioned operations:
+
+* `Command#LoginCommand()` -- Invokes `Model#getAccount(Account)`.
+* `Command#RegisterCommand()` -- Invokes `Model#addAccount(Account)`.
+
+Given below are usage  scenarios and how each of the command and its respective operations behave at each
+step which involves two components, `Logic` which is responsible for parsing the user input and `Model` which is
+responsible for manipulating the list, if necessary. Both components are extended by `LogicManager` and
+`ModelManager` respectively.
+
+The following sequence diagram shows how the `register` command works:
+
+image::RegisterSequenceDiagram.png[width="800"]
+_Figure 4.2.1.1: Sequence diagram to illustrate component interactions for the `register` command_
+
+[NOTE]
+====
+** We assume the user is already logged in to an account with appropriate privilege level (e.g. Administrator)
+** If the username already exists, a warning message will be shown to the user to select another username
+====
+
+Step 1. The user executes `register id/ces pw/1122qq n/Chua Eng Soon` command to create a new user account.
+
+Step 2. `LogicManager` invokes the `GiatrosBookParser#parseCommand()` method which takes in the user input
+as arguments.
+
+Step 3. When the command is parsed, the `Command#RegisterCommand()` will be created which is returned to the
+`LogicManager`.
+
+Step 4. `LogicManager` invokes the `execute()` method of the `Command#RegisterCommand()`, `rc` which is instantiated in
+Step 3. The `Model` component will be involved as the `Command#RegisterCommand()` invokes a request to add the account
+into the storage by calling `Model#addAccount(Account)`.
+
+Step 5: The new account is added into the storage. Then, a `CommandResult` is generated and returned to
+`LogicManager` which is used to display the result to the user.
+
+The following sequence diagram shows how the `login` command works:
+
+image::LoginSequenceDiagram.png[width="800"]
+_Figure 4.2.1.2: Sequence diagram to illustrate component interactions for the `login` command_
+
+[NOTE]
+We assume the user will enter the correct password. Otherwise, warning message will be shown to the user to re-enter
+the credential
+
+Step 1. The user executes `login id/ces pw/1122qq` command to login to an existing user account.
+
+Step 2. `LogicManager` invokes the `GiatrosBookParser#parseCommand()` method which takes in the user input
+as arguments.
+
+Step 3. When the command is parsed, the `Command#LoginCommand()` will be created which is returned to the
+`LogicManager`.
+
+Step 4. `LogicManager` invokes the `execute()` method of the `Command#LoginCommand()`, `lc` which is instantiated in
+Step 3. The `Model` component will be involved as the `Command#LoginCommand()` invokes a request to retrieve an account
+based on the username. If it exists, the account will be retrieved and the password hash will be compared. If it
+matches, then the credential is valid and the user is authenticated.
+// end::authentication[]
+
 // tag::undoredo[]
 === Undo/Redo feature
 ==== Current Implementation
