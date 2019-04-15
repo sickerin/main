@@ -50,7 +50,7 @@ With the authentication and user management components, these restrict people wi
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-include::../UserGuide.adoc[tag=addremall]
+include::../UserGuide.adoc[tag=export]
 
 == Contributions to the Developer Guide
 
@@ -58,4 +58,4 @@ include::../UserGuide.adoc[tag=addremall]
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-_{to be added}_
+include::../DeveloperGuide.adoc[tag=export]
