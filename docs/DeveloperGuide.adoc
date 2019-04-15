@@ -233,6 +233,74 @@ Classes used by multiple components are in the `seedu.giatrosbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+// tag::authentication[]
+=== User authentication feature
+==== Current Implementation
+
+The user account mechanism is facilitated by `GiatrosBook`. Additionally, it implements the following operations:
+
+* `GiatrosBook#addAccount(Account)` -- Saves the new account.
+
+These operations are exposed in the `Model` interface as `Model#getAccount(Account)`. The following commands will
+invoke the aforementioned operations:
+
+* `Command#LoginCommand()` -- Invokes `Model#getAccount(Account)`.
+* `Command#RegisterCommand()` -- Invokes `Model#addAccount(Account)`.
+
+Given below are usage  scenarios and how each of the command and its respective operations behave at each
+step which involves two components, `Logic` which is responsible for parsing the user input and `Model` which is
+responsible for manipulating the list, if necessary. Both components are extended by `LogicManager` and
+`ModelManager` respectively.
+
+The following sequence diagram shows how the `register` command works:
+
+image::RegisterSequenceDiagram.png[width="800"]
+_Figure 4.2.1.1: Sequence diagram to illustrate component interactions for the `register` command_
+
+[NOTE]
+====
+** We assume the user is already logged in to an account with appropriate privilege level (e.g. Administrator)
+** If the username already exists, a warning message will be shown to the user to select another username
+====
+
+Step 1. The user executes `register id/ces pw/1122qq n/Chua Eng Soon` command to create a new user account.
+
+Step 2. `LogicManager` invokes the `GiatrosBookParser#parseCommand()` method which takes in the user input
+as arguments.
+
+Step 3. When the command is parsed, the `Command#RegisterCommand()` will be created which is returned to the
+`LogicManager`.
+
+Step 4. `LogicManager` invokes the `execute()` method of the `Command#RegisterCommand()`, `rc` which is instantiated in
+Step 3. The `Model` component will be involved as the `Command#RegisterCommand()` invokes a request to add the account
+into the storage by calling `Model#addAccount(Account)`.
+
+Step 5: The new account is added into the storage. Then, a `CommandResult` is generated and returned to
+`LogicManager` which is used to display the result to the user.
+
+The following sequence diagram shows how the `login` command works:
+
+image::LoginSequenceDiagram.png[width="800"]
+_Figure 4.2.1.2: Sequence diagram to illustrate component interactions for the `login` command_
+
+[NOTE]
+We assume the user will enter the correct password. Otherwise, warning message will be shown to the user to re-enter
+the credential
+
+Step 1. The user executes `login id/ces pw/1122qq` command to login to an existing user account.
+
+Step 2. `LogicManager` invokes the `GiatrosBookParser#parseCommand()` method which takes in the user input
+as arguments.
+
+Step 3. When the command is parsed, the `Command#LoginCommand()` will be created which is returned to the
+`LogicManager`.
+
+Step 4. `LogicManager` invokes the `execute()` method of the `Command#LoginCommand()`, `lc` which is instantiated in
+Step 3. The `Model` component will be involved as the `Command#LoginCommand()` invokes a request to retrieve an account
+based on the username. If it exists, the account will be retrieved and the password hash will be compared. If it
+matches, then the credential is valid and the user is authenticated.
+// end::authentication[]
+
 // tag::undoredo[]
 === Undo/Redo feature
 ==== Current Implementation
@@ -253,18 +321,18 @@ Step 1. The user launches the application for the first time. The `VersionedGiat
 
 image::UndoRedoStartingStateListDiagram.png[width="800"]
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the Giatros book. The `delete` command calls `Model#commitGiatrosBook()`, causing the modified state of the Giatros book after the `delete 5` command executes to be saved in the `giatrosBookStateList`, and the `currentStatePointer` is shifted to the newly inserted Giatros book state.
+Step 2. The user executes `delete 5` command to delete the 5th patient in the Giatros book. The `delete` command calls `Model#commitGiatrosBook()`, causing the modified state of the Giatros book after the `delete 5` command executes to be saved in the `giatrosBookStateList`, and the `currentStatePointer` is shifted to the newly inserted Giatros book state.
 
 image::UndoRedoNewCommand1StateListDiagram.png[width="800"]
 
-Step 3. The user executes `add n/David ...` to add a new person. The `add` command also calls `Model#commitGiatrosBook()`, causing another modified Giatros book state to be saved into the `giatrosBookStateList`.
+Step 3. The user executes `add n/David ...` to add a new patient. The `add` command also calls `Model#commitGiatrosBook()`, causing another modified Giatros book state to be saved into the `giatrosBookStateList`.
 
 image::UndoRedoNewCommand2StateListDiagram.png[width="800"]
 
 [NOTE]
 If a command fails its execution, it will not call `Model#commitGiatrosBook()`, so the Giatros book state will not be saved into the `giatrosBookStateList`.
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoGiatrosBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous Giatros book state, and restores the Giatros book to that state.
+Step 4. The user now decides that adding the patient was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoGiatrosBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous Giatros book state, and restores the Giatros book to that state.
 
 image::UndoRedoExecuteUndoStateListDiagram.png[width="800"]
 
@@ -300,7 +368,7 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Pros: Easy to implement.
 ** Cons: May have performance issues in terms of memory usage.
 * **Alternative 2:** Individual command knows how to undo/redo by itself.
-** Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+** Pros: Will use less memory (e.g. for `delete`, just save the patient being deleted).
 ** Cons: We must ensure that the implementation of each individual command are correct.
 
 ===== Aspect: Data structure to support the undo/redo commands
@@ -345,19 +413,41 @@ Step 4. Since this command has a valid format, the system will create a new Adda
 
 Step 5. The system will locate the first patient in the patient list, and adds the non-existing allergy to the unique list of patient allergy.
 
-The process is described in sequence diagram shown below:
 The following sequence diagram shows how the add allergy operation works:
 
 image::AddAllergySequenceDiagram.png[width="800"]
 
+The remove allergy mechanism behaves similarly to the add allergy mechanism. Below is the example usage scenario.
+
+Step 1. The user launches the application and logs into the STAFF account.
+
+Step 2. Assuming that the patient list is not empty, the user executes `remall 1 y/existingallergy` to remove existingallergy to the first patient in the list.
+
+Step 3. This command in string format will be passed to the AddallCommandParser, which will check if the command format is valid.
+
+Step 4. Since this command has a valid format, the system will create a new AddallCommand object, which will be executed.
+
+Step 5. The system will locate the first patient in the patient list, and removes the existing allergy from the unique list of patient allergy.
+
+The following sequence diagram shows how the remove allergy operation works:
+
+image::RemoveAllergySequenceDiagram.png[width="800"]
+
 ==== Design Consideration
-===== Aspect:
+===== Aspect: Data structure to support the add/remove allergy commands
+* **Alternative 1 (current choice):** Use a HashSet to store the list of allergy.
+** Pros: Supports the addition and removal of allergy. Additionally, by storing unique list of allergy, we minimise the risk of inputting duplicate allergy by accident.
+** Cons: Slightly harder to implement as compared to a String representation.
+* **Alternative 2:** Use a String to store the list of allergy.
+** Pros: Easier to implement when compared to using a HashSet.
+** Cons: Every time we add or remove an allergy, we need to retype the whole lists of allergies because the previous String will simply be overwritten by the new String.
 
 // end::addremall[]
 
 // tag::addremapt[]
 === Add/Remove Appointment Feature
 ==== Current Implementation
+
 
 The add and remove appointment feature is implemented to extend the functionality of `Appointment` tags.
 Currently, the `edit` command will overwrite the existing `Appointment` tags if user attempts to edit the existing `Appointment`.
@@ -390,10 +480,33 @@ Step 5. The system will locate the first patient in the patient list, and adds t
 The process is described in sequence diagram shown below:
 The following sequence diagram shows how the add appointment operation works:
 
-image::AddaptergySequenceDiagram.png[width="800"]
+image::AddAppointmentActivityDiagram.png[width="800"]
 
 ==== Design Consideration
-===== Aspect:
+
+===== Aspect: CRUD appointments
+
+* **Alternative 1 (current choice):** The appointment began as a refactoring of the tags implementation, with additional features added on later that allowed for easier modification of appointments. So currently each appointment is associated with a patient.
+
+** Pros: A doable task within the time limit, allows displaying of clear and multiple appointments
+** Cons: We ideally want to store appointments as dates, to allow us to sort them; Connect doctor objects to the appointments, etc.
+
+* **Alternative 2 : ** Storing an appointment list, so that it'll only require one appointment object per unique appointment.
+
+** Pros: An appointment object is not tied down to a Patient, since there could be multiple stakeholders in v2.0 implementation. I.e nurses, pharmacists, family of patients.
+** Cons: But compared to tags, appointments would be much more unique and tied to a patient. I.e many patients can have a coconut allergy, but how many patients can have an appointment with Dr.Oz at 10 AM on Christmas?
+
+===== Aspect: Data structure to store appointment
+
+* **Alternative 1 (current choice):** Use a hash set to store appointments
+
+** Pros: Guarantees unique elements, and constant run time.
+** Cons: The hash function and other factors some what determine the order in which in the appointments are stored. Currently it's stored as a string, so the order is to some extent random with hiccups here and there.
+
+* **Alternative 2 :** Use a sorted set to store appointments. Appointments as date objects.
+
+** Pros: Guarantees unique elements, and we can have the elements stored in a sorted fashion.
+** Cons: Not too many. It's doable, but I didn't have time.
 
 // end::addremapt[]
 
@@ -697,7 +810,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 (For all use cases below, the *System* is `Giatros` and the *Actor* is the `user`, unless specified otherwise)
 
-// tag::usecase
+// tag::usecase[]
 [discrete]
 === Use case: Add patient
 
@@ -856,6 +969,80 @@ Use case ends.
 Use case resumes at step 4.
 
 [discrete]
+=== Use case: Add appointment to patient
+Precondition: Current list of patients is not empty, and user is logged in to a staff account.
+
+*MSS*
+
+1. Receptionist requests to list all patients in the database.
+2. System shows a list of patients registered in the database.
+3. Receptionists adds some appointment to a specific patient in the list.
+4. System adds the appointment to the patient.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 3a. The given index is invalid.
++
+[none]
+** 3a1. System shows an error message, prompting for a valid index.
++
+Use case resumes at step 2.
+
+* 3b. The appointment already exists in the patient.
++
+[none]
+** 3b1. System shows an error message, alerting the receptionist that such appointment already exists in the patient.
++
+Use case ends.
+
+* 3c. Receptionist inputs multiple appointment to be added, some of them already associated with the patient.
++
+[none]
+** 3c1. System will ignore appointment that is already associated to the patient.
++
+Use case resumes at step 4.
+
+[discrete]
+=== Use case: Remove appointment from patient
+Precondition: Current list of patients is not empty and user is logged in to a staff account.
+
+*MSS*
+
+1. Receptionist requests to list all patients in the database.
+2. System shows a list of patients registered in the database.
+3. Receptionists removes some appointment from a specific patient in the list.
+4. System removes the appointment from the patient.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 3a. The given index is invalid.
++
+[none]
+** 3a1. System shows an error message, prompting for a valid index.
++
+Use case resumes at step 2.
+
+* 3b. The receptionist attempts to remove an appointment that does not exist in the patient.
++
+[none]
+** 3b1. System shows an error message, alerting the receptionist that such appointment does not exist in the patient.
++
+Use case ends.
+
+* 3c. Receptionist inputs multiple appointment to be removed, some of them not associated with the patient.
++
+[none]
+** 3c1. System will ignore appointment that is not associated to the patient.
++
+Use case resumes at step 4.
+
+[discrete]
 === Use case: Undo an action
 
 *MSS*
@@ -902,7 +1089,7 @@ Use case ends.
 ** 1a3. Since there is no commands to undo, the system will show an error message if redo is executed.
 +
 Use case resumes at step 1.
-//end::usecase
+// end::usecase[]
 
 [appendix]
 == Non Functional Requirements
@@ -938,12 +1125,12 @@ These instructions only provide a starting point for testers to work on; testers
 .. Re-launch the app by double-clicking the jar file. +
    Expected: The most recent window size and location is retained.
 
-//tag::manualtest1
 . Shutdown
 
 .. Test case: `exit` +
    Expected: Exits the application and closes the GUI.
 
+// tag::manualtest1[]
 === Logging into the application
 
 . Using the guest account to use the application
@@ -970,7 +1157,7 @@ These instructions only provide a starting point for testers to work on; testers
   Expected: An error will occur. Such patient already exists.
 . Test case: `add n/Alex Yeoh p/1234 e/a@b.com a/Anywhere` +
   Expected: Add successful. Details of the added contact shown in the status message. Timestamp in the status bar is updated.
-//end::manualtest1
+// end::manualtest1[]
 
 === Deleting a patient
 
@@ -994,7 +1181,7 @@ These instructions only provide a starting point for testers to work on; testers
 .. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size or negative integer), `delete Alex` +
    Expected: Similar to previous.
 
-//tag::manualtest2
+// tag::manualtest2[]
 === Editing a patient
 
 Prerequisites: List some patients using the `list` or `find` command. At least one patient in the list. +
@@ -1037,6 +1224,42 @@ Prerequisites: List all patients using the `list` command. Multiple patients in 
   Expected: Remove allergy successful. The first patient is now not associated with amoxicillin allergy anymore.
 . Test case: `remall 2 y/penicillin y/aspirin` +
   Expected: Remove allergy successful. Aspirin is ignored, since it is not associated to the second patient. Penicillin allergy is removed.
+
+=== Adding appointment to a patient
+
+Prerequisites: List all patients using the `list` command. Multiple patients in the list. +
+
+. Test case: `addapt`, `addapt 1` +
+  Expected: An error will occur. Invalid command format.
+. Test case: `addapt 1 apt/` +
+  Expected: An error will occur. An error will occur. Appointment needs to follow the one of the valid formats: 'yyyy-MM-dd HH:mm:ss', 'yyyy-MM-dd HH:mm', 'yyyy-MM-dd HH' . An empty string is not a valid input.
+. Test case: `addapt 1 apt/2019-04-01 14:30` +
+  Expected: An error will occur. The appointment is already associated to the first patient.
+. Test case: `addapt 1 apt/2019-02-29 14:30` +
+  Expected: An error will occur. The 29th of Feb doesn't exist for 2019.
+. Test case: `addapt 1 apt/2019-04-01 15:00` +
+  Expected: Add appointment successful. The first patient is now associated with 2019-04-01 15:00 appointment.
+. Test case: `addapt 1 apt/2019-04-01 14:30 apt/2019-04-01 18:00` +
+  Expected: Add appointment successful. The first appointment is ignored, since it is already associated to the first patient. Aspirin appointment is added.
+
+  See AppointmentTests.java for other examples for other valid/invalid appointments.
+
+=== Removing appointment from a patient
+
+Prerequisites: List all patients using the `list` command. Multiple patients in the list. +
+
+. Test case: `remapt`, `remapt 1` +
+  Expected: An error will occur. Invalid command format.
+. Test case: `remapt 1 apt/` +
+  Expected: An error will occur. Appointment needs to follow the one of the valid formats: 'yyyy-MM-dd HH:mm:ss', 'yyyy-MM-dd HH:mm', 'yyyy-MM-dd HH' . An empty string is not a valid input.
+. Test case: `remapt 1 apt/2019-12-01 13:30` +
+  Expected: An error will occur. Cannot find the appointment in the list of appointments for the first patient.
+. Test case: `remapt 1 apt/2019-04-01 14:30` +
+  Expected: Remove appointment successful. The first patient is now not associated with 2019-04-01 14:30 appointment anymore.
+. Test case: `remapt 2 apt/2019-04-01 14:30 apt/2019-04-01 18:00` +
+  Expected: Remove appointment successful. The second appointment is ignored, since it is not associated to the second patient. The first appointment is removed.
+
+  See AppointmentTests.java for other examples for other invalid appointments.
 
 === Selecting a patient
 

@@ -19,9 +19,7 @@ By: `CS2103-AY1819S2-W13-4`      Since: `January 2019`      Licence: `MIT`
 == Introduction
 
 Giatros is a hospital-management app that facilitate better interactions between different parties involved in the hospital.
-Mainly targeted at the hospital receptionists who are keeping track of the patient records, Giatros can also be used by doctors
-who wish to find out more about their patients, allows patients to manage their appointments and also by pharmacists
-who wish to prescribe a more personalised medication to the patient.
+It is mainly targeted at the hospital staff who are keeping track of the patient records.
 
 == Quick Start
 

@@ -25,7 +25,7 @@ public class AccountTest {
         assertEquals(MANAGER, MANAGER);
 
         // same values -> returns true
-        Account adminAccount = new AccountCreator().build();
+        Account adminAccount = new AccountCreator("manager").build();
         assertEquals(MANAGER, adminAccount);
 
         // null -> returns false

@@ -35,7 +35,7 @@ public class LoginCommandTest {
     @Test
     public void execute_validAccount() throws CommandException {
         UserSession.destroy();
-        Account account = new AccountCreator().build();
+        Account account = new AccountCreator("manager").build();
         CommandResult result = new LoginCommand(account).execute(model, commandHistory);
 
         assertEquals(String.format(LoginCommand.MESSAGE_SUCCESS, account), result.getFeedbackToUser());
@@ -48,7 +48,7 @@ public class LoginCommandTest {
         thrown.expect(CommandException.class);
         thrown.expectMessage(LoginCommand.MESSAGE_ALREADY_AUTHENTICATED);
 
-        Account account = new AccountCreator().build();
+        Account account = new AccountCreator("manager").build();
         new LoginCommand(account).execute(model, commandHistory);
         new LoginCommand(account).execute(model, commandHistory);
     }
