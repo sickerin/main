@@ -1,6 +1,5 @@
 package seedu.giatros.logic.parser.account;
 
-import static seedu.giatros.commons.core.Messages.MESSAGE_COMMAND_RESTRICTED;
 import static seedu.giatros.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.giatros.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.giatros.logic.commands.CommandTestUtil.PREFIX_WITH_INVALID_NAME;
@@ -17,7 +16,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import seedu.giatros.commons.core.EventsCenter;
-import seedu.giatros.commons.core.session.UserSession;
 import seedu.giatros.commons.events.ui.accounts.LoginEvent;
 import seedu.giatros.logic.commands.account.RegisterCommand;
 import seedu.giatros.model.account.Account;
@@ -31,14 +29,6 @@ public class RegisterCommandParserTest {
 
     @BeforeClass
     public static void setupBeforeClass() {
-        EventsCenter.getInstance().post(new LoginEvent(new AccountCreator().build()));
-    }
-
-    @Test
-    public void parse_notManagerAccount_throwsException() {
-        UserSession.destroy();
-        assertParseFailure(parser, PREFIX_WITH_VALID_USERNAME + PREFIX_WITH_VALID_PASSWORD
-                + PREFIX_WITH_VALID_NAME, MESSAGE_COMMAND_RESTRICTED);
         EventsCenter.getInstance().post(new LoginEvent(new AccountCreator().build()));
     }
 

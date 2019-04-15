@@ -39,7 +39,7 @@ public class RegisterCommandParser implements Parser<RegisterCommand> {
             if (UserSession.isAuthenticated()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RegisterCommand.MESSAGE_USAGE));
             } else {
-                throw new ParseException(String.format(MESSAGE_COMMAND_RESTRICTED, RegisterCommand.MESSAGE_USAGE));
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RegisterCommand.MESSAGE_USAGE));
             }
         }
 
