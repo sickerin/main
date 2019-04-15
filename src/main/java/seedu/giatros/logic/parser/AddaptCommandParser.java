@@ -34,7 +34,6 @@ public class AddaptCommandParser implements Parser<AddaptCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (IllegalValueException exc) {
-            // ? what's this for?
             if (UserSession.isAuthenticated()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddaptCommand.MESSAGE_USAGE),
                         exc);

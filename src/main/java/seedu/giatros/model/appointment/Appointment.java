@@ -19,7 +19,6 @@ import java.util.Date;
  * Guarantees: immutable; name is valid as declared in {@link #isValidAppointment(String)}
  */
 public class Appointment {
-    // ? is there an issue with the style below?
     public static final String[] VALIDATION_REGEX_LIST = {"yyyy-MM-dd HH:mm:ss",
         "yyyy-MM-dd HH:mm", "yyyy-MM-dd HH"};
     public static final String MESSAGE_CONSTRAINTS = "Appointment should not be blank "
@@ -29,7 +28,6 @@ public class Appointment {
             + "I.e account for leap years, months that have only 30 days, etc.";
     public final String appointmentString;
     private Date appointment;
-    // TODO make it figure out day from the time.
 
     public Appointment(String appointmentString) {
         requireNonNull(appointmentString);
@@ -70,8 +68,6 @@ public class Appointment {
      * Returns true if a given string is a valid appointment.
      */
     public static boolean isValidAppointment(String test) {
-        // * reference https://www.codota.com/code/java/methods/java.util.stream.Stream/anyMatch
-        // ? with regards to style should it be VALIDATION_REGEX??
         requireNonNull(test);
         boolean match = Arrays.asList(VALIDATION_REGEX_LIST).stream()
                 .anyMatch(VALIDATION_REGEX -> {
