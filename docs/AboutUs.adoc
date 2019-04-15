@@ -30,7 +30,7 @@ Responsibilities: Feature Development, UI
 
 === Radhika Lakhtakia
 image::radhika-lakhtakia.png[width="150", align="left"]
-{empty}[http://github.com/radhika-lakhtakia[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/radhika-lakhtakia[github]] [<<radhika-lakhtakia#, portfolio>>]
 
 Role: Developer +
 Responsibilities: Feature Development, UI
