@@ -65,30 +65,21 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public boolean isGuestCommand(Command command, boolean test) {
-        if (test == false) {
-            return command instanceof LoginCommand || command instanceof HelpCommand
-                    || command instanceof ExitCommand;
-        } else {
-            return true;
-        }
+    public boolean isGuestCommand(Command command) {
+        return command instanceof LoginCommand || command instanceof HelpCommand
+                || command instanceof ExitCommand;
     }
 
     @Override
-    public boolean isStaffCommand(Command command, boolean test) {
-        if (test == false) {
-            return command instanceof LoginCommand || command instanceof HelpCommand
-                    || command instanceof AddCommand || command instanceof AddallCommand
-                    || command instanceof AddaptCommand || command instanceof ClearCommand
-                    || command instanceof DeleteCommand || command instanceof EditCommand
-                    || command instanceof FindCommand || command instanceof HistoryCommand
-                    || command instanceof ListCommand || command instanceof RedoCommand
-                    || command instanceof RemallCommand || command instanceof SelectCommand
-                    || command instanceof LogoutCommand || command instanceof UndoCommand
-                    || command instanceof ExitCommand;
-        } else {
-            return true;
-        }
+    public boolean isStaffCommand(Command command) { //the commands below are allowed for normal staff
+        return command instanceof LoginCommand || command instanceof HelpCommand
+                || command instanceof AddallCommand || command instanceof AddCommand
+                || command instanceof ClearCommand || command instanceof DeleteCommand
+                || command instanceof EditCommand || command instanceof FindCommand
+                || command instanceof HistoryCommand || command instanceof ListCommand
+                || command instanceof RedoCommand || command instanceof RemallCommand
+                || command instanceof SelectCommand || command instanceof LogoutCommand
+                || command instanceof UndoCommand || command instanceof ExitCommand;
     }
 
     @Override
@@ -100,10 +91,10 @@ public class LogicManager implements Logic {
         try {
             Command command = giatrosBookParser.parseCommand(commandText);
 
-            if (!isGuestCommand(command, isTest) && !UserSession.isAuthenticated()) {
+            if (!isGuestCommand(command) && !UserSession.isAuthenticated()) {
                 throw new CommandException(Messages.MESSAGE_COMMAND_RESTRICTED);
             }
-            if (!isStaffCommand(command, isTest) && UserSession.isAuthenticated() && !UserSession.getAccount()
+            if (!isStaffCommand(command) && UserSession.isAuthenticated() && !UserSession.getAccount()
                     .getUsername().toString().equals(HEAD_STAFF_USERNAME)) {
                 throw new CommandException(Messages.MESSAGE_COMMAND_RESTRICTED);
             }
@@ -168,10 +159,5 @@ public class LogicManager implements Logic {
     @Override
     public void setSelectedPatient(Patient patient) {
         model.setSelectedPatient(patient);
-    }
-
-    @Override
-    public void setIsTest(boolean isTest) {
-        this.isTest = isTest;
     }
 }

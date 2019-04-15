@@ -77,6 +77,9 @@ public abstract class GiatrosBookSystemTest {
         assertApplicationStartingStateIsCorrect();
 
         EventsCenter.getInstance().post(new ToggleSidePanelVisibilityEvent(true));
+        EventsCenter.getInstance().post(new ToggleSidePanelVisibilityEvent(true));
+
+
     }
 
     @After

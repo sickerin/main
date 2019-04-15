@@ -1,0 +1,13 @@
+{
+  "patients" : [ ],
+  "accounts" : [
+    {
+      "name": "ces",
+      "username": "ces",
+      "password": "1122qq"
+    }, {
+      "name": "ces1",
+      "username": "ces1",
+      "password": "1122qq"
+    } ]
+}
