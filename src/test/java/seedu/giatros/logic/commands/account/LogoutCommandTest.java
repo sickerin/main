@@ -16,8 +16,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.giatros.testutil.TypicalAccounts.MANAGER;
 import static seedu.giatros.testutil.TypicalAccounts.getTypicalGiatrosBook;
 

@@ -15,10 +15,10 @@ import org.junit.Test;
 
 import static seedu.giatros.commons.core.Messages.MESSAGE_COMMAND_RESTRICTED;
 import static seedu.giatros.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.giatros.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.giatros.logic.commands.CommandTestUtil.PREFIX_WITH_INVALID_NAME;
 import static seedu.giatros.logic.commands.CommandTestUtil.PREFIX_WITH_INVALID_PASSWORD;
 import static seedu.giatros.logic.commands.CommandTestUtil.PREFIX_WITH_INVALID_USERNAME;
-import static seedu.giatros.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.giatros.logic.commands.CommandTestUtil.PREFIX_WITH_VALID_NAME;
 import static seedu.giatros.logic.commands.CommandTestUtil.PREFIX_WITH_VALID_PASSWORD;
 import static seedu.giatros.logic.commands.CommandTestUtil.PREFIX_WITH_VALID_USERNAME;
@@ -47,8 +47,8 @@ public class RegisterCommandParserTest {
         Account expectedStaff = BABA;
 
         // whitespace only preamble
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + PREFIX_WITH_VALID_USERNAME +
-                        PREFIX_WITH_VALID_PASSWORD + PREFIX_WITH_VALID_NAME, new RegisterCommand(expectedStaff));
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + PREFIX_WITH_VALID_USERNAME
+                + PREFIX_WITH_VALID_PASSWORD + PREFIX_WITH_VALID_NAME, new RegisterCommand(expectedStaff));
     }
 
     @Test
@@ -68,15 +68,15 @@ public class RegisterCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
         // invalid username
-        assertParseFailure(parser, PREFIX_WITH_INVALID_USERNAME + PREFIX_WITH_VALID_PASSWORD +
-                        PREFIX_WITH_VALID_NAME, Username.MESSAGE_USERNAME_CONSTRAINT);
+        assertParseFailure(parser, PREFIX_WITH_INVALID_USERNAME + PREFIX_WITH_VALID_PASSWORD
+                + PREFIX_WITH_VALID_NAME, Username.MESSAGE_USERNAME_CONSTRAINT);
 
         // invalid password
-        assertParseFailure(parser, PREFIX_WITH_VALID_USERNAME + PREFIX_WITH_INVALID_PASSWORD +
-                        PREFIX_WITH_VALID_NAME, Password.MESSAGE_PASSWORD_CONSTRAINT);
+        assertParseFailure(parser, PREFIX_WITH_VALID_USERNAME + PREFIX_WITH_INVALID_PASSWORD
+                + PREFIX_WITH_VALID_NAME, Password.MESSAGE_PASSWORD_CONSTRAINT);
 
         // invalid name
-        assertParseFailure(parser, PREFIX_WITH_VALID_USERNAME + PREFIX_WITH_VALID_PASSWORD +
-                        PREFIX_WITH_INVALID_NAME, Name.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, PREFIX_WITH_VALID_USERNAME + PREFIX_WITH_VALID_PASSWORD
+                + PREFIX_WITH_INVALID_NAME, Name.MESSAGE_CONSTRAINTS);
     }
 }

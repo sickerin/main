@@ -1,7 +1,6 @@
 package seedu.giatros.logic.commands.account;
 
 import seedu.giatros.logic.CommandHistory;
-import seedu.giatros.logic.commands.Command;
 import seedu.giatros.logic.commands.CommandResult;
 import seedu.giatros.logic.commands.exceptions.CommandException;
 import seedu.giatros.model.Model;
@@ -16,9 +15,9 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class RegisterCommandTest {

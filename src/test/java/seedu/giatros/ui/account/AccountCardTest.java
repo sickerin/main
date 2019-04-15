@@ -7,10 +7,8 @@ import seedu.giatros.ui.testutil.AccountCreator;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.giatros.ui.testutil.GuiTestAssert.assertCardDisplaysAccount;
 
 public class AccountCardTest extends GuiUnitTest {
 

@@ -27,6 +27,6 @@ public class TypicalAccounts {
     }
 
     public static List<Account> getTypicalAccounts() {
-        return new ArrayList<>(Arrays.asList(MANAGER,BABA));
+        return new ArrayList<>(Arrays.asList(MANAGER, BABA));
     }
 }

@@ -12,8 +12,8 @@ import java.util.Collections;
 import java.util.List;
 
 import static junit.framework.TestCase.assertTrue;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.giatros.testutil.TypicalAccounts.BABA;
 import static seedu.giatros.testutil.TypicalAccounts.MANAGER;
 

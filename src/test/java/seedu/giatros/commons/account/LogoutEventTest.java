@@ -11,7 +11,7 @@ import static org.junit.Assert.assertNull;
 
 public class LogoutEventTest {
 
-    LogoutEvent logout = new LogoutEvent();
+    private LogoutEvent logout = new LogoutEvent();
 
     @Test
     public void constructor_destroyUserSession_returnNull() {

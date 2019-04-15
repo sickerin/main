@@ -2,7 +2,6 @@ package seedu.giatros.commons.events;
 
 import seedu.giatros.commons.events.ui.ToggleSidePanelVisibilityEvent;
 
-import org.junit.ClassRule;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

@@ -48,7 +48,7 @@ public class LoginCommandTest {
         thrown.expect(CommandException.class);
         thrown.expectMessage(LoginCommand.MESSAGE_WRONG_PASSWORD);
 
-        Account invalidAccount = new Account(new Username("baba"), new Password("112233"),new Name("baba"));
+        Account invalidAccount = new Account(new Username("baba"), new Password("112233"), new Name("baba"));
         new LoginCommand(invalidAccount).execute(model, commandHistory);
     }
 
@@ -67,7 +67,7 @@ public class LoginCommandTest {
         thrown.expect(CommandException.class);
         thrown.expectMessage(LoginCommand.MESSAGE_ACCOUNT_NOT_FOUND);
 
-        Account invalidAccount = new Account(new Username("MANAGER1"), new Password("1122qq"),new Name("MANAGER1"));
+        Account invalidAccount = new Account(new Username("MANAGER1"), new Password("1122qq"), new Name("MANAGER1"));
         new LoginCommand(invalidAccount).execute(model, commandHistory);
     }
 
