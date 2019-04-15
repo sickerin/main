@@ -32,7 +32,13 @@ who wish to prescribe a more personalised medication to the patient.
 +
 image::Ui.png[width="790"]
 +
-.  Type the command in the command box and press kbd:[Enter] to execute it. +
+.  At this stage, you are in Guest mode and you will not be able to execute any commands yet.
+You need to login to your account before you can use the application.
+*  If you are a staff who already has an account, please login using this format : `login id/USERNAME pw/PASS`.
+*  If you do not have an account, please approach the manager to create an account for you.
+*  Refer to <<Authentication>> for details of the login system.
+
+.  Once logged in, you can type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
@@ -43,8 +49,40 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 .  Refer to <<Features>> for details of each command.
 
+// tag::authentication
+[[Authentication]]
+== User Authentication Features
+When the application is first opened, it will be in Guest mode and no command can be executed except the `login` command.
+
+=== Logging in to the application : `login`
+
+Allows a guest to login and start using the application. +
+Format: `login id/USERNAME pw/PASSWORD`
+
+NOTE: A dummy staff account with sample data is available by default. Username: `STAFF` and Password: `1122qq`
+
+=== Logging out of the application : `logout`
+
+Allows the user to logout when done with the session. +
+Format: `logout`
+
+TIP: You can only logout when you have been logged in.
+
+=== Registering a new staff to use the application : `register`
+
+Allows the manager to create new staff account using which new staff can log into the application. +
+Format: `register id/USERNAME pw/PASSWORD n/NAME`
+
+****
+* Only the manager can create new staff accounts. A normal staff will not be able to execute the `register` command
+* The username `manager` is restricted. There can only be one manager.
+****
+
+NOTE: A dummy manager account is available by default. Username: `MANAGER` and Password: `1122qq`
+// end::authentication
+
 [[Features]]
-== Features
+== Application Features
 
 ====
 *Command Format*
@@ -271,8 +309,8 @@ Format: `remall INDEX y/ALLERGY [y/ALLERGY]...`
 * Removes one or more allergies to the patient at the specified `INDEX`. The index refers to the index number shown in the displayed patient list.
 The index *must be a positive integer* 1, 2, 3, ...
 * Multiple allergies can be removed at a time by separating the distinct allergies with distinct `y/` tags, e.g. `y/aspirin y/ibuprofen`.
-* Allergies not already associated with the patient will be ignored. For example, if the 1st patient is allergic to `aspirin`, `addall 1 y/ibuprofen`
-  will not modify the allergy list while `addall 1 y/aspirin y/ibuprofen` will just remove `aspirin` from the allergy list.
+* Allergies not already associated with the patient will be ignored. For example, if the 1st patient is allergic to `aspirin`, `remall 1 y/ibuprofen`
+  will not modify the allergy list while `remall 1 y/aspirin y/ibuprofen` will just remove `aspirin` from the allergy list.
 ****
 
 Examples:
@@ -352,18 +390,22 @@ Format: `exit`
 Giatros data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
-// tag::dataencryption[]
-=== Encrypting data files `[coming in v2.0]`
-
-_{explain how the user can enable/disable data encryption}_
-// end::dataencryption[]
-
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
 *A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Giatros folder.
 
 == Command Summary
+
+=== User Authentication Features
+
+* *Login (Guest-only)* `login id/USERNAME pw/PASSWORD`
+e.g. `login id/STAFF pw/1122qq`
+* *Logout (Staff-only)* `logout`
+* *Register (Manager-only)* `register id/USERNAME pw/PASSWORD n/NAME`
+e.g. `register id/USER pw/1122qq n/New User`
+
+=== Application Features
 
 * *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [y/ALLERGY] [y/APPOINTMENT]...` +
 e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 y/paracetamol y/ibuprofen`
@@ -385,3 +427,7 @@ e.g.`select 2`
 * *History* : `history`
 * *Undo* : `undo`
 * *Redo* : `redo`
+* *Add allergy* : `addall INDEX y/ALLERGY [y/ALLERGY]`
+e.g. `addall 1 y/ibuprofen`
+* *Remove allergy* : `remall INDEX y/ALLERGY [y/ALLERGY]`
+e.g. `remall 1 y/aspirin y/paracetamol`
