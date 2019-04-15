@@ -15,7 +15,7 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/CS2103-AY1819S2-W13-4/main
 
-By: `CS2103-AY1819S2-W13-4`      Since: `April 2019`      Licence: `MIT`
+By: `CS2103-AY1819S2-W13-4`      Since: `January 2019`      Licence: `MIT`
 
 == Setting up
 
@@ -1019,12 +1019,12 @@ These instructions only provide a starting point for testers to work on; testers
 .. Re-launch the app by double-clicking the jar file. +
    Expected: The most recent window size and location is retained.
 
-// tag::manualtest1[]
 . Shutdown
 
 .. Test case: `exit` +
    Expected: Exits the application and closes the GUI.
 
+// tag::manualtest1[]
 === Logging into the application
 
 . Using the guest account to use the application
