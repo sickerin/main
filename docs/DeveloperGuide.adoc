@@ -15,7 +15,7 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/CS2103-AY1819S2-W13-4/main
 
-By: `CS2103-AY1819S2-W13-4`      Since: `January 2019`      Licence: `MIT`
+By: `CS2103-AY1819S2-W13-4`      Since: `April 2019`      Licence: `MIT`
 
 == Setting up
 
@@ -321,18 +321,18 @@ Step 1. The user launches the application for the first time. The `VersionedGiat
 
 image::UndoRedoStartingStateListDiagram.png[width="800"]
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the Giatros book. The `delete` command calls `Model#commitGiatrosBook()`, causing the modified state of the Giatros book after the `delete 5` command executes to be saved in the `giatrosBookStateList`, and the `currentStatePointer` is shifted to the newly inserted Giatros book state.
+Step 2. The user executes `delete 5` command to delete the 5th patient in the Giatros book. The `delete` command calls `Model#commitGiatrosBook()`, causing the modified state of the Giatros book after the `delete 5` command executes to be saved in the `giatrosBookStateList`, and the `currentStatePointer` is shifted to the newly inserted Giatros book state.
 
 image::UndoRedoNewCommand1StateListDiagram.png[width="800"]
 
-Step 3. The user executes `add n/David ...` to add a new person. The `add` command also calls `Model#commitGiatrosBook()`, causing another modified Giatros book state to be saved into the `giatrosBookStateList`.
+Step 3. The user executes `add n/David ...` to add a new patient. The `add` command also calls `Model#commitGiatrosBook()`, causing another modified Giatros book state to be saved into the `giatrosBookStateList`.
 
 image::UndoRedoNewCommand2StateListDiagram.png[width="800"]
 
 [NOTE]
 If a command fails its execution, it will not call `Model#commitGiatrosBook()`, so the Giatros book state will not be saved into the `giatrosBookStateList`.
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoGiatrosBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous Giatros book state, and restores the Giatros book to that state.
+Step 4. The user now decides that adding the patient was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoGiatrosBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous Giatros book state, and restores the Giatros book to that state.
 
 image::UndoRedoExecuteUndoStateListDiagram.png[width="800"]
 
@@ -368,7 +368,7 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Pros: Easy to implement.
 ** Cons: May have performance issues in terms of memory usage.
 * **Alternative 2:** Individual command knows how to undo/redo by itself.
-** Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+** Pros: Will use less memory (e.g. for `delete`, just save the patient being deleted).
 ** Cons: We must ensure that the implementation of each individual command are correct.
 
 ===== Aspect: Data structure to support the undo/redo commands
@@ -448,6 +448,7 @@ image::RemoveAllergySequenceDiagram.png[width="800"]
 === Add/Remove Appointment Feature
 ==== Current Implementation
 
+
 The add and remove appointment feature is implemented to extend the functionality of `Appointment` tags.
 Currently, the `edit` command will overwrite the existing `Appointment` tags if user attempts to edit the existing `Appointment`.
 With the `addapt` and `remapt` command, it is now possible to add or remove a single or multiple appointments associated with a patient.
@@ -479,10 +480,33 @@ Step 5. The system will locate the first patient in the patient list, and adds t
 The process is described in sequence diagram shown below:
 The following sequence diagram shows how the add appointment operation works:
 
-image::AddaptergySequenceDiagram.png[width="800"]
+image::AddAppointmentActivityDiagram.png[width="800"]
 
 ==== Design Consideration
-===== Aspect:
+
+===== Aspect: CRUD appointments
+
+* **Alternative 1 (current choice):** The appointment began as a refactoring of the tags implementation, with additional features added on later that allowed for easier modification of appointments. So currently each appointment is associated with a patient.
+
+** Pros: A doable task within the time limit, allows displaying of clear and multiple appointments
+** Cons: We ideally want to store appointments as dates, to allow us to sort them; Connect doctor objects to the appointments, etc.
+
+* **Alternative 2 : ** Storing an appointment list, so that it'll only require one appointment object per unique appointment.
+
+** Pros: An appointment object is not tied down to a Patient, since there could be multiple stakeholders in v2.0 implementation. I.e nurses, pharmacists, family of patients.
+** Cons: But compared to tags, appointments would be much more unique and tied to a patient. I.e many patients can have a coconut allergy, but how many patients can have an appointment with Dr.Oz at 10 AM on Christmas?
+
+===== Aspect: Data structure to store appointment
+
+* **Alternative 1 (current choice):** Use a hash set to store appointments
+
+** Pros: Guarantees unique elements, and constant run time.
+** Cons: The hash function and other factors some what determine the order in which in the appointments are stored. Currently it's stored as a string, so the order is to some extent random with hiccups here and there.
+
+* **Alternative 2 :** Use a sorted set to store appointments. Appointments as date objects.
+
+** Pros: Guarantees unique elements, and we can have the elements stored in a sorted fashion.
+** Cons: Not too many. It's doable, but I didn't have time.
 
 // end::addremapt[]
 
@@ -907,6 +931,80 @@ Use case ends.
 Use case resumes at step 4.
 
 [discrete]
+=== Use case: Add appointment to patient
+Precondition: Current list of patients is not empty, and user is logged in to a staff account.
+
+*MSS*
+
+1. Receptionist requests to list all patients in the database.
+2. System shows a list of patients registered in the database.
+3. Receptionists adds some appointment to a specific patient in the list.
+4. System adds the appointment to the patient.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 3a. The given index is invalid.
++
+[none]
+** 3a1. System shows an error message, prompting for a valid index.
++
+Use case resumes at step 2.
+
+* 3b. The appointment already exists in the patient.
++
+[none]
+** 3b1. System shows an error message, alerting the receptionist that such appointment already exists in the patient.
++
+Use case ends.
+
+* 3c. Receptionist inputs multiple appointment to be added, some of them already associated with the patient.
++
+[none]
+** 3c1. System will ignore appointment that is already associated to the patient.
++
+Use case resumes at step 4.
+
+[discrete]
+=== Use case: Remove appointment from patient
+Precondition: Current list of patients is not empty and user is logged in to a staff account.
+
+*MSS*
+
+1. Receptionist requests to list all patients in the database.
+2. System shows a list of patients registered in the database.
+3. Receptionists removes some appointment from a specific patient in the list.
+4. System removes the appointment from the patient.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 3a. The given index is invalid.
++
+[none]
+** 3a1. System shows an error message, prompting for a valid index.
++
+Use case resumes at step 2.
+
+* 3b. The receptionist attempts to remove an appointment that does not exist in the patient.
++
+[none]
+** 3b1. System shows an error message, alerting the receptionist that such appointment does not exist in the patient.
++
+Use case ends.
+
+* 3c. Receptionist inputs multiple appointment to be removed, some of them not associated with the patient.
++
+[none]
+** 3c1. System will ignore appointment that is not associated to the patient.
++
+Use case resumes at step 4.
+
+[discrete]
 === Use case: Undo an action
 
 *MSS*
@@ -1088,6 +1186,42 @@ Prerequisites: List all patients using the `list` command. Multiple patients in 
   Expected: Remove allergy successful. The first patient is now not associated with amoxicillin allergy anymore.
 . Test case: `remall 2 y/penicillin y/aspirin` +
   Expected: Remove allergy successful. Aspirin is ignored, since it is not associated to the second patient. Penicillin allergy is removed.
+
+=== Adding appointment to a patient
+
+Prerequisites: List all patients using the `list` command. Multiple patients in the list. +
+
+. Test case: `addapt`, `addapt 1` +
+  Expected: An error will occur. Invalid command format.
+. Test case: `addapt 1 apt/` +
+  Expected: An error will occur. An error will occur. Appointment needs to follow the one of the valid formats: 'yyyy-MM-dd HH:mm:ss', 'yyyy-MM-dd HH:mm', 'yyyy-MM-dd HH' . An empty string is not a valid input.
+. Test case: `addapt 1 apt/2019-04-01 14:30` +
+  Expected: An error will occur. The appointment is already associated to the first patient.
+. Test case: `addapt 1 apt/2019-02-29 14:30` +
+  Expected: An error will occur. The 29th of Feb doesn't exist for 2019.
+. Test case: `addapt 1 apt/2019-04-01 15:00` +
+  Expected: Add appointment successful. The first patient is now associated with 2019-04-01 15:00 appointment.
+. Test case: `addapt 1 apt/2019-04-01 14:30 apt/2019-04-01 18:00` +
+  Expected: Add appointment successful. The first appointment is ignored, since it is already associated to the first patient. Aspirin appointment is added.
+
+  See AppointmentTests.java for other examples for other valid/invalid appointments.
+
+=== Removing appointment from a patient
+
+Prerequisites: List all patients using the `list` command. Multiple patients in the list. +
+
+. Test case: `remapt`, `remapt 1` +
+  Expected: An error will occur. Invalid command format.
+. Test case: `remapt 1 apt/` +
+  Expected: An error will occur. Appointment needs to follow the one of the valid formats: 'yyyy-MM-dd HH:mm:ss', 'yyyy-MM-dd HH:mm', 'yyyy-MM-dd HH' . An empty string is not a valid input.
+. Test case: `remapt 1 apt/2019-12-01 13:30` +
+  Expected: An error will occur. Cannot find the appointment in the list of appointments for the first patient.
+. Test case: `remapt 1 apt/2019-04-01 14:30` +
+  Expected: Remove appointment successful. The first patient is now not associated with 2019-04-01 14:30 appointment anymore.
+. Test case: `remapt 2 apt/2019-04-01 14:30 apt/2019-04-01 18:00` +
+  Expected: Remove appointment successful. The second appointment is ignored, since it is not associated to the second patient. The first appointment is removed.
+
+  See AppointmentTests.java for other examples for other invalid appointments.
 
 === Selecting a patient
 

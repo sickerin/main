@@ -22,28 +22,26 @@ This software is built upon an existing application: Address Book - Level 4 by M
 remove appointments from the existing list associated to a patient.
 ** Highlights: This enhancement extends the ability of the existing `add` and `edit` commands, which allows the user to create a patient with appointments.
 
-* *Minor enhancement*:
+* *Minor enhancements*:
+** Parse appointment string and store into Date objects Date Strings(not fully implemented)
+** Fixed typos, logic errors and test cases in Allergy feature.
 
-* *Code contributed*: [https://nus-cs2103-ay1819s2.github.io/cs2103-dashboard/#search=sickerin&sort=displayName&since=2019-02-10&until=2019-04-13&timeframe=day&reverse=false&repoSort=true[Project Code Dashboard]]
-[https://github.com/sickerin/main/blob/master/src/main/java/seedu/giatros/logic/commands/AddaptCommand.java[Functional code addapt]]
-[https://github.com[Functional code remapt]]
-[https://github.com[Test code addapt]]
-[https://github.com[Test code remapt]]
+* *Code contributed*: [https://nus-cs2103-ay1819s2.github.io/cs2103-dashboard/#search=sickerin&sort=displayName&since=2019-04-10&until=2019-04-16&timeframe=day&reverse=false&repoSort=true[Project Code Dashboard]][https://github.com/CS2103-AY1819S2-W13-4/main/blob/master/src/main/java/seedu/giatros/logic/commands/AddaptCommand.java[Functional code addapt]][https://github.com/CS2103-AY1819S2-W13-4/main/blob/master/src/main/java/seedu/giatros/logic/commands/RemaptCommand.java[Functional code remapt]][https://github.com/CS2103-AY1819S2-W13-4/main/blob/master/src/test/java/seedu/giatros/logic/commands/AddaptCommandTest.java[Test code addapt]][https://github.com/CS2103-AY1819S2-W13-4/main/blob/master/src/test/java/seedu/giatros/logic/commands/RemaptCommandTest.java[Test code remapt]]
 
 * *Other contributions*:
 
 ** Project management:
-*** Managed releases `v1.2` - `v1.4` (3 releases) on GitHub
-** Enhancements to existing features:
-*** _{to be added}_
+*** Created users stories and issues. Assigned them to relevant members.
 ** Documentation:
-*** Added to and updated the User Guide
-*** Added to and update the Developer Guide
-*** Added to and updated the ContactUs.adoc
-*** Added to and updated the AboutUs.adoc
+*** Added to and updated the User Guide for appointments (addapt, remapt).
+*** Added to and update the Developer Guide for appointments (addapt, remapt).
+*** Redrawing existing diagrams for storage, logic, etc in Developer Guide.
+*** Updated the ContactUs.adoc
+*** Updated the AboutUs.adoc
+** Enhancements to existing features:
+*** Account for appointments in add and edit commands.
 ** Community:
 *** Reviewed and approved PRs of other team mates
-** Tools:
 
 == Contributions to the User Guide
 
@@ -60,4 +58,4 @@ include::../UserGuide.adoc[tag=addremapt]
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-_{to be added}_
+include::../DeveloperGuide.adoc[tag=addremapt]
