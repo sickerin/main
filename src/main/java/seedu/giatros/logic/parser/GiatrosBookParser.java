@@ -10,6 +10,7 @@ import java.util.regex.Pattern;
 import seedu.giatros.commons.core.session.UserSession;
 import seedu.giatros.logic.commands.AddCommand;
 import seedu.giatros.logic.commands.AddallCommand;
+import seedu.giatros.logic.commands.AddaptCommand;
 import seedu.giatros.logic.commands.ClearCommand;
 import seedu.giatros.logic.commands.Command;
 import seedu.giatros.logic.commands.DeleteCommand;
@@ -111,6 +112,9 @@ public class GiatrosBookParser {
 
         case AddallCommand.COMMAND_WORD:
             return new AddallCommandParser().parse(arguments);
+
+        case AddaptCommand.COMMAND_WORD:
+            return new AddaptCommandParser().parse(arguments);
 
         case RemallCommand.COMMAND_WORD:
             return new RemallCommandParser().parse(arguments);

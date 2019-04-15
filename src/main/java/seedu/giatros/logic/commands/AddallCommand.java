@@ -68,7 +68,7 @@ public class AddallCommand extends Command {
         newAllergy.addAll(allergies);
 
         Patient editedPatient = new Patient(patientToEdit.getName(), patientToEdit.getPhone(), patientToEdit.getEmail(),
-                patientToEdit.getAddress(), newAllergy);
+                patientToEdit.getAddress(), newAllergy, patientToEdit.getAppointments());
 
         // No allergy has been added because it has already existed in the set
         if (editedPatient.equals(patientToEdit)) {

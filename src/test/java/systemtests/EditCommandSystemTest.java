@@ -7,6 +7,8 @@ import static seedu.giatros.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.giatros.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static seedu.giatros.logic.commands.CommandTestUtil.ALLERGY_DESC_AMPICILLIN;
 import static seedu.giatros.logic.commands.CommandTestUtil.ALLERGY_DESC_IBUPROFEN;
+import static seedu.giatros.logic.commands.CommandTestUtil.APPOINTMENT_DESC_YMDH;
+import static seedu.giatros.logic.commands.CommandTestUtil.APPOINTMENT_DESC_YMDHM;
 import static seedu.giatros.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.giatros.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.giatros.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
@@ -19,6 +21,9 @@ import static seedu.giatros.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.giatros.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.giatros.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.giatros.logic.commands.CommandTestUtil.VALID_ALLERGY_AMPICILLIN;
+import static seedu.giatros.logic.commands.CommandTestUtil.VALID_ALLERGY_IBUPROFEN;
+import static seedu.giatros.logic.commands.CommandTestUtil.VALID_APPOINTMENT_YMDH;
+import static seedu.giatros.logic.commands.CommandTestUtil.VALID_APPOINTMENT_YMDHM;
 import static seedu.giatros.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.giatros.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.giatros.logic.commands.CommandTestUtil.VALID_NAME_BOB;
@@ -60,9 +65,12 @@ public class EditCommandSystemTest extends GiatrosBookSystemTest {
          * -> edited
          */
         Index index = INDEX_FIRST_PATIENT;
-        String command = " " + EditCommand.COMMAND_WORD + "  " + index.getOneBased() + "  " + NAME_DESC_BOB + "  "
-                + PHONE_DESC_BOB + " " + EMAIL_DESC_BOB + "  " + ADDRESS_DESC_BOB + " " + ALLERGY_DESC_AMPICILLIN + " ";
-        Patient editedPatient = new PatientBuilder(BOB).withAllergies(VALID_ALLERGY_AMPICILLIN).build();
+        String command = " " + EditCommand.COMMAND_WORD + " " + index.getOneBased() + " " + NAME_DESC_BOB + " "
+                + PHONE_DESC_BOB + " " + EMAIL_DESC_BOB + " " + ADDRESS_DESC_BOB + " "
+                + ALLERGY_DESC_IBUPROFEN + " " + ALLERGY_DESC_AMPICILLIN + " "
+                + APPOINTMENT_DESC_YMDH + " " + APPOINTMENT_DESC_YMDHM + " ";
+        Patient editedPatient = new PatientBuilder(BOB).withAllergies(VALID_ALLERGY_IBUPROFEN, VALID_ALLERGY_AMPICILLIN)
+                .withAppointments(VALID_APPOINTMENT_YMDH, VALID_APPOINTMENT_YMDHM).build();
         assertCommandSuccess(command, index, editedPatient);
 
         /* Case: undo editing the last patient in the list -> last patient restored */
@@ -78,7 +86,8 @@ public class EditCommandSystemTest extends GiatrosBookSystemTest {
 
         /* Case: edit a patient with new values same as existing values -> edited */
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + ALLERGY_DESC_IBUPROFEN + ALLERGY_DESC_AMPICILLIN;
+                + ADDRESS_DESC_BOB + ALLERGY_DESC_IBUPROFEN + ALLERGY_DESC_AMPICILLIN
+                + APPOINTMENT_DESC_YMDH + APPOINTMENT_DESC_YMDHM;
         assertCommandSuccess(command, index, BOB);
 
         /* Case: edit a patient with new values same as another patient's values but with different name -> edited */
@@ -86,7 +95,8 @@ public class EditCommandSystemTest extends GiatrosBookSystemTest {
         index = INDEX_SECOND_PATIENT;
         assertNotEquals(getModel().getFilteredPatientList().get(index.getZeroBased()), BOB);
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + ALLERGY_DESC_IBUPROFEN + ALLERGY_DESC_AMPICILLIN;
+                + ADDRESS_DESC_BOB + ALLERGY_DESC_IBUPROFEN + ALLERGY_DESC_AMPICILLIN
+                + APPOINTMENT_DESC_YMDH + APPOINTMENT_DESC_YMDHM;
         editedPatient = new PatientBuilder(BOB).withName(VALID_NAME_AMY).build();
         assertCommandSuccess(command, index, editedPatient);
 
@@ -95,7 +105,8 @@ public class EditCommandSystemTest extends GiatrosBookSystemTest {
          */
         index = INDEX_SECOND_PATIENT;
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                + ADDRESS_DESC_BOB + ALLERGY_DESC_IBUPROFEN + ALLERGY_DESC_AMPICILLIN;
+                + ADDRESS_DESC_BOB + ALLERGY_DESC_IBUPROFEN + ALLERGY_DESC_AMPICILLIN
+                + APPOINTMENT_DESC_YMDH + APPOINTMENT_DESC_YMDHM;
         editedPatient = new PatientBuilder(BOB).withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).build();
         assertCommandSuccess(command, index, editedPatient);
 
@@ -135,7 +146,7 @@ public class EditCommandSystemTest extends GiatrosBookSystemTest {
         index = INDEX_FIRST_PATIENT;
         selectPatient(index);
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                + ADDRESS_DESC_AMY + ALLERGY_DESC_IBUPROFEN;
+                + ADDRESS_DESC_AMY + ALLERGY_DESC_IBUPROFEN + APPOINTMENT_DESC_YMDH;
         // this can be misleading: card selection actually remains unchanged but the
         // browser's url is updated to reflect the new patient's name
         assertCommandSuccess(command, index, AMY, index);
