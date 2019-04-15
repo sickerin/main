@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.giatros.logic.parser.CliSyntax.PREFIX_DEST;
 import static seedu.giatros.model.Model.PREDICATE_SHOW_ALL_PATIENTS;
 
-import java.awt.Desktop;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -96,7 +95,7 @@ public class ExportCommand extends Command {
             String dest = CDL.toString(patients);
             FileUtils.writeStringToFile(getCurLocation(), dest);
 
-            Desktop.getDesktop().open(getCurLocation());
+//            Desktop.getDesktop().open(getCurLocation());
 
         } catch (IOException e) {
             new CommandException(MESSAGE_CSV_FAIL);
