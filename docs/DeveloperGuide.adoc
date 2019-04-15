@@ -680,7 +680,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 (For all use cases below, the *System* is `Giatros` and the *Actor* is the `user`, unless specified otherwise)
 
-// tag::usecase
+// tag::usecase[]
 [discrete]
 === Use case: Add patient
 
@@ -885,7 +885,7 @@ Use case ends.
 ** 1a3. Since there is no commands to undo, the system will show an error message if redo is executed.
 +
 Use case resumes at step 1.
-//end::usecase
+// end::usecase[]
 
 [appendix]
 == Non Functional Requirements
@@ -921,7 +921,7 @@ These instructions only provide a starting point for testers to work on; testers
 .. Re-launch the app by double-clicking the jar file. +
    Expected: The most recent window size and location is retained.
 
-//tag::manualtest1
+// tag::manualtest1[]
 . Shutdown
 
 .. Test case: `exit` +
@@ -953,7 +953,7 @@ These instructions only provide a starting point for testers to work on; testers
   Expected: An error will occur. Such patient already exists.
 . Test case: `add n/Alex Yeoh p/1234 e/a@b.com a/Anywhere` +
   Expected: Add successful. Details of the added contact shown in the status message. Timestamp in the status bar is updated.
-//end::manualtest1
+// end::manualtest1[]
 
 === Deleting a patient
 
@@ -977,7 +977,7 @@ These instructions only provide a starting point for testers to work on; testers
 .. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size or negative integer), `delete Alex` +
    Expected: Similar to previous.
 
-//tag::manualtest2
+// tag::manualtest2[]
 === Editing a patient
 
 Prerequisites: List some patients using the `list` or `find` command. At least one patient in the list. +
@@ -1067,4 +1067,4 @@ You may need to restart your application if you just finished testing the `undo`
 . Test case: `redo` +
   Expected: An error will occur. No commands to redo.
 
-//end::manualtest2
+// end::manualtest2[]
