@@ -9,6 +9,9 @@ import javafx.scene.Node;
 import javafx.scene.control.ListView;
 import seedu.giatros.model.account.Account;
 
+/**
+ * Provides a handle for {@code accountListPanel} containing the list of {@code accountCard}.
+ */
 public class AccountListPanelHandle extends NodeHandle<ListView<Account>> {
     public static final String ACCOUNT_LIST_VIEW_ID = "#accountListView";
 

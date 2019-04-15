@@ -2,7 +2,6 @@ package seedu.giatros.commons.account;
 
 import seedu.giatros.commons.core.session.UserSession;
 import seedu.giatros.commons.events.ui.accounts.LogoutEvent;
-
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertEquals;
