@@ -23,8 +23,10 @@ remove allergies from the existing list associated to a patient.
 ** Highlights: This enhancement extends the ability of the existing `add` and `edit` commands, which allows user to create a patient with allergies displayed as colourful tags.
 
 * *Minor enhancement*:
-** Added colours to the various allergies for easier identification.
+** Updated the GUI colour scheme.
+** Changed the landing page of the application.
 ** Changed the UI to show the search result of the first allergy when the patient is selected.
+** Added colours to the various allergies for easier identification.
 
 * *Code contributed*: [https://nus-cs2103-ay1819s2.github.io/cs2103-dashboard/#=undefined&search=githbub_wfxronald[Code contribution]]
 
@@ -33,13 +35,17 @@ remove allergies from the existing list associated to a patient.
 ** Project management:
 *** Managed releases `v1.0` - `v1.4` (5 releases) on GitHub
 ** Enhancements to existing features:
-*** _{to be added}_
+*** Updated the GUI colour scheme: Pull request https://github.com/CS2103-AY1819S2-W13-4/main/pull/83[#83]
+*** Changed the landing page of the application: Pull request https://github.com/CS2103-AY1819S2-W13-4/main/pull/83[#83]
+*** Changed the UI to show the search result of the first allergy when the patient is selected: Pull request https://github.com/CS2103-AY1819S2-W13-4/main/pull/83[#83]
+*** Added colours to the various allergies for easier identification: Pull request https://github.com/CS2103-AY1819S2-W13-4/main/pull/50[#50]
 ** Documentation:
-*** _{to be added}_
+*** Did cosmetic tweaks to existing contents of the User Guide: Pull request https://github.com/CS2103-AY1819S2-W13-4/main/pull/49[#49]
+*** Updated the existing diagrams in the Developer Guide: Pull request https://github.com/CS2103-AY1819S2-W13-4/main/pull/93[#93]
 ** Community:
-*** _{to be added}_
-** Tools:
-*** _{to be added}_
+*** PRs reviewed: https://github.com/CS2103-AY1819S2-W13-4/main/pull/86[#86], https://github.com/CS2103-AY1819S2-W13-4/main/pull/96[#96]
+*** Reported bugs and suggestions for other teams in the class (examples: https://github.com/nus-cs2103-AY1819S2/pe-dry-run/issues/917[1],
+https://github.com/nus-cs2103-AY1819S2/pe-dry-run/issues/648[2], https://github.com/nus-cs2103-AY1819S2/pe-dry-run/issues/238[3])
 
 == Contributions to the User Guide
 
