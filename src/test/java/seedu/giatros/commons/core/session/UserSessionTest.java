@@ -1,20 +1,20 @@
 package seedu.giatros.commons.core.session;
 
-import seedu.giatros.model.account.Account;
-import seedu.giatros.model.account.Name;
-import seedu.giatros.model.account.Password;
-import seedu.giatros.model.account.Username;
-import seedu.giatros.ui.testutil.AccountCreator;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 
-import static junit.framework.TestCase.assertTrue;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import seedu.giatros.model.account.Account;
+import seedu.giatros.model.account.Name;
+import seedu.giatros.model.account.Password;
+import seedu.giatros.model.account.Username;
+import seedu.giatros.ui.testutil.AccountCreator;
 
 /**
  * Since this is a local desktop application, we assume the multiplicity of 0...1 user will be logged in at any time.

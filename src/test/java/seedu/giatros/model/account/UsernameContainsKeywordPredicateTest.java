@@ -2,12 +2,12 @@ package seedu.giatros.model.account;
 
 import seedu.giatros.ui.testutil.AccountCreator;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-
-import static junit.framework.TestCase.assertTrue;
-import static org.junit.Assert.assertFalse;
 
 public class UsernameContainsKeywordPredicateTest {
     @Rule

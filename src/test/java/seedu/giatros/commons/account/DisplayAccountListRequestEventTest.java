@@ -1,11 +1,11 @@
 package seedu.giatros.commons.account;
 
-import seedu.giatros.commons.events.ui.accounts.DisplayAccountListRequestEvent;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import seedu.giatros.commons.events.ui.accounts.DisplayAccountListRequestEvent;
 
 public class DisplayAccountListRequestEventTest {
 

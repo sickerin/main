@@ -1,11 +1,11 @@
 package seedu.giatros.model.account;
 
-import org.junit.Test;
-
-import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.giatros.logic.commands.CommandTestUtil.VALID_PASSWORD;
+
+import org.junit.Test;
 
 public class PasswordTest {
 

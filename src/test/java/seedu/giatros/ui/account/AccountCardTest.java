@@ -1,14 +1,13 @@
 package seedu.giatros.ui.account;
 
-import guitests.guihandles.account.AccountCardHandle;
 import seedu.giatros.model.account.Account;
 import seedu.giatros.ui.GuiUnitTest;
 import seedu.giatros.ui.testutil.AccountCreator;
 
-import org.junit.Test;
-
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+
+import org.junit.Test;
 
 public class AccountCardTest extends GuiUnitTest {
 

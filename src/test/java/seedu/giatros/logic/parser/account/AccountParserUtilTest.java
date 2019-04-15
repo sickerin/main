@@ -1,16 +1,7 @@
 package seedu.giatros.logic.parser.account;
 
-import seedu.giatros.logic.parser.exceptions.ParseException;
-import seedu.giatros.model.account.Name;
-import seedu.giatros.model.account.Password;
-import seedu.giatros.model.account.Username;
-
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
-
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.giatros.logic.commands.CommandTestUtil.INVALID_NAME;
 import static seedu.giatros.logic.commands.CommandTestUtil.INVALID_PASSWORD;
 import static seedu.giatros.logic.commands.CommandTestUtil.INVALID_USERNAME;
@@ -18,6 +9,15 @@ import static seedu.giatros.logic.commands.CommandTestUtil.VALID_NAME;
 import static seedu.giatros.logic.commands.CommandTestUtil.VALID_PASSWORD;
 import static seedu.giatros.logic.commands.CommandTestUtil.VALID_USERNAME;
 import static seedu.giatros.testutil.Assert.assertThrows;
+
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.ExpectedException;
+
+import seedu.giatros.logic.parser.exceptions.ParseException;
+import seedu.giatros.model.account.Name;
+import seedu.giatros.model.account.Password;
+import seedu.giatros.model.account.Username;
 
 public class AccountParserUtilTest {
     private static final String WHITESPACE = " \t\r\n";

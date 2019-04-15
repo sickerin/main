@@ -1,13 +1,13 @@
 package guitests.guihandles.account;
 
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+
 import guitests.guihandles.NodeHandle;
 import javafx.scene.Node;
 import javafx.scene.control.ListView;
 import seedu.giatros.model.account.Account;
-
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
 
 public class AccountListPanelHandle extends NodeHandle<ListView<Account>> {
     public static final String ACCOUNT_LIST_VIEW_ID = "#accountListView";

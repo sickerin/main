@@ -1,18 +1,5 @@
 package seedu.giatros.logic.parser.account;
 
-import seedu.giatros.commons.core.EventsCenter;
-import seedu.giatros.commons.core.session.UserSession;
-import seedu.giatros.commons.events.ui.accounts.LoginEvent;
-import seedu.giatros.logic.commands.account.RegisterCommand;
-import seedu.giatros.model.account.Account;
-import seedu.giatros.model.account.Name;
-import seedu.giatros.model.account.Password;
-import seedu.giatros.model.account.Username;
-import seedu.giatros.ui.testutil.AccountCreator;
-
-import org.junit.BeforeClass;
-import org.junit.Test;
-
 import static seedu.giatros.commons.core.Messages.MESSAGE_COMMAND_RESTRICTED;
 import static seedu.giatros.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.giatros.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
@@ -25,6 +12,19 @@ import static seedu.giatros.logic.commands.CommandTestUtil.PREFIX_WITH_VALID_USE
 import static seedu.giatros.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.giatros.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.giatros.testutil.TypicalAccounts.BABA;
+
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import seedu.giatros.commons.core.EventsCenter;
+import seedu.giatros.commons.core.session.UserSession;
+import seedu.giatros.commons.events.ui.accounts.LoginEvent;
+import seedu.giatros.logic.commands.account.RegisterCommand;
+import seedu.giatros.model.account.Account;
+import seedu.giatros.model.account.Name;
+import seedu.giatros.model.account.Password;
+import seedu.giatros.model.account.Username;
+import seedu.giatros.ui.testutil.AccountCreator;
 
 public class RegisterCommandParserTest {
     private RegisterCommandParser parser = new RegisterCommandParser();

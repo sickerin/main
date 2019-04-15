@@ -1,15 +1,5 @@
 package seedu.giatros.logic.parser.account;
 
-
-import seedu.giatros.logic.commands.account.LoginCommand;
-import seedu.giatros.model.account.Account;
-import seedu.giatros.model.account.Name;
-import seedu.giatros.model.account.Password;
-import seedu.giatros.model.account.Username;
-
-import org.junit.Before;
-import org.junit.Test;
-
 import static seedu.giatros.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.giatros.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.giatros.logic.commands.CommandTestUtil.PREFIX_WITH_INVALID_PASSWORD;
@@ -20,6 +10,16 @@ import static seedu.giatros.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.giatros.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.giatros.ui.testutil.AccountCreator.DEFAULT_PASSWORD;
 import static seedu.giatros.ui.testutil.AccountCreator.DEFAULT_USERNAME;
+
+
+import org.junit.Before;
+import org.junit.Test;
+
+import seedu.giatros.logic.commands.account.LoginCommand;
+import seedu.giatros.model.account.Account;
+import seedu.giatros.model.account.Name;
+import seedu.giatros.model.account.Password;
+import seedu.giatros.model.account.Username;
 
 public class LoginCommandParserTest {
     private LoginCommandParser parser = new LoginCommandParser();

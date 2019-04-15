@@ -1,17 +1,18 @@
 package seedu.giatros.storage.account;
 
-import seedu.giatros.commons.exceptions.IllegalValueException;
-import seedu.giatros.model.account.Name;
-import seedu.giatros.model.account.Password;
-import seedu.giatros.model.account.Username;
-import seedu.giatros.storage.JsonAdaptedAccount;
-import seedu.giatros.testutil.Assert;
+import static org.junit.Assert.assertEquals;
+import static seedu.giatros.storage.JsonAdaptedAccount.MISSING_FIELD_MESSAGE_FORMAT;
+import static seedu.giatros.testutil.TypicalAccounts.BABA;
 
 import org.junit.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.giatros.storage.JsonAdaptedAccount.MISSING_FIELD_MESSAGE_FORMAT;
-import static seedu.giatros.testutil.TypicalAccounts.BABA;
+import seedu.giatros.commons.exceptions.IllegalValueException;
+
+import seedu.giatros.model.account.Password;
+import seedu.giatros.model.account.Username;
+import seedu.giatros.model.patient.Name;
+import seedu.giatros.storage.JsonAdaptedAccount;
+import seedu.giatros.testutil.Assert;
 
 public class JsonAdaptedAccountTest {
     private static final String INVALID_NAME = "M@ANAGER1";

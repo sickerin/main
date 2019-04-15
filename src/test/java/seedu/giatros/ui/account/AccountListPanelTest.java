@@ -1,24 +1,22 @@
 package seedu.giatros.ui.account;
 
+import static java.time.Duration.ofMillis;
+import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTimeoutPreemptively;
+import static seedu.giatros.testutil.TypicalAccounts.getTypicalAccounts;
+
+import org.junit.Test;
+
 import guitests.guihandles.account.AccountCardHandle;
 import guitests.guihandles.account.AccountListPanelHandle;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.giatros.model.account.Account;
-import seedu.giatros.model.account.Name;
 import seedu.giatros.model.account.Password;
 import seedu.giatros.model.account.Username;
+import seedu.giatros.model.account.Name;
 import seedu.giatros.ui.GuiUnitTest;
-
-import org.junit.Test;
-
-import static java.time.Duration.ofMillis;
-import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTimeoutPreemptively;
-import static seedu.giatros.testutil.TypicalAccounts.getTypicalAccounts;
-import static seedu.giatros.testutil.TypicalIndexes.INDEX_SECOND_ACCOUNT;
-import static seedu.giatros.ui.testutil.GuiTestAssert.assertCardEqualsAccount;
 
 public class AccountListPanelTest extends GuiUnitTest {
     private static final ObservableList<Account> TYPICAL_ACCOUNTS =

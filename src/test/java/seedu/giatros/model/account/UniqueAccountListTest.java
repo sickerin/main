@@ -1,21 +1,21 @@
 package seedu.giatros.model.account;
 
-import seedu.giatros.model.account.exceptions.AccountNotFoundException;
-import seedu.giatros.model.account.exceptions.DuplicateAccountException;
-
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static seedu.giatros.testutil.TypicalAccounts.BABA;
+import static seedu.giatros.testutil.TypicalAccounts.MANAGER;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static junit.framework.TestCase.assertTrue;
-import static org.junit.Assert.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.giatros.testutil.TypicalAccounts.BABA;
-import static seedu.giatros.testutil.TypicalAccounts.MANAGER;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.ExpectedException;
+
+import seedu.giatros.model.account.exceptions.AccountNotFoundException;
+import seedu.giatros.model.account.exceptions.DuplicateAccountException;
 
 public class UniqueAccountListTest {
     @Rule
