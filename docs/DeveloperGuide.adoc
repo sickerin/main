@@ -1145,7 +1145,7 @@ These instructions only provide a starting point for testers to work on; testers
    Expected: Login successful. Can now execute command as a staff.
 
 . Using the staff account to use the application -- should be able to execute all the commands below, except for `register`
-. Using the manager account to use the application -- should be able to execute all the commands below
+. Using the manager account to use the application -- should only be able to execute `register`
 
 === Adding a patient
 
