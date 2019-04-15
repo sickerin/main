@@ -49,7 +49,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 .  Refer to <<Features>> for details of each command.
 
-// tag::authentication
+// tag::authentication[]
 [[Authentication]]
 == User Authentication Features
 When the application is first opened, it will be in Guest mode and no command can be executed except the `login` command.
@@ -79,7 +79,7 @@ Format: `register id/USERNAME pw/PASSWORD n/NAME`
 ****
 
 NOTE: A dummy manager account is available by default. Username: `MANAGER` and Password: `1122qq`
-// end::authentication
+// end::authentication[]
 
 [[Features]]
 == Application Features
