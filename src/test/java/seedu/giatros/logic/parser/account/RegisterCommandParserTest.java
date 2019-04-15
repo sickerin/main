@@ -35,7 +35,7 @@ public class RegisterCommandParserTest {
     }
 
     @Test
-    public void parse_NotManagerAccount_throwsException() {
+    public void parse_notManagerAccount_throwsException() {
         UserSession.destroy();
         assertParseFailure(parser, PREFIX_WITH_VALID_USERNAME + PREFIX_WITH_VALID_PASSWORD
                 + PREFIX_WITH_VALID_NAME, MESSAGE_COMMAND_RESTRICTED);
