@@ -345,13 +345,34 @@ Step 4. Since this command has a valid format, the system will create a new Adda
 
 Step 5. The system will locate the first patient in the patient list, and adds the non-existing allergy to the unique list of patient allergy.
 
-The process is described in sequence diagram shown below:
 The following sequence diagram shows how the add allergy operation works:
 
 image::AddAllergySequenceDiagram.png[width="800"]
 
+The remove allergy mechanism behaves similarly to the add allergy mechanism. Below is the example usage scenario.
+
+Step 1. The user launches the application and logs into the STAFF account.
+
+Step 2. Assuming that the patient list is not empty, the user executes `remall 1 y/existingallergy` to remove existingallergy to the first patient in the list.
+
+Step 3. This command in string format will be passed to the AddallCommandParser, which will check if the command format is valid.
+
+Step 4. Since this command has a valid format, the system will create a new AddallCommand object, which will be executed.
+
+Step 5. The system will locate the first patient in the patient list, and removes the existing allergy from the unique list of patient allergy.
+
+The following sequence diagram shows how the remove allergy operation works:
+
+image::RemoveAllergySequenceDiagram.png[width="800"]
+
 ==== Design Consideration
-===== Aspect:
+===== Aspect: Data structure to support the add/remove allergy commands
+* **Alternative 1 (current choice):** Use a HashSet to store the list of allergy.
+** Pros: Supports the addition and removal of allergy. Additionally, by storing unique list of allergy, we minimise the risk of inputting duplicate allergy by accident.
+** Cons: Slightly harder to implement as compared to a String representation.
+* **Alternative 2:** Use a String to store the list of allergy.
+** Pros: Easier to implement when compared to using a HashSet.
+** Cons: Every time we add or remove an allergy, we need to retype the whole lists of allergies because the previous String will simply be overwritten by the new String.
 
 // end::addremall[]
 
