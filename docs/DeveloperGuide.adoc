@@ -15,7 +15,7 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/CS2103-AY1819S2-W13-4/main
 
-By: `CS2103-AY1819S2-W13-4`      Since: `January 2019`      Licence: `MIT`
+By: `CS2103-AY1819S2-W13-4`      Since: `April 2019`      Licence: `MIT`
 
 == Setting up
 
@@ -253,18 +253,18 @@ Step 1. The user launches the application for the first time. The `VersionedGiat
 
 image::UndoRedoStartingStateListDiagram.png[width="800"]
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the Giatros book. The `delete` command calls `Model#commitGiatrosBook()`, causing the modified state of the Giatros book after the `delete 5` command executes to be saved in the `giatrosBookStateList`, and the `currentStatePointer` is shifted to the newly inserted Giatros book state.
+Step 2. The user executes `delete 5` command to delete the 5th patient in the Giatros book. The `delete` command calls `Model#commitGiatrosBook()`, causing the modified state of the Giatros book after the `delete 5` command executes to be saved in the `giatrosBookStateList`, and the `currentStatePointer` is shifted to the newly inserted Giatros book state.
 
 image::UndoRedoNewCommand1StateListDiagram.png[width="800"]
 
-Step 3. The user executes `add n/David ...` to add a new person. The `add` command also calls `Model#commitGiatrosBook()`, causing another modified Giatros book state to be saved into the `giatrosBookStateList`.
+Step 3. The user executes `add n/David ...` to add a new patient. The `add` command also calls `Model#commitGiatrosBook()`, causing another modified Giatros book state to be saved into the `giatrosBookStateList`.
 
 image::UndoRedoNewCommand2StateListDiagram.png[width="800"]
 
 [NOTE]
 If a command fails its execution, it will not call `Model#commitGiatrosBook()`, so the Giatros book state will not be saved into the `giatrosBookStateList`.
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoGiatrosBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous Giatros book state, and restores the Giatros book to that state.
+Step 4. The user now decides that adding the patient was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoGiatrosBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous Giatros book state, and restores the Giatros book to that state.
 
 image::UndoRedoExecuteUndoStateListDiagram.png[width="800"]
 
@@ -300,7 +300,7 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Pros: Easy to implement.
 ** Cons: May have performance issues in terms of memory usage.
 * **Alternative 2:** Individual command knows how to undo/redo by itself.
-** Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+** Pros: Will use less memory (e.g. for `delete`, just save the patient being deleted).
 ** Cons: We must ensure that the implementation of each individual command are correct.
 
 ===== Aspect: Data structure to support the undo/redo commands
@@ -435,7 +435,7 @@ image::AddAppointmentActivityDiagram.png[width="800"]
 ** Pros: Guarantees unique elements, and constant run time.
 ** Cons: The hash function and other factors some what determine the order in which in the appointments are stored. Currently it's stored as a string, so the order is to some extent random with hiccups here and there.
 
-* **Alternative 1 (current choice):** Use a sorted set to store appointments. Appointments as date objects.
+* **Alternative 2 :** Use a sorted set to store appointments. Appointments as date objects.
 
 ** Pros: Guarantees unique elements, and we can have the elements stored in a sorted fashion.
 ** Cons: Not too many. It's doable, but I didn't have time.
