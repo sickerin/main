@@ -45,7 +45,7 @@ public class PatientCardHandle extends NodeHandle<Node> {
                 .stream()
                 .map(Label.class::cast)
                 .collect(Collectors.toList());
-        
+
         Region appointmentsContainer = getChildNode(APPOINTMENTS_FIELD_ID);
         appointmentLabels = appointmentsContainer
                 .getChildrenUnmodifiable()

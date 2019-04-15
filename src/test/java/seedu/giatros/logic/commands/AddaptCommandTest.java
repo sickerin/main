@@ -167,10 +167,12 @@ public class AddaptCommandTest {
 
     @Test
     public void equals() {
-        final AddaptCommand standardCommand = new AddaptCommand(INDEX_FIRST_PATIENT, new Appointment(VALID_APPOINTMENT_YMDH));
+        final AddaptCommand standardCommand = new AddaptCommand(INDEX_FIRST_PATIENT,
+                new Appointment(VALID_APPOINTMENT_YMDH));
 
         // same values -> returns true
-        AddaptCommand commandWithSameValues = new AddaptCommand(INDEX_FIRST_PATIENT, new Appointment(VALID_APPOINTMENT_YMDH));
+        AddaptCommand commandWithSameValues = new AddaptCommand(INDEX_FIRST_PATIENT,
+                new Appointment(VALID_APPOINTMENT_YMDH));
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -183,10 +185,12 @@ public class AddaptCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new AddaptCommand(INDEX_SECOND_PATIENT, new Appointment(VALID_APPOINTMENT_YMDH))));
+        assertFalse(standardCommand.equals(new AddaptCommand(INDEX_SECOND_PATIENT,
+                new Appointment(VALID_APPOINTMENT_YMDH))));
 
         // different descriptor -> returns false
-        assertFalse(standardCommand.equals(new AddaptCommand(INDEX_FIRST_PATIENT, new Appointment(VALID_APPOINTMENT_YMDHM))));
+        assertFalse(standardCommand.equals(new AddaptCommand(INDEX_FIRST_PATIENT,
+                new Appointment(VALID_APPOINTMENT_YMDHM))));
     }
 
 }

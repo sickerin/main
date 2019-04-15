@@ -5,7 +5,7 @@ import static org.junit.Assert.assertTrue;
 import static seedu.giatros.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.giatros.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.giatros.logic.parser.CliSyntax.PREFIX_ALLERGY;
-import static seedu.giatros.logic.parser.CliSyntax.PREFIX_APPOINTMENT; 
+import static seedu.giatros.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
 import static seedu.giatros.testutil.TypicalIndexes.INDEX_FIRST_PATIENT;
 
 import java.util.Arrays;
@@ -33,6 +33,7 @@ import seedu.giatros.logic.commands.HistoryCommand;
 import seedu.giatros.logic.commands.ListCommand;
 import seedu.giatros.logic.commands.RedoCommand;
 import seedu.giatros.logic.commands.RemallCommand;
+import seedu.giatros.logic.commands.RemaptCommand;
 import seedu.giatros.logic.commands.SelectCommand;
 import seedu.giatros.logic.commands.UndoCommand;
 import seedu.giatros.logic.parser.exceptions.ParseException;
@@ -155,14 +156,14 @@ public class GiatrosBookParserTest {
         assertEquals(new AddaptCommand(INDEX_FIRST_PATIENT, appointment), command);
     }
 
-    // @Test
-    // public void parseCommand_remapt() throws Exception {
-    //     final Appointment appointment = new Appointment("2019-01-01 10");
-    //     RemaptCommand command = (RemaptCommand) parser.parseCommand(RemaptCommand.COMMAND_WORD + " "
-    //             + INDEX_FIRST_PATIENT.getOneBased() + " " + PREFIX_APPOINTMENT + appointment.appointmentString);
-    //     assertEquals(new RemaptCommand(INDEX_FIRST_PATIENT, appointment), command);
-    // }
-    
+    @Test
+    public void parseCommand_remapt() throws Exception {
+        final Appointment appointment = new Appointment("2019-01-01 10");
+        RemaptCommand command = (RemaptCommand) parser.parseCommand(RemaptCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_PATIENT.getOneBased() + " " + PREFIX_APPOINTMENT + appointment.appointmentString);
+        assertEquals(new RemaptCommand(INDEX_FIRST_PATIENT, appointment), command);
+    }
+
     @Test
     public void parseCommand_redoCommandWord_returnsRedoCommand() throws Exception {
         assertTrue(parser.parseCommand(RedoCommand.COMMAND_WORD) instanceof RedoCommand);

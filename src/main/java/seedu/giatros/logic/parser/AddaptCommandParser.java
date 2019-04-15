@@ -26,7 +26,7 @@ public class AddaptCommandParser implements Parser<AddaptCommand> {
      */
     public AddaptCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        
+
         Index index;
         Set<Appointment> appointments;
 

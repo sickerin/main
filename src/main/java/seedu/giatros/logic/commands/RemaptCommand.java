@@ -1,5 +1,13 @@
 package seedu.giatros.logic.commands;
 
+import static seedu.giatros.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.giatros.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
+import static seedu.giatros.model.Model.PREDICATE_SHOW_ALL_PATIENTS;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import seedu.giatros.commons.core.Messages;
 import seedu.giatros.commons.core.index.Index;
 import seedu.giatros.logic.CommandHistory;
@@ -7,14 +15,6 @@ import seedu.giatros.logic.commands.exceptions.CommandException;
 import seedu.giatros.model.Model;
 import seedu.giatros.model.appointment.Appointment;
 import seedu.giatros.model.patient.Patient;
-
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import static seedu.giatros.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.giatros.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
-import static seedu.giatros.model.Model.PREDICATE_SHOW_ALL_PATIENTS;
 
 /**
  * Removes an appointment of the existing patient in the giatros book.
@@ -26,7 +26,7 @@ public class RemaptCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes the appointment from the patient identified "
             + "by the index number used in the patient listing.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_APPOINTMENT + "APPOINTMENT ["+ PREFIX_APPOINTMENT + "APPOINTMENT]\n"
+            + PREFIX_APPOINTMENT + "APPOINTMENT [" + PREFIX_APPOINTMENT + "APPOINTMENT]\n"
             + "Example: " + COMMAND_WORD + " 1 " + PREFIX_APPOINTMENT
             + "2019-03-19 10:30:00.";
 

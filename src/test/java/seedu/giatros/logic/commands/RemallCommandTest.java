@@ -106,7 +106,8 @@ public class RemallCommandTest {
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
         Patient patientToModify = model.getFilteredPatientList().get(INDEX_FIRST_PATIENT.getZeroBased());
         Patient modifiedPatient = new Patient(patientToModify.getName(), patientToModify.getPhone(),
-                patientToModify.getEmail(), patientToModify.getAddress(), new HashSet<>(), patientToModify.getAppointments());
+                patientToModify.getEmail(), patientToModify.getAddress(), new HashSet<>(),
+                patientToModify.getAppointments());
 
         RemallCommand remallCommand = new RemallCommand(INDEX_FIRST_PATIENT, patientToModify.getAllergies());
 

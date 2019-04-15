@@ -26,7 +26,7 @@ public class AddaptCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds the appointment to the patient identified "
             + "by the index number used in the patient listing.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_APPOINTMENT + "APPOINTMENT ["+ PREFIX_APPOINTMENT + "APPOINTMENT]\n"
+            + PREFIX_APPOINTMENT + "APPOINTMENT [" + PREFIX_APPOINTMENT + "APPOINTMENT]\n"
             + "Example: " + COMMAND_WORD + " 1 " + PREFIX_APPOINTMENT
             + "2019-03-19 10:30:00.";
 
@@ -72,7 +72,7 @@ public class AddaptCommand extends Command {
 
         Patient editedPatient = new Patient(patientToEdit.getName(), patientToEdit.getPhone(), patientToEdit.getEmail(),
                 patientToEdit.getAddress(), patientToEdit.getAllergies(), newAppointment);
-        
+
         // No appointment has been added because it has already existed in the set
         if (editedPatient.equals(patientToEdit)) {
             throw new CommandException(String.format(MESSAGE_ADD_APPOINTMENT_FAILURE, patientToEdit));

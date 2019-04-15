@@ -35,7 +35,7 @@ public class RemaptCommandTest {
         Patient firstPatient = model.getFilteredPatientList().get(INDEX_FIRST_PATIENT.getZeroBased());
         Patient editedPatient = new Patient(firstPatient.getName(), firstPatient.getPhone(), firstPatient.getEmail(),
                 firstPatient.getAddress(), firstPatient.getAllergies(), new HashSet<>());
-        
+
         RemaptCommand remaptCommand = new RemaptCommand(INDEX_FIRST_PATIENT, firstPatient.getAppointments());
 
         String expectedMessage = String.format(RemaptCommand.MESSAGE_REMOVE_APPOINTMENT_SUCCESS, editedPatient);
@@ -106,7 +106,8 @@ public class RemaptCommandTest {
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
         Patient patientToModify = model.getFilteredPatientList().get(INDEX_FIRST_PATIENT.getZeroBased());
         Patient modifiedPatient = new Patient(patientToModify.getName(), patientToModify.getPhone(),
-                patientToModify.getEmail(), patientToModify.getAddress(), patientToModify.getAllergies(), new HashSet<>());
+                patientToModify.getEmail(), patientToModify.getAddress(),
+                patientToModify.getAllergies(), new HashSet<>());
 
         RemaptCommand remaptCommand = new RemaptCommand(INDEX_FIRST_PATIENT, patientToModify.getAppointments());
 
@@ -175,10 +176,12 @@ public class RemaptCommandTest {
 
     @Test
     public void equals() {
-        final RemaptCommand standardCommand = new RemaptCommand(INDEX_FIRST_PATIENT, new Appointment(VALID_APPOINTMENT_YMDH));
+        final RemaptCommand standardCommand = new RemaptCommand(INDEX_FIRST_PATIENT,
+                new Appointment(VALID_APPOINTMENT_YMDH));
 
         // same values -> returns true
-        RemaptCommand commandWithSameValues = new RemaptCommand(INDEX_FIRST_PATIENT, new Appointment(VALID_APPOINTMENT_YMDH));
+        RemaptCommand commandWithSameValues = new RemaptCommand(INDEX_FIRST_PATIENT,
+                new Appointment(VALID_APPOINTMENT_YMDH));
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -191,10 +194,12 @@ public class RemaptCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new RemaptCommand(INDEX_SECOND_PATIENT, new Appointment(VALID_APPOINTMENT_YMDH))));
+        assertFalse(standardCommand.equals(new RemaptCommand(INDEX_SECOND_PATIENT,
+                new Appointment(VALID_APPOINTMENT_YMDH))));
 
         // different descriptor -> returns false
-        assertFalse(standardCommand.equals(new RemaptCommand(INDEX_FIRST_PATIENT, new Appointment(VALID_APPOINTMENT_YMDHM))));
+        assertFalse(standardCommand.equals(new RemaptCommand(INDEX_FIRST_PATIENT,
+                new Appointment(VALID_APPOINTMENT_YMDHM))));
     }
 
 }
