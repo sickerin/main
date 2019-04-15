@@ -3,11 +3,11 @@ package seedu.giatros.commons.account;
 import seedu.giatros.commons.core.session.UserSession;
 import seedu.giatros.commons.events.ui.accounts.LogoutEvent;
 
-import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
 
 public class LogoutEventTest {
 

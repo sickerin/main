@@ -18,6 +18,9 @@ import seedu.giatros.model.account.Username;
 import seedu.giatros.model.account.Name;
 import seedu.giatros.ui.GuiUnitTest;
 
+/**
+ * Test accountlistpanel class
+ */
 public class AccountListPanelTest extends GuiUnitTest {
     private static final ObservableList<Account> TYPICAL_ACCOUNTS =
             FXCollections.observableList(getTypicalAccounts());
