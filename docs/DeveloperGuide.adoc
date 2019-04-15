@@ -15,7 +15,7 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/CS2103-AY1819S2-W13-4/main
 
-By: `CS2103-AY1819S2-W13-4`      Since: `April 2019`      Licence: `MIT`
+By: `CS2103-AY1819S2-W13-4`      Since: `January 2019`      Licence: `MIT`
 
 == Setting up
 
@@ -233,6 +233,74 @@ Classes used by multiple components are in the `seedu.giatrosbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+// tag::authentication[]
+=== User authentication feature
+==== Current Implementation
+
+The user account mechanism is facilitated by `GiatrosBook`. Additionally, it implements the following operations:
+
+* `GiatrosBook#addAccount(Account)` -- Saves the new account.
+
+These operations are exposed in the `Model` interface as `Model#getAccount(Account)`. The following commands will
+invoke the aforementioned operations:
+
+* `Command#LoginCommand()` -- Invokes `Model#getAccount(Account)`.
+* `Command#RegisterCommand()` -- Invokes `Model#addAccount(Account)`.
+
+Given below are usage  scenarios and how each of the command and its respective operations behave at each
+step which involves two components, `Logic` which is responsible for parsing the user input and `Model` which is
+responsible for manipulating the list, if necessary. Both components are extended by `LogicManager` and
+`ModelManager` respectively.
+
+The following sequence diagram shows how the `register` command works:
+
+image::RegisterSequenceDiagram.png[width="800"]
+_Figure 4.2.1.1: Sequence diagram to illustrate component interactions for the `register` command_
+
+[NOTE]
+====
+** We assume the user is already logged in to an account with appropriate privilege level (e.g. Administrator)
+** If the username already exists, a warning message will be shown to the user to select another username
+====
+
+Step 1. The user executes `register id/ces pw/1122qq n/Chua Eng Soon` command to create a new user account.
+
+Step 2. `LogicManager` invokes the `GiatrosBookParser#parseCommand()` method which takes in the user input
+as arguments.
+
+Step 3. When the command is parsed, the `Command#RegisterCommand()` will be created which is returned to the
+`LogicManager`.
+
+Step 4. `LogicManager` invokes the `execute()` method of the `Command#RegisterCommand()`, `rc` which is instantiated in
+Step 3. The `Model` component will be involved as the `Command#RegisterCommand()` invokes a request to add the account
+into the storage by calling `Model#addAccount(Account)`.
+
+Step 5: The new account is added into the storage. Then, a `CommandResult` is generated and returned to
+`LogicManager` which is used to display the result to the user.
+
+The following sequence diagram shows how the `login` command works:
+
+image::LoginSequenceDiagram.png[width="800"]
+_Figure 4.2.1.2: Sequence diagram to illustrate component interactions for the `login` command_
+
+[NOTE]
+We assume the user will enter the correct password. Otherwise, warning message will be shown to the user to re-enter
+the credential
+
+Step 1. The user executes `login id/ces pw/1122qq` command to login to an existing user account.
+
+Step 2. `LogicManager` invokes the `GiatrosBookParser#parseCommand()` method which takes in the user input
+as arguments.
+
+Step 3. When the command is parsed, the `Command#LoginCommand()` will be created which is returned to the
+`LogicManager`.
+
+Step 4. `LogicManager` invokes the `execute()` method of the `Command#LoginCommand()`, `lc` which is instantiated in
+Step 3. The `Model` component will be involved as the `Command#LoginCommand()` invokes a request to retrieve an account
+based on the username. If it exists, the account will be retrieved and the password hash will be compared. If it
+matches, then the credential is valid and the user is authenticated.
+// end::authentication[]
+
 // tag::undoredo[]
 === Undo/Redo feature
 ==== Current Implementation
@@ -441,6 +509,44 @@ image::AddAppointmentActivityDiagram.png[width="800"]
 ** Cons: Not too many. It's doable, but I didn't have time.
 
 // end::addremapt[]
+
+// tag::export[]
+=== Export Feature
+==== Current Implementation
+The following feature is mainly used to export data for report analysis.
+The export feature is available to admin only.
+
+The functionality of the classes related to `export` are listed below:
+
+* `ExportCommandParser` -- Reads the user input and creates `ExportCommand`.
+* `ExportCommand` -- When executed, the command will result in a cvs file saved on the local disk at the specified `DESTINATION`.
+* `DESTINATION` can end with an extension of .csv or end as a path to a directory.
+* Existing data file at `DESTINATION` will be overwritten.
+* A table view of the exported data will appear on execution of command.
+* .csv files can be opened and edited in Microsoft Excel
+
+Given below is an example usage scenario and how the export mechanism behaves at each step.
+
+Step 1. The user launches the application and logs into the STAFF account.
+
+Step 2. Assuming that the patient list is not empty, the user executes `export` to save the current Giastro's book to a csv file
+
+Step 3. This command in string format will be passed to the ExportCommandParser, which will check if the command format is valid.
+
+Step 4. Since this command has a valid format, the system will create a new ExportCommand object, which will be executed.
+
+Step 5. The system will locate the the desired destination, and save the giastrobook.csv file to the path.
+
+The process is described in sequence diagram shown below:
+The following sequence diagram shows how the add appointment operation works:
+
+==== Design Consideration
+* Create different csv files for each type of user. Due to only having patients in our book, we can currently only create csv files for that type of user.
+* Create cvs file for filtered lists
+
+===== Aspect:
+
+// end::export[]
 
 === Logging
 
@@ -1019,12 +1125,12 @@ These instructions only provide a starting point for testers to work on; testers
 .. Re-launch the app by double-clicking the jar file. +
    Expected: The most recent window size and location is retained.
 
-// tag::manualtest1[]
 . Shutdown
 
 .. Test case: `exit` +
    Expected: Exits the application and closes the GUI.
 
+// tag::manualtest1[]
 === Logging into the application
 
 . Using the guest account to use the application
@@ -1039,7 +1145,7 @@ These instructions only provide a starting point for testers to work on; testers
    Expected: Login successful. Can now execute command as a staff.
 
 . Using the staff account to use the application -- should be able to execute all the commands below, except for `register`
-. Using the manager account to use the application -- should be able to execute all the commands below
+. Using the manager account to use the application -- should only be able to execute `register`
 
 === Adding a patient
 
@@ -1201,4 +1307,15 @@ You may need to restart your application if you just finished testing the `undo`
 . Test case: `redo` +
   Expected: An error will occur. No commands to redo.
 
-// end::manualtest2[]
+=== Exporting Giatros Book
+
+Prerequisites: Have a non-empty list of patients.
+You may need to restart your application if you just finished testing the `undo` command.
+
+. Test case: `export` +
+  Expected: Export sucessful. Giatros book csv file located at ~/Downloads. CSV file will open automatically.
+. Test case: `export d/~/Desktop` +
+  Expected: Export sucessful. Giatros book csv file located at ~/Desktop. CSV file will open automatically.
+. Test case: `export d/` +
+  Expected: An error will occur. Invalid destination specified
+//end::manualtest2

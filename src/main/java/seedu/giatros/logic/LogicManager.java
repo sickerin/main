@@ -19,6 +19,7 @@ import seedu.giatros.logic.commands.CommandResult;
 import seedu.giatros.logic.commands.DeleteCommand;
 import seedu.giatros.logic.commands.EditCommand;
 import seedu.giatros.logic.commands.ExitCommand;
+import seedu.giatros.logic.commands.ExportCommand;
 import seedu.giatros.logic.commands.FindCommand;
 import seedu.giatros.logic.commands.HelpCommand;
 import seedu.giatros.logic.commands.HistoryCommand;
@@ -30,6 +31,7 @@ import seedu.giatros.logic.commands.SelectCommand;
 import seedu.giatros.logic.commands.UndoCommand;
 import seedu.giatros.logic.commands.account.LoginCommand;
 import seedu.giatros.logic.commands.account.LogoutCommand;
+import seedu.giatros.logic.commands.account.RegisterCommand;
 import seedu.giatros.logic.commands.exceptions.CommandException;
 import seedu.giatros.logic.parser.GiatrosBookParser;
 import seedu.giatros.logic.parser.exceptions.ParseException;
@@ -44,7 +46,7 @@ import seedu.giatros.storage.Storage;
  */
 public class LogicManager implements Logic {
     public static final String FILE_OPS_ERROR_MESSAGE = "Could not save data to file: ";
-    public static final String HEAD_STAFF_USERNAME = "MANAGER";
+    public static final String MANAGER_USERNAME = "MANAGER";
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
     private final Model model;
@@ -81,7 +83,14 @@ public class LogicManager implements Logic {
                     || command instanceof ListCommand || command instanceof RedoCommand
                     || command instanceof RemallCommand || command instanceof RemaptCommand
                     || command instanceof SelectCommand || command instanceof LogoutCommand
-                    || command instanceof UndoCommand || command instanceof ExitCommand;
+                    || command instanceof UndoCommand || command instanceof ExitCommand
+                    || command instanceof ExportCommand;
+    }
+
+    @Override
+    public boolean isManagerCommand(Command command) {
+        return command instanceof RegisterCommand || command instanceof HelpCommand
+                || command instanceof LogoutCommand || command instanceof ExitCommand;
     }
 
     @Override
@@ -97,7 +106,11 @@ public class LogicManager implements Logic {
                 throw new CommandException(Messages.MESSAGE_COMMAND_RESTRICTED);
             }
             if (!isStaffCommand(command) && UserSession.isAuthenticated() && !UserSession.getAccount()
-                    .getUsername().toString().equals(HEAD_STAFF_USERNAME)) {
+                    .getUsername().toString().equals(MANAGER_USERNAME)) {
+                throw new CommandException(Messages.MESSAGE_COMMAND_RESTRICTED);
+            }
+            if (!isManagerCommand(command) && UserSession.isAuthenticated() && UserSession.getAccount()
+                    .getUsername().toString().equals(MANAGER_USERNAME)) {
                 throw new CommandException(Messages.MESSAGE_COMMAND_RESTRICTED);
             }
 

@@ -16,6 +16,7 @@ import seedu.giatros.logic.commands.Command;
 import seedu.giatros.logic.commands.DeleteCommand;
 import seedu.giatros.logic.commands.EditCommand;
 import seedu.giatros.logic.commands.ExitCommand;
+import seedu.giatros.logic.commands.ExportCommand;
 import seedu.giatros.logic.commands.FindCommand;
 import seedu.giatros.logic.commands.HelpCommand;
 import seedu.giatros.logic.commands.HistoryCommand;
@@ -80,6 +81,9 @@ public class GiatrosBookParser {
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
+
+        case ExportCommand.COMMAND_WORD:
+            return new ExportCommandParser().parse(arguments);
 
         case SelectCommand.COMMAND_WORD:
             return new SelectCommandParser().parse(arguments);

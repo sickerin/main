@@ -19,9 +19,7 @@ By: `CS2103-AY1819S2-W13-4`      Since: `January 2019`      Licence: `MIT`
 == Introduction
 
 Giatros is a hospital-management app that facilitate better interactions between different parties involved in the hospital.
-Mainly targeted at the hospital receptionists who are keeping track of the patient records, Giatros can also be used by doctors
-who wish to find out more about their patients, allows patients to manage their appointments and also by pharmacists
-who wish to prescribe a more personalised medication to the patient.
+It is mainly targeted at the hospital staff who are keeping track of the patient records.
 
 == Quick Start
 
@@ -390,6 +388,18 @@ Format: `exit`
 Giatros data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
+// tag::export[]
+=== Exporting the data `export`
+
+Exports the giatros book to a cvs file saved on the local disk at the specified `DESTINATION`. +
+Format: `export` [d/`DESTINATION`]
+
+* `DESTINATION` can end with an extension of .csv or end as a path to a directory. +
+* Existing data file at `DESTINATION` will be overwritten. +
+* A table view of the exported data will appear on execution of command.
+* .csv files can be opened and edited in Microsoft Excel
+// end::export[]
+
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
@@ -431,3 +441,5 @@ e.g.`select 2`
 e.g. `addall 1 y/ibuprofen`
 * *Remove allergy* : `remall INDEX y/ALLERGY [y/ALLERGY]`
 e.g. `remall 1 y/aspirin y/paracetamol`
+* *Export* : `export [d/DESTINATION]`
+e.g. `export d/~/Desktop`

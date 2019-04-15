@@ -29,6 +29,11 @@ public interface Logic {
     public boolean isStaffCommand(Command command);
 
     /**
+     * Verifies if a {@code Command} is a manager command which can executed without proper manager account.
+     */
+    public boolean isManagerCommand(Command command);
+
+    /**
      * Executes the command and returns the result.
      * @param commandText The command as entered by the user.
      * @return the result of the command execution.
