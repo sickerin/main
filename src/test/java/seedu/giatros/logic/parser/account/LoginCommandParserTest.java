@@ -11,7 +11,6 @@ import static seedu.giatros.logic.parser.CommandParserTestUtil.assertParseSucces
 import static seedu.giatros.ui.testutil.AccountCreator.DEFAULT_PASSWORD;
 import static seedu.giatros.ui.testutil.AccountCreator.DEFAULT_USERNAME;
 
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -62,6 +61,7 @@ public class LoginCommandParserTest {
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + PREFIX_WITH_VALID_USERNAME
-                + PREFIX_WITH_VALID_PASSWORD, String.format(MESSAGE_INVALID_COMMAND_FORMAT, LoginCommand.MESSAGE_USAGE));
+                + PREFIX_WITH_VALID_PASSWORD, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                LoginCommand.MESSAGE_USAGE));
     }
 }

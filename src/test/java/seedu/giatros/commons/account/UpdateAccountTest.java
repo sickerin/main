@@ -20,7 +20,7 @@ import seedu.giatros.ui.testutil.AccountCreator;
  */
 public class UpdateAccountTest {
 
-    public UpdateAccountEvent updateAccount;
+    private UpdateAccountEvent updateAccount;
 
     @Test
     public void constructor_updateIsDoneCorrectly_returnEqualAndNotNull() {

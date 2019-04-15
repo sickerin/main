@@ -10,7 +10,7 @@ import seedu.giatros.commons.events.ui.ToggleSidePanelVisibilityEvent;
 
 public class ToggleSidePanelVisibilityEventTest {
 
-    public static ToggleSidePanelVisibilityEvent toggle = new ToggleSidePanelVisibilityEvent(true);
+    private static ToggleSidePanelVisibilityEvent toggle = new ToggleSidePanelVisibilityEvent(true);
 
     @Test
     public void constructor_returnTrue() {

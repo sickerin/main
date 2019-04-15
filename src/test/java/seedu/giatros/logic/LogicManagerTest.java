@@ -91,7 +91,7 @@ public class LogicManagerTest {
     @Test
     public void execute_validCommand_success() {
         String exitCommand = ExitCommand.COMMAND_WORD;
-        assertCommandSuccess(exitCommand,MESSAGE_EXIT_ACKNOWLEDGEMENT, model);
+        assertCommandSuccess(exitCommand, MESSAGE_EXIT_ACKNOWLEDGEMENT, model);
         assertHistoryCorrect(exitCommand);
     }
 

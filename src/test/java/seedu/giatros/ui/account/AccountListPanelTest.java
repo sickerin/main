@@ -13,8 +13,8 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.giatros.model.account.Account;
-import seedu.giatros.model.account.Password;
 import seedu.giatros.model.account.Name;
+import seedu.giatros.model.account.Password;
 import seedu.giatros.model.account.Username;
 import seedu.giatros.ui.GuiUnitTest;
 

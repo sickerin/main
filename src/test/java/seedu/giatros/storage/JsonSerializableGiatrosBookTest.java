@@ -20,11 +20,13 @@ public class JsonSerializableGiatrosBookTest {
 
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonSerializableGiatrosBookTest");
     private static final Path TYPICAL_PATIENTS_FILE = TEST_DATA_FOLDER.resolve("typicalPatientsGiatrosBook.json");
-    private static final Path TYPICAL_ACCOUNTS_FILE = TEST_DATA_FOLDER.resolve("account/typicalAccountsGiatrosBook.json");
+    private static final Path TYPICAL_ACCOUNTS_FILE = TEST_DATA_FOLDER.
+            resolve("account/typicalAccountsGiatrosBook.json");
     private static final Path INVALID_PATIENT_FILE = TEST_DATA_FOLDER.resolve("invalidPatientGiatrosBook.json");
     private static final Path INVALID_ACCOUNT_FILE = TEST_DATA_FOLDER.resolve("account/invalidAccountGiatrosBook.json");
     private static final Path DUPLICATE_PATIENT_FILE = TEST_DATA_FOLDER.resolve("duplicatePatientGiatrosBook.json");
-    private static final Path DUPLICATE_ACCOUNT_FILE = TEST_DATA_FOLDER.resolve("account/duplicateAccountGiatrosBook.json");
+    private static final Path DUPLICATE_ACCOUNT_FILE = TEST_DATA_FOLDER.
+            resolve("account/duplicateAccountGiatrosBook.json");
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();

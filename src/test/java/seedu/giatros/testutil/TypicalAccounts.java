@@ -10,6 +10,9 @@ import seedu.giatros.model.account.Name;
 import seedu.giatros.model.account.Password;
 import seedu.giatros.model.account.Username;
 
+/**
+ * A utility class containing a list of {@code Account} objects to be used in tests.
+ */
 public class TypicalAccounts {
     public static final Account MANAGER = new Account(new Username("MANAGER"), new Password("1122qq"),
             new Name("MANAGER"));
