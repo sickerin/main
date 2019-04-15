@@ -3,14 +3,6 @@ package seedu.giatros.logic;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.giatros.commons.core.Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX;
-import static seedu.giatros.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.giatros.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
-import static seedu.giatros.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
-import static seedu.giatros.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-import static seedu.giatros.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
-import static seedu.giatros.logic.commands.ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT;
-import static seedu.giatros.testutil.TypicalPatients.AMY;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -25,10 +17,8 @@ import org.junit.rules.TemporaryFolder;
 import seedu.giatros.commons.core.EventsCenter;
 import seedu.giatros.commons.core.session.UserSession;
 import seedu.giatros.commons.events.ui.accounts.LoginEvent;
-import seedu.giatros.logic.commands.AddCommand;
 import seedu.giatros.logic.commands.Command;
 import seedu.giatros.logic.commands.CommandResult;
-import seedu.giatros.logic.commands.ExitCommand;
 import seedu.giatros.logic.commands.HistoryCommand;
 import seedu.giatros.logic.commands.account.LogoutCommand;
 import seedu.giatros.logic.commands.exceptions.CommandException;
@@ -41,11 +31,9 @@ import seedu.giatros.model.account.Account;
 import seedu.giatros.model.account.Name;
 import seedu.giatros.model.account.Password;
 import seedu.giatros.model.account.Username;
-import seedu.giatros.model.patient.Patient;
 import seedu.giatros.storage.JsonGiatrosBookStorage;
 import seedu.giatros.storage.JsonUserPrefsStorage;
 import seedu.giatros.storage.StorageManager;
-import seedu.giatros.testutil.PatientBuilder;
 import seedu.giatros.ui.testutil.AccountCreator;
 
 
