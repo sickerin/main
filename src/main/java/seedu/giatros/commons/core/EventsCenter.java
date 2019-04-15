@@ -25,10 +25,6 @@ public class EventsCenter {
         return instance;
     }
 
-    public static void clearSubscribers() {
-        instance = null;
-    }
-
     public void registerHandler(Object handler) {
         eventBus.register(handler);
     }

@@ -24,8 +24,10 @@ public class SampleDataUtil {
 
     public static Account[] getSampleAccount() {
         return new Account[] {
-            new Account(new Username("HEADSTAFF"), new Password("1122qq"),
-                    new seedu.giatros.model.account.Name("HEADSTAFF"))
+            new Account(new Username("MANAGER"), new Password("1122qq"), new seedu.giatros.model.account
+                    .Name("MANAGER")),
+            new Account(new Username("STAFF"), new Password("1122qq"), new seedu.giatros.model.account
+                    .Name("STAFF"))
         };
     }
 

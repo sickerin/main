@@ -6,7 +6,9 @@ import static seedu.giatros.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.giatros.logic.parser.CliSyntax.PREFIX_ALLERGY;
 import static seedu.giatros.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
 import static seedu.giatros.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.giatros.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.giatros.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.giatros.logic.parser.CliSyntax.PREFIX_PASSWORD;
 import static seedu.giatros.logic.parser.CliSyntax.PREFIX_PHONE;
 
 import java.util.ArrayList;
@@ -65,6 +67,21 @@ public class CommandTestUtil {
     public static final String INVALID_ALLERGY_DESC = " " + PREFIX_ALLERGY + "*allergy"; // '*' not allowed in allergies
     public static final String INVALID_APPOINTMENT_DESC = " "
             + PREFIX_APPOINTMENT + "2019"; // it must be in one of the accepted formats
+
+    public static final String VALID_USERNAME = "baba";
+    public static final String VALID_PASSWORD = "1122qq";
+    public static final String VALID_NAME = "baba";
+    public static final String INVALID_USERNAME = "bab b";
+    public static final String INVALID_PASSWORD = "1122 qq";
+    public static final String INVALID_NAME = "bab @ b";
+
+    public static final String PREFIX_WITH_VALID_USERNAME = " " + PREFIX_ID + VALID_USERNAME;
+    public static final String PREFIX_WITH_VALID_PASSWORD = " " + PREFIX_PASSWORD + VALID_PASSWORD;
+    public static final String PREFIX_WITH_VALID_NAME = " " + PREFIX_NAME + VALID_NAME;
+
+    public static final String PREFIX_WITH_INVALID_USERNAME = " " + PREFIX_ID + INVALID_USERNAME;
+    public static final String PREFIX_WITH_INVALID_PASSWORD = " " + PREFIX_PASSWORD + INVALID_PASSWORD;
+    public static final String PREFIX_WITH_INVALID_NAME = " " + PREFIX_NAME + INVALID_NAME;
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
