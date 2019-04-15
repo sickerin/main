@@ -376,6 +376,48 @@ image::RemoveAllergySequenceDiagram.png[width="800"]
 
 // end::addremall[]
 
+// tag::addremapt[]
+=== Add/Remove Appointment Feature
+==== Current Implementation
+
+The add and remove appointment feature is implemented to extend the functionality of `Appointment` tags.
+Currently, the `edit` command will overwrite the existing `Appointment` tags if user attempts to edit the existing `Appointment`.
+With the `addapt` and `remapt` command, it is now possible to add or remove a single or multiple appointments associated with a patient.
+
+The functionality of the classes related to `addapt` and `remapt` are listed below:
+
+* `AddaptCommandParser` and `RemaptCommandParser` -- Reads the user input and create `AddaptCommand` and `RemaptCommand` object respectively.
+* `AddaptCommand` and `RemaptCommand` -- When executed, the command will result in the addition or removal of a single or multiple appointments.
+* `Appointment` -- An object that models appointment. It contains a String describing the name of the appointment.
+
+A patient's `Appointment` is stored in a Java HashSet, which stores only unique `Appointment` object.
+This feature makes use of this behaviour of a HashSet to allow user to add or remove appointments from the patient.
+
+* `addapt` command uses the `.addapt()` method, which takes in a set of `Appointment` objects and add them in if they are not inside the set already.
+* `remapt` command uses the `.remapt()` method, which takes in a set of `Appointment` objects and remove them if they are actually inside in the set.
+
+Given below is an example usage scenario and how the add appointment mechanism behaves at each step.
+
+Step 1. The user launches the application and logs into the STAFF account.
+
+Step 2. Assuming that the patient list is not empty, the user executes `addapt 1 apt/2019-01-01 15:30` to add a new appointment at 2019-01-01 15:30 to the first patient in the list.
+
+Step 3. This command in string format will be passed to the AddaptCommandParser, which will check if the command format is valid.
+
+Step 4. Since this command has a valid format, the system will create a new AddaptCommand object, which will be executed.
+
+Step 5. The system will locate the first patient in the patient list, and adds the non-existing appointment to the unique list of patient appointment.
+
+The process is described in sequence diagram shown below:
+The following sequence diagram shows how the add appointment operation works:
+
+image::AddaptergySequenceDiagram.png[width="800"]
+
+==== Design Consideration
+===== Aspect:
+
+// end::addremapt[]
+
 === Logging
 
 We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels and logging destinations.

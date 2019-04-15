@@ -33,6 +33,30 @@ public class AccountCreator {
     }
 
     /**
+     * Sets the {@code Username} of the {@code Account} that we are building.
+     */
+    public AccountCreator withUsername(String username) {
+        this.username = new Username(username);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Password} of the {@code Account} that we are building.
+     */
+    public AccountCreator withPassword(String password) {
+        this.password = new Password(password);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Name} of the {@code Account} that we are building.
+     */
+    public AccountCreator withName(String name) {
+        this.name = new Name(name);
+        return this;
+    }
+
+    /**
      * Build an Account with the username and password given
      * @return
      */

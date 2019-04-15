@@ -26,9 +26,9 @@ public class AddaptCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds the appointment to the patient identified "
             + "by the index number used in the patient listing.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_APPOINTMENT + "[APPOINTMENT]\n"
+            + PREFIX_APPOINTMENT + "APPOINTMENT [" + PREFIX_APPOINTMENT + "APPOINTMENT]\n"
             + "Example: " + COMMAND_WORD + " 1 " + PREFIX_APPOINTMENT
-            + "2019-03-19 10:30:00";
+            + "2019-03-19 10:30:00.";
 
     public static final String MESSAGE_ADD_APPOINTMENT_SUCCESS = "Added appointment to Patient: %1$s";
     public static final String MESSAGE_ADD_APPOINTMENT_FAILURE = "Such appointment is already"
@@ -45,6 +45,7 @@ public class AddaptCommand extends Command {
         this.appointments = appointments;
     }
 
+    // Overloaded constructor if only one appointment is given
     public AddaptCommand(Index index, Appointment appointment) {
         requireAllNonNull(index, appointment);
 
@@ -72,15 +73,16 @@ public class AddaptCommand extends Command {
         Patient editedPatient = new Patient(patientToEdit.getName(), patientToEdit.getPhone(), patientToEdit.getEmail(),
                 patientToEdit.getAddress(), patientToEdit.getAllergies(), newAppointment);
 
+        // No appointment has been added because it has already existed in the set
+        if (editedPatient.equals(patientToEdit)) {
+            throw new CommandException(String.format(MESSAGE_ADD_APPOINTMENT_FAILURE, patientToEdit));
+        }
+
         model.setPatient(patientToEdit, editedPatient);
         model.updateFilteredPatientList(PREDICATE_SHOW_ALL_PATIENTS);
         model.commitGiatrosBook();
 
-        if (!editedPatient.equals(patientToEdit)) {
-            return new CommandResult(generateSuccessMessage(editedPatient));
-        } else {
-            return new CommandResult(generateFailureMessage(editedPatient));
-        }
+        return new CommandResult(generateSuccessMessage(editedPatient));
     }
 
     /**
@@ -88,14 +90,6 @@ public class AddaptCommand extends Command {
      */
     private String generateSuccessMessage(Patient patientToEdit) {
         String message = MESSAGE_ADD_APPOINTMENT_SUCCESS;
-        return String.format(message, patientToEdit);
-    }
-
-    /**
-     * Generates a command execution failure message when the appointment is not added to {@code patientToEdit}.
-     */
-    private String generateFailureMessage(Patient patientToEdit) {
-        String message = MESSAGE_ADD_APPOINTMENT_FAILURE;
         return String.format(message, patientToEdit);
     }
 

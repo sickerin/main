@@ -43,8 +43,16 @@
     "appointments" : [ "2019-03-10 21:30" ]
   } ],
   "accounts" : [ {
-    "name" : "HEADSTAFF",
-    "username" : "HEADSTAFF",
+    "name" : "MANAGER",
+    "username" : "MANAGER",
+    "password" : "1122qq"
+  }, {
+    "name" : "STAFF",
+    "username" : "STAFF",
+    "password" : "1122qq"
+  }, {
+    "name" : "ces",
+    "username" : "ces",
     "password" : "1122qq"
   } ]
 }

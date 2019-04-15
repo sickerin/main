@@ -14,7 +14,6 @@ public class AccountParserUtil {
 
     // This class should not be instantiated.
     private AccountParserUtil() {
-        throw new AssertionError("AccountParserUtil should not be instantiated.");
     }
 
     /**

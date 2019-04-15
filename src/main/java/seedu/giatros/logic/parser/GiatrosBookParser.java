@@ -22,6 +22,7 @@ import seedu.giatros.logic.commands.HistoryCommand;
 import seedu.giatros.logic.commands.ListCommand;
 import seedu.giatros.logic.commands.RedoCommand;
 import seedu.giatros.logic.commands.RemallCommand;
+import seedu.giatros.logic.commands.RemaptCommand;
 import seedu.giatros.logic.commands.SelectCommand;
 import seedu.giatros.logic.commands.UndoCommand;
 import seedu.giatros.logic.commands.account.LoginCommand;
@@ -113,11 +114,15 @@ public class GiatrosBookParser {
         case AddallCommand.COMMAND_WORD:
             return new AddallCommandParser().parse(arguments);
 
+        case RemallCommand.COMMAND_WORD:
+            return new RemallCommandParser().parse(arguments);
+
         case AddaptCommand.COMMAND_WORD:
             return new AddaptCommandParser().parse(arguments);
 
-        case RemallCommand.COMMAND_WORD:
-            return new RemallCommandParser().parse(arguments);
+        case RemaptCommand.COMMAND_WORD:
+            return new RemaptCommandParser().parse(arguments);
+
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

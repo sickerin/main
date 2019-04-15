@@ -34,7 +34,7 @@ public class RemallCommandTest {
     public void execute_removeAllergyUnfilteredList_success() {
         Patient firstPatient = model.getFilteredPatientList().get(INDEX_FIRST_PATIENT.getZeroBased());
         Patient editedPatient = new Patient(firstPatient.getName(), firstPatient.getPhone(), firstPatient.getEmail(),
-                firstPatient.getAddress(), new HashSet<>(), new HashSet<>());
+                firstPatient.getAddress(), new HashSet<>(), firstPatient.getAppointments());
 
         RemallCommand remallCommand = new RemallCommand(INDEX_FIRST_PATIENT, firstPatient.getAllergies());
 
@@ -65,7 +65,7 @@ public class RemallCommandTest {
 
         Patient firstPatient = model.getFilteredPatientList().get(INDEX_FIRST_PATIENT.getZeroBased());
         Patient editedPatient = new Patient(firstPatient.getName(), firstPatient.getPhone(), firstPatient.getEmail(),
-                firstPatient.getAddress(), new HashSet<>(), new HashSet<>());
+                firstPatient.getAddress(), new HashSet<>(), firstPatient.getAppointments());
 
         RemallCommand remallCommand = new RemallCommand(INDEX_FIRST_PATIENT, firstPatient.getAllergies());
 
@@ -106,7 +106,8 @@ public class RemallCommandTest {
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
         Patient patientToModify = model.getFilteredPatientList().get(INDEX_FIRST_PATIENT.getZeroBased());
         Patient modifiedPatient = new Patient(patientToModify.getName(), patientToModify.getPhone(),
-                patientToModify.getEmail(), patientToModify.getAddress(), new HashSet<>(), new HashSet<>());
+                patientToModify.getEmail(), patientToModify.getAddress(), new HashSet<>(),
+                patientToModify.getAppointments());
 
         RemallCommand remallCommand = new RemallCommand(INDEX_FIRST_PATIENT, patientToModify.getAllergies());
 

@@ -3,19 +3,12 @@ package seedu.giatros.commons.core.session;
 import seedu.giatros.model.account.Account;
 
 /**
- * Since this is a local desktop application, we assume the multiplicity of 0...1 user will be logged in at any time.
- * Thus, it makes sense to allow only one user sessions as it is impossible to have multi users in this project's
- * context.
+ * Keeps track of the current user session
  */
 public class UserSession {
 
     private static boolean isAuthenticated = false;
     private static Account account;
-
-    // This class should not be instantiated.
-    private UserSession() {
-        throw new AssertionError("UserSession should not be instantiated.");
-    }
 
     /**
      * Stores this {@code Account} info as part of this session.
