@@ -12,7 +12,7 @@ import seedu.giatros.model.account.Username;
 /**
  * Jackson-friendly version of {@link Account}.
  */
-class JsonAdaptedAccount {
+public class JsonAdaptedAccount {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Account's %s field is missing!";
 

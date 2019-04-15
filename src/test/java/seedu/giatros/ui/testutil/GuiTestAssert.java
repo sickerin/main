@@ -8,6 +8,8 @@ import java.util.stream.Collectors;
 import guitests.guihandles.PatientCardHandle;
 import guitests.guihandles.PatientListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
+import guitests.guihandles.account.AccountCardHandle;
+import seedu.giatros.model.account.Account;
 import seedu.giatros.model.patient.Patient;
 
 /**
@@ -15,7 +17,7 @@ import seedu.giatros.model.patient.Patient;
  */
 public class GuiTestAssert {
     /**
-     * Asserts that {@code actualCard} displays the same values as {@code expectedCard}.
+     * Asserts that {@code actualCard} displays the same values as {@code expectedCard} for patient.
      */
     public static void assertCardEquals(PatientCardHandle expectedCard, PatientCardHandle actualCard) {
         assertEquals(expectedCard.getId(), actualCard.getId());
@@ -24,6 +26,13 @@ public class GuiTestAssert {
         assertEquals(expectedCard.getName(), actualCard.getName());
         assertEquals(expectedCard.getPhone(), actualCard.getPhone());
         assertEquals(expectedCard.getAllergies(), actualCard.getAllergies());
+    }
+    /**
+     * Asserts that {@code actualCard} displays the same values as {@code expectedCard} for account.
+     */
+    public static void assertCardEqualsAccount(AccountCardHandle expectedCard, AccountCardHandle actualCard) {
+        assertEquals(expectedCard.getUsername(), actualCard.getUsername());
+        assertEquals(expectedCard.getName(), actualCard.getName());
     }
 
     /**
@@ -36,6 +45,14 @@ public class GuiTestAssert {
         assertEquals(expectedPatient.getAddress().value, actualCard.getAddress());
         assertEquals(expectedPatient.getAllergies().stream().map(allergy -> allergy.allergyName)
                 .collect(Collectors.toList()), actualCard.getAllergies());
+    }
+
+    /**
+     * Asserts that {@code actualCard} displays the details of {@code expectedPatient}.
+     */
+    public static void assertCardDisplaysAccount(Account expectedAccount, AccountCardHandle actualCard) {
+        assertEquals(expectedAccount.getUsername(), actualCard.getUsername());
+        assertEquals(expectedAccount.getName(), actualCard.getName());
     }
 
     /**
