@@ -7,7 +7,7 @@ import seedu.giatros.model.account.Account;
  */
 public class UserSession {
 
-    private static boolean isAuthenticated  = false;
+    private static boolean isAuthenticated = false;
     private static Account account;
 
     /**

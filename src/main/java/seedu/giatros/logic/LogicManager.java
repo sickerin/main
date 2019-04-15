@@ -12,7 +12,6 @@ import seedu.giatros.commons.core.Messages;
 import seedu.giatros.commons.core.session.UserSession;
 import seedu.giatros.logic.commands.AddCommand;
 import seedu.giatros.logic.commands.AddallCommand;
-import seedu.giatros.logic.commands.AddaptCommand;
 import seedu.giatros.logic.commands.ClearCommand;
 import seedu.giatros.logic.commands.Command;
 import seedu.giatros.logic.commands.CommandResult;

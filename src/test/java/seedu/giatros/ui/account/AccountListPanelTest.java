@@ -43,7 +43,7 @@ public class AccountListPanelTest extends GuiUnitTest {
     }
 
     /**
-     * Verifies that creating and deleting large number of patients in {@code AccountListPanel} requires lesser than
+     * Verifies that creating and deleting large number of accounts in {@code AccountListPanel} requires lesser than
      * {@code CARD_CREATION_AND_DELETION_TIMEOUT} milliseconds to execute.
      */
     @Test
@@ -57,7 +57,7 @@ public class AccountListPanelTest extends GuiUnitTest {
     }
 
     /**
-     * Returns a list of patients containing {@code accountCount} patients that is used to populate the
+     * Returns a list of accounts containing {@code accountCount} accounts that is used to populate the
      * {@code AccountListPanel}.
      */
     private ObservableList<Account> createBackingList(int accountCount) {

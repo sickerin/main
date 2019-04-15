@@ -48,7 +48,7 @@ public class RegisterCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        if (account.getUsername().toString().toLowerCase().substring(0,7).equals("manager")) {
+        if (account.getUsername().toString().toLowerCase().substring(0, 7).equals("manager")) {
             throw new CommandException(MESSAGE_RESTRICTED_USERNAME);
         }
         if (model.hasAccount(account)) {
