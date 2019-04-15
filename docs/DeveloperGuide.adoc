@@ -405,8 +405,7 @@ image::AddAppointmentActivityDiagram.png[width="800"]
 * **Alternative 2 : ** Storing an appointment list, so that it'll only require one appointment object per unique appointment.
 
 ** Pros: An appointment object is not tied down to a Patient, since there could be multiple stakeholders in v2.0 implementation. I.e nurses, pharmacists, family of patients.
-** Cons: But compared to tags, appointments would be much more unique and tied to a patient. I.e many patients can have a coconut allergy, but how many patients can have an appointment with Dr.Oz at 10 AM on Christmas? 
-
+** Cons: But compared to tags, appointments would be much more unique and tied to a patient. I.e many patients can have a coconut allergy, but how many patients can have an appointment with Dr.Oz at 10 AM on Christmas?
 
 ===== Aspect: Data structure to store appointment
 
