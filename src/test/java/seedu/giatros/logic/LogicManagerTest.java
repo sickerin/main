@@ -75,48 +75,6 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_invalidCommandFormat_throwsParseException() {
-        String invalidCommand = "uicfhmowqewca";
-        assertParseException(invalidCommand, MESSAGE_UNKNOWN_COMMAND);
-        assertHistoryCorrect(invalidCommand);
-    }
-
-    @Test
-    public void execute_commandExecutionError_throwsCommandException() {
-        String deleteCommand = "delete 100";
-        assertCommandException(deleteCommand, MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
-        assertHistoryCorrect(deleteCommand);
-    }
-
-    @Test
-    public void execute_validCommand_success() {
-        String exitCommand = ExitCommand.COMMAND_WORD;
-        assertCommandSuccess(exitCommand, MESSAGE_EXIT_ACKNOWLEDGEMENT, model);
-        assertHistoryCorrect(exitCommand);
-    }
-
-    @Test
-    public void execute_storageThrowsIoException_throwsCommandException() throws Exception {
-        // Setup LogicManager with JsonGiatrosBookIoExceptionThrowingStub
-        JsonGiatrosBookStorage addressBookStorage =
-                new JsonGiatrosBookIoExceptionThrowingStub(temporaryFolder.newFile().toPath());
-        JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.newFile().toPath());
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
-        logic = new LogicManager(model, storage);
-
-        // Execute add command
-        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                + ADDRESS_DESC_AMY;
-        Patient expectedPatient = new PatientBuilder(AMY).build();
-        ModelManager expectedModel = new ModelManager();
-        expectedModel.addPatient(expectedPatient);
-        expectedModel.commitGiatrosBook();
-        String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
-        assertCommandBehavior(CommandException.class, addCommand, expectedMessage, expectedModel);
-        assertHistoryCorrect(addCommand);
-    }
-
-    @Test
     public void getGiatrosBook_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
         logic.getGiatrosBook().getPatientList().removeAll();
