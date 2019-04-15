@@ -158,4 +158,18 @@ public class ParserUtil {
     public static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
+
+    /**
+     * Parses a {@code String destination} into a {@code String}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static String parseDestination(String dest) {
+        requireNonNull(dest);
+        String trimmedDest = dest.trim();
+        if (trimmedDest.endsWith(".csv")) {
+            trimmedDest = trimmedDest.substring(0, trimmedDest.indexOf('.'));
+            trimmedDest = trimmedDest + '/';
+        }
+        return trimmedDest;
+    }
 }

@@ -1,0 +1,61 @@
+= Radhika Lakhtakia - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: Giatros by CS2103 AY1819S2 W13-4
+
+---
+
+== Overview
+
+Hi! I am Radhika Lakhtakia, a Computer Science undergraduate exchange student in National University of Singapore. I attend the University of Toronto for Computer Science. Giatros is my first software engineering project under CS2103.
+
+An introduction is as such:
+Giatros is a desktop patient record application used to keep track of patient data in a hospital. Written in Java, the user interacts with it using a CLI, and it has a GUI created with JavaFX.
+With the authentication and user management components, these restrict people without proper credentials to view/edit information.
+
+== Summary of contributions
+
+* *Major enhancement*: Added *the ability to export the giatros book to a csv file*
+** What it does: Allows the user to export the giatros book to a csv file/
+** Justification: This feature improves the product significantly because it helps provide data for reporting analysis.
+** Highlights: This enhancement extends the ability of being able to save the file anywhere specified (or by default in the local downloads folder)
+
+* *Minor enhancement*:
+** Open the csv file on export command.
+
+* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+
+* *Other contributions*:
+
+** Project management:
+*** Managed releases `v1.0` - `v1.4` (5 releases) on GitHub
+** Enhancements to existing features:
+*** _{to be added}_
+** Documentation:
+*** _{to be added}_
+** Community:
+*** _{to be added}_
+** Tools:
+*** Created an organization repository for the team on Github
+    Integrated a Github plugin (TravisCI) to the team repo
+    Integrated a Github plugin (Appveyor) to the team repo
+    Integrated a Github plugin (Coveralls) to the team repo
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=export]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=export]

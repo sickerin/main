@@ -12,6 +12,8 @@ public class CliSyntax {
     public static final Prefix PREFIX_ADDRESS = new Prefix("a/");
     public static final Prefix PREFIX_ALLERGY = new Prefix("y/");
     public static final Prefix PREFIX_APPOINTMENT = new Prefix("apt/");
+    public static final Prefix PREFIX_DEST = new Prefix("d/");
+
 
     /*Prefix definitions for user accounts */
     public static final Prefix PREFIX_ID = new Prefix("id/");

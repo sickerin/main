@@ -388,6 +388,18 @@ Format: `exit`
 Giatros data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
+// tag::export[]
+=== Exporting the data `export`
+
+Exports the giatros book to a cvs file saved on the local disk at the specified `DESTINATION`. +
+Format: `export` [d/`DESTINATION`]
+
+* `DESTINATION` can end with an extension of .csv or end as a path to a directory. +
+* Existing data file at `DESTINATION` will be overwritten. +
+* A table view of the exported data will appear on execution of command.
+* .csv files can be opened and edited in Microsoft Excel
+// end::export[]
+
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
@@ -429,3 +441,5 @@ e.g.`select 2`
 e.g. `addall 1 y/ibuprofen`
 * *Remove allergy* : `remall INDEX y/ALLERGY [y/ALLERGY]`
 e.g. `remall 1 y/aspirin y/paracetamol`
+* *Export* : `export [d/DESTINATION]`
+e.g. `export d/~/Desktop`
