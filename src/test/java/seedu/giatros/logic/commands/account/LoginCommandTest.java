@@ -44,15 +44,6 @@ public class LoginCommandTest {
     }
 
     @Test
-    public void execute_validAccountButWrongPassword_throwsCommandException() throws CommandException {
-        thrown.expect(CommandException.class);
-        thrown.expectMessage(LoginCommand.MESSAGE_WRONG_PASSWORD);
-
-        Account invalidAccount = new Account(new Username("MANAGER"), new Password("112233"), new Name("MANAGER"));
-        new LoginCommand(invalidAccount).execute(model, commandHistory);
-    }
-
-    @Test
     public void execute_whenLoggedInAlready_throwsCommandException() throws CommandException {
         thrown.expect(CommandException.class);
         thrown.expectMessage(LoginCommand.MESSAGE_ALREADY_AUTHENTICATED);
@@ -60,15 +51,6 @@ public class LoginCommandTest {
         Account account = new AccountCreator().build();
         new LoginCommand(account).execute(model, commandHistory);
         new LoginCommand(account).execute(model, commandHistory);
-    }
-
-    @Test
-    public void execute_nonExistentAccount_throwsCommandException() throws CommandException {
-        thrown.expect(CommandException.class);
-        thrown.expectMessage(LoginCommand.MESSAGE_ACCOUNT_NOT_FOUND);
-
-        Account invalidAccount = new Account(new Username("BABABA1"), new Password("1122qq"), new Name("BABABA1"));
-        new LoginCommand(invalidAccount).execute(model, commandHistory);
     }
 
     @Test
