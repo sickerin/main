@@ -35,7 +35,7 @@ public class RegisterCommandTest {
 
         assertNotNull(model);
 
-        Account account = new Account(new Username("abababa"), new Password("112233"), new Name("abababa"));
+        Account account = new Account(new Username("alices"), new Password("112233"), new Name("alices"));
         CommandResult commandResult = new RegisterCommand(account).execute(model, commandHistory);
 
         assertEquals(String.format(RegisterCommand.MESSAGE_SUCCESS, account), commandResult.getFeedbackToUser());

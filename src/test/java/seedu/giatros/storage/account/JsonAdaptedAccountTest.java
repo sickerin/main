@@ -7,7 +7,6 @@ import static seedu.giatros.testutil.TypicalAccounts.BABA;
 import org.junit.Test;
 
 import seedu.giatros.commons.exceptions.IllegalValueException;
-
 import seedu.giatros.model.account.Password;
 import seedu.giatros.model.account.Username;
 import seedu.giatros.model.patient.Name;

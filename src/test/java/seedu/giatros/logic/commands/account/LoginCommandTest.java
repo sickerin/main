@@ -1,5 +1,16 @@
 package seedu.giatros.logic.commands.account;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static seedu.giatros.testutil.TypicalAccounts.BABA;
+import static seedu.giatros.testutil.TypicalAccounts.getTypicalGiatrosBook;
+
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.ExpectedException;
+
 import seedu.giatros.commons.core.session.UserSession;
 import seedu.giatros.logic.CommandHistory;
 import seedu.giatros.logic.commands.CommandResult;
@@ -12,17 +23,6 @@ import seedu.giatros.model.account.Name;
 import seedu.giatros.model.account.Password;
 import seedu.giatros.model.account.Username;
 import seedu.giatros.ui.testutil.AccountCreator;
-
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import static seedu.giatros.testutil.TypicalAccounts.BABA;
-import static seedu.giatros.testutil.TypicalAccounts.getTypicalGiatrosBook;
 
 public class LoginCommandTest {
 

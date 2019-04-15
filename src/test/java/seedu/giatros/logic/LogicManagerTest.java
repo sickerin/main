@@ -12,6 +12,9 @@ import static seedu.giatros.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.giatros.logic.commands.ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT;
 import static seedu.giatros.testutil.TypicalPatients.AMY;
 
+import java.io.IOException;
+import java.nio.file.Path;
+
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Rule;
@@ -45,8 +48,6 @@ import seedu.giatros.storage.StorageManager;
 import seedu.giatros.testutil.PatientBuilder;
 import seedu.giatros.ui.testutil.AccountCreator;
 
-import java.io.IOException;
-import java.nio.file.Path;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy exception");

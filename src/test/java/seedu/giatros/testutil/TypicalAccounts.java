@@ -1,14 +1,14 @@
 package seedu.giatros.testutil;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import seedu.giatros.model.GiatrosBook;
 import seedu.giatros.model.account.Account;
 import seedu.giatros.model.account.Name;
 import seedu.giatros.model.account.Password;
 import seedu.giatros.model.account.Username;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class TypicalAccounts {
     public static final Account MANAGER = new Account(new Username("MANAGER"), new Password("1122qq"),

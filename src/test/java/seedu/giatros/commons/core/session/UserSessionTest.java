@@ -53,7 +53,8 @@ public class UserSessionTest {
 
     @Test
     public void update_updateIsDoneCorrectly_returnEqual() {
-        Account newAccount = new AccountCreator(new Account(new Username("baba"), new Password("112233"), new Name("baba"))).build();
+        Account newAccount = new AccountCreator(new Account(new Username("baba"), new Password("112233"),
+                new Name("baba"))).build();
         UserSession.update(newAccount);
         assertEquals(UserSession.getAccount().getUsername().toString(), "baba");
         assertTrue(UserSession.isAuthenticated());

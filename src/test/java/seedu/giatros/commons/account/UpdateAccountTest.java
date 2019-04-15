@@ -1,5 +1,11 @@
 package seedu.giatros.commons.account;
 
+import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+
+import org.junit.Test;
+
 import seedu.giatros.commons.core.session.UserSession;
 import seedu.giatros.commons.events.storage.UpdateAccountEvent;
 import seedu.giatros.model.account.Account;
@@ -9,12 +15,9 @@ import seedu.giatros.model.account.Username;
 import seedu.giatros.testutil.Assert;
 import seedu.giatros.ui.testutil.AccountCreator;
 
-import org.junit.Test;
-
-import static org.junit.Assert.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-
+/**
+ * Test if update of account works
+ */
 public class UpdateAccountTest {
 
     public UpdateAccountEvent updateAccount;

@@ -10,7 +10,7 @@ import org.junit.Test;
 public class PasswordTest {
 
     @Test
-    public void toStringCheck(){
+    public void toStringCheck() {
         Password password = new Password("Alices");
         assertEquals("Alices", password.toString());
     }

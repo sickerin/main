@@ -1,7 +1,5 @@
 package seedu.giatros.model.account;
 
-import seedu.giatros.ui.testutil.AccountCreator;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
@@ -9,6 +7,8 @@ import static seedu.giatros.testutil.TypicalAccounts.BABA;
 import static seedu.giatros.testutil.TypicalAccounts.MANAGER;
 
 import org.junit.Test;
+
+import seedu.giatros.ui.testutil.AccountCreator;
 
 public class AccountTest {
 
