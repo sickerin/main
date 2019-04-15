@@ -72,6 +72,7 @@ public class Appointment {
     public static boolean isValidAppointment(String test) {
         // * reference https://www.codota.com/code/java/methods/java.util.stream.Stream/anyMatch
         // ? with regards to style should it be VALIDATION_REGEX??
+        requireNonNull(test);
         boolean match = Arrays.asList(VALIDATION_REGEX_LIST).stream()
                 .anyMatch(VALIDATION_REGEX -> {
                     try {
