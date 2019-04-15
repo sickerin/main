@@ -34,7 +34,7 @@ remove appointments from the existing list associated to a patient.
 *** Created users stories and issues. Assigned them to relevant members.
 ** Documentation:
 *** Added to and updated the User Guide for appointments (addapt, remapt).
-*** Added to and update the Developer Guide for appointments (addapt, remapt). 
+*** Added to and update the Developer Guide for appointments (addapt, remapt).
 *** Redrawing existing diagrams for storage, logic, etc in Developer Guide.
 *** Updated the ContactUs.adoc
 *** Updated the AboutUs.adoc
