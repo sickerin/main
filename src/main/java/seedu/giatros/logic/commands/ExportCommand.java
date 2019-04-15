@@ -29,25 +29,25 @@ public class ExportCommand extends Command {
 
     public static final String COMMAND_WORD = "export";
 
-    public static final String MESSAGE_SUCCESS = "exported current Giastro book to csv file located at ";
+    public static final String MESSAGE_SUCCESS = "Export sucessul. Giatros book csv file located at ";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Exports current Giatros book as csv file (giastrobook.csv) to ~/Downloads directory unless other "
+            + ": Exports current Giatros book as csv file (giatrosbook.csv) to ~/Downloads directory unless other "
             + "destination is specified by parameter.\n"
             + "Parameters:\n"
             + "[" + PREFIX_DEST + "DESTINATION ]\n"
-            + "Example: " + COMMAND_WORD + PREFIX_DEST + System.getProperty("user.home") + "/Desktop";
+            + "Example: " + COMMAND_WORD + " " + PREFIX_DEST + System.getProperty("user.home") + "/Desktop";
 
-    public static final String MESSAGE_CSV_FAIL = "Unable to open giastrobook.csv - invalid file location";
+    public static final String MESSAGE_CSV_FAIL = "Unable to open giatrosbook.csv - invalid file location";
 
     private static File curLocation;
 
     public ExportCommand(String destination) {
-        curLocation = new File(destination + "/giastrosbook.csv");
+        curLocation = new File(destination + "/giatrosbook.csv");
     }
 
     public ExportCommand() {
-        curLocation = new File(System.getProperty("user.home") + "/Downloads/giastrosbook.csv");
+        curLocation = new File(System.getProperty("user.home") + "/Downloads/giatrosbook.csv");
 
     }
 

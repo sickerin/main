@@ -1,5 +1,6 @@
 package seedu.giatros.logic.parser;
 
+import static seedu.giatros.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.giatros.logic.parser.CliSyntax.PREFIX_DEST;
 
 import java.util.stream.Stream;
@@ -24,7 +25,10 @@ public class ExportCommandParser implements Parser<ExportCommand> {
 
         if (arePrefixesPresent(argMultimap, PREFIX_DEST)) {
             String destination = ParserUtil.parseDestination(argMultimap.getValue(PREFIX_DEST).get());
-            return new ExportCommand(destination);
+            if (destination.trim().isEmpty()) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExportCommand.MESSAGE_USAGE));
+            }
+            return new ExportCommand(destination.trim());
         }
 
         return new ExportCommand();

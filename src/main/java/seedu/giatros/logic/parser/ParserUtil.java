@@ -166,6 +166,10 @@ public class ParserUtil {
     public static String parseDestination(String dest) {
         requireNonNull(dest);
         String trimmedDest = dest.trim();
+        if (trimmedDest.endsWith(".csv")) {
+            trimmedDest = trimmedDest.substring(0, trimmedDest.indexOf('.'));
+            trimmedDest = trimmedDest + '/';
+        }
         return trimmedDest;
     }
 }
